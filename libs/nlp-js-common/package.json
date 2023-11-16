@@ -1,0 +1,42 @@
+{
+  "name": "@safekids-ai/nlp-js-common",
+  "description": "Safekids NLP Common",
+  "version": "0.0.0-replace",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/safekids-ai/ml-models/tree/main/libs/nlp-js-common"
+  },
+  "author": {
+    "name": "Abbas Valliani",
+    "email": "abbas@safekids.ai",
+    "url": "https://www.safekids.ai"
+  },
+  "keywords": [
+    "example",
+    "typescript",
+    "npm",
+    "package",
+    "sample",
+    "boilerplate",
+    "starter",
+    "demo",
+    "cjs",
+    "esm",
+    "umd"
+  ],
+  "license": "Safe Kids License",
+  "peerDependencies": {
+  },
+  "dependencies": {
+    "onnxruntime-common": "^1.16.1",
+    "winston": "^3.11.0",
+    "sbd": "^1.0.19"
+  },
+  "sideEffects": false,
+  "generators": "./plugin/generators.json",
+  "schematics": "./plugin/generators.json",
+  "web-types": "./web-types.json"
+}

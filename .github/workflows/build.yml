@@ -1,0 +1,53 @@
+name: Publish/Create NLP Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout github repo (+ download lfs dependencies)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Init git user
+        run: |
+          git config --local user.email "abbas@safekids.ai"
+          git config --local user.name "Release Workflow"
+
+      - name: Checkout LFS objects
+        run: git lfs pull
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@safekids-ai'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build and test
+        run: |
+          npx nx run-many --target=package --all
+          npx nx run-many --target=test --all

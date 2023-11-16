@@ -1,0 +1,83 @@
+{
+    "labels": [
+        "bullying_hate",
+        "clean",
+        "porn",
+        "proxy",
+        "self_harm",
+        "weapons"
+    ],
+    "scores": [
+        0.7,
+        0.3,
+        0.9,
+        0.99,
+        0.99,
+        0.95
+    ],
+    "hate_model": {
+        "bullying_hate": {
+            "low_thresh_phrases": ["nigger", "bitch", "fat", "ugly", "cunt", "dick", "ass", "bad", "worst", "kill", "die"],
+            "low_thresh_value": 0.5,
+            "default_thresh": 0.65,
+            "reject_phrases": ["."]
+        },
+        "porn": {
+            "low_thresh_phrases": ["sex", "porn", "fuck", "dick", "pussy", "cum", "nude", "naked", "topless", "blow job", "squirt"],
+            "low_thresh_value": 0.6,
+            "default_thresh": 0.9,
+            "reject_phrases": ["."]
+        },
+        "self_harm": {
+            "low_thresh_phrases": ["kill", "die", "sucide", "suicide", "cut", "slit", "hurt"],
+            "low_thresh_value": 0.7,
+            "default_thresh": 0.97,
+            "reject_phrases": ["option"]
+        },
+        "weapons": {
+            "low_thresh_phrases": ["gun", "pistol", "rifle", "shoot", "bullet", "ammo"],
+            "low_thresh_value": 0.7,
+            "default_thresh": 0.95,
+            "reject_phrases": ["water gun", "wikipedia", "law", "legal", "ted", "squirt gun", "toy gun", "nerf gun", "plastic gun", "nerve gun", "laser gun", "toy weapon", "toy grenade", "gun light", "gun usb", "gun drive", "pubg", "call of duty", "counter strike", "massage gun"]
+        }
+    },
+    "default_model": {
+        "bullying_hate": {
+            "low_thresh_phrases": ["nigger", "bitch", "fat", "ugly", "cunt", "dick", "ass", "bad", "worst", "kill", "die"],
+            "low_thresh_value": 0.5,
+            "default_thresh": 0.65,
+            "reject_phrases": ["."]
+        },
+        "porn": {
+            "low_thresh_phrases": ["sex", "porn", "fuck", "dick", "pussy", "cum", "nude", "naked", "topless", "blow job", "squirt"],
+            "low_thresh_value": 0.6,
+            "default_thresh": 0.9,
+            "reject_phrases": ["."]
+        },
+        "self_harm": {
+            "low_thresh_phrases": ["kill", "die", "sucide", "suicide", "cut", "slit", "hurt"],
+            "low_thresh_value": 0.7,
+            "default_thresh": 0.97,
+            "reject_phrases": ["option"]
+        },
+        "weapons": {
+            "low_thresh_phrases": ["gun", "pistol", "rifle", "shoot", "bullet", "ammo"],
+            "low_thresh_value": 0.7,
+            "default_thresh": 0.95,
+            "reject_phrases": ["water gun", "wikipedia", "law", "legal", "ted", "squirt gun", "toy gun", "nerf gun", "plastic gun", "nerve gun", "laser gun", "toy weapon", "toy grenade", "gun light", "gun usb", "gun drive", "pubg", "call of duty", "counter strike", "massage gun"]
+        },
+        "proxy": {
+            "low_thresh_phrases": ["vpn", "proxy"],
+            "low_thresh_value": 0.7,
+            "default_thresh": 0.9,
+            "reject_phrases": ["."]
+        }
+    },
+    "file_mapping": {
+        "hate_bullying":["bullying_hate", "clean"],
+        "porn_accuracy_test.json": ["porn", "clean"],
+        "proxy_accuracy_test.json": ["proxy", "clean"],
+        "self_harm_accuracy_test.json": ["self_harm", "clean"],
+        "weapons_accuracy_test.json": ["weapons", "clean"]
+    }
+}

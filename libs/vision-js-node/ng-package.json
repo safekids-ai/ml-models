@@ -1,0 +1,8 @@
+{
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/libs/vision-js-node",
+    "lib": {
+        "entryFile": "src/index.ts"
+    },
+    "allowedNonPeerDependencies": ["onnxruntime-node", "@safekids-ai/vision-js-common"]
+}

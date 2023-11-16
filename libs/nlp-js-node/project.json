@@ -1,0 +1,59 @@
+{
+  "name": "nlp-js-node",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/nlp-js-node/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/nlp-js-node/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/nlp-js-node/src/index.ts",
+        "project": "libs/nlp-js-node/ng-package.json",
+        "esbuildOptions" : {
+          "packages" : "external"
+        }
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/nlp-js-node/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/nlp-js-node/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "pnpm exec nx build nlp-js-node"
+        ],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/nlp-js-node"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/nlp-js-node/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

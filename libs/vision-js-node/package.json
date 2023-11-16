@@ -1,0 +1,40 @@
+{
+  "name": "@safekids-ai/vision-js-node",
+  "description": "Safekids Vision Node",
+  "version": "0.0.0-replace",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/safekids-ai/ml-models/tree/main/libs/vision-js-node"
+  },
+  "author": {
+    "name": "Abbas Valliani",
+    "email": "abbas@safekids.ai",
+    "url": "https://www.safekids.ai"
+  },
+  "keywords": [
+    "example",
+    "typescript",
+    "npm",
+    "package",
+    "sample",
+    "boilerplate",
+    "starter",
+    "demo",
+    "cjs",
+    "esm",
+    "umd"
+  ],
+  "license": "Safe Kids License",
+  "peerDependencies": {
+  },
+  "dependencies": {
+    "onnxruntime-node": "^1.16.1"
+  },
+  "sideEffects": false,
+  "generators": "./plugin/generators.json",
+  "schematics": "./plugin/generators.json",
+  "web-types": "./web-types.json"
+}

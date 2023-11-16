@@ -1,0 +1,22 @@
+{
+    "labels": [
+        "CLEAN",
+        "GUN",
+        "KNIFE",
+        "PORN"
+    ],
+    "scores": [
+        0.7,
+        0.7,
+        0.7,
+        0.7
+    ],
+    "labels_mapping": {
+        "ADULT": [
+            "PORN"
+        ],
+        "WEAPONS": [
+            "GUN"
+        ]
+    }
+}

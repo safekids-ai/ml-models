@@ -1,0 +1,46 @@
+{
+    "plugins": {
+        "@release-it/conventional-changelog": {
+            "preset": {
+                "name": "conventionalcommits",
+                "types": [
+                    {
+                        "type": "feat",
+                        "section": "Features"
+                    },
+                    {
+                        "type": "fix",
+                        "section": "Bug Fixes"
+                    },
+                    {
+                        "type": "cleanup",
+                        "section": "Cleanup"
+                    },
+                    {
+                        "type": "docs",
+                        "section": "Documentations"
+                    }
+                ]
+            },
+            "infile": "CHANGELOG.md"
+        },
+        "@release-it/bumper": {
+            "in": "version.json",
+            "out": ["version.json", "dist/libs/**/package.json"]
+        }
+    },
+    "git": {
+        "commitMessage": "chore: release ${version}"
+    },
+    "npm": {
+        "publish": false
+    },
+    "github": {
+        "release": true,
+        "releaseName": "Release ${version}"
+    },
+    "hooks": {
+        "before:bump": "pnpm exec nx run-many --target=package --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false",
+        "after:bump": ["git checkout -- package.json"]
+    }
+}
