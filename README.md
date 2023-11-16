@@ -29,6 +29,26 @@ These are local models (12MB/5MB) that detect hate speech and more and vision mo
 
 The models can be run on node or on the browser. SDK's are available for Python, JAVA, Node and in-the-browser that can be leverage by a chrome extension.
 
+## Basic script for install and building the repo
+<pre>
+# to install the application
+npm install
+
+# to do a build and test
+./build.sh or nx run-many -t test,build
+
+# to do a git release
+npm run release
+
+# to publish to npm repos
+a) make sure you have the following in your ~/.npmrc //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+b) define an environment variable NPM_TOKEN with the value of the token
+c) 
+run
+./publish.sh or 
+nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
+</pre>
+
 ## NLP Classification Types
 Main classification categories supported are:
 
@@ -86,7 +106,7 @@ expect(await nlp.classifyText("Milf Porn Videos: Mature Mom Sex Videos - RedTube
 #### Run the image classification model in node
 
 ```typescript
-import {VisionNode, VisionLabel} from '@safekids-ai/vision-js-node'
+import {VisionNode} from '@safekids-ai/vision-js-node'
 vision = new VisionNode("vision.onnx");
 await vision.init();
 const buffer: ImageData = getSync(qa_path + "gun1.jpg");
@@ -96,7 +116,7 @@ expect(pred).toEqual("weapons");
 
 #### Run the text classification directly in the browser!
 ```typescript
-import {NLPWeb, NLPLabel} from '@safekids-ai/vision-web'
+import {NLPWeb} from '@safekids-ai/nlp-js-web'
 //initialize the model
 nlp = new NLPWeb("nlp.onnx");
 await nlp.init();
@@ -104,7 +124,7 @@ await nlp.init();
 #### Run the image classification model directly in the browser or used in chrome extension
 
 ```typescript
-  import {VisionWeb, VisionLabel} from '@safekids-ai/vision-web'
+  import {VisionWeb, VisionLabel} from '@safekids-ai/vision-js-web'
   vision = new VisionWeb("vision.onnx");
   await vision.init();
 ```
