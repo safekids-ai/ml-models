@@ -35,7 +35,7 @@ The models can be run on node or on the browser. SDK's are available for Python,
 npm install
 
 # to do a build and test
-./build.sh or nx run-many -t test,build
+./build.sh or npx nx run-many -t test,build
 
 # to do a git release
 npm run release
@@ -46,7 +46,7 @@ b) define an environment variable NPM_TOKEN with the value of the token
 c) 
 run
 ./publish.sh or 
-nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
+npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
 </pre>
 
 ## NLP Classification Types
