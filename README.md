@@ -2,24 +2,18 @@
   <a href="https://safekids.ai">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="logo.png">
-      <img src="logo.png" height="120">
+      <img src="logo.png" style="width:300px;">
     </picture>
     <h1 align="center">safekids.ai</h1>
   </a>
 </p>
 
 <p align="center">
-  <a aria-label="Safekids logo" href="https://safekids.ai">
-    <img src="https://img.shields.io/badge/MADE%20BY%20SafeKids-000000.svg?style=for-the-badge&logo=Safekids&labelColor=000">
-  </a>
-  <a aria-label="NPM version" href="https://www.npmjs.com/package/safekids-ai">
-    <img alt="" src="https://img.shields.io/npm/v/next.svg?style=for-the-badge&labelColor=000000">
-  </a>
   <a aria-label="License" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">
-    <img alt="" src="https://img.shields.io/npm/l/next.svg?style=for-the-badge&labelColor=000000">
+    <img alt="" src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-red?link=href%3D%22https%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-nc-sa%2F4.0%2Fdeed.en%22">
   </a>
-  <a aria-label="Join the community on GitHub" href="https://github.com/safekids-ai/ml-models/discussions">
-    <img alt="" src="https://img.shields.io/badge/Join%20the%20community-blueviolet.svg?style=for-the-badge&logo=Next.js&labelColor=000000&logoWidth=20">
+  <a aria-label="NPM" href="https://www.npmjs.com/search?q=%40safekids-ai">
+    <img alt="" src="https://img.shields.io/badge/NPM-Published%20Packages-green?link=https%3A%2F%2Fwww.npmjs.com%2Fsearch%3Fq%3D%2540safekids-ai">
   </a>
 </p>
 
@@ -29,39 +23,40 @@ These are local models (12MB/5MB) that detect hate speech and more and vision mo
 
 The models can be run on node or on the browser. SDK's are available for Python, JAVA, Node and in-the-browser that can be leverage by a chrome extension.
 
-## Basic script for install and building the repo
-<pre>
-# to install the application
+### Install
+```properties
 npm install
+```
 
-# to do a build and test
-./build.sh or npx nx run-many -t test,build
+### Build/Test
+```properties
+npx nx run-many -t test,build
+```
 
-# to do a git release
+### Release Management
+```properties
 npm run release
+```
 
-# to publish to npm repos
+### Publish
+```properties
+npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
+```
+
+<pre>
 a) make sure you have the following in your ~/.npmrc //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 b) define an environment variable NPM_TOKEN with the value of the token
-c) 
-run
-./publish.sh or 
-npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
 </pre>
 
-## NLP Classification Types
-Main classification categories supported are:
-
-    bullying_hate
-    clean
-    porn
-    proxy
-    self_harm
-    weapons
-
-## Vision Classification Types
-    porn
-    weapons
+## NLP and Vision Classification
+| NLP Classification | Vision Classification |
+| ------------------ |-----------------------|
+| bullying_hate      | porn                  |
+| porn               | weapons               |
+| proxy              | clean   ß             |
+| self_harm          |                       |
+| weapons            |                       |
+| clean              |                       |
 
 ## Model Accuracy
 | Label | Training Data Count | Test Data Count | f1 score | precision | recall |
@@ -74,8 +69,16 @@ Main classification categories supported are:
 | weapons | 74,802 | 4,000 | 0.96 | 0.989 | 0.932 |
 
 ### Glossary of Terms
-| precision | number of true positives / total positive predictions. - indicates the confidence of a model. i.e: if precision for class X is 0.99, 99% chance that if model predicts class X for an input, 99% chance that correct label is also X | recall | number of true positives/ total positive  labels in test set. --- indicates how many of the total inputs belonging to a class in test set are correctly caught by the model. | f1 score | harmonic mean of Precision and  Recall. - the general accuracy measure for classification that balances out precision and recall |
-|---|---|---|---|---|---|
+<small>
+<b>Precision</b><br>
+number of true positives / total positive predictions. - indicates the confidence of a model. i.e: if precision for class X is 0.99, 99% chance that if model predicts class X for an input, 99% chance that correct label is also X
+
+<b>Recall</b><br>
+number of true positives/ total positive  labels in test set. --- indicates how many of the total inputs belonging to a class in test set are correctly caught by the model
+
+<b>F1 score</b><br>
+harmonic mean of Precision and  Recall. - the general accuracy measure for classification that balances out precision and recall
+</small>
 
 ## API Reference
 
@@ -129,25 +132,6 @@ await nlp.init();
   await vision.init();
 ```
 
-
-# License
-Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
-
-# SafeKids.ai
-
-- SafeKids' models for light weight NSFW detection in images and text
-- ... are idenified in images
-- ... are identified in text
-
-#### in-browser demo (models running on your browser):
-
-#### Python
-
-```bash
-pip install --upgrade safekids
-```
-
 ```python
 from safekids import SafeText
 safe_text_classifier = SafeText()
@@ -159,14 +143,6 @@ from safekids import SafeImage
 safe_image_classifier = SafeImage
 safe_image_classifier.classify("path_to_image")
 ```
-
-
-#### Java
-
-
-#### Javascript
-
-
-
-# Licensing
-The code is governed by GPL3 but for NON COMMERCIAL USE ONLY. For commercial use, contact us at licensing@safekids.ai
+### License
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
