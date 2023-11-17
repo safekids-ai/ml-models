@@ -1,0 +1,60 @@
+{
+  "name": "vision-js-react-native",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/vision-js-react-native/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/vision-js-react-native/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/vision-js-react-native/src/index.ts",
+        "project": "libs/vision-js-react-native/ng-package.json",
+        "assets": [
+          { "input": "libs/vision-js-react-native", "glob": "README.md", "output": "/" },
+          { "input": "libs/vision-js-react-native", "glob": "logo.png", "output": "/" }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/vision-js-react-native/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/vision-js-react-native/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "pnpm exec nx build vision-js-react-native"
+        ],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/vision-js-react-native"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/vision-js-react-native/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

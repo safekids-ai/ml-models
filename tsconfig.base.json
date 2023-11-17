@@ -18,9 +18,11 @@
       "@safekids-ai/nlp-js-common": ["libs/nlp-js-common/src/index.ts"],
       "@safekids-ai/nlp-js-node": ["libs/nlp-js-node/src/index.ts"],
       "@safekids-ai/nlp-js-web": ["libs/nlp-js-web/src/index.ts"],
+      "@safekids-ai/nlp-js-react-native": ["libs/nlp-js-react-native/src/index.ts"],
       "@safekids-ai/vision-js-common": ["libs/vision-js-common/src/index.ts"],
       "@safekids-ai/vision-js-node": ["libs/vision-js-node/src/index.ts"],
-      "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"]
+      "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"],
+      "@safekids-ai/vision-js-react-native": ["libs/vision-js-web/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

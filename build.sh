@@ -1,3 +1,3 @@
 #!/bin/sh
 
-npx nx run-many -t test,build
+npx nx run-many -t clean,build,test

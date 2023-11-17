@@ -12,6 +12,7 @@
     "onnxruntime-common": "^1.16.1",
     "onnxruntime-node": "^1.16.1",
     "onnxruntime-web": "^1.16.1",
+    "onnxruntime-react-native": "^1.16.1",
     "sbd": "^1.0.19",
     "tslib": "^2.3.0",
     "winston": "^3.11.0"
