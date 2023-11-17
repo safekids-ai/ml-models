@@ -28,16 +28,15 @@
     "umd"
   ],
   "license": "Safe Kids License",
-  "peerDependencies": {
-  },
   "dependencies": {
     "@techstark/opencv-js": "^4.8.0-release.9",
     "onnxruntime-common": "^1.16.1",
-    "winston": "^3.11.0",
-    "sbd": "^1.0.19"
+    "sbd": "^1.0.19",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
-    "@andreekeberg/imagedata": "^1.0.2"
+    "@andreekeberg/imagedata": "^1.0.2",
+    "esbuild-plugin-copy": "^2.1.1"
   },
   "sideEffects": false,
   "generators": "./plugin/generators.json",

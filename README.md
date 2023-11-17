@@ -68,14 +68,16 @@ b) define an environment variable NPM_TOKEN with the value of the token
 | self_harm | 180,826 | 5,000 | 0.96 | 0.984 | 0.937 |
 | weapons | 74,802 | 4,000 | 0.96 | 0.989 | 0.932 |
 
-### Glossary of Terms
+## Glossary of Terms
 <small>
 <b>Precision</b><br>
 number of true positives / total positive predictions. - indicates the confidence of a model. i.e: if precision for class X is 0.99, 99% chance that if model predicts class X for an input, 99% chance that correct label is also X
 
+<p></p>
 <b>Recall</b><br>
 number of true positives/ total positive  labels in test set. --- indicates how many of the total inputs belonging to a class in test set are correctly caught by the model
 
+<p></p>
 <b>F1 score</b><br>
 harmonic mean of Precision and  Recall. - the general accuracy measure for classification that balances out precision and recall
 </small>
@@ -127,11 +129,12 @@ await nlp.init();
 #### Run the image classification model directly in the browser or used in chrome extension
 
 ```typescript
-  import {VisionWeb, VisionLabel} from '@safekids-ai/vision-js-web'
-  vision = new VisionWeb("vision.onnx");
-  await vision.init();
+import {VisionWeb} from '@safekids-ai/vision-js-web'
+vision = new VisionWeb("vision.onnx");
+await vision.init();
 ```
 
+#### Run the text and image classification model in Python
 ```python
 from safekids import SafeText
 safe_text_classifier = SafeText()

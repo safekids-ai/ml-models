@@ -17,7 +17,11 @@
       "options": {
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/nlp-js-web/src/index.ts",
-        "project": "libs/nlp-js-web/ng-package.json"
+        "project": "libs/nlp-js-web/ng-package.json",
+        "assets": [
+          { "input": "libs/nlp-js-web", "glob": "README.md", "output": "/" },
+          { "input": "libs/nlp-js-web", "glob": "logo.png", "output": "/" }
+        ]
       },
       "configurations": {
         "production": {

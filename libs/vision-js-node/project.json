@@ -20,7 +20,11 @@
         "project": "libs/vision-js-node/ng-package.json",
         "esbuildOptions" : {
           "packages" : "external"
-        }
+        },
+        "assets": [
+          { "input": "libs/vision-js-node", "glob": "README.md", "output": "/" },
+          { "input": "libs/vision-js-node", "glob": "logo.png", "output": "/" }
+        ]
       },
       "configurations": {
         "production": {

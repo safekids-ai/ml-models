@@ -28,15 +28,16 @@
     "umd"
   ],
   "license": "Safe Kids License",
-  "peerDependencies": {
-  },
   "dependencies": {
     "onnxruntime-common": "^1.16.1",
-    "winston": "^3.11.0",
-    "sbd": "^1.0.19"
+    "sbd": "^1.0.19",
+    "winston": "^3.11.0"
   },
   "sideEffects": false,
   "generators": "./plugin/generators.json",
   "schematics": "./plugin/generators.json",
-  "web-types": "./web-types.json"
+  "web-types": "./web-types.json",
+  "devDependencies": {
+    "esbuild-plugin-copy": "^2.1.1"
+  }
 }

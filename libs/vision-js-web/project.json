@@ -17,7 +17,11 @@
       "options": {
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/vision-js-web/src/index.ts",
-        "project": "libs/vision-js-web/ng-package.json"
+        "project": "libs/vision-js-web/ng-package.json",
+        "assets": [
+          { "input": "libs/vision-js-web", "glob": "README.md", "output": "/" },
+          { "input": "libs/vision-js-web", "glob": "logo.png", "output": "/" }
+        ]
       },
       "configurations": {
         "production": {
