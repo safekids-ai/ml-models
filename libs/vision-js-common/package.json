@@ -34,10 +34,6 @@
     "sbd": "^1.0.19",
     "winston": "^3.11.0"
   },
-  "devDependencies": {
-    "@andreekeberg/imagedata": "^1.0.2",
-    "esbuild-plugin-copy": "^2.1.1"
-  },
   "sideEffects": false,
   "generators": "./plugin/generators.json",
   "schematics": "./plugin/generators.json",

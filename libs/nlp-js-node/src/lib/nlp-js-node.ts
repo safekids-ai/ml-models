@@ -1,4 +1,4 @@
-import {NLP} from '@safekids-ai/nlp-js-common';
+import {NLP,NLPLabel,NLPResult} from '@safekids-ai/nlp-js-common';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ort = require('onnxruntime-node');
@@ -13,6 +13,4 @@ class NLPNode extends NLP {
   }
 }
 
-class Foo {
-}
-export {NLPNode, Foo}
+export {NLPNode, NLPLabel,NLPResult}

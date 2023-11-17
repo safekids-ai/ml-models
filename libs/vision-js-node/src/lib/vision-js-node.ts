@@ -1,4 +1,4 @@
-import {Vision} from "@safekids-ai/vision-js-common";
+import {Vision,VisionLabel} from "@safekids-ai/vision-js-common";
 import {InferenceSession} from "onnxruntime-common";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -16,4 +16,4 @@ class VisionNode extends Vision {
   }
 }
 
-export {VisionNode}
+export {VisionNode,VisionLabel}
