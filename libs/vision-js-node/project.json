@@ -22,8 +22,8 @@
           "packages" : "external"
         },
         "assets": [
-          { "input": "libs/vision-js-node", "glob": "README.md", "output": "/" },
-          { "input": "libs/vision-js-node", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ]
       },
       "configurations": {

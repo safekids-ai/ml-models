@@ -19,8 +19,8 @@
         "main": "libs/nlp-js-react-native/src/index.ts",
         "project": "libs/nlp-js-react-native/ng-package.json",
         "assets": [
-          { "input": "libs/nlp-js-react-native", "glob": "README.md", "output": "/" },
-          { "input": "libs/nlp-js-react-native", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ],
         "esbuildOptions" : {
           "packages" : "external"

@@ -19,8 +19,8 @@
         "main": "libs/nlp-js-node/src/index.ts",
         "project": "libs/nlp-js-node/ng-package.json",
         "assets": [
-          { "input": "libs/nlp-js-node", "glob": "README.md", "output": "/" },
-          { "input": "libs/nlp-js-node", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ],
         "esbuildOptions" : {
           "packages" : "external"

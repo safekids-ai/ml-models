@@ -19,8 +19,8 @@
         "main": "libs/nlp-js-common/src/index.ts",
         "project": "libs/nlp-js-common/ng-package.json",
         "assets": [
-          { "input": "libs/nlp-js-common", "glob": "README.md", "output": "/" },
-          { "input": "libs/nlp-js-common", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ]
       },
       "configurations": {

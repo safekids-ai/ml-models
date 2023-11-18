@@ -19,8 +19,8 @@
         "main": "libs/vision-js-react-native/src/index.ts",
         "project": "libs/vision-js-react-native/ng-package.json",
         "assets": [
-          { "input": "libs/vision-js-react-native", "glob": "README.md", "output": "/" },
-          { "input": "libs/vision-js-react-native", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ]
       },
       "configurations": {

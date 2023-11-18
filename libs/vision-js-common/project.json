@@ -19,8 +19,8 @@
         "main": "libs/vision-js-common/src/index.ts",
         "project": "libs/vision-js-common/ng-package.json",
         "assets": [
-          { "input": "libs/vision-js-common", "glob": "README.md", "output": "/" },
-          { "input": "libs/vision-js-common", "glob": "logo.png", "output": "/" }
+          { "input": ".", "glob": "README.md", "output": "/" },
+          { "input": ".", "glob": "logo.png", "output": "/" }
         ]
       },
       "configurations": {
