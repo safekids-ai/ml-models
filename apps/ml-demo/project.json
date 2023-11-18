@@ -1,62 +1,45 @@
 {
   "name": "ml-demo",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/ml-demo/src",
+  "sourceRoot": "apps/ml-demo",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "platform": "node",
-        "outputPath": "dist/apps/ml-demo",
-        "format": ["cjs"],
-        "bundle": false,
-        "main": "apps/ml-demo/src/main.ts",
-        "tsConfig": "apps/ml-demo/tsconfig.app.json",
-        "assets": ["apps/ml-demo/src/assets"],
-        "generatePackageJson": true,
-        "esbuildOptions": {
-          "sourcemap": true,
-          "outExtension": {
-            ".js": ".js"
-          }
-        }
-      },
-      "configurations": {
-        "development": {},
-        "production": {
-          "generateLockfile": true,
-          "esbuildOptions": {
-            "sourcemap": false,
-            "outExtension": {
-              ".js": ".js"
-            }
-          }
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "ml-demo:build"
+        "outputPath": "dist/apps/ml-demo"
       },
       "configurations": {
         "development": {
-          "buildTarget": "ml-demo:build:development"
+          "outputPath": "apps/ml-demo"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ml-demo:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ml-demo:build:development",
+          "dev": true
         },
         "production": {
-          "buildTarget": "ml-demo:build:production"
+          "buildTarget": "ml-demo:build:production",
+          "dev": false
         }
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+    "export": {
+      "executor": "@nx/next:export",
       "options": {
-        "lintFilePatterns": ["apps/ml-demo/**/*.ts"]
+        "buildTarget": "ml-demo:build:production"
       }
     },
     "test": {
@@ -66,9 +49,12 @@
         "jestConfig": "apps/ml-demo/jest.config.ts"
       }
     },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f apps/ml-demo/Dockerfile . -t ml-demo"
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ml-demo/**/*.{ts,tsx,js,jsx}"]
+      }
     }
   },
   "tags": []

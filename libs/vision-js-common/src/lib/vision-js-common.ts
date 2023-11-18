@@ -1,7 +1,8 @@
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {visionConfig} from './model'
-// @ts-ignore
-import cv from "@techstark/opencv-js";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cv = require("@techstark/opencv-js");
 import * as winston from 'winston';
 
 enum VisionLabel {
@@ -27,6 +28,9 @@ abstract class Vision {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this;
     return new Promise((resolve, reject) => {
+      if (!cv) {
+        throw new Error("OpenCV is not defined and unavailable");
+      }
       cv.onRuntimeInitialized = () => {
         if (this.logger) {
           this.logger.debug("initialized opencv");
