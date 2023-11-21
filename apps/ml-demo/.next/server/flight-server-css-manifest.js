@@ -1,16 +1,4 @@
 self.__RSC_CSS_MANIFEST={
-  "cssImports": {
-    "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/page.tsx": [
-      "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/page.module.css"
-    ],
-    "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/layout.tsx": [
-      "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/global.css"
-    ]
-  },
-  "cssModules": {
-    "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/page": [
-      "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/page.module.css",
-      "/Users/abbasvalliani/Documents/work/sourcecode/safekids/ml-models/apps/ml-demo/app/global.css"
-    ]
-  }
+  "cssImports": {},
+  "cssModules": {}
 }

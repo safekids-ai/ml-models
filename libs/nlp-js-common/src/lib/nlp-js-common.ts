@@ -2,9 +2,9 @@ import {Tokenizer} from './tokenizer';
 import {modelConfig} from './model';
 import {toxicPhrases} from './constants';
 import {InferenceSession, Tensor} from 'onnxruntime-common';
-import * as sentence_tokenizer from 'sbd';
+import {sentences} from "sbd"
+//import * as sentence_tokenizer from 'sbd';
 import * as winston from 'winston';
-
 enum NLPLabel {
   BullyingHate = "bullying_hate",
   Clean = "clean",
@@ -36,6 +36,9 @@ abstract class NLP {
   public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
   public async init() {
+    if (this.logger) {
+      this.logger.info(`Loading model ${this.onnxUrl}`);
+    }
     this.session = await this.createSession(this.onnxUrl);
   }
 
@@ -87,12 +90,12 @@ abstract class NLP {
       return _result[0] as NLPLabel
     }
 
-    let sentences: string[] = Array.from(new Set(sentence_tokenizer.sentences(text)));
-    if (text.length >= 50 && text.split(' ').length >= 15 && sentences.length == 1) {
-      sentences = Array.from(new Set(sentence_tokenizer.sentences(text.replace(',', '.'))));
+    let sentenceArray: string[] = sentences(text);
+    if (text.length >= 50 && text.split(' ').length >= 15 && sentenceArray.length == 1) {
+      sentenceArray = sentences(text.replace(',', '.'));
     }
 
-    const sentenceWiseResults = await this.classifySentences(sentences, batchSize, config);
+    const sentenceWiseResults = await this.classifySentences(sentenceArray, batchSize, config);
 
     let finalLabel = "clean";
 
@@ -107,12 +110,12 @@ abstract class NLP {
   }
 
   public async findTextToFlag(text: string, batchSize = 2, config = "default_model"): Promise<NLPResult> {
-    let sentences: string[] = Array.from(new Set(sentence_tokenizer.sentences(text)));
-    if (text.length >= 50 && text.split(' ').length >= 15 && sentences.length == 1) {
-      sentences = Array.from(new Set(sentence_tokenizer.sentences(text.replace(',', '.'))));
+    let sentenceArray: string[] = sentences(text);
+    if (text.length >= 50 && text.split(' ').length >= 15 && sentenceArray.length == 1) {
+      sentenceArray = sentences(text.replace(',', '.'));
     }
 
-    const sentenceWiseResults = await this.classifySentences(sentences, batchSize, config);
+    const sentenceWiseResults = await this.classifySentences(sentenceArray, batchSize, config);
 
     let finalLabel = "clean";
     let flaggedText = "";
@@ -121,7 +124,7 @@ abstract class NLP {
     sentenceWiseResults.forEach(label => {
       if (finalLabel == "clean" && label != "clean") {
         finalLabel = label;
-        flaggedText = sentences[currentSentenceIndex];
+        flaggedText = sentenceArray[currentSentenceIndex];
       }
       currentSentenceIndex += 1;
     });
@@ -257,4 +260,4 @@ abstract class NLP {
   }
 }
 
-export {NLP, NLPLabel, toxicPhrases, NLPResult}
+export {NLP, NLPLabel, toxicPhrases, type NLPResult}

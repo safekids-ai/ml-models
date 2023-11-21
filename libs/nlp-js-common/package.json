@@ -29,6 +29,7 @@
   ],
   "license": "Safe Kids License",
   "dependencies": {
+    "@types/sbd": "^1.0.5",
     "onnxruntime-common": "^1.16.1",
     "sbd": "^1.0.19",
     "winston": "^3.11.0"

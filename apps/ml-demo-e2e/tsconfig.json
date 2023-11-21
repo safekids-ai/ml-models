@@ -16,5 +16,8 @@
     "**/*.cy.js",
     "**/*.cy.jsx",
     "**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
   ]
 }

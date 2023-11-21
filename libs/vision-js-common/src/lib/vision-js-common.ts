@@ -35,6 +35,9 @@ abstract class Vision {
         if (this.logger) {
           this.logger.debug("initialized opencv");
         }
+        if (this.logger) {
+          this.logger.info(`Loading model ${this.onnxUrl}`);
+        }
         const sessionPromise: Promise<InferenceSession> = this.createSession(this.onnxUrl);
         sessionPromise.then(r => {
           me.session = r;
@@ -111,4 +114,4 @@ async function getImageTensorFromImageData(imageData: ImageData): Promise<Tensor
   return new Tensor("float32", input.data32F, [1, 3, 224, 224]);
 }
 
-export {Vision, VisionLabel}
+export {Vision, type VisionLabel}

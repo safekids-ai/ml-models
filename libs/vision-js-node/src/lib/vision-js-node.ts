@@ -16,4 +16,4 @@ class VisionNode extends Vision {
   }
 }
 
-export {VisionNode,VisionLabel}
+export {VisionNode, type VisionLabel}

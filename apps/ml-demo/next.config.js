@@ -12,6 +12,10 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  experimental: {
+    instrumentationHook: true,
+    //serverComponentsExternalPackages: ["@safekids-ai/nlp-js-node", "onnxruntime-node"]
+  },
 };
 
 const plugins = [

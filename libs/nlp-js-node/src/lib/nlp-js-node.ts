@@ -13,4 +13,4 @@ class NLPNode extends NLP {
   }
 }
 
-export {NLPNode, NLPLabel,NLPResult}
+export {NLPNode, NLPLabel, type NLPResult}
