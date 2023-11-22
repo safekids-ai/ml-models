@@ -1,0 +1,37 @@
+{
+  "name": "ml-demo-web-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ml-demo-web-e2e/src",
+  "targets": {
+    "integration": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+      "options": {
+        "jestConfig": "apps/ml-demo-web-e2e/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ml-demo-web-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "ml-demo-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "ml-demo-web:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ml-demo-web-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["ml-demo-web"]
+}

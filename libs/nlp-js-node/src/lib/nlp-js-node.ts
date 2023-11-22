@@ -3,9 +3,10 @@ import {NLP,NLPLabel,NLPResult} from '@safekids-ai/nlp-js-common';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ort = require('onnxruntime-node');
 import {InferenceSession} from "onnxruntime-common";
+import {Logger} from "winston";
 class NLPNode extends NLP {
-  constructor(modelUrl: string) {
-    super(modelUrl);
+  constructor(modelUrl: string, logger?: Logger) {
+    super(modelUrl, logger);
   }
 
   public createSession(modelUrl: string): Promise<InferenceSession> {
