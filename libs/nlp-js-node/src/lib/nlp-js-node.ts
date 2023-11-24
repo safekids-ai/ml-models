@@ -1,4 +1,5 @@
-import {NLP,NLPLabel,NLPResult} from '@safekids-ai/nlp-js-common';
+import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
+import {NLP} from '@safekids-ai/nlp-js-common';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ort = require('onnxruntime-node');

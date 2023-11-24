@@ -1,4 +1,5 @@
-import {NLP,NLPLabel,NLPResult} from '@safekids-ai/nlp-js-common';
+import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
+import {NLP} from '@safekids-ai/nlp-js-common';
 import {InferenceSession} from "onnxruntime-web";
 class NLPWeb extends NLP {
   constructor(modelUrl: string) {

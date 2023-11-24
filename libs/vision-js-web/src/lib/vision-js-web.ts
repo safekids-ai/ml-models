@@ -1,4 +1,5 @@
-import {Vision, VisionLabel} from '@safekids-ai/vision-js-common';
+import {VisionLabel} from "@safekids-ai/vision-js-types";
+import {Vision} from '@safekids-ai/vision-js-common';
 import {InferenceSession} from "onnxruntime-web";
 
 class VisionWeb extends Vision {

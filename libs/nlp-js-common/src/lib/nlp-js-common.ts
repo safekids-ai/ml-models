@@ -5,20 +5,7 @@ import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {sentences} from "sbd"
 //import * as sentence_tokenizer from 'sbd';
 import * as winston from 'winston';
-enum NLPLabel {
-  BullyingHate = "bullying_hate",
-  Clean = "clean",
-  Porn = "porn",
-  Proxy = "proxy",
-  SelfHarm = "self_harm",
-  Weapons = "weapons"
-}
-
-interface NLPResult {
-  flag: boolean,
-  label: NLPLabel,
-  flaggedText: string
-}
+import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 
 abstract class NLP {
   public static readonly version: string = "0.0.1";
@@ -103,7 +90,6 @@ abstract class NLP {
       if (label != "clean") {
         finalLabel = label
       }
-
     });
 
     return finalLabel as NLPLabel;

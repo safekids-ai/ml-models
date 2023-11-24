@@ -1,15 +1,10 @@
+import {VisionLabel} from "@safekids-ai/vision-js-types";
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {visionConfig} from './model'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cv = require("@techstark/opencv-js");
 import * as winston from 'winston';
-
-enum VisionLabel {
-  Porn = "porn",
-  Clean = "clean",
-  Weapons = "weapons"
-}
 
 abstract class Vision {
   public static readonly version: string = "0.0.1";
