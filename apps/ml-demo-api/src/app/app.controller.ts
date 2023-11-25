@@ -12,9 +12,10 @@ import {
 import {AppService} from './app.service';
 import {ApiOperation, ApiTags} from '@nestjs/swagger';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
-import {NLPRequestDto} from "./types/NLPTypes";
+import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
+import {Throttle} from "@nestjs/throttler";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cv = require('@techstark/opencv-js');
 

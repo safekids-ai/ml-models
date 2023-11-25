@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {NLPRequestDto} from "../../../ml-demo-api/src/app/types/NLPTypes";
+import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 import * as fs from "fs";
 import {VisionLabel} from "@safekids-ai/vision-js-types";
