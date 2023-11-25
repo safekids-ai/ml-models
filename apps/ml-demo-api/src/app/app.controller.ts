@@ -1,9 +1,23 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  FileTypeValidator,
+  Get, MaxFileSizeValidator,
+  ParseFilePipe,
+  Post,
+  UploadedFile,
+  UseInterceptors
+} from '@nestjs/common';
 
 import {AppService} from './app.service';
 import {ApiOperation, ApiTags} from '@nestjs/swagger';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLPRequestDto} from "./types/NLPTypes";
+import {FileInterceptor} from "@nestjs/platform-express";
+import {Multer} from "multer";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cv = require('@techstark/opencv-js');
+
 @ApiTags('App')
 @Controller()
 export class AppController {
@@ -15,15 +29,28 @@ export class AppController {
     return "Hello";
   }
 
-  @Post('v1/find-hate')
+  @Post('v1/classify-hate')
   @ApiOperation({summary: 'Find if the text has hateful language'})
-  findHate(@Body() request: NLPRequestDto): Promise<NLPResult> {
-    return this.appService.findHate(request.message);
+  classifyHate(@Body() request: NLPRequestDto): Promise<NLPResult> {
+    return this.appService.classifyHate(request.message);
   }
 
   @Post('v1/classify-text')
   @ApiOperation({summary: 'Classifies text into one of the generic labels.'})
   classifyText(@Body() request: NLPRequestDto): Promise<NLPLabel> {
     return this.appService.classifyText(request.message);
+  }
+
+  @Post('v1/classify-image')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiOperation({summary: 'Classifies image into a category'})
+  async classifyImage(
+    @UploadedFile(new ParseFilePipe({
+      validators: [
+        new FileTypeValidator({fileType: '.(png|jpeg|jpg)'}),
+        new MaxFileSizeValidator({maxSize: 1024 * 1024 * 4}),
+      ],
+    }),) file: Express.Multer.File) {
+    return await this.appService.classifyImage(file.buffer);
   }
 }

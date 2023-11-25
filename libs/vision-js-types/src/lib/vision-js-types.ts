@@ -5,4 +5,4 @@ enum VisionLabel {
   Weapons = "weapons"
 }
 
-export {type VisionLabel}
+export {VisionLabel}

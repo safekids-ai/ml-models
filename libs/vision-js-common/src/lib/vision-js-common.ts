@@ -4,6 +4,9 @@ import {visionConfig} from './model'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cv = require("@techstark/opencv-js");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const imageDataUtils = require('@andreekeberg/imagedata')
+
 import * as winston from 'winston';
 
 abstract class Vision {
@@ -45,13 +48,20 @@ abstract class Vision {
     });
   }
 
-  public async classifyImageData(imageData: ImageData): Promise<VisionLabel> {
+  // public async classifyImage(buffer: Buffer): Promise<VisionLabel> {
+  //   const mat = cv.imread(buffer);
+  //   const imageData = new ImageData(new Uint8ClampedArray(mat.getData()), mat.cols, mat.rows);
+  //   mat.delete();
+  //   return this.classifyImageData(imageData);
+  // }
+
+  public async classifyImage(imageData: ImageData | Buffer): Promise<VisionLabel> {
     if (!this.session) {
       throw new Error("Please call init() to initialize the InferenceSession");
     }
 
     let startTime = new Date().getTime();
-    const onnxInput = await getImageTensorFromImageData(imageData);
+    const onnxInput = await getImageTensor(imageData);
     const preProcessingTime = new Date().getTime() - startTime;
     startTime = new Date().getTime();
     const _output = await this.session.run({images: onnxInput});
@@ -85,9 +95,16 @@ abstract class Vision {
   }
 }
 
-
-async function getImageTensorFromImageData(imageData: ImageData): Promise<Tensor> {
+async function getImageTensor(imageInput: ImageData | Buffer): Promise<Tensor> {
   const matC3 = new cv.Mat(224, 224, cv.CV_8UC3);
+  let imageData : ImageData = null;
+
+  if (imageInput instanceof Buffer) {
+    imageData = await imageDataUtils.getSync(imageInput);
+  } else {
+    imageData = imageInput;
+  }
+
   const mat = cv.matFromImageData(imageData);
   cv.cvtColor(mat, matC3, cv.COLOR_RGBA2BGR); // RGBA to BGR
   mat.delete();

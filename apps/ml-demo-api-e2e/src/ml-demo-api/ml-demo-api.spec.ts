@@ -1,7 +1,12 @@
 import axios from 'axios';
 import {NLPRequestDto} from "../../../ml-demo-api/src/app/types/NLPTypes";
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
-import {int} from "@techstark/opencv-js";
+import * as fs from "fs";
+import {VisionLabel} from "@safekids-ai/vision-js-types";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const FormData = require('form-data');
+
+const qa_path = "./qa-data/vision/";
 
 describe('GET /api/v1/hello', () => {
   it('ping', async () => {
@@ -12,9 +17,9 @@ describe('GET /api/v1/hello', () => {
   });
 });
 
-describe('POST /api/v1/find-hate', () => {
+describe('POST /api/v1/classify-hate', () => {
   it('should be clean', async () => {
-    const res = await axios.post(`api/v1/find-hate`, {
+    const res = await axios.post(`api/v1/classify-hate`, {
       message : "you are amazing."
     } as NLPRequestDto);
 
@@ -26,7 +31,7 @@ describe('POST /api/v1/find-hate', () => {
   });
 
   it('should be hateful', async () => {
-    const res = await axios.post(`api/v1/find-hate`, {
+    const res = await axios.post(`api/v1/classify-hate`, {
       message : "you are amazing. but you're also an asshole"
     } as NLPRequestDto);
 
@@ -103,5 +108,41 @@ describe('POST /api/v1/classify-text', () => {
     expect(res.status).toBeLessThan(300);
 
     expect(res.data).toEqual(NLPLabel.SelfHarm);
+  });
+});
+
+describe('POST /api/v1/classify-image', () => {
+  it('should be clean', async () => {
+    const form = new FormData();
+    const buffer = fs.readFileSync(qa_path + 'clean1.jpg');
+    form.append ('file',  buffer, 'clean1.jpg');
+
+    const res = await axios.post(`api/v1/classify-image`, form, {
+      headers: {
+        ...form.getHeaders()
+      }
+    });
+
+    expect(res.status).toBeGreaterThanOrEqual(200);
+    expect(res.status).toBeLessThan(300);
+
+    expect(res.data).toEqual(VisionLabel.Clean);
+  });
+
+  it('should be weapons', async () => {
+    const form = new FormData();
+    const buffer = fs.readFileSync(qa_path + 'gun1.jpg');
+    form.append ('file',  buffer, 'gun1.jpg');
+
+    const res = await axios.post(`api/v1/classify-image`, form, {
+      headers: {
+        ...form.getHeaders()
+      }
+    });
+
+    expect(res.status).toBeGreaterThanOrEqual(200);
+    expect(res.status).toBeLessThan(300);
+
+    expect(res.data).toEqual(VisionLabel.Weapons);
   });
 });

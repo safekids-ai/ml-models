@@ -36,13 +36,19 @@ function toImageData(path: string) {
 
 test('clean', async () => {
   const buffer: ImageData = getSync(qa_path + "clean1.jpg");
-  const pred = await vision.classifyImageData(buffer);
+  const pred = await vision.classifyImage(buffer);
   expect(pred).toEqual("clean");
 });
 
 test('weapons', async () => {
   const buffer: ImageData = getSync(qa_path + "gun1.jpg");
-  const pred = await vision.classifyImageData(buffer);
+  const pred = await vision.classifyImage(buffer);
+  expect(pred).toEqual("weapons");
+});
+
+test('weapons-as-binary', async () => {
+  const buffer = fs.readFileSync(qa_path + "gun1.jpg");
+  const pred = await vision.classifyImage(buffer);
   expect(pred).toEqual("weapons");
 });
 
@@ -56,7 +62,7 @@ test('weapons', async () => {
 test('adult-b64', async () => {
   //const data: VisionImageData = await fromBase64(qa_path + "adult1.jpeg.b64");
   const data = toImageData(qa_path + "adult1.jpeg.b64");
-  const pred = await vision.classifyImageData(data);
+  const pred = await vision.classifyImage(data);
   expect(pred).toEqual("porn");
 });
 
