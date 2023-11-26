@@ -5,7 +5,7 @@ import {
   Get, MaxFileSizeValidator,
   ParseFilePipe,
   Post,
-  UploadedFile,
+  UploadedFile, UseGuards,
   UseInterceptors
 } from '@nestjs/common';
 

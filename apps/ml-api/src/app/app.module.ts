@@ -7,6 +7,7 @@ import {APP_GUARD} from "@nestjs/core";
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import throttleConfig from "./config/throttle.config";
 import modelConfig from "./config/model.config";
+import {ThrottlerBehindProxyGuard} from "./guards/throttler-behind-proxy-guard";
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import modelConfig from "./config/model.config";
   controllers: [AppController],
   providers: [AppService, Logger, {
     provide: APP_GUARD,
-    useClass: ThrottlerGuard
+    useClass: ThrottlerBehindProxyGuard
   }],
 })
 export class AppModule {}
