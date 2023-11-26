@@ -1,14 +1,14 @@
 {
-  "name": "ml-demo-api-e2e",
+  "name": "ml-api-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["ml-demo-api"],
+  "implicitDependencies": ["ml-api"],
   "projectType": "application",
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/ml-demo-api-e2e/jest.config.ts",
+        "jestConfig": "apps/ml-api-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -16,7 +16,7 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ml-demo-api-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/ml-api-e2e/**/*.{js,ts}"]
       }
     }
   }
