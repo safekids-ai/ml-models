@@ -31,7 +31,7 @@
   "dependencies": {
     "onnxruntime-common": "^1.16.1",
     "sbd": "^1.0.19",
-    "winston": "^3.11.0"
+    "abstract-logging": "^2.0.1"
   },
   "devDependencies": {
     "@types/sbd": "^1.0.5"

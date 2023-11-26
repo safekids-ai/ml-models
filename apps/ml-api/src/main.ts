@@ -5,7 +5,7 @@
 
 import { Logger } from '@nestjs/common';
 import { WinstonModule } from 'nest-winston';
-import { instance } from './app/logger/winston.logger';
+import { instance } from './app/config/logger.config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 

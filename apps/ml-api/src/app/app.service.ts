@@ -1,13 +1,19 @@
 import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
 import {NLPLabel, NLPNode, NLPResult} from "@safekids-ai/nlp-js-node";
 import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
+import {ConfigService} from "@nestjs/config";
+import {logger} from "nx/src/utils/logger";
 
 @Injectable()
 export class AppService implements OnModuleInit {
   nlpModel: NLPNode = null;
   visionModel: VisionNode = null;
+  nlp_onnx_path: string;
+  vision_onnx_path: string;
 
-  constructor(private readonly logger: Logger) {
+  constructor(private readonly logger: Logger, private readonly configService: ConfigService) {
+    this.nlp_onnx_path = configService.get("nlp_onnx_path");
+    this.vision_onnx_path = configService.get("vision_onnx_path");
   }
 
   async classifyHate(message: string): Promise<NLPResult> {
@@ -25,14 +31,14 @@ export class AppService implements OnModuleInit {
   async onModuleInit(): Promise<void> {
     //load the NLP model
     this.logger.log("Loading NLP Model");
-    this.nlpModel = new NLPNode("model_files/nlp.onnx");
+    this.nlpModel = new NLPNode(this.nlp_onnx_path, logger);
     await this.nlpModel.init();
-    this.logger.log("Successfully loaded NLP Model");
+    this.logger.log(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
 
     //load the Vision model
     this.logger.log("Loading Vision Model");
-    this.visionModel = new VisionNode("model_files/vision.onnx");
+    this.visionModel = new VisionNode(this.vision_onnx_path, logger);
     await this.visionModel.init();
-    this.logger.log("Successfully loaded Vision Model");
+    this.logger.log(`Successfully loaded Vision Model ${this.vision_onnx_path}`);
   }
 }

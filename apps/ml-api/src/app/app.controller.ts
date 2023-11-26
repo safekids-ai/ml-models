@@ -16,6 +16,7 @@ import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
 import {Throttle} from "@nestjs/throttler";
+import {ConfigService} from "@nestjs/config";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cv = require('@techstark/opencv-js');
 

@@ -3,8 +3,7 @@ import {modelConfig} from './model';
 import {toxicPhrases} from './constants';
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {sentences} from "sbd"
-//import * as sentence_tokenizer from 'sbd';
-import * as winston from 'winston';
+import * as Logger from 'abstract-logging';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 
 abstract class NLP {
@@ -12,9 +11,9 @@ abstract class NLP {
   private readonly tokenizer: Tokenizer;
   private session: InferenceSession;
   private readonly onnxUrl: string;
-  private readonly logger?: winston.Logger;
+  private readonly logger?: Logger;
 
-  protected constructor(onnxUrl: string, logger?: winston.Logger) {
+  protected constructor(onnxUrl: string, logger?: Logger) {
     this.onnxUrl = onnxUrl;
     this.logger = logger;
     this.tokenizer = new Tokenizer();

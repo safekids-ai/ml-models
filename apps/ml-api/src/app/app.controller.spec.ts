@@ -3,6 +3,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {Logger} from "@nestjs/common";
+import {ConfigService} from "@nestjs/config";
 
 describe('AppController', () => {
   let app: TestingModule;
@@ -14,6 +15,13 @@ describe('AppController', () => {
         provide: Logger,
         useValue: {
           log: jest.fn(),
+        }
+      }, {
+        provide: ConfigService,
+        useValue: {
+          get: jest.fn((key: string) => {
+            return null;
+          })
         }
       }],
     }).compile();

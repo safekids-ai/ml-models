@@ -4,26 +4,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {ThrottlerGuard, ThrottlerModule} from "@nestjs/throttler";
 import {APP_GUARD} from "@nestjs/core";
+import {ConfigModule, ConfigService} from '@nestjs/config';
+import throttleConfig from "./config/throttle.config";
+import modelConfig from "./config/model.config";
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot([
-      {
-        name: 'short',
-        ttl: 1000,
-        limit: 10,
-      },
-      {
-        name: 'medium',
-        ttl: 10000,
-        limit: 20
-      },
-      {
-        name: 'long',
-        ttl: 60000,
-        limit: 50
-      }
-    ]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      load: [throttleConfig, modelConfig]
+    }),
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => config.get("throttle_config"),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, Logger, {

@@ -1,21 +1,21 @@
 import {VisionLabel} from "@safekids-ai/vision-js-types";
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {visionConfig} from './model'
+import * as Logger from 'abstract-logging';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const cv = require("@techstark/opencv-js");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const imageDataUtils = require('@andreekeberg/imagedata')
 
-import * as winston from 'winston';
 
 abstract class Vision {
   public static readonly version: string = "0.0.1";
   private session: InferenceSession
   private readonly onnxUrl: string
-  private readonly logger?: winston.Logger;
+  private readonly logger?: Logger;
 
-  constructor(onnxUrl: string, logger?: winston.Logger) {
+  constructor(onnxUrl: string, logger?: Logger) {
     this.onnxUrl = onnxUrl;
     this.logger = logger;
   }

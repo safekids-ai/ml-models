@@ -1,7 +1,7 @@
 import {VisionLabel} from "@safekids-ai/vision-js-types";
 import {Vision} from "@safekids-ai/vision-js-common";
 import {InferenceSession} from "onnxruntime-common";
-import {Logger} from "winston";
+import * as Logger from 'abstract-logging';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ort = require('onnxruntime-node');
