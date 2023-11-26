@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 3px solid #fb2f4e;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #fb2f4e;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -70px;
+  }
+  
+  .tooltip:hover {
+    cursor: pointer;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
