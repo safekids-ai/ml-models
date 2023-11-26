@@ -16,7 +16,8 @@
       ]
     },
     "e2e": {
-      "cache": true
+      "cache": true,
+      "inputs": ["default", "^production"]
     },
     "@nx/jest:jest": {
       "cache": true,
@@ -30,6 +31,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -46,5 +51,22 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudAccessToken": "MGVlZmUwZjEtMzgzOS00MGE4LTg5OTYtMTExNWYzZDg4MDBhfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MGVlZmUwZjEtMzgzOS00MGE4LTg5OTYtMTExNWYzZDg4MDBhfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "bundler": "vite",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  }
 }
