@@ -3,14 +3,16 @@
     position: relative;
     display: inline-block;
     border-bottom: 3px solid #fb2f4e;
+    font-style: italic;
+    font-weight: 600;
   }
   
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 140px;
-    background-color: #fb2f4e;
+    background-color: #fb2f4ecf;
     color: #fff;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
@@ -27,5 +29,6 @@
     cursor: pointer;
   }
   .tooltip:hover .tooltiptext {
+    font-style: normal;
     visibility: visible;
   }

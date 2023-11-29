@@ -15,7 +15,7 @@ const Hate = () => {
     {
       from: "computer",
       text:
-        "Nice to meet you. <span class='test'>You can send me message and i'll reply you with same message.</span>"
+        "Nice to meet you. You can send me message and i'll tell you if it is hate speech or not",
     }
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -29,16 +29,18 @@ const Hate = () => {
     setMessages((old) => [...old, { from: "me", text: prevMessage }]);
     setInputMessage("");
 
-    const res: NLPResult = await axios.post("http://localhost:3000/api/v1/classify-hate", { message: prevMessage })
+    const req = await axios.post<NLPResult>("http://localhost:3000/api/v1/classify-hate", { message: prevMessage })
+    const res = req.data;
+    console.log(res, res.flag)
     const arr = prevMessage.split(res.flaggedText)
-    const data = res.flag ? `${arr[0]}<span class="tooltip">${res.flaggedText}<span class="tooltiptext">Flagged as hate</span></span>${arr[1]}`: "Not flagged"
+    const data = res.flag ? `${arr[0]}<span class="tooltip">${res.flaggedText}<span class="tooltiptext">Flagged as ${res.label}</span></span>${arr[1]}`: "Not flagged"
     console.log(data)
     setMessages((old) => [...old, { from: "computer", text: data }]);
   };
 
   return (
-    <Flex w="100%" h="100vh" justify="center" align="center">
-      <Flex w={["100%", "100%", "40%"]} h="90%" flexDir="column">
+    <Flex w="100%" h="100vh" justify="center">
+      <Flex w={["100%", "100%", "40%"]} h="80%" flexDir="column">
         <Header />
         <Divider />
         <Messages messages={messages} />

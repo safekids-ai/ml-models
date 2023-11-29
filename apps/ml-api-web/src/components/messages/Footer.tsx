@@ -26,6 +26,7 @@ const Footer: React.FC<FooterProps> = ({ inputMessage, setInputMessage, handleSe
         value={inputMessage}
         onChange={(e) => setInputMessage(e.target.value)}
         disabled={disabled}
+        id="message"
       />
       <Button
         bg="black"

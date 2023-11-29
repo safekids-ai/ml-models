@@ -13,6 +13,7 @@ import {
     BoxProps,
     FlexProps,
     useColorMode,
+    DrawerOverlay
   } from "@chakra-ui/react";
   import {
     FiTrendingUp,
@@ -75,9 +76,9 @@ import {
         h="full"
         {...rest}
       >
-        <Box h="20" as={NextLink} to="/">
+        <Box h="20">
           <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" as={NextLink} to="/">
               SafeDemo
             </Text>
             <CloseButton
@@ -112,7 +113,7 @@ import {
     const location = useLocation();
     const pathname = location.pathname;
     //   const bgColor = useColorModeValue('pink.300', 'pink.300')
-    const bgColor = useColorModeValue("#FB2F4E", "#FB2F4E");
+    const bgColor = useColorModeValue("#fb2f4ecf", "#fb2f4ecf");
     const textColor = "white";
     return (
       <Box
@@ -173,9 +174,9 @@ import {
           icon={<FiMenu />}
         />
   
-        <Box h="20" as={NextLink} to="/" display={{ base: 'flex', md: 'none' }}>
+        <Box h="20" display={{ base: 'flex', md: 'none' }}>
           <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" as={NextLink} to="/">
               SafeDemo
             </Text>
           </Flex>
@@ -227,6 +228,7 @@ import {
           onOverlayClick={onClose}
           size="xs"
         >
+          <DrawerOverlay />  
           <DrawerContent>
             <SidebarContent onClose={onClose} />
           </DrawerContent>

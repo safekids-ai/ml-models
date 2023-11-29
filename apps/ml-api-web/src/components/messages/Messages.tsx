@@ -47,7 +47,7 @@ const Messages: React.FC<{messages: Array<Message>}> = ({ messages }) => {
                 p="3"
                 borderRadius="15px"
               >
-                <Text>{parse(item.text)}</Text>
+                <Text className="compmessage">{parse(item.text)}</Text>
               </Flex>
             </Flex>
           );
