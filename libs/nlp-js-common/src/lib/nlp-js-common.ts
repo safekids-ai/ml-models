@@ -11,7 +11,7 @@ abstract class NLP {
   private readonly tokenizer: Tokenizer;
   private session: InferenceSession;
   private readonly onnxUrl: string;
-  private readonly logger?: Logger;
+  private logger?: Logger;
 
   protected constructor(onnxUrl: string, logger?: Logger) {
     this.onnxUrl = onnxUrl;
