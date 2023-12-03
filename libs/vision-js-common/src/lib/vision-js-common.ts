@@ -78,10 +78,11 @@ abstract class Vision {
 
     const inferenceTime = new Date().getTime() - startTime;
 
-    console.debug("vision:", "label:", label, "finalLabel:", finalLabel, "maxIndex:", maxIndex, "maxProb:", maxProb, "inferenceTime:", inferenceTime, "totalTime:", preProcessingTime + inferenceTime)
-
+    if(this.logger) {
+      const totalTime = preProcessingTime + inferenceTime;
+      this.logger.debug(`vision: label: ${label} finalLabel: ${finalLabel} maxIndex: ${maxIndex} maxProb: ${maxProb} inferenceTime: ${inferenceTime} totalTime: ${totalTime}`);
+    }
     return finalLabel as VisionLabel
-
   }
 
   private async softmax(vector: number[]): Promise<number[]> {
