@@ -6,7 +6,10 @@
     font-style: italic;
     font-weight: 600;
   }
-  
+  .red-underline {
+    font-weight: 700;
+    color: rgba(172, 1, 1, 0.899)
+  }
   .tooltip .tooltiptext {
     visibility: hidden;
     width: 140px;
@@ -19,7 +22,7 @@
     
     /* Position the tooltip */
     position: absolute;
-    z-index: 1;
+    z-index: 999;
     bottom: 100%;
     left: 50%;
     margin-left: -70px;

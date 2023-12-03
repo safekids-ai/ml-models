@@ -56,13 +56,14 @@ import {
     {
       header: "Models",
       submenu: [
-        { name: "Vision", icon: FiTrendingUp, link: "/vision" },
+        // { name: "Vision", icon: FiTrendingUp, link: "/vision" },
         { name: "Hate", icon: FiCompass, link: "/hate" },
+        {name: "Intent Classification", icon: FiCompass, link: "/classify-intent" },
       ],
     },
     {
       header: "Docs",
-      submenu: [{ name: "Test", icon: FiCompass, link: "/test" }],
+      submenu: [{ name: "Docs", icon: FiCompass, link: "/docs" }],
     },
   ];
   
@@ -79,7 +80,7 @@ import {
         <Box h="20">
           <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
             <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" as={NextLink} to="/">
-              SafeDemo
+            Model Demo
             </Text>
             <CloseButton
               display={{ base: "flex", md: "none" }}
@@ -177,7 +178,7 @@ import {
         <Box h="20" display={{ base: 'flex', md: 'none' }}>
           <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
             <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" as={NextLink} to="/">
-              SafeDemo
+            Model Demo
             </Text>
           </Flex>
         </Box>

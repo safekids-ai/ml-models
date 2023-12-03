@@ -8,6 +8,7 @@ import {
     Icon,
     IconProps,
   } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
   
   const Illustration = (props: IconProps) => {
     return (
@@ -834,15 +835,13 @@ import {
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
-            Meeting scheduling{' '}
+            See our models{' '}
             <Text as={'span'} color={'orange.400'}>
-              made easy
+              in action
             </Text>
           </Heading>
           <Text color={'gray.500'} maxW={'3xl'}>
-            Never miss a meeting. Never be late for one too. Keep track of your meetings and
-            receive smart reminders in appropriate times. Read your smart “Daily Agenda”
-            every morning.
+            Use our models to detect hate speech, search intent, and explicit/violent images.
           </Text>
           <Stack spacing={6} direction={'row'}>
             <Button
@@ -850,10 +849,12 @@ import {
               px={6}
               colorScheme={'orange'}
               backgroundColor={'orange.400'}
-              _hover={{ bg: 'orange.500' }}>
+              _hover={{ bg: 'orange.500' }}
+              as={Link}
+              to="/hate">
               Get started
             </Button>
-            <Button rounded={'full'} px={6}>
+            <Button as={Link} to="/docs" rounded={'full'} px={6}>
               Learn more
             </Button>
           </Stack>

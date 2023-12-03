@@ -3,12 +3,13 @@ import { useState } from "react";
 import Divider from "../components/messages/Divider";
 import Footer from "../components/messages/Footer";
 import Header from "../components/messages/Header";
-import Messages from "../components/messages/Messages";
+import Messages, { Message } from "../components/messages/Messages";
 import {NLPResult} from "@safekids-ai/nlp-js-types";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const Hate = () => {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     { from: "computer", text: "Hi, My Name is HoneyChat" },
     { from: "me", text: "Hey there" },
     { from: "me", text: "Myself Ferin Patel" },
@@ -29,18 +30,18 @@ const Hate = () => {
     setMessages((old) => [...old, { from: "me", text: prevMessage }]);
     setInputMessage("");
 
-    const req = await axios.post<NLPResult>("http://localhost:3000/api/v1/classify-hate", { message: prevMessage })
+    const req = await axios.post<NLPResult>(API_URL + "/api/v1/classify-hate", { message: prevMessage })
     const res = req.data;
     console.log(res, res.flag)
     const arr = prevMessage.split(res.flaggedText)
-    const data = res.flag ? `${arr[0]}<span class="tooltip">${res.flaggedText}<span class="tooltiptext">Flagged as ${res.label}</span></span>${arr[1]}`: "Not flagged"
+    const data = res.flag ? <div>{arr[0]}<span className="tooltip">{res.flaggedText}<span className="tooltiptext">Flagged as {res.label}</span></span>{arr[1]}</div>: "Not flagged"
     console.log(data)
     setMessages((old) => [...old, { from: "computer", text: data }]);
   };
 
   return (
-    <Flex w="100%" h="100vh" justify="center">
-      <Flex w={["100%", "100%", "40%"]} h="80%" flexDir="column">
+    <Flex w="100%" h="100vh" justify="center" marginTop="4">
+      <Flex w={{base: "100%", md: "100%", xl: "40%"}} h="80%" flexDir="column">
         <Header />
         <Divider />
         <Messages messages={messages} />

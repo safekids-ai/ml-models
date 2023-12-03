@@ -3,9 +3,9 @@ import { Avatar, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import parse from "html-react-parser";
 import { useChatScroll } from "../../hooks/useChatScroll";
 
-interface Message {
+export interface Message {
     from: string,
-    text: string
+    text: string | JSX.Element
 }
 
 const Messages: React.FC<{messages: Array<Message>}> = ({ messages }) => {
@@ -26,7 +26,7 @@ const Messages: React.FC<{messages: Array<Message>}> = ({ messages }) => {
                 p="3"
                 borderRadius="15px"
               >
-                <Text>{item.text}</Text>
+                <Text as="div">{item.text}</Text>
               </Flex>
             </Flex>
           );
@@ -47,7 +47,7 @@ const Messages: React.FC<{messages: Array<Message>}> = ({ messages }) => {
                 p="3"
                 borderRadius="15px"
               >
-                <Text className="compmessage">{parse(item.text)}</Text>
+                <Text as="div" className="compmessage test">{item.text}</Text>
               </Flex>
             </Flex>
           );
