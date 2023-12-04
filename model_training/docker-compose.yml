@@ -1,7 +1,0 @@
-version: '3'
-services:
-  tensorflow-service:
-    build: 
-      context: ./
-    volumes:
-      - ./nlp_data_v1.json:/usr/src/app/nlp_data.json
