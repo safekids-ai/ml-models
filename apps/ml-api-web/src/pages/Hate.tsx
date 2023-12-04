@@ -10,13 +10,10 @@ import { API_URL } from "../config";
 
 const Hate = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { from: "computer", text: "Hi, My Name is HoneyChat" },
-    { from: "me", text: "Hey there" },
-    { from: "me", text: "Myself Ferin Patel" },
     {
       from: "computer",
       text:
-        "Nice to meet you. You can send me message and i'll tell you if it is hate speech or not",
+        "Hi, this is Safe Kids bot. You can send me message and i'll tell you if it is hate speech or not. I'll underline the hate part of the speech.",
     }
   ]);
   const [inputMessage, setInputMessage] = useState("");
