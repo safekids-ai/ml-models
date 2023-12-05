@@ -4,6 +4,7 @@ WORKDIR /apps
 
 #Install all packages for one time snapshot
 COPY ../../package*.json ./
+RUN npm config set registry https://registry.npmjs.org/
 RUN npm install
 
 #Copy the entire codebase
