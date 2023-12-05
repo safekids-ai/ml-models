@@ -5,7 +5,7 @@ WORKDIR /apps
 #Install all packages for one time snapshot
 COPY ../../package*.json ./
 RUN npm config set registry https://registry.npmjs.org/
-RUN npm install
+RUN npm install --ignore-scripts --unsafe-perm
 
 #Copy the entire codebase
 COPY ../../ .
