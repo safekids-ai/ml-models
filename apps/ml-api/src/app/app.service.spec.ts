@@ -4,6 +4,7 @@ import {Logger} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 
 describe('AppService', () => {
+
   let service: AppService;
 
   beforeAll(async () => {

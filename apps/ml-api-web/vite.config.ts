@@ -2,18 +2,23 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import * as process from "process";
 
+const port:number = (process.env.PORT) ? parseInt(process.env.PORT) : 4200;
+const portPreview:number = (process.env.PORT_PREVIEW) ? parseInt(process.env.PORT_PREVIEW) : 4300;
+
+console.log(`VITE starting on port:${port} and preview port: ${portPreview}`);
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/ml-api-web',
 
   server: {
-    port: 4200,
-    host: 'localhost',
+    port: port,
+    host: true,
   },
 
   preview: {
-    port: 4300,
-    host: 'localhost',
+    port: portPreview,
+    host: true,
   },
 
   plugins: [react(), nxViteTsPaths()],

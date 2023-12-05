@@ -2,7 +2,6 @@ import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
 import {NLPLabel, NLPNode, NLPResult} from "@safekids-ai/nlp-js-node";
 import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
 import {ConfigService} from "@nestjs/config";
-import {logger} from "nx/src/utils/logger";
 import * as apiLogger from "abstract-logging";
 
 @Injectable()

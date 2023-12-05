@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  api:
+    build:
+      dockerfile: apps/ml-api/Dockerfile
+      target: development
+      context: .
+    ports:
+      - 3000:3000
+  web:
+    build:
+      dockerfile: apps/ml-api-web/Dockerfile
+      target: development
+      context: .
+    environment:
+        API_URL: "http://api:3000"
+        PORT: 4200
+        PORT_PREVIEW: 4300
+        #DEBUG: "vite:*"
+    ports:
+      - 3001:4200
+      - 3002:4300
