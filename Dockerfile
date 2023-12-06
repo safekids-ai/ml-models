@@ -11,10 +11,9 @@ RUN npm install --ignore-scripts --unsafe-perm
 COPY ../../ .
 
 FROM base as development
-RUN npx nx run-many -t build
-CMD ["npx", "nx", "serve", "ml-api", "--configuration=development"]
+RUN npx nx run-many -t build,test
 
 FROM base as production
 ENV NODE_ENV=production
-RUN npx nx run-many -t build
-CMD ["npx", "nx", "serve", "ml-api", "--configuration=production"]
+RUN npx nx run-many -t build,test
+

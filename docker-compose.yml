@@ -1,22 +1,28 @@
 version: '3.9'
 services:
-  api:
+  common:
     build:
-      dockerfile: apps/ml-api/Dockerfile
+      dockerfile: Dockerfile  # Specify the Dockerfile for common code
       target: development
-      context: .
+    image: common-image:1
+
+  api:
+    image: common-image:1
+    command: ["npx", "nx", "serve", "ml-api", "--configuration=development"]
     ports:
       - 3000:3000
+    depends_on:
+      - common
   web:
-    build:
-      dockerfile: apps/ml-api-web/Dockerfile
-      target: development
-      context: .
+    image: common-image:1
     environment:
-        API_URL: "http://api:3000"
-        PORT: 4200
-        PORT_PREVIEW: 4300
-        #DEBUG: "vite:*"
+      API_URL: "http://api:3000"
+      PORT: 4200
+      PORT_PREVIEW: 4300
+      #DEBUG: "vite:*"
+    command: ["npx", "nx", "serve", "ml-api-web", "--configuration=development"]
     ports:
       - 3001:4200
       - 3002:4300
+    depends_on:
+      - api
