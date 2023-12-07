@@ -23,6 +23,7 @@
     "axios": "^1.6.2",
     "framer-motion": "^10.16.5",
     "html-react-parser": "^5.0.6",
+    "http-server": "^14.1.1",
     "nest-winston": "^1.9.4",
     "onnxruntime-common": "^1.16.1",
     "onnxruntime-node": "^1.16.1",
@@ -38,13 +39,13 @@
     "swagger": "^0.7.5",
     "tslib": "^2.3.0",
     "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1"
+    "winston-daily-rotate-file": "^4.7.1",
+    "@andreekeberg/imagedata": "^1.0.2",
+    "@nestjs/swagger": "^7.1.16"
   },
   "devDependencies": {
-    "@andreekeberg/imagedata": "^1.0.2",
     "@jnxplus/nx-gradle": "^0.17.4",
     "@nestjs/schematics": "^10.0.1",
-    "@nestjs/swagger": "^7.1.16",
     "@nestjs/testing": "^10.0.2",
     "@nx/cypress": "17.1.2",
     "@nx/esbuild": "17.1.2",

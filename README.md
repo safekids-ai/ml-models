@@ -146,6 +146,11 @@ from safekids import SafeImage
 safe_image_classifier = SafeImage
 safe_image_classifier.classify("path_to_image")
 ```
+
+```console
+docker build -t test_image . --target=production --progress=plain && docker run -p 4200:4200 -it test_image
+docker build -t test_image --no-cache . --target=production --progress=plain && docker run -p 4200:4200 -it test_image
+```
 ### License
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en

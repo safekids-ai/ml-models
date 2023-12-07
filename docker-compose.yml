@@ -1,16 +1,16 @@
 version: '3.9'
 services:
   common:
-    platform: linux/amd64
+#    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
-      target: development
+      target: production
     image: safekids-ai/ml-models:1
 
   api:
     image: safekids-ai/ml-models:1
-    command: ["npx", "nx", "serve", "ml-api", "--configuration=development"]
+    command: ["node", "dist/ml-api/main.js"]
     ports:
       - 3000:3000
     depends_on:
@@ -22,9 +22,8 @@ services:
       PORT: 4200
       PORT_PREVIEW: 4300
       #DEBUG: "vite:*"
-    command: ["npx", "nx", "serve", "ml-api-web", "--configuration=development"]
+    command: ["npx", "http-server", "/apps/dist/ml-api-web/", "-p 4200", "-d false", "-g true", "-b true", ""]
     ports:
       - 3001:4200
-      - 3002:4300
     depends_on:
       - api
