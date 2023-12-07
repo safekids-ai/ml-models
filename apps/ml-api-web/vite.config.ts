@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 import * as process from "process";
 
 const port:number = (process.env.PORT) ? parseInt(process.env.PORT) : 4200;
@@ -21,7 +22,19 @@ export default defineConfig({
     host: true,
   },
 
-  plugins: [react(), nxViteTsPaths()],
+  plugins:
+    [
+      react(),
+      nxViteTsPaths(),
+      // viteStaticCopy({
+      //   targets: [
+      //     {
+      //       src: 'launch.js', //
+      //       dest: './dist',
+      //     },
+      //   ],
+      // }),
+    ],
 
   // Uncomment this if you are using workers.
   // worker: {

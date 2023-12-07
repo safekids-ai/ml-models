@@ -127,6 +127,9 @@ devDependencies:
   '@nestjs/testing':
     specifier: ^10.0.2
     version: 10.2.10(@nestjs/common@10.2.10)(@nestjs/core@10.2.10)(@nestjs/platform-express@10.2.10)
+  '@nx-tools/nx-container':
+    specifier: ^5.1.0
+    version: 5.1.0(@nx/devkit@16.10.0)(dotenv@16.3.1)(tslib@2.6.2)
   '@nx/cypress':
     specifier: 17.1.2
     version: 17.1.2(@swc-node/register@1.6.8)(@swc/core@1.3.96)(@types/node@18.14.2)(cypress@13.5.1)(eslint@8.46.0)(nx@17.1.2)(typescript@5.2.2)
@@ -289,6 +292,16 @@ packages:
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
+
+  /@actions/exec@1.1.1:
+    resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
+    dependencies:
+      '@actions/io': 1.1.3
+    dev: true
+
+  /@actions/io@1.1.3:
+    resolution: {integrity: sha512-wi9JjgKLYS7U/z8PPbco+PvTb/nRWjeoFlJ1Qer83k/3C5PHQi28hiVdeE2kHXmIL99mQFawx8qt/JPjZilJ8Q==}
+    dev: true
 
   /@adobe/css-tools@4.3.1:
     resolution: {integrity: sha512-/62yikz7NLScCGAAST5SHdnjaDJQBDq0M2muyRTpf2VQhw6StBg2ALiu73zSJQ4fMVLA+0uBhBHAle7Wg+2kSg==}
@@ -4868,6 +4881,36 @@ packages:
     transitivePeerDependencies:
       - encoding
 
+  /@nx-tools/core@5.1.0(@nx/devkit@16.10.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-mc4nXNSQUUxoDoJsn+pqGYLddce/vFClOZLWZLH5XEsowxce2F1hB8aBttNZXD1egZmmtED1+cNfkq1BaO18zw==}
+    peerDependencies:
+      '@nx/devkit': ^16.0.0 || ^17.0.0
+      tslib: ^2.5.3
+    dependencies:
+      '@actions/exec': 1.1.1
+      '@nx/devkit': 16.10.0(nx@17.1.2)
+      chalk: 4.1.2
+      ci-info: 3.8.0
+      tslib: 2.6.2
+    dev: true
+
+  /@nx-tools/nx-container@5.1.0(@nx/devkit@16.10.0)(dotenv@16.3.1)(tslib@2.6.2):
+    resolution: {integrity: sha512-pFIVp6q7hWN05AUgK9JXnaGav/N4QAjrbTZu0yA06w5D7/IEEl/QaD3yHJqEy5zKNpr77HBUXyxbqmIDRFZxwQ==}
+    peerDependencies:
+      '@nx/devkit': ^16.0.0 || ^17.0.0
+      dotenv: '>=10.0.0'
+      tslib: ^2.5.3
+    dependencies:
+      '@nx-tools/core': 5.1.0(@nx/devkit@16.10.0)(tslib@2.6.2)
+      '@nx/devkit': 16.10.0(nx@17.1.2)
+      csv-parse: 5.4.0
+      dotenv: 16.3.1
+      handlebars: 4.7.7
+      semver: 7.5.4
+      tmp: 0.2.1
+      tslib: 2.6.2
+    dev: true
+
   /@nx/cypress@17.1.2(@swc-node/register@1.6.8)(@swc/core@1.3.96)(@types/node@18.14.2)(cypress@13.5.1)(eslint@8.46.0)(nx@17.1.2)(typescript@5.2.2):
     resolution: {integrity: sha512-5UoGGTPPsckeFTyu79DjmatAb4npHCGYgcHDbebRZDqifB99LRTKa/ZxcWNFdUiwZp4Buig5QM5MnhkjyjYpZg==}
     peerDependencies:
@@ -8688,6 +8731,11 @@ packages:
     resolution: {integrity: sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==}
     dev: false
 
+  /ci-info@3.8.0:
+    resolution: {integrity: sha512-eXTggHWSooYhq49F2opQhuHWgzucfF2YgODK4e1566GQs5BIfP30B0oenwBJHfWxAs2fyPB1s7Mg949zLf61Yw==}
+    engines: {node: '>=8'}
+    dev: true
+
   /ci-info@3.9.0:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
     engines: {node: '>=8'}
@@ -9593,6 +9641,10 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+
+  /csv-parse@5.4.0:
+    resolution: {integrity: sha512-JiQosUWiOFgp4hQn0an+SBoV9IKdqzhROM0iiN4LB7UpfJBlsSJlWl9nq4zGgxgMAzHJ6V4t29VAVD+3+2NJAg==}
+    dev: true
 
   /cypress@13.5.1:
     resolution: {integrity: sha512-yqLViT0D/lPI8Kkm7ciF/x/DCK/H/DnogdGyiTnQgX4OVR2aM30PtK+kvklTOD1u3TuItiD9wUQAF8EYWtyZug==}
@@ -11990,6 +12042,19 @@ packages:
 
   /handle-thing@2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
+    dev: true
+
+  /handlebars@4.7.7:
+    resolution: {integrity: sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==}
+    engines: {node: '>=0.4.7'}
+    hasBin: true
+    dependencies:
+      minimist: 1.2.8
+      neo-async: 2.6.2
+      source-map: 0.6.1
+      wordwrap: 1.0.0
+    optionalDependencies:
+      uglify-js: 3.17.4
     dev: true
 
   /handlebars@4.7.8:

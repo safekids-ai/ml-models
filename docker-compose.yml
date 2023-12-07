@@ -1,20 +1,22 @@
 version: '3.9'
 services:
   common:
+    platform: linux/amd64
     build:
-      dockerfile: Dockerfile  # Specify the Dockerfile for common code
+      context: .
+      dockerfile: Dockerfile
       target: development
-    image: common-image:1
+    image: safekids-ai/ml-models:1
 
   api:
-    image: common-image:1
+    image: safekids-ai/ml-models:1
     command: ["npx", "nx", "serve", "ml-api", "--configuration=development"]
     ports:
       - 3000:3000
     depends_on:
       - common
   web:
-    image: common-image:1
+    image: safekids-ai/ml-models:1
     environment:
       API_URL: "http://api:3000"
       PORT: 4200
