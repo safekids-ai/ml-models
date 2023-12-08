@@ -2,7 +2,7 @@ import {Logger, Module} from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {ThrottlerGuard, ThrottlerModule} from "@nestjs/throttler";
+import {ThrottlerModule} from "@nestjs/throttler";
 import {APP_GUARD} from "@nestjs/core";
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import throttleConfig from "./config/throttle.config";

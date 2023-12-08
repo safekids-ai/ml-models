@@ -6,23 +6,27 @@ services:
       context: .
       dockerfile: Dockerfile
       target: production
+      args:
+        API_URL: "http://localhost:3000"
+        API_PORT: 3000
+        WEB_PORT: 4200
     image: safekids-ai/ml-models:1
 
   api:
     image: safekids-ai/ml-models:1
-    command: ["node", "dist/ml-api/main.js"]
+    command: ["./docker_run_api.sh"]
     ports:
       - 3000:3000
     depends_on:
       - common
   web:
     image: safekids-ai/ml-models:1
-    environment:
-      API_URL: "http://api:3000"
-      PORT: 4200
-      PORT_PREVIEW: 4300
+#    environment:
+#      API_URL: "http://api:3000"
+#      PORT: 4200
+#      PORT_PREVIEW: 4300
       #DEBUG: "vite:*"
-    command: ["npx", "http-server", "/apps/dist/ml-api-web/", "-p 4200", "-d false", "-g true", "-b true", ""]
+    command: ["./docker_run_web.sh"]
     ports:
       - 3001:4200
     depends_on:

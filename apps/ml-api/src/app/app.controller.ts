@@ -5,7 +5,7 @@ import {
   Get, MaxFileSizeValidator,
   ParseFilePipe,
   Post,
-  UploadedFile, UseGuards,
+  UploadedFile,
   UseInterceptors
 } from '@nestjs/common';
 
@@ -14,8 +14,7 @@ import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const cv = require('@techstark/opencv-js');
+import {Limit} from "./guards/limit.guard";
 
 @Controller()
 export class AppController {
@@ -27,11 +26,13 @@ export class AppController {
     return "Hello";
   }
 
+  @Limit(1024 * 1024)
   @Post('v1/classify-hate')
   classifyHate(@Body() request: NLPRequestDto): Promise<NLPResult> {
     return this.appService.classifyHate(request.message);
   }
 
+  @Limit(1024 * 1024)
   @Post('v1/classify-text')
   classifyText(@Body() request: NLPRequestDto): Promise<NLPLabel> {
     return this.appService.classifyText(request.message);

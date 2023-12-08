@@ -1,4 +1,5 @@
 import {createLogger, format, transports} from "winston";
+import DailyRotateFile from "winston-daily-rotate-file";
 
 // custom log display format
 const customFormat = format.printf(({timestamp, level, stack, message}) => {
@@ -26,20 +27,30 @@ const devLogger = {
 }
 
 // for production environment
-const prodLogger = {
+const prodLogger = createLogger({
   format: format.combine(
     format.timestamp(),
-    format.errors({stack: true}),
+    format.errors({ stack: true }),
     format.json()
   ),
   transports: [
-    new transports.File(options.file),
-    new transports.File({
-      filename: 'api.log',
+    new DailyRotateFile({
+      filename: 'logs/%DATE%-api.log',
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true, // Optionally compress old log files
+      maxSize: '20m',     // Maximum size of each log file
+      maxFiles: '7d',     // Retain logs for 7 days
+      level: 'info'
+    }),
+    new transports.Console({
+      format: format.combine(
+        format.colorize(),
+        format.simple() // or use your preferred console log format
+      ),
       level: 'info'
     })
   ]
-}
+});
 
 // export log instance based on the current environment
 const instanceLogger = (process.env.NODE_ENV === 'production') ? prodLogger : devLogger
