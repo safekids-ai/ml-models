@@ -27,16 +27,6 @@ export default defineConfig({
     [
       react(),
       nxViteTsPaths(),
-      {
-        name: 'copy-custom-files',
-        async buildStart(options) {
-          const source = path.join(__dirname, "launch.ts");
-          const target = path.join(__dirname, "launch2.ts");
-          return fs.copyFile(source, target, (err) => {
-            console.log("Unable to copy file due to", err);
-          });
-        },
-      }
     ],
 
   // Uncomment this if you are using workers.
