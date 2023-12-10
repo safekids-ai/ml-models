@@ -149,6 +149,8 @@ safe_image_classifier.classify("path_to_image")
 
 #### Common Docker related and imaging commands
 ```console
+docker build -t web_image . --target=production --progress=plain && docker run -p 4200:4200 -it web_image
+
 docker build -t test_image . --target=production --progress=plain && docker run -p 4200:4200 -it test_image
 docker build -t test_image --no-cache . --target=production --progress=plain && docker run -p 4200:4200 -it test_image
 du -sh ./node_modules/* | sort -nr | grep 'M.*'

@@ -19,39 +19,38 @@ import {
     FiTrendingUp,
     FiCompass,
     FiMenu,
-    FiBell,
   } from "react-icons/fi";
   import { FaSun } from "react-icons/fa";
   import { MdOutlineNightlight } from "react-icons/md";
   import { IconType } from "react-icons";
   import React from "react";
   import { Link as NextLink, useLocation } from "react-router-dom";
-  
+
   interface LinkItemProps {
     name: string;
     icon: IconType;
     link: string;
   }
-  
+
   interface MenuProps {
     header: string;
     submenu: Array<LinkItemProps>;
   }
-  
+
   interface NavItemProps extends FlexProps {
     icon: IconType;
     children: React.ReactNode;
     href: string;
   }
-  
+
   interface MobileProps extends FlexProps {
     onOpen: () => void;
   }
-  
+
   interface SidebarProps extends BoxProps {
     onClose: () => void;
   }
-  
+
   const LinkItems: Array<MenuProps> = [
     {
       header: "Models",
@@ -66,7 +65,7 @@ import {
       submenu: [{ name: "Docs", icon: FiCompass, link: "/docs" }],
     },
   ];
-  
+
   const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     const color = useColorModeValue("black", "white");
     return (
@@ -109,7 +108,7 @@ import {
       </Box>
     );
   };
-  
+
   const NavItem = ({ icon, href, children, ...rest }: NavItemProps) => {
     const location = useLocation();
     const pathname = location.pathname;
@@ -154,7 +153,7 @@ import {
       </Box>
     );
   };
-  
+
   const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     const { colorMode, toggleColorMode } = useColorMode();
     return (
@@ -174,7 +173,7 @@ import {
           aria-label="open menu"
           icon={<FiMenu />}
         />
-  
+
         <Box h="20" display={{ base: 'flex', md: 'none' }}>
           <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
             <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" as={NextLink} to="/">
@@ -182,14 +181,14 @@ import {
             </Text>
           </Flex>
         </Box>
-  
+
         <HStack spacing={{ base: "0", md: "6" }}>
-          <IconButton
-            size="lg"
-            variant="ghost"
-            aria-label="open menu"
-            icon={<FiBell />}
-          />
+          {/*<IconButton*/}
+          {/*  size="lg"*/}
+          {/*  variant="ghost"*/}
+          {/*  aria-label="open menu"*/}
+          {/*  icon={<FiBell />}*/}
+          {/*/>*/}
           <Flex alignItems={"center"}>
             <IconButton
               size="lg"
@@ -214,7 +213,7 @@ import {
   };
   const SidebarWithHeader: React.FC<Props> = ({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
     return (
       <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
         <SidebarContent
@@ -229,7 +228,7 @@ import {
           onOverlayClick={onClose}
           size="xs"
         >
-          <DrawerOverlay />  
+          <DrawerOverlay />
           <DrawerContent>
             <SidebarContent onClose={onClose} />
           </DrawerContent>
@@ -243,6 +242,5 @@ import {
       </Box>
     );
   };
-  
+
   export default SidebarWithHeader;
-  

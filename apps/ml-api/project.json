@@ -16,7 +16,8 @@
         "tsConfig": "apps/ml-api/tsconfig.app.json",
         "assets": ["apps/ml-api/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/ml-api/webpack.config.js"
+        "webpackConfig": "apps/ml-api/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
