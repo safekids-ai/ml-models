@@ -37,7 +37,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npm exec nx build vision-js-web"
+          "pnpm exec nx build vision-js-web"
         ],
         "parallel": false
       }

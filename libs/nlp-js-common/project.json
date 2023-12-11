@@ -37,7 +37,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npm exec nx build nlp-js-common"
+          "pnpm exec nx build nlp-js-common"
         ],
         "parallel": false
       }

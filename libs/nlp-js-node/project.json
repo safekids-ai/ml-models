@@ -40,7 +40,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npm exec nx build nlp-js-node"
+          "pnpm exec nx build nlp-js-node"
         ],
         "parallel": false
       }

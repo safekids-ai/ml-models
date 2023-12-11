@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:digitalocean": "npm install --frozen-lockfile && npm run build:prod",
     "release": "dotenv release-it --",
     "publish": "npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false",
     "start": "npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web",

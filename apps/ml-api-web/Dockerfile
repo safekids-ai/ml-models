@@ -20,6 +20,7 @@ RUN npx nx run ml-api-web:build:production
 EXPOSE $WEB_PORT
 
 FROM base AS production
+ENV API_URL=$API_URL
 ENV NODE_ENV=production
 ENV WEB_PORT=$WEB_PORT
 

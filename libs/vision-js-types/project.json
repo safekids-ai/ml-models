@@ -37,7 +37,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "npm exec nx build vision-js-types"
+          "pnpm exec nx build vision-js-types"
         ],
         "parallel": false
       }
