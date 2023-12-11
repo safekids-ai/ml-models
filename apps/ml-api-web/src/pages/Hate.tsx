@@ -31,7 +31,7 @@ const Hate = () => {
     const res = req.data;
     console.log(res, res.flag)
     const arr = prevMessage.split(res.flaggedText)
-    const data = res.flag ? <div>{arr[0]}<span className="tooltip">{res.flaggedText}<span className="tooltiptext">Flagged as {res.label}</span></span>{arr[1]}</div>: "Not flagged"
+    const data = res.flag ? <div>{arr[0]}<span className="tooltip">{res.flaggedText}<span className="tooltiptext">Flagged as {res.label}</span></span>{arr[1]}</div>: "Text looks clean"
     console.log(data)
     setMessages((old) => [...old, { from: "computer", text: data }]);
   };
