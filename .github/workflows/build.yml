@@ -45,7 +45,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: npm install --no-frozen-lockfile
+        run: npm install --frozen-lockfile
 
       - name: Build and test
         run: |
