@@ -40,7 +40,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "pnpm exec nx build nlp-js-react-native"
+          "npm exec nx build nlp-js-react-native"
         ],
         "parallel": false
       }

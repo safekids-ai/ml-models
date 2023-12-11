@@ -37,7 +37,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "pnpm exec nx build ml-api-types"
+          "npm exec nx build ml-api-types"
         ],
         "parallel": false
       }
