@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build:digitalocean": "npm install && npm run build:prod",
     "release": "dotenv release-it --",
     "publish": "npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false",
     "start": "npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web",
+    "start:prod": "NODE_ENV=production npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web --prod",
     "start:web:prod": "NODE_ENV=production npx nx serve ml-api-web",
     "start:api:prod": "NODE_ENV=production npx nx serve ml-api",
-    "build": "npx nx run-many -t clean,build,test --no-cache",
+    "build": "npx nx run-many -t build --no-cache",
+    "build:prod": "npx nx run-many -t build --prod",
     "test": "npx nx run-many -t clean,build,test --no-cache",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "npx nx e2e ml-api-e2e --no-cache && npx nx e2e ml-api-web-e2e --no-cache",
@@ -117,5 +120,9 @@
     "typescript": "~5.2.2",
     "vite": "~4.3.9",
     "vitest": "~0.32.0"
+  },
+  "engines": {
+    "node": "20.x",
+    "npm": "~10.1.0"
   }
 }
