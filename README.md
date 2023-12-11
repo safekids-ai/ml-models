@@ -30,7 +30,13 @@ npm install
 
 ### Build/Test
 ```properties
-npx nx run-many -t test,build
+npm run build
+npm run test
+```
+
+### Run the serves
+```properties
+npm run start
 ```
 
 ### Release Management
@@ -40,7 +46,7 @@ npm run release
 
 ### Publish
 ```properties
-npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false
+npm run publish
 ```
 
 <pre>

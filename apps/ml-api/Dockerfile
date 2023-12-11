@@ -1,13 +1,8 @@
 FROM node:20.9-bullseye-slim AS base
-ARG API_URL
 ARG API_PORT=3000
-ARG WEB_PORT=4200
 EXPOSE $API_PORT
-EXPOSE $WEB_PORT
 
 FROM base as development
-ENV API_URL=$API_URL
-RUN echo "The value of API_URL is: $API_URL"
 WORKDIR /apps
 
 RUN npm install -g pnpm
@@ -18,14 +13,12 @@ COPY ./scripts ./scripts
 COPY ./model_files ./model_files
 COPY package.json pnpm-lock.yaml tsconfig.base.json nx.json .
 RUN pnpm i
-RUN npx nx run-many -t build --prod
-EXPOSE 3000
-EXPOSE 4200
+RUN npx nx run ml-api:build:production
+EXPOSE $API_PORT
 
 FROM base AS production
 ENV NODE_ENV=production
 ENV API_PORT=$API_PORT
-ENV WEB_PORT=$WEB_PORT
 
 WORKDIR /apps
 
@@ -39,7 +32,6 @@ COPY --from=development /apps/model_files ./model_files
 
 RUN pnpm i
 
-RUN pnpm install express
-
 EXPOSE $API_PORT
-EXPOSE $WEB_PORT
+
+CMD ["./docker_run_api.sh"]

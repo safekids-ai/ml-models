@@ -1,26 +1,24 @@
 version: '3.9'
 services:
-  common:
-    #    platform: linux/amd64
+  api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./apps/ml-api/Dockerfile
       target: production
       args:
-        API_URL: "http://localhost:3000"
         API_PORT: 3000
-        WEB_PORT: 4200
-    image: safekids-ai/ml-models:1
-
-  api:
-    image: safekids-ai/ml-models:1
     command: ["./docker_run_api.sh"]
     ports:
       - 3000:3000
-    depends_on:
-      - common
+
   web:
-    image: safekids-ai/ml-models:1
+    build:
+      context: .
+      dockerfile: ./apps/ml-api-web/Dockerfile
+      target: production
+      args:
+        API_URL: "http://localhost:3000"
+        WEB_PORT: 4200
     command: ["./docker_run_web.sh"]
     ports:
       - 3001:4200
