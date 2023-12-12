@@ -89,7 +89,7 @@ const Docs = () => {
 
           <Box>
             <Text fontWeight="bold">Endpoint:</Text>
-            <Code p={2}>https://api.safekids.ai/api/v1/classify-hate</Code>
+            <Code p={2}>https://api.safekids.ai/v1/classify-hate</Code>
           </Box>
 
           <Box>
