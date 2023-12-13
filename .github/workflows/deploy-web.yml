@@ -1,12 +1,10 @@
 
-name: Build and publish manually
+name: Build and publish WEB
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Image version'
-        required: true
+  release:
+    types:
+      - created
 
 jobs:
   build_and_push:
@@ -24,6 +22,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image # (callout-5)
         run:
-          docker tag safekids-ai/ml-models-web registry.digitalocean.com/safekids-ai/ml-models-web:${{github.event.inputs.version }}
+          docker tag safekids-ai/ml-models-web registry.digitalocean.com/safekids-ai/ml-models-web:latest
       - name: Push image to DO Container Registry # (callout-6)
-        run: docker push registry.digitalocean.com/my-sample-registry/my-sample-page:${{ github.event.inputs.version }}
+        run: docker push registry.digitalocean.com/safekids-ai/ml-models-web:latest
