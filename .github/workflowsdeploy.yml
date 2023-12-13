@@ -1,0 +1,29 @@
+
+name: Build and publish manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image version'
+        required: true
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo # (callout-1)
+        uses: actions/checkout@v2
+      - name: Build image # (callout-2)
+        run: docker build . -t safekids-ai/ml-models-web -f apps/ml-api-web/Dockerfile
+      - name: Install doctl # (callout-3)
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Log in to DO Container Registry # (callout-4)
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image # (callout-5)
+        run:
+          docker tag safekids-ai/ml-models-web registry.digitalocean.com/safekids-ai/ml-models-web:${{github.event.inputs.version }}
+      - name: Push image to DO Container Registry # (callout-6)
+        run: docker push registry.digitalocean.com/my-sample-registry/my-sample-page:${{ github.event.inputs.version }}
