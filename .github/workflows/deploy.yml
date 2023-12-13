@@ -26,4 +26,4 @@ jobs:
         run:
           docker tag safekids-ai/ml-models-web registry.digitalocean.com/safekids-ai/ml-models-web:${{github.event.inputs.version }}
       - name: Push image to DO Container Registry # (callout-6)
-        run: docker push registry.digitalocean.com/my-sample-registry/my-sample-page:${{ github.event.inputs.version }}
+        run: docker push registry.digitalocean.com/safekids-ai/ml-models-web:${{ github.event.inputs.version }}
