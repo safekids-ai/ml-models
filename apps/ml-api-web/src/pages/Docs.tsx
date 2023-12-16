@@ -52,7 +52,7 @@ const Docs = () => {
             Learn more
           </Button>
         </Stack>
-
+        <Box>
         <Stack textAlign={'left'}
                align={'left'}>
 
@@ -112,7 +112,7 @@ const Docs = () => {
           </Box>
 
         </Stack>
-
+      </Box>
       </Stack>
     </Container>
   )
