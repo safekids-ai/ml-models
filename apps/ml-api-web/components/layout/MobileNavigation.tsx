@@ -79,9 +79,12 @@ export function MobileNavigation() {
       </Suspense>
       <Transition
       show={isOpen}
-      leave="duration-[200ms] ease-out"
-      leaveFrom="opacity-100 w-full"
-      leaveTo="opacity-0 w-0"
+      enter="transition-opacity duration-[200ms] ease-in"
+      enterFrom='opacity-0'
+      enterTo="opacity-100"
+      leave="transition-opacity duration-[200ms] ease-out"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
       as={Fragment}
     >
       <Dialog
