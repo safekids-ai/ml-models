@@ -1,81 +1,13 @@
-enum NLPLabel {
-  HateBullying = "hate_bullying",
-  Clean = "clean",
-  Porn = "porn",
-  Proxy = "proxy",
-  SelfHarm = "self_harm",
-  Weapons = "weapons"
-}
+import { getGreeting } from '../support/app.po';
 
-describe('Hate route', () => {
+describe('ml-api-web-e2e', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('Hate route works', () => {
+  it('should display welcome message', () => {
     // Custom command example, see `../support/commands.ts` file
-    cy.contains("Hate").click()
-    cy.url().should("include", "hate")
+    cy.login('my-email@something.com', 'myPassword');
+
+    // Function helper example, see `../support/app.po.ts` file
+    getGreeting().contains(/Welcome/);
   });
-
-  it('Hate model does not flag', () => {
-    cy.visit("/hate")
-    cy.get("#message").type("I am happy")
-    cy.get("#message").type("{enter}")
-    cy.contains("Not flagged").should("exist")
-  })
-
-  it('Hate model flagges hate bullying', () => {
-    cy.visit("/hate")
-    cy.get("#message").type("Mike is annoying and is an asshole")
-    cy.get("#message").type("{enter}")
-    cy.get(".tooltip").should("exist")
-  })
-});
-
-describe('Intent Classification Route', () => {
-  beforeEach(() => cy.visit('/'));
-
-  it('Intent route works', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.contains("Classification").click()
-    cy.url().should("include", "intent")
-  });
-
-  it('Intent model does not flag', () => {
-    cy.visit("/classify-intent")
-    cy.get("#message").type("I am happy")
-    cy.get("#message").type("{enter}")
-    cy.contains(".red-underline").should("not.exist")
-  })
-
-  it('Classifies Hate Bullying', () => {
-    cy.visit("/classify-intent")
-    cy.get("#message").type("you are an asshole.")
-    cy.get("#message").type("{enter}")
-    cy.get(".red-underline").should("exist")
-    cy.get(".red-underline").should("have.text", NLPLabel.HateBullying)
-  })
-
-  it('Classifies Adult', () => {
-    cy.visit("/classify-intent")
-    cy.get("#message").type("find adult sex links videos")
-    cy.get("#message").type("{enter}")
-    cy.get(".red-underline").should("exist")
-    cy.get(".red-underline").should("have.text", NLPLabel.Porn)
-  })
-
-  it('Classifies Weapons', () => {
-    cy.visit("/classify-intent")
-    cy.get("#message").type("The Most Trusted Place To Buy Guns :: Guns.com")
-    cy.get("#message").type("{enter}")
-    cy.get(".red-underline").should("exist")
-    cy.get(".red-underline").should("have.text", NLPLabel.Weapons)
-  })
-
-  it('Classifies Self-harm', () => {
-    cy.visit("/classify-intent")
-    cy.get("#message").type("Cutting and Self-Harm")
-    cy.get("#message").type("{enter}")
-    cy.get(".red-underline").should("exist")
-    cy.get(".red-underline").should("have.text", NLPLabel.SelfHarm)
-  })
 });

@@ -1,7 +1,6 @@
 {
   "name": "ml-api-web-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
   "sourceRoot": "apps/ml-api-web-e2e/src",
   "targets": {
     "e2e": {
@@ -9,15 +8,7 @@
       "options": {
         "cypressConfig": "apps/ml-api-web-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "ml-api-web:serve"
-      },
-      "configurations": {
-        "production": {
-          "devServerTarget": "ml-api-web:serve:production"
-        },
-        "ci": {
-          "devServerTarget": "ml-api-web:serve-static"
-        }
+        "baseUrl": "http://localhost:4200"
       }
     },
     "lint": {
@@ -28,6 +19,6 @@
       }
     }
   },
-  "implicitDependencies": ["ml-api-web"],
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["ml-api-web"]
 }

@@ -1,78 +1,57 @@
 {
   "name": "ml-api-web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/ml-api-web/src",
+  "sourceRoot": "apps/ml-api-web",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/vite:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/ml-api-web",
-        "generatePackageJson": true
+        "outputPath": "dist/apps/ml-api-web"
       },
       "configurations": {
         "development": {
-          "mode": "development"
+          "outputPath": "apps/ml-api-web"
         },
-        "production": {
-          "mode": "production"
-        }
+        "production": {}
       }
     },
     "serve": {
-      "executor": "@nx/vite:dev-server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "ml-api-web:build"
+        "buildTarget": "ml-api-web:build",
+        "dev": true
       },
       "configurations": {
         "development": {
           "buildTarget": "ml-api-web:build:development",
-          "hmr": true
+          "dev": true
         },
         "production": {
           "buildTarget": "ml-api-web:build:production",
-          "hmr": false
+          "dev": false
         }
       }
     },
-    "preview": {
-      "executor": "@nx/vite:preview-server",
-      "defaultConfiguration": "development",
+    "export": {
+      "executor": "@nx/next:export",
       "options": {
-        "buildTarget": "ml-api-web:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "ml-api-web:build:development"
-        },
-        "production": {
-          "buildTarget": "ml-api-web:build:production"
-        }
+        "buildTarget": "ml-api-web:build:production"
       }
     },
     "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/ml-api-web"
+        "jestConfig": "apps/ml-api-web/jest.config.ts"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/ml-api-web/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "ml-api-web:build"
-      }
+      "outputs": ["{options.outputFile}"]
     }
   },
   "tags": []

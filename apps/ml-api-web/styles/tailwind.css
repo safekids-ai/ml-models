@@ -1,0 +1,25 @@
+@import 'tailwindcss/base';
+@import './prism.css';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  [inert] ::-webkit-scrollbar {
+    display: none;
+  }
+}
+@keyframes softBounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-30px);
+  }
+  60% {
+      transform: translateY(-5px);
+  }
+}
+
+.terminal-window {
+  animation: softBounce 1s ease-in;
+}
