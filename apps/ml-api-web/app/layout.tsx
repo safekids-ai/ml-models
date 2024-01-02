@@ -6,6 +6,8 @@ import clsx from 'clsx'
 import { Providers } from '../app/providers'
 import { Layout } from '../components/layout/Layout'
 
+// Then register the languages you need
+
 import '../styles/tailwind.css'
 
 const inter = Inter({

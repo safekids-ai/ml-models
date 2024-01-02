@@ -275,7 +275,7 @@ export function Hero() {
           </div>
           <div className="relative overflow-hidden pt-16 lg:hidden">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-              <img
+              <Image
                 src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
                 alt="App screenshot"
                 className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
@@ -286,7 +286,7 @@ export function Hero() {
           </div>
           <div className="h-full m-auto align-middle lg:justify-end hidden lg:flex">
             <div className="m-auto">
-              <img
+              <Image
                 src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
                 alt="Product screenshot"
                 className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-white/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"

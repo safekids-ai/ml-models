@@ -19,9 +19,9 @@ Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut par
 Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
 
 ```js
+//config.js
 /** @type {import('@tailwindlabs/lorem').ipsum} */
 export default {
-  lorem: 'ipsum',
   dolor: ['sit', 'amet', 'consectetur'],
   adipiscing: {
     elit: true,

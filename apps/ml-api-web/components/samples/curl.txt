@@ -1,0 +1,2 @@
+//Terminal
+npm install tailwindcss

@@ -2,7 +2,23 @@
 @import './prism.css';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import './utilities.css';
 
+.animate-flash-code-slow {
+  animation: flash-code 2s forwards;
+}
+.bg-code-highlight {
+  background-color: rgb(125 211 252 / 0.1);
+}
+
+@keyframes flash-code {
+  0% {
+    background-color: rgb(125 211 252 / 0.1);    
+  }
+  100% {
+    background-color: transparent;
+  }
+}
 @keyframes softBounce {
   0%, 20%, 50%, 80%, 100% {
       transform: translateY(0);
@@ -17,4 +33,10 @@
 
 .terminal-window {
   animation: softBounce 1s ease-in;
+}
+
+.code-highlight {
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.1875rem;
+  margin: 0 -0.1875rem;
 }

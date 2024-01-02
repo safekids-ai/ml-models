@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { Disclosure } from '@headlessui/react';
+import { Disclosure, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
   InboxIcon,
@@ -11,11 +11,24 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import {
-  CheckIcon,
-} from '@heroicons/react/20/solid';
+  lines as html,
+  code as htmlCode,
+} from '../components/samples/curl.txt?highlight=txt';
+import redent from 'redent';
+import { CheckIcon } from '@heroicons/react/20/solid';
 import { cn } from '../lib/utils';
 import { Hero } from '../components/pages/homepage/Hero';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import {
+  CodeWindow,
+  getClassNameForToken,
+} from '../components/code/CodeWindow';
+import { TabBar } from '../components/performance/TabBar';
+import clsx from 'clsx';
+import { Fence } from '../components/markdoc/Fence';
+import { NLPLabel } from '@safekids-ai/nlp-js-types';
+import localFont from 'next/font/local';
 
 const navigation = [
   { name: 'Product', href: '#' },
@@ -69,6 +82,11 @@ const ProductFeatures = [
     icon: TrashIcon,
   },
 ];
+const lexend = localFont({
+  src: '../fonts/lexend.woff2',
+  display: 'swap',
+  variable: '--font-lexend',
+});
 const tiers = [
   {
     name: 'Hobby',
@@ -136,15 +154,227 @@ const footerNavigation = {
     { name: 'Terms', href: '#' },
   ],
 };
+function CopyButton({ code }) {
+  let [{ state, i }, setState] = useState({ state: 'idle', i: 0 });
 
+  useEffect(() => {
+    if (state === 'copied') {
+      let handle = window.setTimeout(() => {
+        setState({ state: 'idle', i: i + 1 });
+      }, 1500);
+      return () => {
+        window.clearTimeout(handle);
+      };
+    }
+  }, [state, i]);
+
+  return (
+    <div className="relative flex -mr-2">
+      <button
+        type="button"
+        className={clsx({
+          'text-slate-500 hover:text-slate-400': state === 'idle',
+          'text-sky-400': state === 'copied',
+        })}
+        onClick={() => {
+          navigator.clipboard
+            .writeText(redent(code.replace(/^[+>-]/gm, ' ')))
+            .then(() => {
+              setState({ state: 'copied', i: i + 1 });
+            });
+        }}
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="w-8 h-8"
+        >
+          <path d="M13 10.75h-1.25a2 2 0 0 0-2 2v8.5a2 2 0 0 0 2 2h8.5a2 2 0 0 0 2-2v-8.5a2 2 0 0 0-2-2H19" />
+          <path d="M18 12.25h-4a1 1 0 0 1-1-1v-1.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1.5a1 1 0 0 1-1 1ZM13.75 16.25h4.5M13.75 19.25h4.5" />
+        </svg>
+      </button>
+      <Transition
+        className="absolute bottom-full left-1/2 mb-3.5 pb-1 -translate-x-1/2"
+        show={state === 'copied'}
+        enter="transform ease-out duration-200 transition origin-bottom"
+        enterFrom="scale-95 translate-y-0.5 opacity-0"
+        enterTo="scale-100 translate-y-0 opacity-100"
+        leave="transition ease-in duration-100"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div className="relative bg-sky-500 text-white font-mono text-[0.625rem] leading-6 font-medium px-1.5 rounded-lg">
+          Copied
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="6"
+            viewBox="0 0 16 6"
+            className="text-sky-500 absolute top-full left-1/2 -mt-px -ml-2"
+          >
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M15 0H1V1.00366V1.00366V1.00371H1.01672C2.72058 1.0147 4.24225 2.74704 5.42685 4.72928C6.42941 6.40691 9.57154 6.4069 10.5741 4.72926C11.7587 2.74703 13.2803 1.0147 14.9841 1.00371H15V0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </Transition>
+    </div>
+  );
+}
+type Result = {
+  flag: boolean;
+  label?: string;
+  flaggedText?: string;
+};
+type ResultWithInput = {
+  flag: boolean;
+  label?: string;
+  flaggedText?: string;
+  input: string;
+};
+const fixInput = (input: string): React.JSX.Element => {
+  console.log(input)
+  return (
+    <>
+      {input.split('\n').length > 1 ? (
+        input.split('\n').map((val, index) => (
+          <div key={index}>
+            {val}
+          </div>
+        ))
+      ) : (
+        <>{input}</>
+      )}
+    </>
+  );
+};
+function mockAPI(text: string): Promise<Result> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (text === 'I hate you\nd\na') {
+        resolve({
+          flag: true,
+          label: 'hate_bullying',
+          flaggedText: 'I hate you',
+        });
+      } else {
+        resolve({ flag: false, label: 'clean', flaggedText: '' });
+      }
+    }, 1000);
+  });
+}
 export default function Example() {
+  const [input, setInputValue] = useState('I hate you\nd\na');
+  const [results, setResults] = useState<Array<ResultWithInput> | Array<never>>(
+    []
+  );
+  console.log(htmlCode);
+  const handleGetResult = async () => {
+    const realInput = input.trim();
+    const result = await mockAPI(realInput);
+    console.log(
+      result.flag
+        ? { ...result, input: realInput }
+        : { flag: false, flaggedText: '', label: 'clean', input: realInput }
+    );
+    setResults([
+      ...results,
+      result.flag
+        ? {
+            ...result,
+            input: realInput,
+          }
+        : {
+            flag: false,
+            flaggedText: '',
+            label: 'clean',
+            input: realInput,
+          },
+    ]);
+  };
   return (
     <div className="bg-white dark:text-white w-screen dark:bg-gray-900">
       {/* Header */}
       <main>
         {/* Hero section */}
         <Hero />
+        <h1
+          className={cn(
+            'dark:text-white flex w-screen justify-center items-start m-4 p-4 text-[30px] font-semibold',
+            'mb-8'
+          )}
+        >
+          Try it out
+        </h1>
+        <div className="w-screen flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 container justify-center m-4">
+            <div className="bg-gray-900 h-full w-full flex flex-col rounded-lg">
+              <textarea
+                className="text-white p-6 bg-inherit h-full w-full rounded-lg"
+                style={{ resize: 'none' }}
+                placeholder="Enter your text here..."
+                value={input}
+                onChange={(e) => setInputValue(e.target.value)}
+              />
 
+              <div className="relative">
+                <div className="absolute right-[15px] bottom-[6px] text-white hover:bg-indigo-400/80 dark:hover:bg-indigo-600/80 dark:bg-indigo-600 bg-indigo-400 p-2 rounded-2xl hover:cursor-pointer">
+                  <button onClick={handleGetResult}>Get result</button>
+                </div>
+              </div>
+            </div>
+            <div className="w-full max-w-full bg-gray-900 rounded-lg">
+              <TabBar
+                side="left"
+                translucent={true}
+                primary={{ name: 'Result', saved: true }}
+              >
+                {}
+              </TabBar>
+
+              <div className={'ml-2 p-4 ' + lexend.className}>
+                {results.map((val, index) =>
+                  val.flag ? (
+                    <div key={index} className='text-white'>
+                      <span className="text-red-500 font-semibold">
+                        {index + 1}.
+                      </span>{' '}
+                      {fixInput(
+                        val.input.split(
+                          val.flaggedText ? val.flaggedText : ''
+                        )[0]
+                      )}
+                      <span className="text-red-500 font-semibold">
+                        {fixInput(val.flaggedText ? val.flaggedText : '')}
+                      </span>
+                      {fixInput(
+                        val.input.split(
+                          val.flaggedText ? val.flaggedText : ''
+                        )[1]
+                      )}
+                      <hr></hr>
+                    </div>
+                  ) : (
+                    <div key={index} className="text-green-400">
+                      {index + 1}. The text is clean:{' '}
+                      <span className="font-semibold text-white">
+                        {fixInput(val.input)}
+                      </span>
+                      <hr></hr>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Feature section */}
         <div className="bg-white dark:bg-inherit py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -154,7 +384,7 @@ export default function Example() {
               </h2>
               <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-white">
                 Lorem ipsum dolor sit amet consect adipisicing elit. Possimus
-                magnam voluptatum cupiditate veritatis in accusamus quisquam. 
+                magnam voluptatum cupiditate veritatis in accusamus quisquam.
               </p>
             </div>
             <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

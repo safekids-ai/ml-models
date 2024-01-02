@@ -9,7 +9,6 @@ import { Open_Sans, Oswald } from 'next/font/google'
 import SKLogo from '../pics/logo.svg'
 // If loading a variable font, you don't need to specify the font weight
 const oswald = Open_Sans({ subsets: ['latin'] })
- 
 import { Hero } from '../pages/homepage/Hero'
 import { Logo, Logomark } from './Logo'
 import { MobileNavigation } from './MobileNavigation'
@@ -80,8 +79,10 @@ function Header() {
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  let pathname = usePathname()
-  let isHomePage = pathname === '/' || pathname === '/nsfw'
+  const pathname = usePathname()
+  const isDocs = pathname.split("/")[1] === "docs"
+  console.log(isDocs)
+  const isHomePage = !isDocs
 
   return (
     <div className="flex w-full flex-col">
