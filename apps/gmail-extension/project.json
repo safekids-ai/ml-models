@@ -1,0 +1,13 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/gmail-extension/",
+  "targets": {
+    "build": {
+      "executor": "@safekids-ai/common-plugin:copy-assets",
+      "options": {
+        "source": "apps/gmail-extension/manifest.json",
+        "destination": "dist/apps/gmail-extension/manifest.json"
+      }
+    }
+  }
+}

@@ -19,6 +19,10 @@ abstract class NLP {
     this.tokenizer = new Tokenizer();
   }
 
+  public version() : string {
+    return NLP.version;
+  }
+
   public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
   public async init() {

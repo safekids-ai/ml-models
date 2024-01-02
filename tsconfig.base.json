@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@safekids-ai/common-plugin": ["libs/common-plugin/src/index.ts"],
       "@safekids-ai/ml-api-types": ["libs/ml-api-types/src/index.ts"],
       "@safekids-ai/nlp-js-common": ["libs/nlp-js-common/src/index.ts"],
       "@safekids-ai/nlp-js-node": ["libs/nlp-js-node/src/index.ts"],

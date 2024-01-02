@@ -1,0 +1,33 @@
+import React from "react";
+import { render, cleanup } from "@testing-library/react";
+import GetStarted from "./index";
+
+const spyScrollTo = jest.fn();
+describe("Get Started screen => gmail user onboarding", () => {
+  beforeEach(() => {
+    Object.defineProperty(global.window, "scrollTo", { value: spyScrollTo });
+    spyScrollTo.mockClear();
+  });
+  afterEach(() => {
+    cleanup();
+  });
+  test("Get Started component is being rendered correctly ", () => {
+    render(<GetStarted />);
+  });
+  test("Get Started component is rendering safekids Logo correctly ", () => {
+    render(<GetStarted />);
+    const displayedImage = document.querySelector("img") as HTMLImageElement;
+    expect(displayedImage.src).toContain("safeKids_logo");
+  });
+  test("Get Started component is rendering 'Safe Kids for Email helps you' points correctly ", () => {
+    render(<GetStarted />);
+    const helpsYouText = document.querySelector("h2") as HTMLHeadingElement;
+    expect(helpsYouText.innerHTML).toContain("Safe Kids for Email helps you:");
+  });
+
+  test("Get Started component is rendering get started button correctly ", () => {
+    render(<GetStarted />);
+    const getStartedBtn = document.querySelector("button") as HTMLButtonElement;
+    expect(getStartedBtn.textContent).toContain("Get Started");
+  });
+});

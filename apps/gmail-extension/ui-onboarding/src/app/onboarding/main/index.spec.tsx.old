@@ -1,0 +1,29 @@
+import React from "react";
+import { render, screen, cleanup } from "@testing-library/react";
+import GmailOnBoarding from "./index";
+
+const spyScrollTo = jest.fn();
+describe("Onboarding stepper screen => gmail user onboarding", () => {
+  beforeEach(() => {
+    Object.defineProperty(global.window, "scrollTo", { value: spyScrollTo });
+    spyScrollTo.mockClear();
+  });
+  afterEach(() => {
+    cleanup();
+  });
+  test("GmailOnBoarding components is being rendered successfully", () => {
+    render(<GmailOnBoarding />);
+  });
+  test("GmailOnBoarding components is rendering safekids Logo correctly ", () => {
+    render(<GmailOnBoarding />);
+    const displayedImage = document.querySelector("img") as HTMLImageElement;
+    expect(displayedImage.src).toContain("safeKids_logo");
+  });
+
+  test("GmailOnBoarding components is displaying 'services terms' in footer correctly", () => {
+    render(<GmailOnBoarding />);
+    const hasServicesTerms =
+      document?.body?.textContent?.includes("Services Terms");
+    expect(hasServicesTerms).toBe(true);
+  });
+});

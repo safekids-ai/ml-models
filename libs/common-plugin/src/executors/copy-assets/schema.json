@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "CopyAssets executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "The source directory of the assets"
+    },
+    "destination": {
+      "type": "string",
+      "description": "The destination directory of the assets"
+    },
+    "required": [
+      "source",
+      "destination"
+    ]
+  }
+}

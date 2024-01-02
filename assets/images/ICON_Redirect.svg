@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="95px" height="92px" viewBox="0 0 95 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ICON_Redirect</title>
+    <g id="KIDSl-UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ICON_Redirect" transform="translate(2.000000, 0.000000)">
+            <circle id="Oval-Copy-4" stroke="#F7274A" stroke-width="3" fill="#FFFFFF" cx="46" cy="46" r="44.5"></circle>
+            <path id="Line-2" d="M44.0262154,43.9741238 L48.0258762,44.0262154 L47.9998304,46.0260458 L47.812,60.418 L57.8115322,60.5489351 L45.5,84.390625 L33.8135674,60.2363853 L43.813,60.366 L44.0001696,45.9739542 L44.0262154,43.9741238 Z" fill="#F7274A" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M27.3315017,11.8588056 L31.3251106,12.0848313 L31.2120977,14.0816358 L30.213,31.717 L40.197966,32.2829048 L26.8609845,55.566481 L16.2363124,30.9267501 L26.22,31.491 L27.2184888,13.85561 L27.3315017,11.8588056 Z" transform="translate(28.360985, 34.829639) rotate(120.000000) translate(-28.360985, -34.829639) " fill="#F7274A" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M65.5737233,13.6718649 L65.5825276,15.6718455 L65.649,30.855 L75.6492726,30.8115426 L63.7550409,54.864136 L51.6495052,30.9171945 L61.649,30.873 L61.5825664,15.6894542 L61.5737621,13.6894735 L65.5737233,13.6718649 Z" transform="translate(63.755041, 35.127294) rotate(240.000000) translate(-63.755041, -35.127294) " fill="#F7274A" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>
