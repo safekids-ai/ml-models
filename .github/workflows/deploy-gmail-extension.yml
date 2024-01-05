@@ -57,18 +57,14 @@ jobs:
           npx nx run-many --target=test --all
 
       - name: Zip Extension
-        id: packExtensionDir
-        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
-        with:
-          extensionDir: 'dist/apps/gmail-extension'
-          zipFilePath: 'build/gmail-extension.zip'
+        run: zip -r gmail-extension.zip dist/apps/gmail-extension
 
       - uses: Klemensas/chrome-extension-upload-action@v1.3
         with:
           refresh-token: '${{ secrets.CHROMESTORE_REFRESH_TOKEN }}'
           client-id: '${{ secrets.CHROMESTORE_CLIENT_ID }}'
           client-secret: '${{ secrets.CHROMESTORE_CLIENT_SECRET }}'
-          file-name: 'build/gmail-extension.zip'
+          file-name: 'gmail-extension.zip'
           app-id: 'pnaedlhkmadjdgjkenjmaepfaiiioocc'
           publish: false
 
