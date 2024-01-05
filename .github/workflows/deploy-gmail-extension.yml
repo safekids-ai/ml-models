@@ -53,8 +53,8 @@ jobs:
 
       - name: Build and test
         run: |
-          npx nx run-many --target=package --all
-          npx nx run-many --target=test --all
+          npx nx build gmail-extension --configuration=production
+          npx nx test gmail-extension --configuration=production
 
       - name: Zip Extension
         run: |
