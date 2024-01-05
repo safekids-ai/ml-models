@@ -1,0 +1,74 @@
+
+name: Build and publish WEB
+
+on:
+  release:
+    types:
+      - created
+  push:
+    paths:
+      - 'apps/gmail-extension/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout github repo (+ download lfs dependencies)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Init git user
+        run: |
+          git config --local user.email "abbas@safekids.ai"
+          git config --local user.name "Release Workflow"
+
+      - name: Checkout LFS objects
+        run: git lfs pull
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@safekids-ai'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and test
+        run: |
+          npx nx run-many --target=package --all
+          npx nx run-many --target=test --all
+
+      - name: Zip Extension
+        id: packExtensionDir
+        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
+        with:
+          extensionDir: 'dist/apps/gmail-extension'
+          zipFilePath: 'build/gmail-extension.zip'
+
+      - uses: Klemensas/chrome-extension-upload-action@$VERSION
+        with:
+          refresh-token: '${{ secrets.CHROMESTORE_REFRESH_TOKEN }}'
+          client-id: '${{ secrets.CHROMESTORE_CLIENT_ID }}'
+          client-secret: '${{ secrets.CHROMESTORE_CLIENT_SECRET }}'
+          file-name: 'build/gmail-extension.zip'
+          app-id: 'pnaedlhkmadjdgjkenjmaepfaiiioocc'
+          publish: false
+

@@ -26,7 +26,7 @@
         },
         "@release-it/bumper": {
             "in": "version.json",
-            "out": ["version.json", "dist/libs/**/package.json"]
+            "out": ["version.json", "dist/libs/**/package.json", "dist/apps/**/manifest.json"]
         }
     },
     "git": {
