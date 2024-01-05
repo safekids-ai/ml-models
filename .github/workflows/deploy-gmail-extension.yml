@@ -61,8 +61,8 @@ jobs:
 
       - uses: Klemensas/chrome-extension-upload-action@v1.3
         with:
-          refresh-token: '${{ secrets.CHROMESTORE_REFRESH_TOKEN }}'
-          client-id: '${{ secrets.CHROMESTORE_CLIENT_ID }}'
+          refresh-token: '4/1AfJohXkElq9PMnmQUccWwVUxUpeaFMmOjvu-nE7-aeXWWHaLRFQWjbeBPcg'
+          client-id: '799909032966-knabg56jmk9de9tiqn2u71uflsmvm1ti.apps.googleusercontent.com'
           client-secret: '${{ secrets.CHROMESTORE_CLIENT_SECRET }}'
           file-name: 'gmail-extension.zip'
           app-id: 'pnaedlhkmadjdgjkenjmaepfaiiioocc'
