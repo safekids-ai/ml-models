@@ -1,5 +1,5 @@
 
-name: Build and publish WEB
+name: Build and publish Gmail Extension
 
 on:
   release:
@@ -63,7 +63,7 @@ jobs:
           extensionDir: 'dist/apps/gmail-extension'
           zipFilePath: 'build/gmail-extension.zip'
 
-      - uses: Klemensas/chrome-extension-upload-action@$VERSION
+      - uses: Klemensas/chrome-extension-upload-action@v1.3
         with:
           refresh-token: '${{ secrets.CHROMESTORE_REFRESH_TOKEN }}'
           client-id: '${{ secrets.CHROMESTORE_CLIENT_ID }}'
