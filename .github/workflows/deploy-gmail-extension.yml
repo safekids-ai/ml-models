@@ -57,7 +57,9 @@ jobs:
           npx nx run-many --target=test --all
 
       - name: Zip Extension
-        run: zip -r gmail-extension.zip dist/apps/gmail-extension
+        run: |
+          ls -la
+          zip -r gmail-extension.zip dist/apps/gmail-extension
 
       - uses: Klemensas/chrome-extension-upload-action@v1.3
         with:
