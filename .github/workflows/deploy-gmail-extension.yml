@@ -66,5 +66,5 @@ jobs:
           client-secret: '${{ secrets.CHROMESTORE_CLIENT_SECRET }}'
           file-name: 'gmail-extension.zip'
           app-id: 'pnaedlhkmadjdgjkenjmaepfaiiioocc'
-          publish: false
+          publish: true
 
