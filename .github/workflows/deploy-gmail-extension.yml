@@ -68,7 +68,7 @@ jobs:
           chrome-webstore-upload upload \
           --source 'gmail-extension.zip' \
           --extension-id 'pnaedlhkmadjdgjkenjmaepfaiiioocc' \
-          --client-id '799909032966-knabg56jmk9de9tiqn2u71uflsmvm1ti.apps.googleusercontent.com' \
+          --client-id '${{ secrets.CHROMESTORE_CLIENT_ID }}' \
           --client-secret '${{ secrets.CHROMESTORE_CLIENT_SECRET }}' \
-          --refresh-token '4/1AfJohXkElq9PMnmQUccWwVUxUpeaFMmOjvu-nE7-aeXWWHaLRFQWjbeBPcg'
+          --refresh-token '${{ secrets.CHROMESTORE_REFRESH_TOKEN }}'
 
