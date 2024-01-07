@@ -59,12 +59,12 @@ jobs:
         run: |
           zip -r gmail-extension.zip dist/apps/gmail-extension
 
-      - uses: Klemensas/chrome-extension-upload-action@v1.3
-        with:
-          refresh-token: '4/1AfJohXkElq9PMnmQUccWwVUxUpeaFMmOjvu-nE7-aeXWWHaLRFQWjbeBPcg'
-          client-id: '799909032966-knabg56jmk9de9tiqn2u71uflsmvm1ti.apps.googleusercontent.com'
-          client-secret: '${{ secrets.CHROMESTORE_CLIENT_SECRET }}'
-          file-name: 'gmail-extension.zip'
-          app-id: 'pnaedlhkmadjdgjkenjmaepfaiiioocc'
-          publish: true
+      - name: Upload step
+        run: |-
+          chrome-webstore-upload upload \\
+          --source gmail-extension.zip \\
+          --extension-id pnaedlhkmadjdgjkenjmaepfaiiioocc \\
+          --client-id 799909032966-knabg56jmk9de9tiqn2u71uflsmvm1ti.apps.googleusercontent.com \\
+          --client-secret ${{ secrets.CHROMESTORE_CLIENT_SECRET }} \\
+          --refresh-token 4/1AfJohXkElq9PMnmQUccWwVUxUpeaFMmOjvu-nE7-aeXWWHaLRFQWjbeBPcg
 
