@@ -59,6 +59,10 @@ jobs:
         run: |
           zip -r gmail-extension.zip dist/apps/gmail-extension
 
+      - name: Install webstore cli
+        run: |-
+          npm install -g chrome-webstore-upload-cli
+
       - name: Upload step
         run: |-
           chrome-webstore-upload upload \\
