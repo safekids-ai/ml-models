@@ -55,8 +55,8 @@ jobs:
         run: |
           npx nx build gmail-extension --configuration=production
           pnpm run release:dist:only
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Zip Extension
         run: |
           zip -r gmail-extension.zip dist/apps/gmail-extension
