@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "release": "dotenv release-it --",
+    "release:gitaction" : "release-it --no-increment --no-npm --no-git.commit --no-git.tag --no-github.release",
     "publish": "npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false",
     "start": "npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web",
     "start:prod": "NODE_ENV=production npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web --prod",
