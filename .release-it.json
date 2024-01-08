@@ -43,7 +43,7 @@
       "before:bump": "npm run build",
       "after:bump": [
         "git checkout -- package.json",
-        "git checkout -- pnpm-lock.json",
+        "git checkout -- pnpm-lock.yaml",
         "node tools/scripts/update-version.mjs"
       ]
     }
