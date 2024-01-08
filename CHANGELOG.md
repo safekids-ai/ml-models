@@ -2,6 +2,8 @@
 
 ## [0.0.27](https://github.com/safekids-ai/ml-models/compare/0.0.25...0.0.27) (2024-01-08)
 
+## [0.0.27](https://github.com/safekids-ai/ml-models/compare/0.0.25...0.0.27) (2024-01-08)
+
 ## [0.0.25](https://github.com/safekids-ai/ml-models/compare/0.0.24...0.0.25) (2024-01-08)
 
 ## [0.0.24](https://github.com/safekids-ai/ml-models/compare/0.0.23...0.0.24) (2024-01-08)
