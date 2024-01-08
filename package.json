@@ -9,7 +9,7 @@
     "start:prod": "NODE_ENV=production npx nx run-many --parallel --target=serve --projects=ml-api,ml-api-web --prod",
     "start:web:prod": "NODE_ENV=production npx nx serve ml-api-web",
     "start:api:prod": "NODE_ENV=production npx nx serve ml-api",
-    "build": "npx nx run-many -t build",
+    "build": "npx nx run-many -t build --prod",
     "build:debug": "npx nx run-many -t build --verbose",
     "build:debug:nocache": "npx nx run-many -t build --verbose --skip-nx-cache",
     "build:prod": "npx nx run-many -t build --prod",
