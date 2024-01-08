@@ -40,7 +40,9 @@
         "releaseName": "Release ${version}"
     },
     "hooks": {
+        "before:init": ["npm run test"],
         "before:bump": "pnpm exec nx run-many --target=package --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo,gmail-extension --parallel=false",
-        "after:bump": ["git checkout -- package.json"]
+        "after:bump": ["git checkout -- package.json", "npm run build:prod"],
+        "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
     }
 }
