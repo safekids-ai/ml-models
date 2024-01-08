@@ -54,7 +54,7 @@ jobs:
       - name: Build and test
         run: |
           npx nx build gmail-extension --configuration=production
-
+          pnpm run release:dist:only
       - name: Zip Extension
         run: |
           zip -r gmail-extension.zip dist/apps/gmail-extension
