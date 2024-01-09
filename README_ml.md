@@ -5,7 +5,7 @@ These are local models (12MB/5MB) that detect hate speech and more and vision mo
 
 The models can be run on node or on the browser. SDK's are available for Python, JAVA, Node and in-the-browser that can be leverage by a chrome extension.
 
-[![Try a Demo of our Hate Model](assets/markdown/demo_model.png 'Demo Playground')](https://demo.safekids.ai)
+[![Try a Demo of our Hate Model](assets/markdown/demo_model.png 'Demo Playground')](https://demo.safekids.ai/hate)
 
 ## NLP and Vision Classification
 | NLP Classification | Vision Classification |
