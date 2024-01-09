@@ -66,8 +66,8 @@ dependencies:
     specifier: ^10.16.5
     version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
   html-react-parser:
-    specifier: ^5.0.6
-    version: 5.0.7(react@18.2.0)
+    specifier: ^5.0.11
+    version: 5.0.11(react@18.2.0)
   nest-winston:
     specifier: ^1.9.4
     version: 1.9.4(@nestjs/common@10.2.10)(winston@3.11.0)
@@ -12866,8 +12866,8 @@ packages:
       wbuf: 1.7.3
     dev: true
 
-  /html-dom-parser@5.0.4:
-    resolution: {integrity: sha512-azy8THLKd4Ar0OVJpEgX+MSjYvKdNDWlGiRBIlovMqEQYMAnLLXBhhiSwjylDD3RDdcCYT8Utg6uoRDeLHUyHg==}
+  /html-dom-parser@5.0.6:
+    resolution: {integrity: sha512-6KSMOgxzAIZZ1Tcc6eNEfRFC/XE0+TiYaWanKNYKHSEQOtdxrR0t8ILKXNDcRea/WbIDltLUIP8mi/tw7dtFvQ==}
     dependencies:
       domhandler: 5.0.3
       htmlparser2: 9.0.0
@@ -12887,13 +12887,13 @@ packages:
   /html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
-  /html-react-parser@5.0.7(react@18.2.0):
-    resolution: {integrity: sha512-00ve/0B7ukLUAcAbmD6Vh74EicB+ktLvAM4APeXJjiBsRiPz2ouochTvyUhOJB8apP2t40xAXvpmd+t50aVnJg==}
+  /html-react-parser@5.0.11(react@18.2.0):
+    resolution: {integrity: sha512-TcLGDGMbVRbos09zwnom/QrLbd4PmNFhMEhlp2ZdHBboAuCuctRDqr8JU5aTyKzFKotdpSg8QkXVxVb5ZUU2Ag==}
     peerDependencies:
       react: 0.14 || 15 || 16 || 17 || 18
     dependencies:
       domhandler: 5.0.3
-      html-dom-parser: 5.0.4
+      html-dom-parser: 5.0.6
       react: 18.2.0
       react-property: 2.0.2
       style-to-js: 1.1.10
