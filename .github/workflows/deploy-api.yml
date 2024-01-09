@@ -1,5 +1,5 @@
 
-name: Build and publish API
+name: Build and Deploy API
 
 on:
   release:

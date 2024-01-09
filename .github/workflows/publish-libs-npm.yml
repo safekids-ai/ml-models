@@ -1,5 +1,5 @@
 
-name: Build and publish Gmail Extension
+name: Build and publish Libs to NPM
 
 on:
   release:
@@ -53,6 +53,6 @@ jobs:
 
       - name: Build and test
         run: |
-          npx nx build:prod
+          pnpm run build:prod
           pnpm run release:dist:only
           pnpm run publish
