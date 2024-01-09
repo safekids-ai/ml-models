@@ -18,7 +18,7 @@
 </p>
 
 ## About safekids.ai and what we are all about
-[![The 16 year old Founder](https://img.youtube.com/vi/E7vhpFryVAc/1.jpg)](https://www.youtube.com/watch?v=E7vhpFryVAc)
+[![The 16 year old Founder](https://img.youtube.com/vi/E7vhpFryVAc/maxresdefault.jpg)](https://www.youtube.com/watch?v=E7vhpFryVAc)
 
 
 ## Incredible ML models and Applications in one Mono Repo
