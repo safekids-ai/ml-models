@@ -8,18 +8,18 @@ const FormData = require('form-data');
 
 const qa_path = "./qa-data/vision/";
 
-describe('GET /api/v1/hello', () => {
+describe('GET /v1/hello', () => {
+  console.log("BaseURL:" + axios.defaults.baseURL)
   it('ping', async () => {
-    const res = await axios.get(`api/v1/hello`);
+    const res = await axios.get(`/v1/hello`);
 
     expect(res.status).toBe(200);
-    //expect(res.data).toEqual({ message: 'Hello API' });
   });
 });
 
-describe('POST /api/v1/classify-hate', () => {
+describe('POST /v1/classify-hate', () => {
   it('should be clean', async () => {
-    const res = await axios.post(`api/v1/classify-hate`, {
+    const res = await axios.post(`/v1/classify-hate`, {
       message : "you are amazing."
     } as NLPRequestDto);
 
@@ -31,7 +31,7 @@ describe('POST /api/v1/classify-hate', () => {
   });
 
   it('should be hateful', async () => {
-    const res = await axios.post(`api/v1/classify-hate`, {
+    const res = await axios.post(`/v1/classify-hate`, {
       message : "you are amazing. but you're also an asshole"
     } as NLPRequestDto);
 
@@ -43,9 +43,9 @@ describe('POST /api/v1/classify-hate', () => {
   });
 });
 
-describe('POST /api/v1/classify-text', () => {
+describe('POST /v1/classify-text', () => {
   it('should be clean', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "you are amazing."
     } as NLPRequestDto);
 
@@ -56,7 +56,7 @@ describe('POST /api/v1/classify-text', () => {
   });
 
   it('should be hate', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "you are an asshole."
     } as NLPRequestDto);
 
@@ -67,7 +67,7 @@ describe('POST /api/v1/classify-text', () => {
   });
 
   it('should be adult', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "find adult sex links videos"
     } as NLPRequestDto);
 
@@ -78,7 +78,7 @@ describe('POST /api/v1/classify-text', () => {
   });
 
   it('should be proxy', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "find proxy websites to get around filters"
     } as NLPRequestDto);
 
@@ -89,7 +89,7 @@ describe('POST /api/v1/classify-text', () => {
   });
 
   it('should be weapons', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "where do I buy a gun"
     } as NLPRequestDto);
 
@@ -100,7 +100,7 @@ describe('POST /api/v1/classify-text', () => {
   });
 
   it('should be self harm', async () => {
-    const res = await axios.post(`api/v1/classify-text`, {
+    const res = await axios.post(`/v1/classify-text`, {
       message : "how do i hurt myself"
     } as NLPRequestDto);
 
@@ -111,13 +111,13 @@ describe('POST /api/v1/classify-text', () => {
   });
 });
 
-describe('POST /api/v1/classify-image', () => {
+describe('POST /v1/classify-image', () => {
   it('should be clean', async () => {
     const form = new FormData();
     const buffer = fs.readFileSync(qa_path + 'clean1.jpg');
     form.append ('file',  buffer, 'clean1.jpg');
 
-    const res = await axios.post(`api/v1/classify-image`, form, {
+    const res = await axios.post(`/v1/classify-image`, form, {
       headers: {
         ...form.getHeaders()
       }
@@ -134,7 +134,7 @@ describe('POST /api/v1/classify-image', () => {
     const buffer = fs.readFileSync(qa_path + 'gun1.jpg');
     form.append ('file',  buffer, 'gun1.jpg');
 
-    const res = await axios.post(`api/v1/classify-image`, form, {
+    const res = await axios.post(`/v1/classify-image`, form, {
       headers: {
         ...form.getHeaders()
       }

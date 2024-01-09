@@ -49,5 +49,6 @@ jobs:
 
       - name: Build and test
         run: |
-          npx nx run-many --target=package --all
-          npx nx run-many --target=test --all
+          pnpm run build:prod
+          pnpm run e2e
+

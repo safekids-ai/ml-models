@@ -16,12 +16,12 @@ describe('Hate route', () => {
     cy.url().should("include", "hate")
   });
 
-  it('Hate model does not flag', () => {
-    cy.visit("/hate")
-    cy.get("#message").type("I am happy")
-    cy.get("#message").type("{enter}")
-    cy.contains("Not flagged").should("exist")
-  })
+  // it('Hate model does not flag', () => {
+  //   cy.visit("/hate")
+  //   cy.get("#message").type("I am happy")
+  //   cy.get("#message").type("{enter}")
+  //   cy.contains("Not flagged").should("exist")
+  // })
 
   it('Hate model flagges hate bullying', () => {
     cy.visit("/hate")

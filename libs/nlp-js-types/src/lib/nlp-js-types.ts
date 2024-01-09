@@ -13,4 +13,4 @@ interface NLPResult {
   flaggedText: string
 }
 
-export {NLPLabel, type NLPResult}
+export {NLPLabel, NLPResult}
