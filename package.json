@@ -81,7 +81,7 @@
     "@jest/globals": "^29.7.0",
     "@jnxplus/nx-gradle": "^0.17.4",
     "@nestjs/schematics": "^10.0.1",
-    "@nestjs/testing": "^10.0.2",
+    "@nestjs/testing": "^10.3.0",
     "@nx/cypress": "17.1.2",
     "@nx/esbuild": "17.1.2",
     "@nx/eslint": "17.1.2",
