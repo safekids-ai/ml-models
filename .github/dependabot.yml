@@ -9,12 +9,3 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
-
-  # Regular updates for a specific package
-  - package-ecosystem: "npm"
-    directory: "/" # Root directory
-    schedule:
-      interval: "weekly"
-    allow:
-      - dependency-name: "@inboxsdk/core"
-    versioning-strategy: increase
