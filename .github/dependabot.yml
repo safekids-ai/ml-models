@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Enable security updates for all dependencies in package.json
+  - package-ecosystem: "pnpm"
+    directory: "/" # Root directory
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # Regular updates for a specific package
+  - package-ecosystem: "pnpm"
+    directory: "/" # Root directory
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "@inboxsdk/core"
+    versioning-strategy: increase

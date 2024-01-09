@@ -1,0 +1,65 @@
+name: Dependabot Release Gmail Extension
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+    steps:
+      - name: Auto merging pull request
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            })
+
+  build:
+    runs-on: ubuntu-latest
+    needs: auto-merge
+    steps:
+      - name: Checkout github repo (+ download lfs dependencies)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Init git user
+        run: |
+          git config --local user.email "abbas@safekids.ai"
+          git config --local user.name "Release Workflow"
+
+      - name: Checkout LFS objects
+        run: git lfs pull
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@safekids-ai'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and Release
+        run: |
+          npx nx build:prod
+          pnpm run release:silent
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

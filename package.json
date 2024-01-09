@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "release:silent": "dotenv release-it --ci",
     "release": "dotenv release-it --",
     "release:dist:only" : "release-it --no-increment --no-npm --no-git --no-github.release --no-plugins --ci",
     "publish": "npx nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-demo --parallel=false",
