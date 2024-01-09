@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo # (callout-1)
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Build image # (callout-2)
         run: docker build . -t safekids-ai/ml-models-web -f apps/ml-api-web/Dockerfile
       - name: Install doctl # (callout-3)
