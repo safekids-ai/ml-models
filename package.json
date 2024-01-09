@@ -55,7 +55,7 @@
     "@techstark/opencv-js": "^4.8.0-release.9",
     "abstract-logging": "^2.0.1",
     "axios": "^1.6.2",
-    "framer-motion": "^10.16.5",
+    "framer-motion": "^10.17.12",
     "html-react-parser": "^5.0.6",
     "nest-winston": "^1.9.4",
     "next": "13.4.4",
