@@ -1,4 +1,4 @@
-name: Dependabot Release Gmail Extension
+name: Dependabot Merged Release
 
 on:
   pull_request:
@@ -7,18 +7,13 @@ on:
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+    if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}} # Detect that the PR author is dependabot
     steps:
-      - name: Auto merging pull request
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number
-            })
-
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --merge "$PR_URL" # Use Github CLI to merge automatically the PR
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   build:
     runs-on: ubuntu-latest
     needs: auto-merge
@@ -60,6 +55,5 @@ jobs:
       - name: Build and Release
         run: |
           npx nx build:prod
-          pnpm run release:silent
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
