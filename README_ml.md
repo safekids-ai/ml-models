@@ -9,13 +9,13 @@ The models can be run on node or on the browser. SDK's are available for Python,
 
 ## NLP and Vision Classification
 | NLP Classification | Vision Classification |
-| ------------------ |-----------------------|
-| bullying_hate      | porn                  |
-| porn               | weapons               |
-| proxy              | clean   ß             |
-| self_harm          |                       |
-| weapons            |                       |
-| clean              |                       |
+| ------------------ |----------------|
+| bullying_hate      | porn           |
+| porn               | weapons        |
+| proxy              | clean          |
+| self_harm          |                |
+| weapons            |                |
+| clean              |                |
 
 ## Model Accuracy
 | Label | Training Data Count | Test Data Count | f1 score | precision | recall |
