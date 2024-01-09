@@ -44,7 +44,7 @@
     "@inboxsdk/core": "^2.1.26",
     "@mui/material": "^5.15.2",
     "@mui/styles": "^5.15.2",
-    "@nestjs/common": "^10.0.2",
+    "@nestjs/common": "^10.3.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
