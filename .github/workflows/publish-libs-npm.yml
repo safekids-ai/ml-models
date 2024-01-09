@@ -50,6 +50,6 @@ jobs:
         run: |
           pnpm run build
           pnpm run release:dist:only
-          pnpm run publish
+          pnpm run publish:npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
