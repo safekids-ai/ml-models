@@ -42,7 +42,7 @@ RESPONSE:
 porn
 ```
 
-### Classify Image (using URL)
+### Classify Adult to Gun Image (using URL)
 ```console
 curl "https://api.safekids.ai/v1/classify-image-url?url=https://cdn.britannica.com/96/176196-050-EFC5E6A6/Glock-pistol.jpg"
 ```
