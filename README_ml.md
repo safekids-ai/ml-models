@@ -40,18 +40,15 @@ RESPONSE:
 porn
 ```
 
-### Classify Image
+### Classify Image (using URL)
 ```console
-curl -X 'POST' \
-  'https://api.safekids.ai/v1/classify-image' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '"string"'
+curl "https://api.safekids.ai/v1/classify-image-url?url=https://cdn.britannica.com/96/176196-050-EFC5E6A6/Glock-pistol.jpg"
   
 RESPONSE:
-porn
+weapons
 ```
 
+### Interact directly with our demo
 [![Try a Demo of our Hate Model](assets/markdown/demo_model.png 'Demo Playground')](https://demo.safekids.ai/hate)
 
 ## NLP and Vision Classification
