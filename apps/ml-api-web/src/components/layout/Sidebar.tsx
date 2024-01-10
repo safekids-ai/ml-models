@@ -56,7 +56,7 @@ import {
       header: "Models",
       submenu: [
         // { name: "Vision", icon: FiTrendingUp, link: "/vision" },
-        { name: "Hate", icon: FiCompass, link: "/hate" },
+        { name: "Toxic", icon: FiCompass, link: "/hate" },
         {name: "Intent Classification", icon: FiCompass, link: "/classify-intent" },
       ],
     },

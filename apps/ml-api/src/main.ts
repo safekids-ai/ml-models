@@ -8,6 +8,7 @@ import { WinstonModule } from 'nest-winston';
 import { instance } from './app/config/logger.config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
+import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -16,6 +17,16 @@ async function bootstrap() {
     }),
   });
   app.enableCors();
+
+  const config = new DocumentBuilder()
+    .setTitle('Safe Kids API')
+    .setDescription('Simple API for demonstration')
+    .setVersion('1.0')
+    .addTag('safekids')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   // const globalPrefix = 'api';
   // app.setGlobalPrefix(globalPrefix);

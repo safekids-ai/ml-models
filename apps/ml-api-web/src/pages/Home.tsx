@@ -9,7 +9,7 @@ import {
     IconProps,
   } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-  
+
   const Illustration = (props: IconProps) => {
     return (
       <Icon
@@ -822,7 +822,7 @@ import { Link } from 'react-router-dom'
       </Icon>
     )
   }
-  
+
   export default function Home() {
     return (
       <Container maxW={'5xl'}>
@@ -841,7 +841,7 @@ import { Link } from 'react-router-dom'
             </Text>
           </Heading>
           <Text color={'gray.500'} maxW={'3xl'}>
-            Use our models to detect hate speech, search intent, and explicit/violent images.
+            Use our models to detect toxic speech, search intent, and explicit/violent images.
           </Text>
           <Stack spacing={6} direction={'row'}>
             <Button

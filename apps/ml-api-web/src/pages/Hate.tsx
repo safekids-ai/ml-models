@@ -13,7 +13,7 @@ const Hate = () => {
     {
       from: "computer",
       text:
-        "Hi, this is Safe Kids bot. You can send me message and i'll tell you if it is hate speech or not. I'll underline the hate part of the speech.",
+        "Hi, this is Safe Kids bot. You can send me message and i'll tell you if it is toxic speech or not. I'll underline the toxic part of the speech.",
     }
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -27,7 +27,7 @@ const Hate = () => {
     setMessages((old) => [...old, { from: "me", text: prevMessage }]);
     setInputMessage("");
 
-    const req = await axios.post<NLPResult>(API_URL + "/v1/classify-hate", { message: prevMessage })
+    const req = await axios.post<NLPResult>(API_URL + "/v1/classify-toxic", { message: prevMessage })
     const res = req.data;
     console.log(res, res.flag)
     const arr = prevMessage.split(res.flaggedText)
