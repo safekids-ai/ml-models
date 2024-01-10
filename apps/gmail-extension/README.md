@@ -3,6 +3,10 @@
 
 Most advanced AI powered email filter that helps kids identify bullying for both incoming and outgoing emails
 
+## Download for Chromestore
+[![Download from Chromstore](../../assets/markdown/gmail_chromestore.png 'Chromstore Download')](https://chromewebstore.google.com/detail/safe-kids-ai-for-email/pnaedlhkmadjdgjkenjmaepfaiiioocc)
+
+
 ## See the code here
 https://github.com/safekids-ai/ml-models/tree/main/apps/gmail-extension
 
