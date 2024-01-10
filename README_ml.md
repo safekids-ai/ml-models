@@ -5,6 +5,53 @@ These are local models (12MB/5MB) that detect hate speech and more and vision mo
 
 The models can be run on node or on the browser. SDK's are available for Python, JAVA, Node and in-the-browser that can be leverage by a chrome extension.
 
+You can try out our API using docs at: <br>
+https://api.safekids.ai/api
+
+### Classify Toxic Speech
+```console
+curl -X 'POST' \
+  'https://api.safekids.ai/v1/classify-toxic' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "message": "you'\''re a disgusting person"
+}'
+
+RESPONSE:
+{
+  "flag": true,
+  "label": "bullying_hate",
+  "flaggedText": "you're a disgusting person"
+}
+```
+
+### Classify Google Search Intent
+```console
+curl -X 'POST' \
+  'https://api.safekids.ai/v1/classify-text' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "message": "find adult sex links videos"
+}'
+
+RESPONSE:
+porn
+```
+
+### Classify Image
+```console
+curl -X 'POST' \
+  'https://api.safekids.ai/v1/classify-image' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '"string"'
+  
+RESPONSE:
+porn
+```
+
 [![Try a Demo of our Hate Model](assets/markdown/demo_model.png 'Demo Playground')](https://demo.safekids.ai/hate)
 
 ## NLP and Vision Classification

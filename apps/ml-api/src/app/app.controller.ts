@@ -4,7 +4,7 @@ import {
   FileTypeValidator,
   Get, MaxFileSizeValidator,
   ParseFilePipe,
-  Post,
+  Post, Query,
   UploadedFile,
   UseInterceptors
 } from '@nestjs/common';
@@ -84,5 +84,13 @@ export class AppController {
       ],
     }),) file: Express.Multer.File) {
     return await this.appService.classifyImage(file.buffer);
+  }
+
+  @ApiBody({
+    description: 'Classify image for adult or weapons content',
+  })
+  @Get('v1/classify-image-url')
+  async classifyImageURL(@Query('url') url: string) {
+    return await this.appService.classifyImageURL(url);
   }
 }

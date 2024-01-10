@@ -3,6 +3,7 @@ import {NLPLabel, NLPNode, NLPResult} from "@safekids-ai/nlp-js-node";
 import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
 import {ConfigService} from "@nestjs/config";
 import * as apiLogger from "abstract-logging";
+import axios from "axios";
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -32,6 +33,17 @@ export class AppService implements OnModuleInit {
 
   async classifyImage(input: Buffer | ImageData) : Promise<VisionLabel> {
     return await this.visionModel.classifyImage(input);
+  }
+
+  async classifyImageURL(url: string) : Promise<VisionLabel> {
+    this.logger.debug("Get image from url:" + url);
+    const response = await axios({
+      method: 'get',
+      url: url,
+      responseType: 'arraybuffer', // Treat the response as an ArrayBuffer
+    });
+    const imageBuffer = Buffer.from(response.data);
+    return await this.classifyImage(imageBuffer);
   }
 
   async onModuleInit(): Promise<void> {
