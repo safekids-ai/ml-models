@@ -1,7 +1,7 @@
 
 # Machine Learning Models to Detect Hate Speech and Adult/Weapon Images and User Intent
 
-These are local models (12MB/5MB) that detect hate speech and more and vision models that detect adult images and images of weapons.
+These are local models (12MB/5MB) that detect toxic speech and more and vision models that detect adult images and images of weapons.
 
 The models can be run on node or on the browser. SDK's are available for Python, JAVA, Node and in-the-browser that can be leverage by a chrome extension.
 
