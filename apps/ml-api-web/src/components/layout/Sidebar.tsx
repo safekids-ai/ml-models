@@ -60,10 +60,10 @@ import {
         {name: "Intent Classification", icon: FiCompass, link: "/classify-intent" },
       ],
     },
-    {
-      header: "Docs",
-      submenu: [{ name: "Docs", icon: FiCompass, link: "/docs" }],
-    },
+    // {
+    //   header: "Docs",
+    //   submenu: [{ name: "Docs", icon: FiCompass, link: "/docs" }],
+    // },
   ];
 
   const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
