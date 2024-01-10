@@ -27,8 +27,8 @@ gmail-extension that was deployed to thousands of kids to change their cyber-bul
 
 <!-- !toc (minlevel=2 omit="Table of Contents") -->
 
-* [Use our Hate and Vision Models](README_ml.md)
-* [Gmail Extension for Hate Speech](apps/gmail-extension/README.md)
+* [Use our Toxic Language and Vision Models](README_ml.md)
+* [Gmail Extension for Toxic Speech](apps/gmail-extension/README.md)
 * Web Filter to Kids Using Advanced AI and Mental Health Framework (awaiting release)
 * Network Proxy Filter for Windows that runs are the Kernel Level (awaiting release)
 
