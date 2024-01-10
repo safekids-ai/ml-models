@@ -17,7 +17,8 @@ curl -X 'POST' \
   -d '{
   "message": "you'\''re a disgusting person"
 }'
-
+```
+```
 RESPONSE:
 {
   "flag": true,
@@ -35,7 +36,8 @@ curl -X 'POST' \
   -d '{
   "message": "find adult sex links videos"
 }'
-
+```
+```
 RESPONSE:
 porn
 ```
@@ -43,7 +45,8 @@ porn
 ### Classify Image (using URL)
 ```console
 curl "https://api.safekids.ai/v1/classify-image-url?url=https://cdn.britannica.com/96/176196-050-EFC5E6A6/Glock-pistol.jpg"
-  
+```
+```
 RESPONSE:
 weapons
 ```
