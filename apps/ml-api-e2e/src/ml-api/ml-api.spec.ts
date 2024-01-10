@@ -8,18 +8,10 @@ const FormData = require('form-data');
 
 const qa_path = "./qa-data/vision/";
 
-describe('GET /v1/hello', () => {
-  console.log("BaseURL:" + axios.defaults.baseURL)
-  it('ping', async () => {
-    const res = await axios.get(`/v1/hello`);
 
-    expect(res.status).toBe(200);
-  });
-});
-
-describe('POST /v1/classify-hate', () => {
+describe('POST /v1/classify-toxic', () => {
   it('should be clean', async () => {
-    const res = await axios.post(`/v1/classify-hate`, {
+    const res = await axios.post(`/v1/classify-toxic`, {
       message : "you are amazing."
     } as NLPRequestDto);
 
@@ -31,7 +23,7 @@ describe('POST /v1/classify-hate', () => {
   });
 
   it('should be hateful', async () => {
-    const res = await axios.post(`/v1/classify-hate`, {
+    const res = await axios.post(`/v1/classify-toxic`, {
       message : "you are amazing. but you're also an asshole"
     } as NLPRequestDto);
 

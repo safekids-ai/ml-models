@@ -12,7 +12,7 @@ describe('Hate route', () => {
 
   it('Hate route works', () => {
     // Custom command example, see `../support/commands.ts` file
-    cy.contains("Hate").click()
+    cy.contains("Toxic").click()
     cy.url().should("include", "hate")
   });
 
