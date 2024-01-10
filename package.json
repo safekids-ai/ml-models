@@ -57,7 +57,7 @@
     "@types/swagger-schema-official": "^2.0.25",
     "abstract-logging": "^2.0.1",
     "axios": "^1.6.5",
-    "framer-motion": "^10.17.12",
+    "framer-motion": "^10.18.0",
     "html-react-parser": "^5.0.11",
     "nest-winston": "^1.9.4",
     "next": "14.0.4",
