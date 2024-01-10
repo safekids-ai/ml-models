@@ -21,4 +21,4 @@ class NLPWeb extends NLP {
   }
 }
 
-export { NLPWeb,NLPLabel,NLPResult}
+export {NLPWeb}

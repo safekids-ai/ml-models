@@ -8,7 +8,7 @@ export class NLPResultCache {
   private _nlpCacheData: NLPResultCacheData = new NLPResultCacheData();
   private maxLength = 5000;
   private unflushedCount = 0;
-  private flushInterval: NodeJS.Timer;
+  private flushInterval;
   private logger: ILogger;
   private chromeStorage: IChromeStorage;
   private readonly NLP_VERSION_KEY: string = "NLP_VERSION"
@@ -116,7 +116,7 @@ export class NLPResultCache {
     }
 
     //start the flush timer
-    let myself = this;
+    const myself = this;
     this.flushInterval = setInterval(() => {
       if (myself.unflushedCount > 40) {
         this.flush();

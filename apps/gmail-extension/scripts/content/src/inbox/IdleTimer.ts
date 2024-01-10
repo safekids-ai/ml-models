@@ -8,7 +8,7 @@ export class IdleTimer {
   private runEveryMs = 2000;
   private idleTime = 0;
   private totalIdleTime = 0;
-  private idleInterval: NodeJS.Timer;
+  private idleInterval;
   private callback: IdleTimeoutEvent;
   private element: HTMLElement;
   private composeView: ComposeView;
