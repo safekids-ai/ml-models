@@ -1,5 +1,5 @@
 
-# Machine Learning Models to Detect Hate Speech and Adult/Weapon Images and User Intent
+# Machine Learning Models to Detect Toxic Speech and Adult/Weapon Images and User Intent
 
 These are local models (12MB/5MB) that detect toxic speech and more and vision models that detect adult images and images of weapons.
 
