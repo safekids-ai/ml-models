@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload step
         run: |-
-          chrome-webstore-upload publish \
+          chrome-webstore-upload upload \
           --source 'gmail-extension.zip' \
           --extension-id 'pnaedlhkmadjdgjkenjmaepfaiiioocc' \
           --client-id '${{ secrets.CHROMESTORE_CLIENT_ID }}' \
