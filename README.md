@@ -10,7 +10,7 @@
 
 <p align="center">
   <a aria-label="License" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">
-    <img alt="" src="https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-red?link=href%3D%22https%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-nc-sa%2F4.0%2Fdeed.en%22">
+    <img alt="" src="https://img.shields.io/badge/Modified License-CC_BY--NC--SA_4.0-red?link=href%3D%22https%3A%2F%2Fcreativecommons.org%2Flicenses%2Fby-nc-sa%2F4.0%2Fdeed.en%22">
   </a>
   <a aria-label="NPM" href="https://www.npmjs.com/search?q=%40safekids-ai">
     <img alt="" src="https://img.shields.io/badge/NPM-Published%20Packages-green?link=https%3A%2F%2Fwww.npmjs.com%2Fsearch%3Fq%3D%2540safekids-ai">
@@ -33,5 +33,22 @@ gmail-extension that was deployed to thousands of kids to change their cyber-bul
 * Network Proxy Filter for Windows that runs are the Kernel Level (awaiting release)
 
 ### License
-Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+Modified Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en
+
+Key Modifications:
+Please use the code for educational and non-profit purposes. Any commercial use (for profit or a commercial entity)
+should ask for explicit permission from us to use the codecase. 
+
+The most important request is to modify this codebase to make it better. Any modifications
+you do, please commit back to this repository. I think that's only fair to improve the overall
+software. 
+
+&copy; Safe Kids LLC, 2024
+```plaintext
+All rights reserved. No part of this publication may be reproduced, 
+distributed, or transmitted in any form or by any means, including photocopying, 
+recording, or other electronic or mechanical methods, without the prior written 
+permission of the copyright owner, except in the case of brief quotations embodied 
+in critical reviews and certain other noncommercial uses permitted by copyright law.
+```
