@@ -15,7 +15,7 @@ export class InBoxComposeViewHandler {
     this._modelRunner = value;
   }
 
-  private maxForcedRetries = 1;
+  private maxForcedRetries = 0;
   private _threadId = "sf-" + uuidv4();
   private messsageClean: boolean = false;
   private _attemptsToChangeMessage: number = 0;
