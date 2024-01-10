@@ -13,4 +13,4 @@ https://github.com/safekids-ai/ml-models/tree/main/apps/gmail-extension
 [![Outgoing Email](../../assets/markdown/gmail_writing.png)](https://www.youtube.com/watch?v=jVvqryUcj34)
 
 ## Our research on deploying the extension across thousands of students
-[Research study on the extension impact on schools](https://www.safekids.ai/wp-content/themes/safekids/dist/docs/prr.pdf)
+[![Research study on the extension impact on schools](../../assets/markdown/research.png 'Research Papers')](https://www.safekids.ai/patents/)
