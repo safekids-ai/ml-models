@@ -22,7 +22,7 @@
 
 
 ## Incredible ML models and Applications in one Mono Repo
-We have opensourced our Hate and Vision Models (Guns and Adult) along with multiple applications like the
+We have opensourced our Toxic Language and Vision Models (Guns and Adult) along with multiple applications like the
 gmail-extension that was deployed to thousands of kids to change their cyber-bullying behavior.
 
 <!-- !toc (minlevel=2 omit="Table of Contents") -->
