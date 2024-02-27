@@ -58,7 +58,7 @@
     "abstract-logging": "^2.0.1",
     "axios": "^1.6.5",
     "framer-motion": "^10.17.12",
-    "html-react-parser": "^5.0.11",
+    "html-react-parser": "^5.1.8",
     "nest-winston": "^1.9.4",
     "next": "14.0.4",
     "onnxruntime-common": "^1.16.3",
