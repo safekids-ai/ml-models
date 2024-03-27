@@ -11,12 +11,12 @@ WORKDIR /apps
 RUN npm install -g pnpm
 
 COPY ./apps ./apps
-COPY ./libs ./libs
+#COPY ./libs ./libs
 COPY ./scripts ./scripts
-COPY ./model_files ./model_files
+#COPY ./model_files ./model_files
 COPY package.json pnpm-lock.yaml tsconfig.base.json nx.json .
 RUN pnpm i
-RUN npx nx run ml-api-web:build:production
+RUN npx nx run main-website:build:production
 EXPOSE $WEB_PORT
 
 FROM base AS production
@@ -34,4 +34,4 @@ COPY --from=development /apps/dist/apps ./dist
 
 EXPOSE $WEB_PORT
 
-CMD ["./docker_run_web.sh", "ml-api-web"]
+CMD ["./docker_run_web.sh", "main-website"]

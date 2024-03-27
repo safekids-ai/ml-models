@@ -1,3 +1,3 @@
 #!/bin/sh
 
-node run_web.js
+node run_web.js $1
