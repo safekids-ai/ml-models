@@ -1,0 +1,21 @@
+{
+  "name": "main-website-react-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/main-website-react-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["main-website-react"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/main-website-react-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "main-website-react:start"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    }
+  }
+}
