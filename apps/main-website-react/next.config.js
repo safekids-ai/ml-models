@@ -12,6 +12,15 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  async redirects() {
+    return [
+      {
+        source: '/how-it-works-privacy',
+        destination: '/how-it-works',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 const plugins = [
