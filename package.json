@@ -92,7 +92,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@jnxplus/nx-gradle": "^0.17.19",
+    "@jnxplus/nx-gradle": "^0.42.1",
     "@nestjs/schematics": "^10.1.0",
     "@nestjs/testing": "^10.3.0",
     "@nx/cypress": "17.2.8",
