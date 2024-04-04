@@ -67,6 +67,7 @@
     "jquery": "^3.7.1",
     "nest-winston": "^1.9.4",
     "next": "14.0.4",
+    "nx-cloud": "^18.0.0",
     "onnxruntime-common": "^1.16.3",
     "onnxruntime-node": "^1.16.3",
     "onnxruntime-react-native": "^1.16.3",
