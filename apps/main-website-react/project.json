@@ -5,6 +5,43 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/main-website-react"
+      },
+      "configurations": {
+        "production": {},
+        "development": {
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "main-website-react:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "main-website-react:build:production",
+          "dev": false
+        },
+        "development": {
+          "buildTarget": "main-website-react:build:development",
+          "dev":true
+        }
+      }
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "main-website-react:build:production"
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],

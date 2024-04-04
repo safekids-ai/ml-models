@@ -91,5 +91,6 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "exclude": ["apps/main-website-react/.next"]
 }
