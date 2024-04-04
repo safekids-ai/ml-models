@@ -50,5 +50,5 @@ jobs:
       - name: Build and test
         run: |
           pnpm run build
-          pnpm run e2e
+          pnpm run test
 

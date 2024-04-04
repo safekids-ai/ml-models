@@ -12,9 +12,8 @@ const qa_path = "./qa-data/vision/";
 describe('POST /v1/classify-toxic', () => {
   it('should be clean', async () => {
     const res = await axios.post(`/v1/classify-toxic`, {
-      message : "you are amazing."
+      message: "you are amazing."
     } as NLPRequestDto);
-
     expect(res.status).toBeGreaterThanOrEqual(200);
     expect(res.status).toBeLessThan(300);
 

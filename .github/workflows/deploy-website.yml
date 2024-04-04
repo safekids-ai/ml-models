@@ -1,5 +1,5 @@
 
-name: Build and Deploy Main Webite
+name: Build and Deploy Main Website
 
 on:
   release:
