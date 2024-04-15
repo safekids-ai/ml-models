@@ -6,8 +6,8 @@ WORKDIR /mainapp
 COPY ./apps/main-website-react ./apps/main-website-react
 COPY package.json pnpm-lock.yaml tsconfig.base.json nx.json .
 RUN npm install -g pnpm && \
-    pnpm i && \
-    npx nx run main-website-react:build:production && \
+    pnpm i
+RUN npx nx run main-website-react:build:production && \
     rm -rf apps && \
     rm -rf node_modules
 
