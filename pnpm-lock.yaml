@@ -86,18 +86,27 @@ dependencies:
   framer-motion:
     specifier: ^10.17.12
     version: 10.17.12(react-dom@18.2.0)(react@18.2.0)
+  gunzip-file:
+    specifier: ^0.1.1
+    version: 0.1.1
   html-react-parser:
     specifier: ^5.0.11
     version: 5.0.11(react@18.2.0)
   jquery:
     specifier: ^3.7.1
     version: 3.7.1
+  line-reader:
+    specifier: ^0.4.0
+    version: 0.4.0
   nest-winston:
     specifier: ^1.9.4
     version: 1.9.4(@nestjs/common@10.3.0)(winston@3.11.0)
   next:
     specifier: 14.0.4
     version: 14.0.4(@babel/core@7.23.7)(react-dom@18.2.0)(react@18.2.0)
+  nodejs-file-downloader:
+    specifier: ^4.12.1
+    version: 4.12.1
   nx-cloud:
     specifier: ^18.0.0
     version: 18.0.0
@@ -8275,7 +8284,6 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /agent-base@7.1.0:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
@@ -12436,6 +12444,10 @@ packages:
     resolution: {integrity: sha512-Y8T4vYhEfwJOTbouREvG+3XDsjr8E3kIr7uf+JZ0BYloFsttiHU0WfvANVsR7TxNUJa/WpCnw/Ino/p+DeBhBQ==}
     dev: false
 
+  /gunzip-file@0.1.1:
+    resolution: {integrity: sha512-DjDExBKHuhyhHOs8HeGV5dw6wY6eYTl4pAHz27oy8XppgBK60vmG/G3bY09zyT9PXX4TjmnEF4hYoRn61Fctlg==}
+    dev: false
+
   /handle-thing@2.0.1:
     resolution: {integrity: sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==}
     dev: true
@@ -12749,7 +12761,6 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /https-proxy-agent@7.0.2:
     resolution: {integrity: sha512-NmLNjm6ucYwtcUmL7JQC1ZQ57LmHP4lT15FQ8D61nak1rO6DH+fz5qNK2Ap5UN4ZapYICE3/0KodcLYSPsPbaA==}
@@ -14372,6 +14383,10 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
+  /line-reader@0.4.0:
+    resolution: {integrity: sha512-AYJ8g+eE7v+Ba4s/cuYqzuNulH/WbjdKQ55fvx8fNVn8WQzTpioY6vI1MoxTuMgcHYX3VlmZWbVvnkIqkyJbCA==}
+    dev: false
+
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
@@ -15332,6 +15347,18 @@ packages:
   /node-stream-zip@1.15.0:
     resolution: {integrity: sha512-LN4fydt9TqhZhThkZIVQnF9cwjU3qmUH9h78Mx/K7d3VvfRqqwthLwJEUOEL0QPZ0XQmNN7be5Ggit5+4dq3Bw==}
     engines: {node: '>=0.12.0'}
+    dev: false
+
+  /nodejs-file-downloader@4.12.1:
+    resolution: {integrity: sha512-LpfCTNhh805AlLnJnzt1PuEj+RmbrccbAQZ6hBRw2e6QPVR0Qntuo6qqyvPHG5s77/0w0IEKgRAD4nbSnr/X4w==}
+    dependencies:
+      follow-redirects: 1.15.4
+      https-proxy-agent: 5.0.1
+      mime-types: 2.1.35
+      sanitize-filename: 1.6.3
+    transitivePeerDependencies:
+      - debug
+      - supports-color
     dev: false
 
   /normalize-package-data@6.0.0:
@@ -17756,6 +17783,12 @@ packages:
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
+  /sanitize-filename@1.6.3:
+    resolution: {integrity: sha512-y/52Mcy7aw3gRm7IrcGDFx/bCk4AhRh2eI9luHOQM86nZsqwiRkkq2GekHXBBD+SmPidc8i2PqtYZl+pWJ8Oeg==}
+    dependencies:
+      truncate-utf8-bytes: 1.0.2
+    dev: false
+
   /sanitize-html@2.11.0:
     resolution: {integrity: sha512-BG68EDHRaGKqlsNjJ2xUB7gpInPA8gVx/mvjO743hZaeMCZ2DwzW7xvsqZ+KNU4QKwj86HJ3uu2liISf2qBBUA==}
     dependencies:
@@ -19070,6 +19103,12 @@ packages:
     engines: {node: '>= 14.0.0'}
     dev: false
 
+  /truncate-utf8-bytes@1.0.2:
+    resolution: {integrity: sha512-95Pu1QXQvruGEhv62XCMO3Mm90GscOCClvrIUwCM0PYOXK3kaF3l3sIHxx71ThJfcbM2O5Au6SO3AWCSEfW4mQ==}
+    dependencies:
+      utf8-byte-length: 1.0.4
+    dev: false
+
   /ts-api-utils@1.0.3(typescript@5.3.3):
     resolution: {integrity: sha512-wNMeqtMz5NtwpT/UZGY5alT+VoKdSsOOP/kqHFcUW1P/VRhH2wJ48+DN2WwUliNbQ976ETwDL0Ifd2VVvgonvg==}
     engines: {node: '>=16.13.0'}
@@ -19613,6 +19652,10 @@ packages:
       detect-node-es: 1.1.0
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /utf8-byte-length@1.0.4:
+    resolution: {integrity: sha512-4+wkEYLBbWxqTahEsWrhxepcoVOJ+1z5PGIjPZxRkytcdSUaNjIjBM7Xn8E+pdSuV7SzvWovBFA54FO0JSoqhA==}
     dev: false
 
   /utif@2.0.1:

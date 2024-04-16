@@ -30,7 +30,8 @@
         "libs/vision-js-web/src/index.ts"
       ],
       "@safekids-ai/vision-js-types": ["libs/vision-js-types/src/index.ts"],
-      "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"]
+      "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"],
+      "@safekids-ai/web-categorize": ["libs/web-categorize/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

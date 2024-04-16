@@ -93,4 +93,12 @@ export class AppController {
   async classifyImageURL(@Query('url') url: string) {
     return await this.appService.classifyImageURL(url);
   }
+
+  @ApiBody({
+    description: 'Gets a list of categories of a website',
+  })
+  @Get('v1/classify-website')
+  async classifyWebsite(@Query('url') url: string) {
+    return this.appService.classifyWebsite(url);
+  }
 }
