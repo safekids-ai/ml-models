@@ -6,9 +6,12 @@ import * as fs from "fs";
 import {promises as promiseFs} from "fs";
 import {createHash} from 'crypto';
 import gunzip from "gunzip-file"
-import tldr_parser from "tld-extract"
+import { parse as tldts_parse } from 'tldts';
+import shorthash from 'short-hash';
+import validurl from 'valid-url'
 
 import {DOWNLOADS, SQUID_DOWNLOADS, SquidCategory, WebCategory} from "libs/web-categorize/src/lib/web-category-content";
+import * as process from "process";
 
 
 interface WebCategoryResult {
@@ -49,25 +52,42 @@ class HostURLCategorizer {
     return res
   }
 
-  getCategory(urlOrHost: string): WebCategoryResult[] {
-    const [isUrl, isRoot, hostName, parsedUrl] = this.parseURL(urlOrHost)
+  combineSets<T>(setA: Set<T> | null, setB: Set<T> | null): Set<T> {
+    // Convert null to an empty set using the nullish coalescing operator
+    const safeSetA = setA ?? new Set<T>();
+    const safeSetB = setB ?? new Set<T>();
 
-    if (isUrl) {
-      const categories = this.urlCache.get(parsedUrl)
-      if (categories && categories.size > 0) {
-        return this.categoriesToList(categories)
-      }
-    }
+    // Combine both sets into a new one
+    return new Set([...safeSetA, ...safeSetB]);
+  }
 
-    const categories = this.hostCache.get(hostName)
+  isValidUri(uri: string) : boolean {
+    return validurl.isUri(uri);
+  }
+
+  getCategory(uri: string): WebCategoryResult[] {
+    const {publicSuffix, hostname} = tldts_parse(uri)
+    const [,,,parsedUrl] = this.parseURL(uri)
+
+    //check url
+    const hash = shorthash(parsedUrl)
+    let categories = this.urlCache.get(hash)
     if (categories && categories.size > 0) {
       return this.categoriesToList(categories)
     }
 
-    //check TLD's
-    const {tld, domain, sub} = tldr_parser("https://" + hostName)
-    if (tld) {
-      const res = this.squidCache.get("." + tld)
+    //check hostname (www and root)
+    const hostHash = shorthash(hostname)
+    const categoriesHost = this.hostCache.get(hostHash)
+    const categoriesWithoutWWW = this.hostCache.get(shorthash(hostname.replace("www.", "")))
+    categories = this.combineSets(categoriesHost, categoriesWithoutWWW);
+    if (categories && categories.size > 0) {
+      return this.categoriesToList(categories)
+    }
+
+    //check squid TLD's
+    if (publicSuffix) {
+      const res = this.squidCache.get(shorthash(publicSuffix))
       if (res) {
         if (res.has(SquidCategory.ALLOWED_TLDS)) {
           const cat = WebCategory.UNKNOWN_BUT_CLEAN;
@@ -80,8 +100,8 @@ class HostURLCategorizer {
       }
     }
 
-    //check domain's
-    const hostNameResult = this.squidCache.get("." + hostName)
+    //check squid domain's
+    const hostNameResult = this.squidCache.get(hostHash)
     if (hostNameResult) {
       if (hostNameResult.has(SquidCategory.BLOCK_URL)) {
         const cat = WebCategory.UNKNOWN_DANGEROUS;
@@ -147,18 +167,20 @@ class HostURLCategorizer {
     }
 
     if (line.indexOf("/") <= 0) {
-      if (!this.hostCache.has(line)) {
+      const hash = shorthash(line)
+      if (!this.hostCache.has(hash)) {
         //console.log(line)
-        this.hostCache.set(line, new Set<WebCategory>())
+        this.hostCache.set(hash, new Set<WebCategory>())
       }
-      this.hostCache.get(line).add(category)
+      this.hostCache.get(hash).add(category)
     } else {
       const [, , , parsedUrl] = this.parseURL(line)
-      if (!this.urlCache.has(parsedUrl)) {
+      const hash = shorthash(parsedUrl)
+      if (!this.urlCache.has(hash)) {
         //console.log(parsedUrl)
-        this.urlCache.set(parsedUrl, new Set<WebCategory>())
+        this.urlCache.set(hash, new Set<WebCategory>())
       }
-      this.urlCache.get(parsedUrl).add(category)
+      this.urlCache.get(hash).add(category)
     }
   }
 
@@ -166,13 +188,15 @@ class HostURLCategorizer {
     if (line.startsWith("#")) {
       return
     }
-
-    if (!this.squidCache.has(line)) {
-      this.squidCache.set(line, new Set<SquidCategory>())
+    if (line.startsWith(".")) {
+      line = line.substring(1, line.length)
     }
-    this.squidCache.get(line).add(category)
+    const hash = shorthash(line)
+    if (!this.squidCache.has(hash)) {
+      this.squidCache.set(hash, new Set<SquidCategory>())
+    }
+    this.squidCache.get(hash).add(category)
   }
-
   async loadFileToCache(category: WebCategory | SquidCategory, file, callback) {
     const exists = fs.existsSync(file)
 

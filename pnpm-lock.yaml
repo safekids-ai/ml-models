@@ -95,9 +95,6 @@ dependencies:
   jquery:
     specifier: ^3.7.1
     version: 3.7.1
-  line-reader:
-    specifier: ^0.4.0
-    version: 0.4.0
   nest-winston:
     specifier: ^1.9.4
     version: 1.9.4(@nestjs/common@10.3.0)(winston@3.11.0)
@@ -155,6 +152,9 @@ dependencies:
   sbd:
     specifier: ^1.0.19
     version: 1.0.19
+  short-hash:
+    specifier: ^1.0.0
+    version: 1.0.0
   slick-carousel:
     specifier: ^1.8.1
     version: 1.8.1(jquery@3.7.1)
@@ -164,15 +164,18 @@ dependencies:
   tailwind-merge:
     specifier: ^2.2.2
     version: 2.2.2
-  tld-extract:
-    specifier: ^2.1.0
-    version: 2.1.0
+  tldts:
+    specifier: ^6.1.16
+    version: 6.1.16
   tslib:
     specifier: ^2.6.2
     version: 2.6.2
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
+  valid-url:
+    specifier: ^1.0.9
+    version: 1.0.9
   winston:
     specifier: ^3.11.0
     version: 3.11.0
@@ -12508,6 +12511,10 @@ packages:
       has-symbols: 1.0.3
     dev: true
 
+  /hash-string@1.0.0:
+    resolution: {integrity: sha512-dtNNyxXobzHavayZwOwRWhBTqS9GX4jDjIMsGc0fDyaN2A+4zMn5Ua9ODDCggN6w3Spma6mAHL3ImmW3BkWDmQ==}
+    dev: false
+
   /hasown@2.0.0:
     resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
     engines: {node: '>= 0.4'}
@@ -14385,10 +14392,6 @@ packages:
     resolution: {integrity: sha512-K2U4W2Ff5ibV7j7ydLr+zLAkIg5JJ4lPn1Ltsdt+Tz/IjQ8buJ55pZAxoP34lqIiwtF9iAvtLv3JGv7CAyAg+g==}
     engines: {node: '>=14'}
     dev: true
-
-  /line-reader@0.4.0:
-    resolution: {integrity: sha512-AYJ8g+eE7v+Ba4s/cuYqzuNulH/WbjdKQ55fvx8fNVn8WQzTpioY6vI1MoxTuMgcHYX3VlmZWbVvnkIqkyJbCA==}
-    dev: false
 
   /lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
@@ -18095,6 +18098,12 @@ packages:
       rechoir: 0.6.2
     dev: true
 
+  /short-hash@1.0.0:
+    resolution: {integrity: sha512-qbUCD2Pkl4IXRyVqneEjGnUr0NGDGLzZnBUVGJngIQZf/FrhOL0yJhH+JQzak0t8xMmScIKpoX1SxOsPHdwa4w==}
+    dependencies:
+      hash-string: 1.0.0
+    dev: false
+
   /side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
     dependencies:
@@ -19008,8 +19017,15 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /tld-extract@2.1.0:
-    resolution: {integrity: sha512-Y9QHWIoDQPJJVm3/pOC7kOfOj7vsNSVZl4JGoEHb605FiwZgIfzSMyU0HC0wYw5Cx8435vaG1yGZtIm1yiQGOw==}
+  /tldts-core@6.1.16:
+    resolution: {integrity: sha512-rxnuCux+zn3hMF57nBzr1m1qGZH7Od2ErbDZjVm04fk76cEynTg3zqvHjx5BsBl8lvRTjpzIhsEGMHDH/Hr2Vw==}
+    dev: false
+
+  /tldts@6.1.16:
+    resolution: {integrity: sha512-X6VrQzW4RymhI1kBRvrWzYlRLXTftZpi7/s/9ZlDILA04yM2lNX7mBvkzDib9L4uSymHt8mBbeaielZMdsAkfQ==}
+    hasBin: true
+    dependencies:
+      tldts-core: 6.1.16
     dev: false
 
   /tmp@0.0.33:
@@ -19714,6 +19730,10 @@ packages:
       '@jridgewell/trace-mapping': 0.3.20
       '@types/istanbul-lib-coverage': 2.0.6
       convert-source-map: 2.0.0
+
+  /valid-url@1.0.9:
+    resolution: {integrity: sha512-QQDsV8OnSf5Uc30CKSwG9lnhMPe6exHtTXLRYX8uMwKENy640pU+2BgBL0LRbDh/eYRahNCS7aewCx0wf3NYVA==}
+    dev: false
 
   /validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}

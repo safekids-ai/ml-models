@@ -53,6 +53,10 @@ export class AppService implements OnModuleInit {
     return this.webCategorizer.getCategory(url)
   }
 
+  validateURI(uri: string): boolean {
+    return this.webCategorizer.isValidUri(uri)
+  }
+
   async onModuleInit(): Promise<void> {
     //load the NLP model
     this.logger.log("Loading NLP Model");

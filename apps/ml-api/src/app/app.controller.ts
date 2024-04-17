@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   FileTypeValidator,
-  Get, MaxFileSizeValidator,
+  Get, HttpException, HttpStatus, MaxFileSizeValidator,
   ParseFilePipe,
   Post, Query,
   UploadedFile,
@@ -98,7 +98,13 @@ export class AppController {
     description: 'Gets a list of categories of a website',
   })
   @Get('v1/classify-website')
-  async classifyWebsite(@Query('url') url: string) {
-    return this.appService.classifyWebsite(url);
+  async classifyWebsite(@Query('uri') uri: string) {
+    if (!this.appService.validateURI(uri)) {
+      throw new HttpException({
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        error: "Invalid URI:" + uri
+      }, HttpStatus.UNPROCESSABLE_ENTITY)
+    }
+    return this.appService.classifyWebsite(uri);
   }
 }
