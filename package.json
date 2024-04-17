@@ -89,6 +89,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.2.2",
+    "tld-extract": "^2.1.0",
     "tslib": "^2.6.2",
     "uuid": "^9.0.1",
     "winston": "^3.11.0",

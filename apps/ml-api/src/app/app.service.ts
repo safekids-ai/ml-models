@@ -4,7 +4,7 @@ import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
 import {ConfigService} from "@nestjs/config";
 import * as apiLogger from "abstract-logging";
 import axios from "axios";
-import {HostURLCategorizer, WebCategory, WebCategoryResult} from "@safekids-ai/web-categorize";
+import {HostURLCategorizer, WebCategoryResult} from "@safekids-ai/web-categorize";
 import * as path from 'path';
 import * as os from 'os';
 
