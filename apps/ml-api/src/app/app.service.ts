@@ -7,6 +7,7 @@ import axios from "axios";
 import {HostURLCategorizer, WebCategoryResult} from "@safekids-ai/web-categorize";
 import * as path from 'path';
 import * as os from 'os';
+import {UriUtils} from "libs/web-categorize/src/lib/web-category-utils";
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -54,7 +55,7 @@ export class AppService implements OnModuleInit {
   }
 
   validateURI(uri: string): boolean {
-    return this.webCategorizer.isValidUri(uri)
+    return UriUtils.isValidUri(uri)
   }
 
   async onModuleInit(): Promise<void> {
@@ -74,6 +75,6 @@ export class AppService implements OnModuleInit {
     const downloadPath = os.tmpdir()
     this.webCategorizer = new HostURLCategorizer(downloadPath, apiLogger)
     this.logger.log("Download URL categorization data")
-    this.webCategorizer.download().then(() => this.webCategorizer.load());
+    this.webCategorizer.init()
   }
 }
