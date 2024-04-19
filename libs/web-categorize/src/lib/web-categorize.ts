@@ -45,8 +45,15 @@ class HostURLCategorizer {
     }
 
     //check hostname (www and root)
-    const categoriesHost = this.hostCache.get(hostname)
-    const categoriesWithoutWWW = this.hostCache.get(hostname.replace("www.", ""))
+    let categoriesHost = this.hostCache.get(hostname)
+    let categoriesWithoutWWW = this.hostCache.get(hostname.replace("www.", ""))
+    if (!categoriesHost) {
+      categoriesHost = []
+    }
+    if (!categoriesWithoutWWW) {
+      categoriesWithoutWWW = []
+    }
+    
     categories = [...categoriesHost, ...categoriesWithoutWWW]
     if (categories && categories.length > 0) {
       return this.categoriesToList(categories)
