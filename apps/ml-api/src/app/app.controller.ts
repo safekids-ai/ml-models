@@ -16,6 +16,8 @@ import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
 import {Limit} from "./guards/limit.guard";
 import {ApiBody, ApiTags} from "@nestjs/swagger";
+import {WebCategory} from "@safekids-ai/web-categorize";
+import {enumToJson} from "apps/ml-api/src/app/app.utils";
 
 @ApiTags('App')
 @Controller()
@@ -107,4 +109,13 @@ export class AppController {
     }
     return this.appService.classifyWebsite(uri);
   }
+
+  @ApiBody({
+    description: 'Gets a list of categories available for website classification',
+  })
+  @Get('v1/website-category-codes')
+  async getWebsiteCategoryCodes() {
+    return enumToJson(WebCategory)
+  }
+
 }

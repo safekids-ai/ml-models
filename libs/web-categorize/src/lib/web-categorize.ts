@@ -1,11 +1,12 @@
 import * as Logger from 'abstract-logging';
 import {parse as tldts_parse} from 'tldts';
 
-import {SquidCategory, WebCategory} from "libs/web-categorize/src/lib/web-category-content";
+import {SquidCategory} from "libs/web-categorize/src/lib/web-category-content";
 import {CategoryCacheHash} from "libs/web-categorize/src/lib/category-cache";
 import {UriUtils} from "libs/web-categorize/src/lib/web-category-utils";
 import {CategoryFileReader} from "libs/web-categorize/src/lib/web-category-reader";
 import shorthash from 'short-hash';
+import {WebCategory} from "libs/web-categorize/src/lib/web-category-types";
 
 interface WebCategoryResult {
   category: WebCategory
@@ -53,7 +54,7 @@ class HostURLCategorizer {
     if (!categoriesWithoutWWW) {
       categoriesWithoutWWW = []
     }
-    
+
     categories = [...categoriesHost, ...categoriesWithoutWWW]
     if (categories && categories.length > 0) {
       return this.categoriesToList(categories)
@@ -68,7 +69,7 @@ class HostURLCategorizer {
           return [{category: cat, categoryStr: WebCategory[cat]}]
         }
         if (res.includes(SquidCategory.BLOCK_TLDS)) {
-          const cat = WebCategory.UNKNOWN_DANGEROUS;
+          const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
           return [{category: cat, categoryStr: WebCategory[cat]}]
         }
       }
@@ -78,18 +79,18 @@ class HostURLCategorizer {
     const hostNameResult = this.squidCache.get(hostname)
     if (hostNameResult) {
       if (hostNameResult.includes(SquidCategory.BLOCK_URL)) {
-        const cat = WebCategory.UNKNOWN_DANGEROUS;
+        const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
         return [{category: cat, categoryStr: WebCategory[cat]}]
       }
       if (hostNameResult.includes(SquidCategory.ALLOWED_URL) || hostNameResult.includes(SquidCategory.ALLOWED_DOMAINS)) {
         const cat = WebCategory.UNKNOWN_BUT_CLEAN;
         return [{category: cat, categoryStr: WebCategory[cat]}]
       }
-      const cat = WebCategory.UNKNOWN_DANGEROUS;
+      const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
       return [{category: cat, categoryStr: WebCategory[cat]}]
     }
 
-    return null;
+    return  [{category: WebCategory.UNKNOWN, categoryStr: WebCategory[WebCategory.UNKNOWN]}];
   }
 
   categoriesToList(_categories: Array<number>): WebCategoryResult[] {
@@ -106,4 +107,4 @@ class HostURLCategorizer {
   }
 }
 
-export {HostURLCategorizer, WebCategoryResult}
+export {HostURLCategorizer, WebCategory, WebCategoryResult}
