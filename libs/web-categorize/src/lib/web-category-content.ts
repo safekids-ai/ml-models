@@ -48,6 +48,18 @@ const PORN: FileDownload[] = [
     url: "https://raw.githubusercontent.com/4skinSkywalker/Anti-Porn-HOSTS-File/master/HOSTS.txt",
     type: FileType.IP_HOSTNAME
   },
+  {
+    url: "https://raw.githubusercontent.com/tiuxo/hosts/master/porn",
+    type: FileType.HOSTNAME
+  },
+  {
+    url: "https://raw.githubusercontent.com/mhxion/pornaway/master/hosts/porn_sites.txt",
+    type: FileType.IP_HOSTNAME
+  },
+  {
+    url: "https://raw.githubusercontent.com/Sinfonietta/hostfiles/master/pornography-hosts",
+    type: FileType.IP_HOSTNAME
+  },
 ]
 
 const PROXY_VPN_DDNS: FileDownload[] = [
@@ -102,6 +114,21 @@ const GAMBLING: FileDownload[] = [
   {
     url: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-only/hosts",
     type: FileType.IP_HOSTNAME
+  },
+  {
+    url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/gambling/domains",
+    type: FileType.HOSTNAME
+  },
+  {
+    url: "https://raw.githubusercontent.com/Sinfonietta/hostfiles/master/gambling-hosts",
+    type: FileType.IP_HOSTNAME
+  },
+]
+
+const GAMING: FileDownload[] = [
+  {
+    url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/games/domains",
+    type: FileType.HOSTNAME
   },
 ]
 
@@ -256,6 +283,10 @@ const SOCIAL_MEDIA: FileDownload[] = [
     url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/social_networks/urls",
     type: FileType.URL
   },
+  {
+    url: "https://github.com/Sinfonietta/hostfiles/blob/master/social-hosts",
+    type: FileType.HOSTNAME
+  },
 ]
 
 const CHAT: FileDownload[] = [
@@ -267,11 +298,8 @@ const CHAT: FileDownload[] = [
 ]
 
 const DATING: FileDownload[] = [
-  {
-    url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/domains",
-    type: FileType.IP_HOSTNAME
-  },
   {url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/urls", type: FileType.URL},
+  {url: "https://raw.githubusercontent.com/olbat/ut1-blacklists/master/blacklists/dating/domains", type: FileType.HOSTNAME},
 ]
 
 const SHOPPING: FileDownload[] = [
@@ -410,4 +438,5 @@ export const DOWNLOADS = new Map<WebCategory, FileDownload[]>([
   [WebCategory.SEX_EDUCATION, SEX_EDUCATION],
   [WebCategory.SPORTS, SPORTS],
   [WebCategory.RACY_LINGERIE, RACY_LINGERIE],
+  [WebCategory.GAMING, GAMING],
 ])

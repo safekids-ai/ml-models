@@ -117,5 +117,4 @@ export class AppController {
   async getWebsiteCategoryCodes() {
     return enumToJson(WebCategory)
   }
-
 }
