@@ -249,4 +249,4 @@ abstract class NLP {
   }
 }
 
-export {NLP, NLPLabel, toxicPhrases, type NLPResult}
+export {NLP, toxicPhrases}

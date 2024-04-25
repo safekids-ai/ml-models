@@ -1,37 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 3px solid #fb2f4e;
-    font-style: italic;
-    font-weight: 600;
-  }
-  .red-underline {
-    font-weight: 700;
-    color: rgba(172, 1, 1, 0.899)
-  }
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 140px;
-    background-color: #fb2f4ecf;
-    color: #fff;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 999;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -70px;
-  }
-  
-  .tooltip:hover {
-    cursor: pointer;
-  }
-  .tooltip:hover .tooltiptext {
-    font-style: normal;
-    visibility: visible;
-  }
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: transparent !important;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}

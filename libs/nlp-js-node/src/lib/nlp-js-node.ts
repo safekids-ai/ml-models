@@ -1,4 +1,3 @@
-import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLP} from '@safekids-ai/nlp-js-common';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -16,4 +15,4 @@ class NLPNode extends NLP {
   }
 }
 
-export {NLPNode, NLPLabel, type NLPResult}
+export {NLPNode}

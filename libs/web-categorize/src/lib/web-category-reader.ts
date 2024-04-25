@@ -1,15 +1,15 @@
 import {promises as promiseFs} from "fs";
 import path from "path";
 import {createHash} from "crypto";
-import {DOWNLOADS, SQUID_DOWNLOADS, SquidCategory} from "libs/web-categorize/src/lib/web-category-content";
+import {DOWNLOADS, SQUID_DOWNLOADS, SquidCategory} from "./web-category-content";
 import fs from "fs";
 import * as readline from 'readline';
 import * as Logger from 'abstract-logging';
-import {CategoryCacheHash} from "libs/web-categorize/src/lib/category-cache";
-import {UriUtils} from "libs/web-categorize/src/lib/web-category-utils";
+import {CategoryCacheHash} from "./category-cache";
+import {UriUtils} from "./web-category-utils";
 import gunzip from "gunzip-file"
-import {FileDownloader} from "libs/web-categorize/src/lib/download-utils";
-import {WebCategory} from "libs/web-categorize/src/lib/web-category-types";
+import {FileDownloader} from "./download-utils";
+import {WebCategory} from "./web-category-types";
 
 export class CategoryFileReader {
   private fileDownloader:FileDownloader = null;

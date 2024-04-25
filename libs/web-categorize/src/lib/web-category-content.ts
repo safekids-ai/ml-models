@@ -1,4 +1,4 @@
-import {WebCategory} from "libs/web-categorize/src/lib/web-category-types";
+import {WebCategory} from "./web-category-types";
 
 enum FileType {
   HOSTNAME,

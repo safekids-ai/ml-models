@@ -1,4 +1,4 @@
-import {createLogger, format, transports} from "winston";
+import {createLogger, format, transports, Logger} from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 
 // custom log display format
@@ -53,6 +53,7 @@ const prodLogger = createLogger({
 });
 
 // export log instance based on the current environment
-const instanceLogger = (process.env.NODE_ENV === 'production') ? prodLogger : devLogger
+const instanceLogger = (import.meta.env.PROD) ? prodLogger : devLogger
+const logger = createLogger(instanceLogger)
 
-export const instance = createLogger(instanceLogger);
+export default logger
