@@ -1,49 +1,15 @@
-/// <reference types='vitest' />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import * as process from "process";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import viteTsconfigPaths from 'vite-tsconfig-paths'
 
-const port:number = (process.env.PORT) ? parseInt(process.env.PORT) : 4200;
-const portPreview:number = (process.env.PORT_PREVIEW) ? parseInt(process.env.PORT_PREVIEW) : 4300;
-let API_URL = (process.env.NODE_ENV === 'production') ? "https://api.safekids.ai" : "http://localhost:3000";
-if (process.env.API_URL) {
-  API_URL = process.env.API_URL;
-}
-console.log(`VITE starting on port:${port} and preview port: ${portPreview}`);
 export default defineConfig({
-  cacheDir: '../../node_modules/.vite/.ml-api-web-demo',
-  define: {
-    'import.meta.env.API_URL': JSON.stringify(API_URL),
-  },
-
-  server: {
-    port: port,
-    host: true,
-  },
-
-  preview: {
-    port: portPreview,
-    host: true,
-  },
-
-  plugins:
-    [
-      react(),
-      nxViteTsPaths(),
-    ],
-
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
-
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
+    // depending on your application, base can also be "/"
+    base: '',
+    plugins: [react(), viteTsconfigPaths()],
+    server: {    
+        // this ensures that the browser opens upon server start
+        open: true,
+        // this sets a default port to 3000  
+        port: 3000, 
     },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-  },
-});
+})

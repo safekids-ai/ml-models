@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Popover, PopoverOrigin, makeStyles } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/MoreVert';
+import { Popover, PopoverOrigin, makeStyles } from '@mui/material';
+import MenuIcon from '@mui/icons-material/MoreVert';
 import { AppTheme } from '../theme';
 
 type Item = {

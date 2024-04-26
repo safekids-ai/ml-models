@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles } from '@mui/material';
 import _ from 'lodash';
 import CategoriesTable from './CategoriesTable';
 import CategoriesHeader from './CategoriesHeader';

@@ -5,7 +5,7 @@ import logo from '../../images/getStartedAlt.png';
 import { MessageContainer } from '../../components/InputFields';
 import FormPage from '../../components/FormPage';
 import { useAuth } from '../../context/AuthContext/AuthContext';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { MixPanel } from '../../MixPanel';
 import { trim } from 'ramda';
 import * as yup from 'yup';

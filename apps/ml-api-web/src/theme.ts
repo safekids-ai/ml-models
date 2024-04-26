@@ -1,7 +1,7 @@
 import {
     Theme,
-} from '@material-ui/core';
-import { createTheme } from '@material-ui/core/styles'
+} from '@mui/material';
+import { createTheme } from '@mui/material/styles'
 const accountType = localStorage.getItem('account_type');
 const primaryColor = accountType === 'SCHOOL' ? '#f7274a' : '#fa6400';
 

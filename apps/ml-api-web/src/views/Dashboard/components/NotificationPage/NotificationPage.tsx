@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, makeStyles, Accordion, AccordionSummary, AccordionDetails, CircularProgress, Button, Tooltip } from '@material-ui/core';
-import { ExpandMore } from '@material-ui/icons/';
+import { Typography, makeStyles, Accordion, AccordionSummary, AccordionDetails, CircularProgress, Button, Tooltip } from '@mui/material';
+import { ExpandMore } from '@mui/icons-material/';
 import moment from 'moment';
 
 import { AppTheme } from '../../../../theme';

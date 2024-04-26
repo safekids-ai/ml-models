@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { makeStyles, Paper, Switch, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TableSortLabel, Box } from '@material-ui/core';
+import { makeStyles, Paper, Switch, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TableSortLabel, Box } from '@mui/material';
 import { getRequest, postRequest } from '../../../../utils/api';
 import { GET_NON_INTERCEPT_REPORT, POST_FILTERED_URL_DISABLE } from '../../../../utils/endpoints';
 import { logError } from '../../../../utils/helpers';

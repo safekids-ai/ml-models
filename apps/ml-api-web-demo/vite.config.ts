@@ -12,7 +12,7 @@ if (process.env.API_URL) {
 }
 console.log(`VITE starting on port:${port} and preview port: ${portPreview}`);
 export default defineConfig({
-  cacheDir: '../../node_modules/.vite/ml-api-web',
+  cacheDir: '../../node_modules/.vite/ml-api-web-demo',
   define: {
     'import.meta.env.API_URL': JSON.stringify(API_URL),
   },

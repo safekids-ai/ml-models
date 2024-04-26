@@ -1,4 +1,4 @@
-import { Button, Checkbox, Switch, Tooltip } from '@material-ui/core';
+import { Button, Checkbox, Switch, Tooltip } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import { Props } from './CategoryTable.types';
@@ -147,7 +147,7 @@ const CategoryTable = ({
             .filter((category) => {
                 const editableCategory = conditional(category);
                 if (editableCategory) {
-                    return category 
+                    return category
                 } else {
                     return null;
                 }

@@ -9,7 +9,7 @@ import { FORGOT_PASSWORD, VERIFY_PASSWORD_RESET_CODE } from '../../utils/endpoin
 import CreatePassword from './CreatePassword';
 import { pathOr, propOr } from 'ramda';
 import { ForgotPasswordResponse, VerifyForgotPasswordCodeResponse } from '../../context/AuthContext/types';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { InputContainer, SubmitBtnContainer } from './ForgetPassword.style';
 import { LinkSpan } from './Signin.style';
 import * as yup from 'yup';

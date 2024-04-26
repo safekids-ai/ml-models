@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { makeStyles, Typography, useTheme } from '@material-ui/core';
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
+import { makeStyles, Typography, useTheme } from '@mui/material';
+import { CSSProperties } from '@mui/material/styles/withStyles';
 
 import { isSomething } from '../utils/helpers';
 import Header from './Header';

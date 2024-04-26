@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Typography, MenuItem, Select } from '@material-ui/core';
+import { Typography, MenuItem, Select } from '@mui/material';
 import Loader from '../../../../components/Loader';
 import { getRequest } from '../../../../utils/api';
 import { GET_CONSUMER_KIDS } from '../../../../utils/endpoints';
@@ -78,7 +78,7 @@ const ConsumerActivity = () => {
                     <div className="card-col">
                         {kids.map((kid, index) => {
                             if (index % 2 === 0) {
-                                return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter}/> 
+                                return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter}/>
                             } else {
                                 return null;
                             };

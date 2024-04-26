@@ -32,6 +32,7 @@ import {RedisClientOptions, createClient as createRedisClient} from 'redis';
 import {QueueConfig, QueueConfigItem} from "apps/ml-api/src/app/config/queue";
 
 import { AsyncParser } from '@json2csv/node';
+import {WebAppConfig} from "../config/webapp";
 const Json2csvParser = new AsyncParser();
 
 @Injectable()
@@ -58,11 +59,11 @@ export class ActivityService implements QueueServiceInterface {
   ) {
     this.log.className(ActivityService.name);
     this.DEFAULT_PAGE_LIMIT = 15;
-    this.WEB_URL = this.config.get('webapp').url;
+    this.WEB_URL = this.config.get<WebAppConfig>("webAppConfig").url;
 
     this.queueConfig = config.get<QueueConfig>('queueConfig').standardQueueEmail;
 
-    if (!this.queueConfig || this.queueConfig.name || this.queueConfig.url) {
+    if (!this.queueConfig || !this.queueConfig.name || !this.queueConfig.url) {
       throw new Error('Please define proper name for activity service queue and url')
     }
   }

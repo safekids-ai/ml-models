@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import { Avatar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { getInitials, logError } from '../../../utils/helpers';
 import PinInputField from 'react-pin-field';

@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import { Avatar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../../svgs/Logo';

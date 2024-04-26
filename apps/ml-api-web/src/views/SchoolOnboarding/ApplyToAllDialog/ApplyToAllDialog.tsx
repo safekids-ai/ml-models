@@ -1,8 +1,8 @@
-import { Button, Dialog, makeStyles } from '@material-ui/core';
+import { Button, Dialog, makeStyles } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import { Props } from './ApplyToAllDialog.types';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Root = styled.div`
     width: 780px;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@mui/material';
 import { theme } from '../../theme';
 import { MemoryRouter } from 'react-router';
 import App from '../../App';
@@ -16,7 +16,7 @@ test('it renders sign in screen', async () => {
         </ThemeProvider>,
     );
     await waitFor(() => expect(getAllByText(/Sign In/i)).toBeTruthy());
-    
+
 });
 
 test('it renders email input field', async () => {

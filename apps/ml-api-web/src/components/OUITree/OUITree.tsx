@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Props } from './OUITree.types';
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { ChevronRight } from '@material-ui/icons';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ChevronRight from '@mui/icons-material/ChevronRight';
 import styled from 'styled-components';
 
 const TreeItemContainer = styled.div`

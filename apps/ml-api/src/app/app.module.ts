@@ -237,7 +237,7 @@ console.log('==========================================');
     OneRosterModule,
     PrrNotificationModule,
     RoleModule,
-    JobsModule,
+    //JobsModule,
     LicenseModule,
     AccountLicenseModule,
     AuthModule,

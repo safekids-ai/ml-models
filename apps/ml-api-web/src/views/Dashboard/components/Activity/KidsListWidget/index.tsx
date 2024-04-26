@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Button, makeStyles, Tooltip } from '@material-ui/core';
+import { Button, makeStyles, Tooltip } from '@mui/material';
 import { history } from '../../../../../utils/api';
 import { KidWidgetType } from '../SchoolActivity.type';
 import { CrisisEngagementSection } from './kidsListWidget.style';

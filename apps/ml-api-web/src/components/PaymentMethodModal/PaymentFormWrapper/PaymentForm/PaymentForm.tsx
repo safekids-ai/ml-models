@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 import { AmexCardIcon, MasterCardIcon, PaypalIcon, VisaCardIcon } from '../../../../svgs/DashboardIcons';

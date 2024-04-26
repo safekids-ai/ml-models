@@ -1,7 +1,7 @@
 {
-  "name": "ml-api-web",
+  "name": "ml-api-web-demo",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/ml-api-web/src",
+  "sourceRoot": "/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/ml-api-web",
+        "outputPath": "dist/apps/ml-api-web-demo",
         "generatePackageJson": true
       },
       "configurations": {
@@ -25,15 +25,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "ml-api-web:build"
+        "buildTarget": "ml-api-web-demo:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "ml-api-web:build:development",
+          "buildTarget": "ml-api-web-demo:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "ml-api-web:build:production",
+          "buildTarget": "ml-api-web-demo:build:production",
           "hmr": false
         }
       }
@@ -42,14 +42,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "ml-api-web:build"
+        "buildTarget": "ml-api-web-demo:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "ml-api-web:build:development"
+          "buildTarget": "ml-api-web-demo:build:development"
         },
         "production": {
-          "buildTarget": "ml-api-web:build:production"
+          "buildTarget": "ml-api-web-demo:build:production"
         }
       }
     },
@@ -58,20 +58,20 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/ml-api-web"
+        "reportsDirectory": "../../coverage/apps/ml-api-web-demo"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ml-api-web/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/ml-api-web-demo/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "ml-api-web:build"
+        "buildTarget": "ml-api-web-demo:build"
       }
     }
   },

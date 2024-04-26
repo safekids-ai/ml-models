@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { getRequest, patchRequest } from '../../../../../utils/api';
 import { NON_SCHOOL_DEVICES_CONFIG } from '../../../../../utils/endpoints';

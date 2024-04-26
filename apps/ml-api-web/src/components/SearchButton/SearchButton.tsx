@@ -1,6 +1,6 @@
 import React from 'react';
 import { Props } from './SearchButton.type';
-import { Search } from '@material-ui/icons';
+import SearchIcon from '@mui/icons-material/Search';
 import { SearchBtn } from './SearchButton.style';
 
 const SearchButton = ({ onClick }: Props) => (

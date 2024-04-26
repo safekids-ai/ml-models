@@ -10,8 +10,7 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/ml-api",
-        "generatePackageJson": true,
-        "configFile": "apps/ml-api/vite.config.ts"
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {

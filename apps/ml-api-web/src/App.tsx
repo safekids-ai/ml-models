@@ -2,12 +2,13 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { MixPanel } from './MixPanel';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@mui/material';
 import { AuthProvider } from './context/AuthContext/AuthContext';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
 import NoNetworkNotification from './components/NoNetworkNotification';
 
-import DateFnsUtils from '@date-io/date-fns';
 import { getRequest, updateAxios } from './utils/api';
 import { NotificationToastProvider } from './context/NotificationToastContext/NotificationToastContext';
 import { GET_ACCOUNT_TYPE } from './utils/endpoints';
@@ -93,7 +94,7 @@ function App() {
             <NoNetworkNotification>
                 <AuthProvider>
                     <div className="App">
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <CssBaseline />
                             <Routes>
                                 <Route path="/auth/google/redirect" element={<RedirectComponent />} />
@@ -171,7 +172,7 @@ function App() {
                                 />
                                 <Route element={<Navigate to="/signin" />} />
                             </Routes>
-                        </MuiPickersUtilsProvider>
+                        </LocalizationProvider>
                     </div>
                 </AuthProvider>
             </NoNetworkNotification>

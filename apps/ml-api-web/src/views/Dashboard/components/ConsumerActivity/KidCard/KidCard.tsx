@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Checkbox, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Tooltip, Typography } from '@material-ui/core';
+import { Avatar, Checkbox, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Tooltip, Typography } from '@mui/material';
 import { getInitials } from '../../../../../utils/helpers';
 import PinInputField from 'react-pin-field';
 import { KidCardStyled } from './kidCard.style';

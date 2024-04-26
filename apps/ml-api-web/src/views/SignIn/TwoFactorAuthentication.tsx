@@ -3,8 +3,8 @@ import logo from '../../images/getStartedAlt.png';
 import FormPage from '../../components/FormPage';
 import { SubmitButton, PinField, MessageContainer } from '../../components/InputFields';
 import { useAuth } from '../../context/AuthContext/AuthContext';
-import { Button, Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Button, Snackbar } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 type Props = {
     onSubmit: (code: string) => void;

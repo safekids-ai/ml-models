@@ -1,5 +1,5 @@
-import { Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Snackbar } from '@mui/material';
+import Alert from '@mui/material/Alert';
 import { Form, Formik, FormikErrors, FormikHelpers } from 'formik';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Radio, { RadioProps } from '@material-ui/core/Radio';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Radio, { RadioProps } from '@mui/material/Radio';
+import { makeStyles, withStyles } from '@mui/material/styles';
 import { CategoryStatus, IFilteredCategories } from '../categories.types';
 import {
     CustomTable,
@@ -19,7 +19,7 @@ import { getRequest } from '../../../../../../utils/api';
 import { GET_USER_PLAN } from '../../../../../../utils/endpoints';
 import { ActivePlan } from '../../../../../ConsumerOnboarding/PlanSelector/PlanSelector.type';
 import { useNotificationToast } from '../../../../../../context/NotificationToastContext/NotificationToastContext';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 export type Props = {
     filteredCategoriesData?: IFilteredCategories;

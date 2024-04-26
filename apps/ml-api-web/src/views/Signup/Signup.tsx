@@ -8,7 +8,7 @@ import { extractErrors, isSomething, getFormattedName } from '../../utils/helper
 import FormPage from '../../components/FormPage';
 import { useAuth } from '../../context/AuthContext/AuthContext';
 import VerifyEmail from './VerifyEmail';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { postRequest, history } from '../../utils/api';
 import { RESEND_SIGNUP_CODE } from '../../utils/endpoints';
 import { MixPanel } from '../../MixPanel';

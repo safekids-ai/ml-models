@@ -1,6 +1,6 @@
 import React from 'react';
 import { BackIcon } from '../svgs/DashboardIcons';
-import { makeStyles, Button } from '@material-ui/core';
+import { makeStyles, Button } from '@mui/material';
 
 type Props = {
     className?: string;

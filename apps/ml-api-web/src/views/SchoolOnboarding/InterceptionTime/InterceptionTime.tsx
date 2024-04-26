@@ -1,4 +1,4 @@
-import { Switch } from '@material-ui/core';
+import { Switch } from '@mui/material';
 import { TimePicker } from '@material-ui/pickers';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';

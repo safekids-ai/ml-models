@@ -1,22 +1,22 @@
 {
-  "name": "ml-api-web-e2e",
+  "name": "ml-api-web-demo-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/ml-api-web-e2e/src",
+  "sourceRoot": "/src",
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
       "options": {
-        "cypressConfig": "apps/ml-api-web-e2e/cypress.config.ts",
+        "cypressConfig": "apps/ml-api-web-demo-e2e/cypress.config.ts",
         "testingType": "e2e",
-        "devServerTarget": "ml-api-web:serve"
+        "devServerTarget": "ml-api-web-demo:serve"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "ml-api-web:serve:production"
+          "devServerTarget": "ml-api-web-demo:serve:production"
         },
         "ci": {
-          "devServerTarget": "ml-api-web:serve-static"
+          "devServerTarget": "ml-api-web-demo:serve-static"
         }
       }
     },
@@ -24,10 +24,10 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ml-api-web-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/ml-api-web-demo-e2e/**/*.{js,ts}"]
       }
     }
   },
-  "implicitDependencies": ["ml-api-web"],
+  "implicitDependencies": ["ml-api-web-demo"],
   "tags": []
 }

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Tab } from '@material-ui/core';
+import { Button, Checkbox, Tab } from '@mui/material';
 import React from 'react';
 import { FixedSizeList } from 'react-window';
 

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, ReactNode, useRef, useEffect } from 'react';
-import { Snackbar, useMediaQuery } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
+import { Snackbar, useMediaQuery } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 import { cancellablePromise, delay, CancellablePromise } from './helpers';
 import { AppTheme } from '../theme';

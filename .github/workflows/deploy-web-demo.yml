@@ -13,7 +13,7 @@ jobs:
       - name: Checkout the repo # (callout-1)
         uses: actions/checkout@v2
       - name: Build image # (callout-2)
-        run: docker build . -t safekids-ai/ml-models-web -f apps/ml-api-web/Dockerfile
+        run: docker build . -t safekids-ai/ml-api-web-demo -f apps/ml-api-web-demo/Dockerfile
       - name: Install doctl # (callout-3)
         uses: digitalocean/action-doctl@v2
         with:
@@ -22,6 +22,6 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image # (callout-5)
         run:
-          docker tag safekids-ai/ml-models-web registry.digitalocean.com/safekids-ai/ml-models-web:latest
+          docker tag safekids-ai/ml-api-web-demo registry.digitalocean.com/safekids-ai/ml-api-web-demo:latest
       - name: Push image to DO Container Registry # (callout-6)
-        run: docker push registry.digitalocean.com/safekids-ai/ml-models-web:latest
+        run: docker push registry.digitalocean.com/safekids-ai/ml-api-web-demo:latest

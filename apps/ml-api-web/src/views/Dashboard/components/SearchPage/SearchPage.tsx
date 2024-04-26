@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { debounce } from 'lodash';
-import { Button, TextField } from '@material-ui/core';
+import { Button, TextField } from '@mui/material';
 import { Autocomplete } from '@material-ui/lab';
 import TableView from '../../../../components/TableView/TableView';
 import { getSearchResult, getAutoCompleteOptions, generateColumns, exportSearchResult } from './SearchPage.service';

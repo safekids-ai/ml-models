@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../../images/safeKidSchools.png';
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { GoogleIcon } from '../../../svgs/SchoolOnboarding';
 
 const Root = styled.div`

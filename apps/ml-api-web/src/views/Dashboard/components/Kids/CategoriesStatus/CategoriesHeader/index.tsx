@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { CustomSelectField, SubmitButton } from '../../../../../../components/InputFields';
-import { makeStyles, MenuItem } from '@material-ui/core';
+import { makeStyles, MenuItem } from '@mui/material';
 import { Root, SelectSection } from './categoriesHeader.style';
 import { IKid } from '../categories.types';
 

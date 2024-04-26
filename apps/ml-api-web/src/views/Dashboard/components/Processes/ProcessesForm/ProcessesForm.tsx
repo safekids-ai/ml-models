@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import { MenuItem } from '@material-ui/core';
+import { MenuItem } from '@mui/material';
 import { validateProcessName } from '../../../../../utils/validations';
 import { SelectDropdown, SubmitButton } from '../../../../../components/InputFields';
 import { useNotificationToast } from '../../../../../context/NotificationToastContext/NotificationToastContext';

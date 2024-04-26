@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, makeStyles } from '@material-ui/core';
+import { Checkbox, FormControlLabel, makeStyles } from '@mui/material';
 import { Field, FieldProps } from 'formik';
 import React, { ReactNode } from 'react';
 

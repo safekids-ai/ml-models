@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ClickAwayListener, makeStyles } from '@material-ui/core';
+import { ClickAwayListener, makeStyles } from '@mui/material';
 import { Routes, Route, Navigate, useLocation } from 'react-router';
 import { useIdleTimer, workerTimers } from 'react-idle-timer';
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import SideBar from './SideBar';
 import { AppTheme } from '../../theme';

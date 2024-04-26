@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { PlanCardStyled } from './PlanCard.style';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import Loader from '../Loader';
 
 type Props = {

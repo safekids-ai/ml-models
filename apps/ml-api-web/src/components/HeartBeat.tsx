@@ -4,7 +4,7 @@ import { getRequest } from '../utils/api';
 import Logo from '../svgs/Logo';
 import Loader from './Loader';
 import { DoneIcon, CancelIcon } from '../svgs';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/material';
 import { AppTheme, customProperties } from '../theme';
 
 const useStyles = makeStyles((theme: AppTheme) => ({

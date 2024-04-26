@@ -1,6 +1,6 @@
 import React from 'react';
 import { PaymentMethodCardStyled } from './PaymentMethodCard.style';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 type Props = {
     lastDigits: string;

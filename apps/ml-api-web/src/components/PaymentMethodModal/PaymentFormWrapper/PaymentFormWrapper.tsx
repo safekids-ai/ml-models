@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Elements } from '@stripe/react-stripe-js';
 import Loader from '../../Loader';
 import { PaymentForm } from './PaymentForm/PaymentForm';

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { CancellationFormStyled, FeedbackInputStyled } from './CancellationForm.style';
-import { Dialog, Typography } from '@material-ui/core';
+import { Dialog, Typography } from '@mui/material';
 import { CustomSelection } from '../CustomSelection/CustomSelection';
 import { SubmitButton } from '../InputFields';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import { deleteRequest } from '../../utils/api';
 import { useNotificationToast } from '../../context/NotificationToastContext/NotificationToastContext';
 import { UPDATE_USER_PLAN } from '../../utils/endpoints';

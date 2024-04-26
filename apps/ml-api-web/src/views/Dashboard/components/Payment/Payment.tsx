@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Title, PaymentStyled, TrialStatusStyled, CardStatusStyled, PlanContainer, HeadingContainerStyled } from './Payment.style';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import { PlanSelector } from '../../../ConsumerOnboarding/PlanSelector/PlanSelector';
 import { GET_PAYMENT_METHOD, GET_USER_PLAN } from '../../../../utils/endpoints';
 import { getRequest } from '../../../../utils/api';

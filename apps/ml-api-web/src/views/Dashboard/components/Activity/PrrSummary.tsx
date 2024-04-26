@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { makeStyles, Tooltip } from '@material-ui/core';
+import { makeStyles, Tooltip } from '@mui/material';
 import { getRequest } from '../../../../utils/api';
 import { logError } from '../../../../utils/helpers';
 import { GET_CASUAL_ENGAGEMENT, GET_TOP_INTERCEPT } from '../../../../utils/endpoints';

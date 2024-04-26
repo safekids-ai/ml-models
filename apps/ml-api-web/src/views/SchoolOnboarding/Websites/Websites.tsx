@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SubmitButton } from '../../../components/InputFields';
 import { getRequest, postRequest } from '../../../utils/api';

@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from '../../../components/InputFields';

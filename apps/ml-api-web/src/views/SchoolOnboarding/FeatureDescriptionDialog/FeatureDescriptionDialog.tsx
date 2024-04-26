@@ -1,8 +1,8 @@
-import { Dialog, makeStyles } from '@material-ui/core';
+import { Dialog, makeStyles } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
 import { Props } from './FeatureDescriptionDialog.types';
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import { HelpIcon } from '../../../svgs/SchoolOnboarding';
 
 const Root = styled.div`

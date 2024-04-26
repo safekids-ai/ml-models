@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 import { ReferralStyled, Title } from './Referral.style';
 import { useNotificationToast } from '../../../../context/NotificationToastContext/NotificationToastContext';
