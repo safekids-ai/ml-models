@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import { useMobile } from '../utils/hooks';
 import ConsumerLogo from './ConsumerLogo/ConsumerLogo';
 

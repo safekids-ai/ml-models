@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PinInputField from 'react-pin-field';
-import { makeStyles, Typography, MenuItem, Select, Avatar } from '@mui/material';
+import { Typography, MenuItem, Select, Avatar } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import GmailReporting from './GmailReporting';
 import { StyleProps } from '../../types';
 import { useMobile } from '../../../../utils/hooks';

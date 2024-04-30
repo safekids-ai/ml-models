@@ -1,9 +1,10 @@
 import React, {ReactNode, useState, useEffect, useMemo, useRef, ReactElement} from 'react';
-import {fieldToTextField} from 'formik-material-ui';
+import {fieldToTextField} from 'formik-mui';
 import {Field, FieldProps} from 'formik';
-import {makeStyles, IconButton, Button, TextField, Switch, useTheme, Tooltip} from '@mui/material';
+import {IconButton, Button, TextField, Switch, useTheme, Tooltip} from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import PinInputField from 'react-pin-field';
-import Alert from '@mui/material/Alert';
+import Alert from '@mui/lab/Alert';
 import CloseIcon from '@mui/icons-material/Close';
 import Visibility from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOffOutlined';
@@ -15,13 +16,10 @@ import {getPasswordStrength} from '../utils/passwordStrength';
 import Loader from './Loader';
 import {isSomething} from '../utils/helpers';
 import {AppTheme} from '../theme';
-//import { DatePicker } from '@material-ui/pickers';
 import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import TextField from '@mui/material/TextField';
-
 import {CalendarIcon} from '../svgs';
-import {CSSProperties} from '@mui/material/styles/withStyles';
+import {CSSProperties} from '@mui/styles';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 
 type InputProps = {
   name: string;
@@ -672,8 +670,8 @@ export const PinField: React.FC<PinProps> = (props: PinProps) => {
 type DateFieldProps = {
   name: string;
   label: string;
-  openTo?: 'year' | 'date' | 'month' | undefined;
-  views?: ('year' | 'date' | 'month')[];
+  openTo?: 'year' | 'day' | 'month' | undefined;
+  views?: ('year' | 'day' | 'month')[];
   format?: string;
   showClear?: boolean;
   onlyDay?: boolean;
@@ -702,45 +700,44 @@ export const DateField = ({
         return (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              renderInput={(props) => (
-                <TextField
-                  {...props}
-                  fullWidth
-                  variant="outlined"
-                  className="input-field date-field"
-                  error={!!error && touched}
-                  helperText={touched && error}
-                  InputProps={{
-                    ...props.InputProps,
-                    disableUnderline: true,
-                    endAdornment: value && showClear ? (
-                      <ClearFieldButton
-                        onClick={() => setFieldValue(name, null)}
-                        visible
-                      />
-                    ) : (
-                      <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main}/>
-                    ),
-                  }}
-                />
-              )}
-              readOnly={readOnly}
+              //ABBAS FIX ME inputVariant="outlined"
+              //ABBAS FIX ME style={{width: '100%'}}
               disableFuture
-              showTodayButton
+              //ABBAS FIX ME showTodayButton
+              readOnly={readOnly}
+              {...rest}
+              className="input-field date-field"
               value={value}
+              format={format}
               onChange={(date) => {
-                let newDate = date;
+                const newDate = date;
                 if (onlyDay) {
-                  newDate?.setHours(0, 0, 0, 0); // Clear time part if onlyDay is true
+                  newDate?.setHours(0);
+                  newDate?.setMinutes(0);
+                  newDate?.setSeconds(0);
                 }
                 setFieldValue(name, newDate);
               }}
               name={name}
               label={label}
               openTo={openTo}
-              views={views}
-              inputFormat={format} // `format` is renamed to `inputFormat` in MUI v5
-              {...rest}
+              //ABBAS FIX ME error={!!error && touched}
+
+              //   InputProps={{
+              //     disableUnderline: true,
+              //     endAdornment:
+              //       value && showClear ? (
+              //         <ClearFieldButton
+              //           onClick={() => {
+              //             setFieldValue(name, null);
+              //           }}
+              //           visible
+              //         />
+              //       ) : (
+              //         <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main}/>
+              //       ),
+              //   }}
+              //   views={views}
             />
           </LocalizationProvider>
         );

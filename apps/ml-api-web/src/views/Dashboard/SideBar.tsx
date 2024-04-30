@@ -1,7 +1,8 @@
 import React, { FunctionComponent, ElementType } from 'react';
-import { makeStyles, Avatar, Tooltip } from '@mui/material';
+import { Avatar, Tooltip } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import CustomScroll from 'simplebar-react';
-import { NotificationsOutlined, LanguageOutlined } from '@material-ui/icons';
+import { NotificationsOutlined, LanguageOutlined } from '@mui/icons-material';
 import 'simplebar/dist/simplebar.min.css';
 import Logo from '../../svgs/Logo';
 import { DashboardIcon, SettingsIcon, LogoutIcon, SearchIcon } from '../../svgs';

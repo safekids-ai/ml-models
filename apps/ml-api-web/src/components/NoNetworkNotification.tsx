@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { addResponseInterceptor } from '../utils/api';
 import { identity, pathOr } from 'ramda';
-import { Snackbar, makeStyles, SnackbarCloseReason } from '@mui/material';
+import { Snackbar, SnackbarCloseReason } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import Alert from '@mui/material/Alert';
 import * as Sentry from '@sentry/react';
 import { logDebug } from '../utils/helpers';

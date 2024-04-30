@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, makeStyles } from '@mui/material';
+import { Typography} from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import _ from 'lodash';
 import CategoriesTable from './CategoriesTable';
 import CategoriesHeader from './CategoriesHeader';

@@ -1,4 +1,5 @@
-import { Button, Dialog, makeStyles } from '@mui/material';
+import { Button, Dialog} from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import React from 'react';
 import styled from 'styled-components';
 import { Props } from './ApplyToAllDialog.types';

@@ -1,7 +1,7 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { debounce } from 'lodash';
-import { Button, TextField } from '@mui/material';
-import { Autocomplete } from '@material-ui/lab';
+import {AutocompleteRenderOptionState, Button, TextField} from '@mui/material';
+import { Autocomplete } from '@mui/lab';
 import TableView from '../../../../components/TableView/TableView';
 import { getSearchResult, getAutoCompleteOptions, generateColumns, exportSearchResult } from './SearchPage.service';
 import { useNotificationToast } from '../../../../context/NotificationToastContext/NotificationToastContext';
@@ -11,6 +11,8 @@ import { Content, Root, TableContainer, Title } from './SearchPage.style';
 import Loader from '../../../../components/Loader/Loader';
 import BlankState from '../BlankState/BlankState';
 import { useMobile } from '../../../../utils/hooks';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 const debouncedAutoSuggest = debounce((keyword: string, setResults: Dispatch<SetStateAction<AutoCompleteOption[]>>, setIsLoading: (value: boolean) => void) => {
     getAutoCompleteOptions(keyword)
@@ -117,6 +119,16 @@ const SearchPage = () => {
         }
     };
 
+  const getOptionLabel = (option) => {
+    // Check if option is a string (unexpected case)
+    if (typeof option === 'string') {
+      return option; // Use the string as the label (fallback)
+    } else {
+      // Option is an object (expected case)
+      return option.email || ''; // Return email or an empty string
+    }
+  };
+
     return (
         <Root>
             <Title isMobile={isMobile}>Search</Title>
@@ -125,7 +137,7 @@ const SearchPage = () => {
                 style={{ width: 300 }}
                 autoComplete
                 autoHighlight
-                getOptionSelected={(option, value) => option.email === value.email}
+                isOptionEqualToValue={(option, value) => option.email === value.email}
                 filterOptions={(options, state) => {
                     const text = state?.inputValue?.toLowerCase().trim() || '';
                     return options.filter(
@@ -133,21 +145,17 @@ const SearchPage = () => {
                             option.email.toLowerCase().includes(text) || `${option.firstName.toLowerCase()} ${option.lastName.toLowerCase()}`.includes(text),
                     );
                 }}
-                getOptionLabel={(option) => option.email}
                 options={options}
+                getOptionLabel={getOptionLabel}
                 loading={isLoading}
                 freeSolo
                 onInputChange={onTextChange}
-                renderOption={(option: AutoCompleteOption) => {
-                    return (
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div>
-                                {option.firstName} {option.lastName}
-                            </div>
-                            <div style={{ color: 'gray', fontSize: 12 }}>{option.email}</div>
-                        </div>
-                    );
-                }}
+                renderOption={(props, option: AutoCompleteOption, state: AutocompleteRenderOptionState) => (
+                  <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <ListItemText primary={`${option.firstName} ${option.lastName}`} />
+                    <ListItemText secondary={option.email} sx={{ color: 'gray', fontSize: 12 }} />
+                  </ListItem>
+                )}
                 renderInput={(params) => (
                     <TextField
                         {...params}

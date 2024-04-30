@@ -1,7 +1,8 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { CustomSelectField, SubmitButton } from '../../../../../../components/InputFields';
-import { makeStyles, MenuItem } from '@mui/material';
+import { MenuItem } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import { Root, SelectSection } from './categoriesHeader.style';
 import { IKid } from '../categories.types';
 

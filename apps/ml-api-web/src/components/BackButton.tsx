@@ -1,6 +1,6 @@
 import React from 'react';
 import { BackIcon } from '../svgs/DashboardIcons';
-import { makeStyles, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 type Props = {
     className?: string;
@@ -8,29 +8,39 @@ type Props = {
     iconColor?: string;
     textColor?: string;
 };
-const useStyles = makeStyles((theme) => ({
-    root: {
+const BackButton = (props: Props) => {
+  const { onClick, className, iconColor, textColor } = props;
+
+  return (
+    <Button
+      className={className}
+      onClick={onClick}
+      sx={{
         fontSize: '12px',
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
         cursor: 'pointer',
-        color: ({ textColor }: Props) => textColor || theme.palette.text.primary,
+        color: textColor,
         '& svg': {
-            color: ({ iconColor }: Props) => iconColor || theme.palette.primary.main,
-            marginRight: '4px',
-            width: '24px',
-            height: '24px',
+          color: iconColor,
+          marginRight: '4px',
+          width: '24px',
+          height: '24px',
         },
-    },
-}));
-const BackButton = (props: Props) => {
-    const { onClick, className } = props;
-    const classes = useStyles(props);
-    return (
-        <Button className={`${classes.root} ${className}`} onClick={onClick}>
-            <BackIcon /> Back
-        </Button>
-    );
+        // Default values from theme when props are not provided:
+        ...(textColor === undefined && {
+          color: (theme) => theme.palette.text.primary,
+        }),
+        ...(iconColor === undefined && {
+          '& svg': {
+            color: (theme) => theme.palette.primary.main,
+          }
+        })
+      }}
+    >
+      <BackIcon /> Back
+    </Button>
+  );
 };
 export default BackButton;

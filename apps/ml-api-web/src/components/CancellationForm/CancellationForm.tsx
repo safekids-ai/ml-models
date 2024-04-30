@@ -83,7 +83,7 @@ export const CancellationForm = ({ onClose }: Props) => {
                             variant="outlined"
                             multiline
                             rows={4}
-                            rowsMax={4}
+                            maxRows={4}
                             placeholder="Enter another reason here"
                             value={customFeedback}
                             onChange={onCustomFeedbackChange}

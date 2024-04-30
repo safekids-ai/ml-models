@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ClickAwayListener, makeStyles } from '@mui/material';
+import { ClickAwayListener } from '@mui/material';
+import {makeStyles} from '@mui/styles'
 import { Routes, Route, Navigate, useLocation } from 'react-router';
 import { useIdleTimer, workerTimers } from 'react-idle-timer';
 import MenuIcon from '@mui/icons-material/Menu';

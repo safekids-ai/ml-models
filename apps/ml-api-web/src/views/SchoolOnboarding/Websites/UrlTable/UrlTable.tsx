@@ -4,7 +4,7 @@ import { FixedSizeList } from 'react-window';
 
 import OUITree from '../../../../components/OUITree/OUITree';
 import { Props } from './UrlTable.types';
-import { TabContext, TabList, TabPanel } from '@material-ui/lab';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 import {
     Root,
     LeftTable,
