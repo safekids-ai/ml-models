@@ -1,9 +1,16 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
 import { theme } from '../../../../theme';
 import PrrSummary from './PrrSummary';
 import { SummaryData } from './SchoolActivity.type';
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 afterEach(cleanup);
 
@@ -21,9 +28,11 @@ const endDate = new Date();
 endDate.setDate(startDate.getDate() - 1);
 const renderComponent = (summary?: SummaryData) =>
     render(
-        <ThemeProvider theme={theme}>
-            <PrrSummary startDate={startDate} endDate={endDate} />
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <PrrSummary startDate={startDate} endDate={endDate} />
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
 
 test.skip("it renders correct text for average daily instances for 'undefined' data", () => {

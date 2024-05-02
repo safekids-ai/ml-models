@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             flexDirection: 'column-reverse',
             '& $main': {
                 width: '80%',

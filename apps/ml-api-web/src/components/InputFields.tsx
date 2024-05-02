@@ -585,8 +585,11 @@ export const PasswordField: React.FC<PasswordProps> = (props: PasswordProps) => 
               className={`input-field ${classes.root} ${className}`}
               InputProps={{
                 endAdornment: (
-                  <IconButton aria-label="toggle password visibility" onClick={() => setVisible(!visible)}
-                              className="toggle-visibility">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setVisible(!visible)}
+                    className="toggle-visibility"
+                    size="large">
                     {visible ? <VisibilityOff/> : <Visibility/>}
                   </IconButton>
                 ),

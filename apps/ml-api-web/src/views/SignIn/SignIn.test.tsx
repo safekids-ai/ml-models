@@ -1,19 +1,28 @@
 import React from 'react';
 import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
 import { theme } from '../../theme';
 import { MemoryRouter } from 'react-router';
 import App from '../../App';
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 afterEach(cleanup);
 
 test('it renders sign in screen', async () => {
     const { getAllByText } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getAllByText(/Sign In/i)).toBeTruthy());
 
@@ -21,44 +30,52 @@ test('it renders sign in screen', async () => {
 
 test('it renders email input field', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('email-input-field')).toBeInTheDocument());
 });
 
 test('it renders password input field', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
 });
 
 test('it renders password input field', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
 });
 
 test('it disables sign in button if wrong email regex is entered', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
     const passwordField = getByTestId('password-input-field');
@@ -71,11 +88,13 @@ test('it disables sign in button if wrong email regex is entered', async () => {
 
 test('it enables sign in button if right email regex is entered', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
     const passwordField = getByTestId('password-input-field');
@@ -88,11 +107,13 @@ test('it enables sign in button if right email regex is entered', async () => {
 
 test('it disables sign in button if email is not entered', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
     const passwordField = getByTestId('password-input-field');
@@ -105,11 +126,13 @@ test('it disables sign in button if email is not entered', async () => {
 
 test('it disables sign in button if password is not entered', async () => {
     const { getByTestId } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
     const passwordField = getByTestId('password-input-field');
@@ -123,11 +146,13 @@ test('it disables sign in button if password is not entered', async () => {
 
 test('it changes input type to text if visibility toggle clicked', async () => {
     const { getByTestId, getByLabelText } = render(
-        <ThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={['/signin']}>
-                <App />
-            </MemoryRouter>
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <MemoryRouter initialEntries={['/signin']}>
+                    <App />
+                </MemoryRouter>
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
     const passwordField: any = getByTestId('password-input-field');
     const visibilityToggle = getByLabelText('toggle password visibility');

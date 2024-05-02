@@ -1,9 +1,16 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
 import { theme } from '../../../../../theme';
 import KidsListWidget from '.';
 import { KidWidgetType } from '../SchoolActivity.type';
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 afterEach(cleanup);
 
@@ -31,9 +38,11 @@ const testData: KidWidgetType = {
 
 const renderComponent = (level: number, showViewButton: boolean, eventList: KidWidgetType) =>
     render(
-        <ThemeProvider theme={theme}>
-            <KidsListWidget level={level} event={eventList} showViewButton={showViewButton} />
-        </ThemeProvider>,
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <KidsListWidget level={level} event={eventList} showViewButton={showViewButton} />
+            </ThemeProvider>
+        </StyledEngineProvider>,
     );
 
 test("it renders See All button if 'showViewButton' is true", () => {
