@@ -103,6 +103,6 @@ export function usePrevious(value: any) {
     return ref.current;
 }
 export const useMobile = () => {
-    const isMobile = useMediaQuery((theme: AppTheme) => theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery((theme: AppTheme) => theme.breakpoints.down('lg'));
     return isMobile;
 };

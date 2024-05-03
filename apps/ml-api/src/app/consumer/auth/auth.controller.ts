@@ -17,10 +17,18 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @ApiOperation({ summary: 'Creates parent account, organization unit and its filtered categories and send email for signup.' })
+  @ApiOperation({ summary: 'Creates parent account, organization unit and its filtered categories and send email for signup.' })
+  @UseGuards(UserStatusValidator)
+  @Post('foo')
+  public async foo(): Promise<string> {
+      return "Hello"
+  }
+
+  @ApiOperation({ summary: 'Creates parent account, organization unit and its filtered categories and send email for signup.' })
     @UseGuards(UserStatusValidator)
     @Post('sign-up')
     public async signUp(@Body() dto: UserDto): Promise<LoginTokenResponseDto> {
+      console.log("Abbas1")
         return await this.authService.signUp(dto);
     }
 
