@@ -1,5 +1,7 @@
 
 
+## [1.3.25](https://github.com/safekids-ai/ml-models/compare/1.3.24...1.3.25) (2024-05-05)
+
 ## [1.3.24](https://github.com/safekids-ai/ml-models/compare/1.3.23...1.3.24) (2024-04-21)
 
 ## [1.3.23](https://github.com/safekids-ai/ml-models/compare/1.3.22...1.3.23) (2024-04-20)
