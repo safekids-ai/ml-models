@@ -57,7 +57,7 @@ const Patents = () => {
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
                   <a
                     target="_blank"
-                    href="https://patents.google.com/patent/US11356734B1/en?oq=11356734"
+                    href="/docs/patents/11356734.pdf"
                   >
                     Methods and systems for counseling a user with respect to
                     supervised content
@@ -98,7 +98,7 @@ const Patents = () => {
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
                   <a
                     target="_blank"
-                    href="https://patents.google.com/patent/US10949774B1/en?oq=10949774"
+                    href="/docs/patents/10949774.pdf"
                   >
                     Methods and systems for supervising displayed content
                   </a>
@@ -127,7 +127,7 @@ const Patents = () => {
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
                   <a
                     target="_blank"
-                    href="https://patents.google.com/patent/US11309086B1/en?q=(%22Safe+Kids+LLC%22)&oq=%22Safe+Kids+LLC%22"
+                    href="/docs/patents/11309086.pdf"
                   >
                     Methods and systems for interactively counseling a user with
                     respect to supervised content
