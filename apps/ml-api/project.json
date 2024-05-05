@@ -5,41 +5,26 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/vite:build",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
+        "target": "node",
+        "compiler": "tsc",
         "outputPath": "dist/apps/ml-api",
-        "generatePackageJson": true
+        "main": "apps/ml-api/src/main.ts",
+        "tsConfig": "apps/ml-api/tsconfig.app.json",
+        "assets": ["apps/ml-api/src/assets"],
+        "webpackConfig": "apps/ml-api/webpack.config.js",
+        "generatePackageJson": false
       },
       "configurations": {
-        "development": {
-          "mode": "development"
-        },
-        "production": {
-          "mode": "production"
-        }
+        "development": {},
+        "production": {}
       }
     },
     "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "ml-api:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "ml-api:build:development",
-          "hmr": true
-        },
-        "production": {
-          "buildTarget": "ml-api:build:production",
-          "hmr": false
-        }
-      }
-    },
-    "preview": {
-      "executor": "@nx/vite:preview-server",
+      "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "ml-api:build"
@@ -53,19 +38,18 @@
         }
       }
     },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
-      "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/ml-api"
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ml-api/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/ml-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ml-api/jest.config.ts"
       }
     }
   },

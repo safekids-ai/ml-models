@@ -5,7 +5,7 @@ export interface ThrottleConfigItem {
   ttl: number,
   limit: number,
 }
-const isDev = (!import.meta.env.PROD);
+const isDev = process.env.NODE_ENV != 'production'
 const prodSetting = process.env.TROTTLE_CONFIG ||
   [
     {

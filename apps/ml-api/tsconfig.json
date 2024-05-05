@@ -1,11 +1,7 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["node", "jest"],
-  },
-  "include": [],
+  "extends": "../../tsconfig.base.json",
   "files": [],
+  "include": [],
   "references": [
     {
       "path": "./tsconfig.app.json"
@@ -14,5 +10,7 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "extends": "../../tsconfig.base.json"
+  "compilerOptions": {
+    "esModuleInterop": true
+  }
 }

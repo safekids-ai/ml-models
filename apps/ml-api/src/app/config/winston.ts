@@ -41,7 +41,7 @@ const prodWinstonConfig = {
     },
 };
 
-const isDev = !import.meta.env.PROD;
+const isDev = process.env.NODE_ENV != 'production';
 
 export const winstonTransports = () => {
     const file = isDev ? devWinstonConfig.file : prodWinstonConfig.file;

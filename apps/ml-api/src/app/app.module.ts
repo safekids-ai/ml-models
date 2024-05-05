@@ -108,7 +108,7 @@ import winstonConfig from "./config/winston"
 import {MlModule} from "./ml/ml.module";
 import {TestModule} from "./test/test.module";
 
-const ENV = import.meta.env.PROD || 'development';
+const ENV = process.env.NODE_ENV || 'development';
 
 console.log('==========================================');
 console.log('Reading the following environment:' + ENV);

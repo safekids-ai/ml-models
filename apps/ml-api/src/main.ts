@@ -1,14 +1,14 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from './app/app.module';
 import {BadRequestException, INestApplication, ValidationPipe} from '@nestjs/common';
 import { WinstonModule } from 'nest-winston';
-import { ErrorFilter } from './app.errors.filter';
-import expressConfiguration from './config/express';
-import { winstonOptions } from './config/winston';
+import { ErrorFilter } from './app/app.errors.filter';
+import expressConfiguration from './app/config/express';
+import { winstonOptions } from './app/config/winston';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { install as sourceMapSupportInit } from 'source-map-support';
 import { config } from 'dotenv';
-import { PRODUCTION } from './constants';
+import { PRODUCTION } from './app/constants';
 
 config();
 
@@ -34,7 +34,7 @@ async function createApp() {
   );
   app.useGlobalFilters(new ErrorFilter());
 
-  if (!import.meta.env.PROD) {
+  if (process.env.NODE_ENV != 'production') {
     configureSwagger(app)
   }
   return app;
@@ -50,7 +50,9 @@ function configureSwagger(app: INestApplication) {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 }
-async function bootstrap(app: INestApplication) {
+async function bootstrap() {
+  const app = await createApp()
+
   // get the port from configuration
   const {expressConfig} = expressConfiguration()
   const port = expressConfig.port;
@@ -62,15 +64,4 @@ async function bootstrap(app: INestApplication) {
     winstonLogger.log(`Application is running on: ${await app.getUrl()}`);
   }
 }
-
-const appPromise = createApp()
-
-if (import.meta.env.PROD) {
-  async function init() {
-    const app = await appPromise
-    await bootstrap(app)
-  }
-  init()
-}
-
-export const viteNodeApp = appPromise;
+bootstrap()
