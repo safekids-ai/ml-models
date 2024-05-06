@@ -18,3 +18,6 @@ docker system prune -a
 docker build --progress=plain --no-cache -t ml-api-web -f ./apps/ml-api-web/Dockerfile .
 docker run --name ml-api-web -p 4200:80 ml-api-web 
 
+# For ML API
+docker build --progress=plain --no-cache -t ml-api -f ./apps/ml-api/Dockerfile .
+docker run --name ml-api -p 3000:3000 ml-api 
