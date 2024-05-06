@@ -14,3 +14,7 @@ docker container prune
 docker volume prune
 docker system prune -a
 
+# For ML API WEB
+docker build --progress=plain --no-cache -t ml-api-web -f ./apps/ml-api-web/Dockerfile .
+docker run --name ml-api-web -p 4200:80 ml-api-web 
+
