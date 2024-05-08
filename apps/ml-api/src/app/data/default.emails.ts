@@ -1,9 +1,9 @@
-import { EmailTemplates } from '../../email/email.templates';
-import { EmailTemplateDTO } from '../../email/dto/email.template.dto';
+import { EmailTemplates } from '../email/email.templates';
+import { EmailTemplateDTO } from '../email/dto/email.template.dto';
 import * as path from "path";
 
-const dirname = path.resolve();
-const TEMPLATES_PATH = dirname + '/email-templates/';
+const dirname = __dirname//path.resolve();
+const TEMPLATES_PATH = dirname + '/data/email-templates/';
 
 export const DEFAULT_EMAIL_TEMPLATES: Array<Omit<EmailTemplateDTO, '_id'>> = [
     {

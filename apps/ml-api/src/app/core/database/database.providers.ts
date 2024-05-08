@@ -77,7 +77,7 @@ export const databaseProviders = [
       }
       let dbOptions = dbConfig.options
       let config;
-      switch (import.meta.env.MODE) {
+      switch (process.env.APP_ENV) {
         case DEVELOPMENT:
           config = databaseConfig.development;
           break;

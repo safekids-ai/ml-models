@@ -13,7 +13,11 @@ export class EmailTemplateService implements EmailTemplateServiceInterface {
         await this.impl.delete(id);
     }
 
-    async get(id: string): Promise<EmailTemplateInterface> {
+  async deleteAll(): Promise<void> {
+    await this.impl.deleteAll();
+  }
+
+  async get(id: string): Promise<EmailTemplateInterface> {
         return await this.impl.get(id);
     }
 

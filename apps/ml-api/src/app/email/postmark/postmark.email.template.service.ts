@@ -114,7 +114,8 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         async (bail) => {
           try {
             const result = await client.createTemplate(templateParams);
-            this.log.debug('postmarkEmailTemplateService createdTemplate', {template, result});
+            const {content, ...logTemplate} = template
+            this.log.debug('postmarkEmailTemplateService createdTemplate', {logTemplate, result});
           } catch (error) {
             if (error.retryable === false) {
               bail(error);
@@ -126,7 +127,9 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         {
           ...this.retryOptions,
           onRetry: (error: Error) => {
-            this.log.warn('postmarkEmailTemplateService OnRetry - retrying SES createTemplate due to', error);
+            const {HtmlBody, ...logTemplate} = templateParams
+            const logMessage = JSON.stringify(logTemplate)
+            this.log.warn(`postmarkEmailTemplateService OnRetry - retrying postmark createTemplate ${logMessage} due to`, error);
           },
         }
       );
@@ -135,7 +138,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         this.log.warn('Template ' + template.name + ' already exists. Not creating.');
         return;
       }
-      this.log.error('AWS Email Service. Unable to do SES.createTemplate', error);
+      this.log.error('AWS Email Service. Unable to do postmark.createTemplate', error);
       throw error;
     }
   }
@@ -155,7 +158,8 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         async (bail) => {
           try {
             const templateResponse: postmark.Models.Template = await client.editTemplate(Number(template.id), templateParams);
-            this.log.debug('postmarkEmailTemplateService updateTemplate', {template, templateResponse});
+            const {content, ...logTemplate} = template
+            this.log.debug('postmarkEmailTemplateService updateTemplate {}', {logTemplate, templateResponse});
           } catch (error) {
             if (error.retryable === false) {
               bail(error);
@@ -167,14 +171,24 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         {
           ...this.retryOptions,
           onRetry: (error: Error) => {
-            this.log.warn('postmarkEmailTemplateService OnRetry - retrying SES updateTemplate due to', error);
+            this.log.warn('postmarkEmailTemplateService OnRetry - retrying Postmark updateTemplate due to', error);
           },
         }
       );
     } catch (error) {
-      this.log.error('AWS Email Service. Unable to do SES.updateTemplate', error);
+      this.log.error('AWS Email Service. Unable to do Postmark.updateTemplate', error);
       throw error;
     }
+  }
+
+  async deleteAll() : Promise<void> {
+      const templates = await this.list();
+
+      for (let i=0; i < templates.length; i++) {
+        const id = templates[i].id
+        this.log.info("Delete template id: ", id)
+        await this.delete(id)
+      }
   }
 
   async delete(id: string): Promise<void> {
@@ -197,12 +211,12 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         {
           ...this.retryOptions,
           onRetry: (error: Error) => {
-            this.log.warn('postmarkEmailTemplateService OnRetry - retrying SES deleteTemplate due to', error);
+            this.log.warn('postmarkEmailTemplateService OnRetry - retrying PostMark deleteTemplate due to', error);
           },
         }
       );
     } catch (error) {
-      this.log.error('AWS Email Service. Unable to do SES.deleteTemplate', error);
+      this.log.error('AWS Email Service. Unable to do Postmark.deleteTemplate', error);
       throw error;
     }
   }

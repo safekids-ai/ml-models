@@ -10,14 +10,14 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/ml-api-web",
-        "generatePackageJson": true
+        "generatePackageJson": true,
       },
       "configurations": {
         "development": {
           "mode": "development"
         },
         "production": {
-          "mode": "production"
+          "mode": "production",
         }
       }
     },

@@ -19,7 +19,7 @@ async function createApp() {
   const app = await NestFactory.create(AppModule, {
     logger: winstonLogger,
     cors: true,
-    bodyParser: false,
+    bodyParser: true,
   });
 
   const httpAdapter = app.getHttpAdapter();
@@ -34,7 +34,7 @@ async function createApp() {
   );
   app.useGlobalFilters(new ErrorFilter());
 
-  if (process.env.NODE_ENV != 'production') {
+  if (process.env.APP_ENV != 'production') {
     configureSwagger(app)
   }
   return app;

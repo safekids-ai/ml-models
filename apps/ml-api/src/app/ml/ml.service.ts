@@ -70,21 +70,22 @@ export class MlService implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     //load the NLP model
-    apiLogger.log("Loading NLP Model");
-    this.nlpModel = new NLPNode(this.nlp_onnx_path, apiLogger);
-    await this.nlpModel.init();
-    apiLogger.log(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
-
-    //load the Vision model
-    apiLogger.log("Loading Vision Model");
-    this.visionModel = new VisionNode(this.vision_onnx_path, apiLogger);
-    await this.visionModel.init();
-    apiLogger.log(`Successfully loaded Vision Model ${this.vision_onnx_path}`);
+    // apiLogger.info("Loading NLP Model");
+    // this.nlpModel = new NLPNode(this.nlp_onnx_path, apiLogger);
+    // await this.nlpModel.init();
+    // apiLogger.info(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
+    //
+    // //load the Vision model
+    // apiLogger.info("Loading Vision Model");
+    // this.visionModel = new VisionNode(this.vision_onnx_path, apiLogger);
+    // await this.visionModel.init();
+    // apiLogger.info(`Successfully loaded Vision Model ${this.vision_onnx_path}`);
+    // console.log("Abbas2")
     //
     // //download and load categorization files.. do this async
     // const downloadPath = os.tmpdir()
     // this.webCategorizer = new HostURLCategorizer(downloadPath, apiLogger)
-    // this.logger.log("Download URL categorization data")
+    // this.logger.info("Download URL categorization data")
     // this.webCategorizer.init()
   }
 }

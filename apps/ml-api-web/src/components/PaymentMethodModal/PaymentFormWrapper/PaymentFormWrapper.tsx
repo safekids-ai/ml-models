@@ -11,7 +11,7 @@ export const PaymentFormWrapper = (props: Props) => {
     const [message, setMessage] = useState('');
     useEffect(function onMount() {
         loadStripe(
-            import.meta.env.VITE_APP_STRIPE_KEY || 'pk_test_51IDWQjJBjodztVXYIRhpttyPAlmT9bLARz6KJcdQ9GYyDhZKEpSpBPAFjTZnZLe0yGi1tRjHzj6cQs3hwLeJYBvr00bjClP2Gn'
+            import.meta.env.STRIPE_KEY || 'pk_test_51IDWQjJBjodztVXYIRhpttyPAlmT9bLARz6KJcdQ9GYyDhZKEpSpBPAFjTZnZLe0yGi1tRjHzj6cQs3hwLeJYBvr00bjClP2Gn'
         )
             .then((stripe) => {
                 setStripe(stripe);

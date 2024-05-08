@@ -1,4 +1,4 @@
-import {DEFAULT_EMAIL_TEMPLATES} from './data/default.emails';
+import {DEFAULT_EMAIL_TEMPLATES} from '../data/default.emails';
 import {EmailTemplateDTO} from '../email/dto/email.template.dto';
 import {LoggingService} from '../logger/logging.service';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
@@ -107,11 +107,12 @@ export class DefaultDataService {
     const emailTemplates = this.getHtmlsForEmailTemplates(DEFAULT_EMAIL_TEMPLATES);
 
     //update email templates
+    //await this.emailTemplateService.deleteAll()
     const serverTemplates: EmailTemplateInterface[] = await this.emailTemplateService.list();
 
     //insert or update templates on the service
     emailTemplates.map(async (template) => {
-      const serverTemplate = _.find(serverTemplates, {id: template.name});
+      const serverTemplate = _.find(serverTemplates, {name: template.name});
       if (!serverTemplate) {
         await this.emailTemplateService.create({
           id: template.name,
@@ -127,8 +128,8 @@ export class DefaultDataService {
         //only update the template in development//TODO: for now, updating in production as well until initial templates finalized.
         //    if (this.config._isDevelopment()) {
         await this.emailTemplateService.update({
-          id: template.name,
-          name: template.name,
+          id: serverTemplate.id,
+          name: serverTemplate.name,
           content: {
             html: template.content.Body,
             subject: template.content.Subject,

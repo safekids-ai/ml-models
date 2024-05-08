@@ -37,6 +37,8 @@ interface EmailTemplateServiceInterface {
   update(template: EmailTemplateInterface): Promise<void>;
 
   delete(id: string): Promise<void>;
+
+  deleteAll(): Promise<void>;
 }
 
 interface EmailServiceInterface {

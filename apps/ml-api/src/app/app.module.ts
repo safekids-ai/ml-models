@@ -108,7 +108,7 @@ import winstonConfig from "./config/winston"
 import {MlModule} from "./ml/ml.module";
 import {TestModule} from "./test/test.module";
 
-const ENV = process.env.NODE_ENV || 'development';
+const ENV = process.env.APP_ENV || 'development';
 
 console.log('==========================================');
 console.log('Reading the following environment:' + ENV);
@@ -237,7 +237,7 @@ console.log('==========================================');
     OneRosterModule,
     PrrNotificationModule,
     RoleModule,
-    //JobsModule,
+    JobsModule,
     LicenseModule,
     AccountLicenseModule,
     AuthModule,
@@ -272,27 +272,25 @@ console.log('==========================================');
     InvoiceModule,
   ],
 })
-// export class AppModule implements NestModule {
-//   constructor(private defaultDataService: DefaultDataService) {
-//   }
-//
-//   onModuleInit(): void {
-//     void this.defaultDataService.insertDefaultData();
-//   }
-//
-//   /**
-//    * get raw or json body for requests routes implementation.
-//    */
-//   public configure(consumer: MiddlewareConsumer): void {
-//     consumer
-//       .apply(RawBodyMiddleware)
-//       .forRoutes({
-//         path: '/payment/*/webhooks',
-//         method: RequestMethod.POST,
-//       })
-//       .apply(JsonBodyMiddleware)
-//       .forRoutes('*');
-//   }
-// }
+export class AppModule implements NestModule {
+  constructor(private defaultDataService: DefaultDataService) {
+  }
 
-export class AppModule {}
+  onModuleInit(): void {
+    void this.defaultDataService.insertDefaultData();
+  }
+
+  /**
+   * get raw or json body for requests routes implementation.
+   */
+  public configure(consumer: MiddlewareConsumer): void {
+    consumer
+      .apply(RawBodyMiddleware)
+      .forRoutes({
+        path: '/payment/*/webhooks',
+        method: RequestMethod.POST,
+      })
+      .apply(JsonBodyMiddleware)
+      .forRoutes('*');
+  }
+}

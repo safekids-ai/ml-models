@@ -5,7 +5,7 @@ export interface ExpressConfig {
 }
 export default () => ({
   expressConfig: {
-    environment: process.env.EXPRESS_ENVIRONMENT || 'development',
+    environment: process.env.APP_ENV || 'development',
     port: process.env.EXPRESS_PORT || 3000,
 
     // helpers

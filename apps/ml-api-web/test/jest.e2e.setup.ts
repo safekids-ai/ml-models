@@ -12,8 +12,8 @@ export const setupEnv = async () => {
         process.env.BACKEND_URL = `https://api.safekids.dev/`;
         process.env.FRONTEND_URL = 'https://safekids.dev/';
     }else if (env === 'local' || env===undefined){
-        process.env.BACKEND_URL = `http://localhost:4001/`;
-        process.env.FRONTEND_URL = `http://localhost:3000/`;
+        process.env.BACKEND_URL = `http://localhost:3000/`;
+        process.env.FRONTEND_URL = `http://localhost:5200/`;
     }
     else if (env === 'stage' || 'staging'){
         process.env.BACKEND_URL = `https://staging-api.safekids.ai/`;

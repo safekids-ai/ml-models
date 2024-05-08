@@ -22,9 +22,24 @@ abstract class Vision {
 
   public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
+  public async handleCreateSession(onnxFile: string) : Promise<InferenceSession> {
+    if (this.logger) {
+      this.logger.debug("initialized opencv");
+    }
+    if (this.logger) {
+      this.logger.info(`Loading model ${this.onnxUrl}`);
+    }
+    return await this.createSession(onnxFile);
+  }
+
   public async init(): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this;
+    if (cv && cv.Mat) {
+       await this.handleCreateSession(this.onnxUrl);
+       return;
+    }
+
     return new Promise((resolve, reject) => {
       if (!cv) {
         throw new Error("OpenCV is not defined and unavailable");
@@ -36,7 +51,7 @@ abstract class Vision {
         if (this.logger) {
           this.logger.info(`Loading model ${this.onnxUrl}`);
         }
-        const sessionPromise: Promise<InferenceSession> = this.createSession(this.onnxUrl);
+        const sessionPromise: Promise<InferenceSession> = this.handleCreateSession(this.onnxUrl);
         sessionPromise.then(r => {
           me.session = r;
           resolve();
@@ -44,7 +59,7 @@ abstract class Vision {
       };
       setTimeout(() => {
         reject(new Error("failed to initialize opencv or session within 2 seconds"));
-      }, 2000); // fail after 2 seconds
+      }, 2000); // fail after 5 seconds
     });
   }
 

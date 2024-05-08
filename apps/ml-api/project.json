@@ -12,6 +12,7 @@
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/apps/ml-api",
+        "outputFileName": "main.js",
         "main": "apps/ml-api/src/main.ts",
         "tsConfig": "apps/ml-api/tsconfig.app.json",
         "assets": ["apps/ml-api/src/assets"],
@@ -19,7 +20,9 @@
         "generatePackageJson": false
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "watch": true
+        },
         "production": {}
       }
     },
@@ -27,11 +30,12 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "ml-api:build"
+        "buildTarget": "ml-api:build:development",
+        "watch": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "ml-api:build:development"
+          "buildTarget": "ml-api:build:development",
         },
         "production": {
           "buildTarget": "ml-api:build:production"

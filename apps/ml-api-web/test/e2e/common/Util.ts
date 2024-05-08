@@ -9,7 +9,7 @@ import { DELETE_AN_ACCOUNT, LOGIN, CONSUMER_KID } from '../../../src/utils/endpo
  */
 declare var global: any;
 export class Util {
-    private backendURL: string | undefined = process.env.BACKEND_URL;
+    private backendURL: string | undefined = import.meta.env.API_URL;
     private loginResponse: AxiosResponse<any> | undefined;
     private loginKidResponse: AxiosResponse<any> | undefined;
 

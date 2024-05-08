@@ -1,37 +1,31 @@
-FROM node:20.9-bullseye-slim AS base
-ARG API_PORT=3000
-EXPOSE $API_PORT
-
-FROM base as development
-WORKDIR /apps
-
+FROM node:bullseye-slim AS builder
 RUN npm install -g pnpm
+WORKDIR /build
+RUN cd /build
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY . ./
 
-COPY ./apps ./apps
-COPY ./libs ./libs
-COPY ./scripts ./scripts
-COPY ./model_files ./model_files
-COPY package.json pnpm-lock.yaml tsconfig.base.json nx.json .
-RUN pnpm i
-RUN npx nx run ml-api:build:production
-EXPOSE $API_PORT
-
-FROM base AS production
 ENV NODE_ENV=production
+
+RUN npx nx run ml-api:build:production
+
+FROM node:bullseye-slim AS deployer
+
+ARG API_PORT=3000
 ENV API_PORT=$API_PORT
+ENV NODE_ENV=production
 
-WORKDIR /apps
-
+WORKDIR /app
 RUN npm install -g pnpm
 
-COPY --from=development /apps/dist/apps/ml-api/package.json .
-COPY --from=development /apps/dist/apps/ml-api/pnpm-lock.yaml .
-COPY --from=development /apps/scripts/ .
-COPY --from=development /apps/dist/apps ./dist
-COPY --from=development /apps/model_files ./model_files
+COPY --from=builder /build/dist/apps/ml-api/package.json .
+COPY --from=builder /build/dist/apps/ml-api/pnpm-lock.yaml .
+COPY --from=builder /build/dist/apps ./dist
+COPY --from=builder /build/model_files ./model_files
 
 RUN pnpm i
 
 EXPOSE $API_PORT
 
-CMD ["./docker_run_api.sh"]
+CMD ["node", "dist/ml-api/main.js"]
