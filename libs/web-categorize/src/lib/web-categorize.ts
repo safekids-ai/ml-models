@@ -1,12 +1,12 @@
 import * as Logger from 'abstract-logging';
 import {parse as tldts_parse} from 'tldts';
 
-import {SquidCategory} from "libs/web-categorize/src/lib/web-category-content";
-import {CategoryCacheHash} from "libs/web-categorize/src/lib/category-cache";
-import {UriUtils} from "libs/web-categorize/src/lib/web-category-utils";
-import {CategoryFileReader} from "libs/web-categorize/src/lib/web-category-reader";
+import {SquidCategory} from "./web-category-content";
+import {CategoryCacheHash} from "./category-cache";
+import {UriUtils} from "./web-category-utils";
+import {CategoryFileReader} from "./web-category-reader";
 import shorthash from 'short-hash';
-import {WebCategory} from "libs/web-categorize/src/lib/web-category-types";
+import {WebCategory} from "./web-category-types";
 
 interface WebCategoryResult {
   category: WebCategory
@@ -107,4 +107,4 @@ class HostURLCategorizer {
   }
 }
 
-export {HostURLCategorizer, WebCategory, WebCategoryResult}
+export {HostURLCategorizer, WebCategory, WebCategoryResult, UriUtils}

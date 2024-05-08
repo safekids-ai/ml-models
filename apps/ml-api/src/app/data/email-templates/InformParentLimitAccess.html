@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Safe Kids at Home Alert - Inform</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        /**
+     * Google webfonts. Recommended to include the .woff version for cross-client compatibility.
+     */
+        @media screen {
+            @font-face {
+                font-family: 'Merriweather';
+                src: local('Merriweather'), local('Merriweather'),
+                url(https://fonts.gstatic.com/s/merriweather/v8/ZvcMqxEwPfh2qDWBPxn6nmB7wJ9CoPCp9n30ZBThZ1I.woff) format('woff');
+            }
+        }
+
+        * {
+            font-family: 'Merriweather', serif;
+        }
+
+        body {
+            margin: 0 auto;
+            padding: 2% 25% 2% 25%;
+        }
+
+        header {
+            padding: 1% 0 2% 4%;
+            text-align: center;
+            width: 100%;
+        }
+
+        section {
+            padding: 1% 0 2% 4%;
+        }
+
+        pre {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<section>
+        <div style="text-align: center">
+           <hr style=>
+            <img src="https://safekids-prod-resources.s3.amazonaws.com/safekids.png" alt="Safe kids logo loading..." style="width: 130px" />
+        </div>
+        <pre>
+            Greetings,
+
+            As you know, kids are often persistent when they try to access things they shouldn't.
+            When that happens, we put them in <b>Limited Access</b>, which means they can only go to those sites
+            that you've set up as Always Allowed under <a href="{{settingsUrl}}" style="color: #DC6415;">settings on the Parent Portal</a>.
+
+            {{kidName}} is currently in Limited Access for 5 minutes (until {{time}}).
+            We encourage you to speak with them about it.
+            If you want to remove this limitation before 5 minutes is up, click the button below:
+
+            <a href="{{updateLink}}" style="background-color: #DC6415;color: white;padding: 10px; text-decoration: none">CLEAR</a>
+
+            Stay curious, stay safe,
+            The Safe Kids Team
+        </pre>
+
+</section>
+</body>
+</html>

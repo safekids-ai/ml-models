@@ -1,4 +1,3 @@
-import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLP} from '@safekids-ai/nlp-js-common';
 import {env,InferenceSession} from "onnxruntime-web";
 //import {Env} from "onnxruntime-common";

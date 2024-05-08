@@ -3,6 +3,7 @@ import {VisionNode} from '../lib/vision-js-node'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require("fs");
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getSync } = require('@andreekeberg/imagedata')
 

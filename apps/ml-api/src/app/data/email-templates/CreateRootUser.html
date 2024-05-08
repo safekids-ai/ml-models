@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Email Confirmation</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            /**
+         * Google webfonts. Recommended to include the .woff version for cross-client compatibility.
+         */
+            @media screen {
+                @font-face {
+                    font-family: 'Merriweather';
+                    src: local('Merriweather'), local('Merriweather'),
+                        url(https://fonts.gstatic.com/s/merriweather/v8/ZvcMqxEwPfh2qDWBPxn6nmB7wJ9CoPCp9n30ZBThZ1I.woff) format('woff');
+                }
+            }
+
+            * {
+                font-family: 'Merriweather', serif;
+            }
+
+            body {
+                margin: 0 auto;
+                padding: 2% 25% 2% 25%;
+            }
+
+            header {
+                padding: 1% 0 2% 4%;
+                text-align: center;
+                border-bottom: 5px solid #69bcb1;
+            }
+
+            section {
+                padding: 1% 0 2% 4%;
+            }
+
+            footer {
+                padding: 2% 0 2% 4%;
+                border-top: 5px solid #69bcb1;
+            }
+
+            p {
+                width: fit-content;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="https://safekids-prod-resources.s3.amazonaws.com/safekids-logo-1.png" alt="Safe kids logo loading..." style="width: 130px" />
+        </header>
+
+        <section>
+            <div>
+                <h1>Welcome to safe kids</h1>
+                <p>Use this <a href="https://safekids.dev/signin">link</a> to sign in to your account.</p>
+                <p>Use the following password to login to account.</p>
+                <p style="background-color: red; color: white; padding: 10px 20px; text-align: center; border-radius: 6px; margin: 0 auto">{{password}}</p>
+
+                <p>
+                    Cheers,<br />
+                    SafeKids
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p style="color: #666">You received this email because we received a login request for your account.</p>
+        </footer>
+    </body>
+</html>

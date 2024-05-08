@@ -1,4 +1,3 @@
-import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLP} from '@safekids-ai/nlp-js-common';
 import { InferenceSession } from "onnxruntime-react-native";
 class NLPWeb extends NLP {
@@ -11,4 +10,4 @@ class NLPWeb extends NLP {
   }
 }
 
-export { NLPWeb,NLPLabel,NLPResult}
+export { NLPWeb}

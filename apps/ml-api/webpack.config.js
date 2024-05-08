@@ -1,34 +1,34 @@
-const {composePlugins, withNx} = require('@nx/webpack');
-const webpack = require('webpack');
+const {NxWebpackPlugin} = require('@nx/webpack');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const {join} = require('path');
 
-// Nx plugins for webpack.
-module.exports = composePlugins(withNx(), (config) => {
-  config.plugins = [
-    ...config.plugins,
-    new webpack.IgnorePlugin({
-      checkResource(resource) {
-        const lazyImports = [
-          '@nestjs/microservices',
-          'cache-manager',
-          'class-validator',
-          'class-transformer',
-          '@nestjs/websockets/socket-module',
-          '@nestjs/microservices/microservices-module',
-          'fastify-swagger',
-        ];
-        if (!lazyImports.includes(resource)) {
-          return false;
-        }
-        try {
-          require.resolve(resource, {
-            paths: [process.cwd()],
-          });
-        } catch (err) {
-          return true;
-        }
-        return false;
-      },
+module.exports = {
+  output: {
+    path: join(__dirname, '../../dist/apps/ml-api'),
+  },
+  plugins: [
+    new NxWebpackPlugin({
+      target: 'node',
+      compiler: 'tsc',
+      main: './src/main.ts',
+      tsConfig: './tsconfig.app.json',
+      assets: ["./src/assets"],
+      outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
+      optimization: process.env['NODE_ENV'] === 'production',
+      memoryLimit: 4056,
+      watch: process.env['NODE_ENV'] !== 'production',
     }),
-  ];
-  return config;
-});
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "apps/ml-api/src/app/data/email-templates",
+          to: "./data/email-templates"
+        },
+        // {
+        //   from: "model_files/*",
+        //   to: "../../"
+        // },
+      ],
+    }),
+  ],
+};
