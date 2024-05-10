@@ -21,7 +21,7 @@
     "build:debug": "nx run-many -t build --verbose",
     "build:debug:nocache": "nx run-many -t build --verbose --skip-nx-cache",
     "build:prod": "nx run-many -t build --prod",
-    "test": "nx run-many -t clean,build,test --skip-nx-cache",
+    "test": "nx run-many -t clean,build,test --skip-nx-cache --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web,ml-api-web-demo",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e ml-api-e2e --skip-nx-cache",
     "affected:apps": "nx affected:apps",
