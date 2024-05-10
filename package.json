@@ -135,7 +135,7 @@
     "react-phone-input-2": "^2.15.1",
     "react-pin-field": "^3.1.5",
     "react-router": "^6.23.0",
-    "react-router-dom": "6.21.1",
+    "react-router-dom": "6.23.0",
     "react-slick": "^0.30.2",
     "react-week-picker": "^1.1.4",
     "react-window": "^1.8.10",
