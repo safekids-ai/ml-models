@@ -14,6 +14,7 @@ RUN pnpm run build:api:prod
 EXPOSE $API_PORT
 
 ENV NODE_ENV=production
+ENV APP_ENV=production
 
 #CMD ["tail", "-f", "/dev/null"]
 CMD ["node", "dist/apps/ml-api/main.js"]

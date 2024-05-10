@@ -43,6 +43,6 @@ docker system prune -a
 APP_ENV=development nx run-many --parallel --target=serve --projects=ml-api,ml-api-web-demo --configuration=development
 
 # Docker Ports
-main-website-react 80
+main-website-react 4200 (next is used)
 ml-api-web-demo 80
 ml-api 3000
