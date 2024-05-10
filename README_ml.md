@@ -11,7 +11,7 @@ https://api.safekids.ai/api
 ### Classify Toxic Speech
 ```console
 curl -X 'POST' \
-  'https://api.safekids.ai/v1/classify-toxic' \
+  'https://api.safekids.ai/v1/ml/classify-toxic' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -30,7 +30,7 @@ RESPONSE:
 ### Classify Google Search Intent
 ```console
 curl -X 'POST' \
-  'https://api.safekids.ai/v1/classify-text' \
+  'https://api.safekids.ai/v1/ml/classify-text' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -44,7 +44,7 @@ porn
 
 ### Classify Adult to Gun Image (using URL)
 ```console
-curl "https://api.safekids.ai/v1/classify-image-url?url=https://cdn.britannica.com/96/176196-050-EFC5E6A6/Glock-pistol.jpg"
+curl "https://api.safekids.ai/v1/ml/classify-image-url?url=https://cdn.britannica.com/96/176196-050-EFC5E6A6/Glock-pistol.jpg"
 ```
 ```
 RESPONSE:
