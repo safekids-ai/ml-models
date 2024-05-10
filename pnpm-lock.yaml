@@ -376,8 +376,8 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0
       '@jnxplus/nx-gradle':
-        specifier: ^0.17.19
-        version: 0.17.19(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11))
+        specifier: ^0.45.0
+        version: 0.45.0(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11))
       '@nestjs/schematics':
         specifier: ^10.1.1
         version: 10.1.1(chokidar@3.6.0)(typescript@5.3.3)
@@ -2489,11 +2489,11 @@ packages:
   '@jimp/utils@0.16.13':
     resolution: {integrity: sha512-VyCpkZzFTHXtKgVO35iKN0sYR10psGpV6SkcSeV4oF7eSYlR8Bl6aQLCzVeFjvESF7mxTmIiI3/XrMobVrtxDA==}
 
-  '@jnxplus/common@0.18.4':
-    resolution: {integrity: sha512-4iUeLthq+XH1K41h6rUVRJ2Ckqp/L9jagZ7SrySpty16lKtLRo+TJ11a86ncy1lPD2V6fW8AJafTxE4kP8nsAQ==}
+  '@jnxplus/common@0.45.0':
+    resolution: {integrity: sha512-8fI+qAfcu3HrGWz4LqMr2swk/IL+eV3L990XU50FxMBFSrOqKW+vmu9JOoU1qGrdDpL2DBW80ZG/4VGu8u5Pvw==}
 
-  '@jnxplus/nx-gradle@0.17.19':
-    resolution: {integrity: sha512-ajaWXHy2A8J+NQstYr1vQ4w/dfAiixbaYg1v4FBIMHHKv+cAcWg336JkR/F7szvuAGL3a5LHxiHNwTJ+1WyTRA==}
+  '@jnxplus/nx-gradle@0.45.0':
+    resolution: {integrity: sha512-9gJZANY0wFEFnn7591P19MHJO6UokJnYepNTamTbZTxTz8f3sFz3Pj3zqfIDUlrPiTqCiWzmP32qQ2jY0Rmf+g==}
 
   '@jorgeferrero/stream-to-buffer@1.0.0':
     resolution: {integrity: sha512-Nf1lzT/XSw9uDvN7b3JbY0mRwx/XC7TCeqwlRsCrkbOUkx767+7n4+4krJE3f8xc1LZmeQ866mxQcSpoxRZbQg==}
@@ -10834,6 +10834,10 @@ packages:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
 
+  smol-toml@1.1.4:
+    resolution: {integrity: sha512-Y0OT8HezWsTNeEOSVxDnKOW/AyNXHQ4BwJNbAXlLTF5wWsBvrcHhIkE5Rf8kQMLmgf7nDX3PVOlgC6/Aiggu3Q==}
+    engines: {node: '>= 18', pnpm: '>= 8'}
+
   snake-case@3.0.4:
     resolution: {integrity: sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==}
 
@@ -14780,18 +14784,19 @@ snapshots:
       '@babel/runtime': 7.24.5
       regenerator-runtime: 0.13.11
 
-  '@jnxplus/common@0.18.4(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))':
+  '@jnxplus/common@0.45.0(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))':
     dependencies:
       '@nx/devkit': 19.0.2(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))
       tslib: 2.6.2
     transitivePeerDependencies:
       - nx
 
-  '@jnxplus/nx-gradle@0.17.19(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11))':
+  '@jnxplus/nx-gradle@0.45.0(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11))':
     dependencies:
-      '@jnxplus/common': 0.18.4(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))
+      '@jnxplus/common': 0.45.0(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))
       '@nx/devkit': 19.0.2(nx@19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11)))
       nx: 19.0.2(@swc-node/register@1.8.0(@swc/core@1.3.107(@swc/helpers@0.5.11))(@swc/types@0.1.6)(typescript@5.3.3))(@swc/core@1.3.107(@swc/helpers@0.5.11))
+      smol-toml: 1.1.4
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@swc-node/register'
@@ -25414,6 +25419,8 @@ snapshots:
   slugify@1.6.6: {}
 
   smart-buffer@4.2.0: {}
+
+  smol-toml@1.1.4: {}
 
   snake-case@3.0.4:
     dependencies:
