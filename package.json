@@ -166,7 +166,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
-    "@jnxplus/nx-gradle": "^0.17.19",
+    "@jnxplus/nx-gradle": "^0.45.0",
     "@nestjs/schematics": "^10.1.1",
     "@nestjs/testing": "^10.3.8",
     "@nrwl/cli": "^15.9.3",
