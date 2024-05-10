@@ -10,12 +10,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/main-website-react"
+        "outputPath": "dist/apps/main-website-react",
+        "includeDevDependenciesInPackageJson": true
       },
       "configurations": {
         "production": {},
-        "development": {
-        }
+        "development": {}
       }
     },
     "serve": {

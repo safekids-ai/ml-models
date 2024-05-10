@@ -89,7 +89,7 @@ const Docs = () => {
 
           <Box>
             <Text fontWeight="bold">Endpoint:</Text>
-            <Code p={2}>https://api.safekids.ai/v1/classify-hate</Code>
+            <Code p={2}>https://api.safekids.ai/v1/ml/classify-hate</Code>
           </Box>
 
           <Box>
@@ -100,7 +100,7 @@ const Docs = () => {
           <Box>
             <Text fontWeight="bold">Example Request:</Text>
             <Code p={2} whiteSpace="pre">
-              {`POST /v1/classify-hate\n{\n  "message": "you're a disgusting person."\n}`}
+              {`POST /v1/ml/classify-hate\n{\n  "message": "you're a disgusting person."\n}`}
             </Code>
           </Box>
 

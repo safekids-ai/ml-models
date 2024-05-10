@@ -27,7 +27,7 @@ const Hate = () => {
     setMessages((old) => [...old, { from: "me", text: prevMessage }]);
     setInputMessage("");
 
-    const req = await axios.post<NLPResult>(API_URL + "/v1/classify-toxic", { message: prevMessage })
+    const req = await axios.post<NLPResult>(API_URL + "/v1/ml/classify-toxic", { message: prevMessage })
     const res = req.data;
     console.log(res, res.flag)
     const arr = prevMessage.split(res.flaggedText)

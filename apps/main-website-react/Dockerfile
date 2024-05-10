@@ -1,17 +1,21 @@
 FROM node:slim AS builder
-RUN npm install -g pnpm
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk -F'@' '{print $2}') && npm install -g "pnpm@$version"
+
+RUN pnpm install --ignore-scripts --frozen-lockfile
 COPY . .
-RUN npx nx run main-website-react:build:production
+RUN pnpm run build:main-website:prod
 
 FROM node:slim AS deployer
 ARG WEB_PORT=3000
 EXPOSE $WEB_PORT
-RUN npm install -g pnpm
 WORKDIR /app
 COPY --from=builder /app/dist/apps/main-website-react .
-RUN pnpm install
+COPY --from=builder /app/package.json  ./package-mono-repo.json
+RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk -F'@' '{print $2}') && npm install -g "pnpm@$version"
+RUN version=$(grep '"next":' package-mono-repo.json | awk -F'"' '{print $4}') && pnpm install "next@$version"
 EXPOSE $WEB_PORT
+
+#CMD ["tail", "-f", "/dev/null"]
 CMD ["npm", "run", "start"]

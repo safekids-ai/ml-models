@@ -38,11 +38,11 @@ export class MlService implements OnModuleInit {
   }
 
   async classifyHate(message: string): Promise<NLPResult> {
-    return await this.nlpModel.findHate(message, apiLogger);
+    return await this.nlpModel.findHate(message);
   }
 
   async classifyText(message: string): Promise<NLPLabel> {
-    return await this.nlpModel.classifyText(message, apiLogger);
+    return await this.nlpModel.classifyText(message);
   }
 
   async classifyImage(input: Buffer | ImageData): Promise<VisionLabel> {
@@ -70,17 +70,16 @@ export class MlService implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     //load the NLP model
-    // apiLogger.info("Loading NLP Model");
-    // this.nlpModel = new NLPNode(this.nlp_onnx_path, apiLogger);
-    // await this.nlpModel.init();
-    // apiLogger.info(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
-    //
-    // //load the Vision model
-    // apiLogger.info("Loading Vision Model");
-    // this.visionModel = new VisionNode(this.vision_onnx_path, apiLogger);
-    // await this.visionModel.init();
-    // apiLogger.info(`Successfully loaded Vision Model ${this.vision_onnx_path}`);
-    // console.log("Abbas2")
+    apiLogger.info("Loading NLP Model");
+    this.nlpModel = new NLPNode(this.nlp_onnx_path, apiLogger);
+    await this.nlpModel.init();
+    apiLogger.info(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
+
+    //load the Vision model
+    apiLogger.info("Loading Vision Model");
+    this.visionModel = new VisionNode(this.vision_onnx_path, apiLogger);
+    await this.visionModel.init();
+    apiLogger.info(`Successfully loaded Vision Model ${this.vision_onnx_path}`);
     //
     // //download and load categorization files.. do this async
     // const downloadPath = os.tmpdir()

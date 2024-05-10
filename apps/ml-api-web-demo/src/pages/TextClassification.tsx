@@ -36,9 +36,9 @@ const TextClassification = () => {
 
     setMessages((old) => [...old, { from: 'me', text: prevMessage }]);
     setInputMessage('');
-    
+
     const req = await axios.post<string>(
-      API_URL + '/v1/classify-text',
+      API_URL + '/v1/ml/classify-text',
       { message: prevMessage }
     );
     const res = req.data;

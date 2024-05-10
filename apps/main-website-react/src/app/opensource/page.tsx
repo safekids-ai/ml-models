@@ -17,7 +17,7 @@ const Opensource = () => {
                 </h1>
                 <p className="font-gt-walsheim-pro pb-[2rem] pt-[2rem] px-[1rem] xl:pr-[0] xl:pb-[1.5rem] xl:pl-[0px] text-[18px] leading-[24px] sm:text-[20px] sm:leading-[32px] md:text-[18px] md:leading-[30px] lg:text-[24px] lg:leading-[36px]">
                   Safe Kids is dedicated to our mission. We are releasing all of
-                  our patents and sourcecode to the community.
+                  our sourcecode to the community.
                 </p>
               </div>
             </div>

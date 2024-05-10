@@ -103,7 +103,6 @@ abstract class NLP {
     if (text.length >= 50 && text.split(' ').length >= 15 && sentenceArray.length == 1) {
       sentenceArray = sentences(text.replace(',', '.'));
     }
-
     const sentenceWiseResults = await this.classifySentences(sentenceArray, batchSize, config);
 
     let finalLabel = "clean";
@@ -146,13 +145,11 @@ abstract class NLP {
 
     for (let batch_i = 0; batch_i < sentences.length; batch_i += batchSize) {
       const currentTexts = sentences.slice(batch_i, batch_i + batchSize);
-
       const preProcessedTexts = new Array<string>();
 
       currentTexts.forEach(text => {
         preProcessedTexts.push(this.preprocess(text))
       });
-
       const [input_ids, attention_mask, token_type_ids, batch_len, maxInputLength] = await this.tokenizer.tokenize(preProcessedTexts);
 
       const onnxInput = {

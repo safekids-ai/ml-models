@@ -9,13 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "target": "node",
-        "compiler": "tsc",
         "outputPath": "dist/apps/ml-api",
-        "outputFileName": "main.js",
-        "main": "apps/ml-api/src/main.ts",
-        "tsConfig": "apps/ml-api/tsconfig.app.json",
-        "assets": ["apps/ml-api/src/assets"],
         "webpackConfig": "apps/ml-api/webpack.config.js",
         "generatePackageJson": false
       },

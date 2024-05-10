@@ -1,16 +1,15 @@
 FROM node:slim AS builder
-RUN npm install -g pnpm
 WORKDIR /build
-RUN cd /build
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-COPY . ./
+RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk -F'@' '{print $2}') && npm install -g "pnpm@$version"
+
+RUN pnpm install --ignore-scripts --frozen-lockfile
+COPY . .
 
 ENV API_URL=$API_URL
 ENV NODE_ENV=production
 
-RUN npx nx run ml-api-web:build-demo:production
-RUN ls -la /build/dist/apps/ml-api-web-demo
+RUN pnpm run build:web-demo:prod
 
 FROM nginx:latest AS deployer
 

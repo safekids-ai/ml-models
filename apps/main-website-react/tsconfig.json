@@ -30,7 +30,8 @@
     "../../dist/apps/main-website-react/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "../../dist/apps/main-website-react/dist/apps/main-website-react/.next/types/**/*.ts"
+    "../../dist/apps/main-website-react/dist/apps/main-website-react/.next/types/**/*.ts",
+    "dist/apps/main-website-react/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

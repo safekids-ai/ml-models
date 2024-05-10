@@ -3,7 +3,7 @@ import {MlController} from './ml.controller';
 import {MlService} from './ml.service';
 
 @Module({
-  controllers: [],
+  controllers: [MlController],
   providers: [MlService],
   exports: [MlService],
 })

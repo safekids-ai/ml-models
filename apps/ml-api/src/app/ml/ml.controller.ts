@@ -20,7 +20,7 @@ import {WebCategory} from "@safekids-ai/web-categorize";
 import {enumToJson} from "../app.utils";
 
 @ApiTags('App')
-@Controller()
+@Controller('v1/ml')
 export class MlController {
   constructor(private readonly appService: MlService) {
   }
@@ -36,7 +36,7 @@ export class MlController {
     },
   })
   @Limit(1024 * 1024)
-  @Post('v1/classify-toxic')
+  @Post('classify-toxic')
   classifyToxic(@Body() request: NLPRequestDto): Promise<NLPResult> {
     return this.appService.classifyHate(request.message);
   }
@@ -68,7 +68,7 @@ export class MlController {
     description: 'Json structure for NLP Text Classification Request. Max size 1MB.',
   })
   @Limit(1024 * 1024)
-  @Post('v1/classify-text')
+  @Post('classify-text')
   classifyText(@Body() request: NLPRequestDto): Promise<NLPLabel> {
     return this.appService.classifyText(request.message);
   }
@@ -76,7 +76,7 @@ export class MlController {
   @ApiBody({
     description: 'Classify image for adult or weapons content. Max size 4MB.',
   })
-  @Post('v1/classify-image')
+  @Post('classify-image')
   @UseInterceptors(FileInterceptor('file'))
   async classifyImage(
     @UploadedFile(new ParseFilePipe({
@@ -91,7 +91,7 @@ export class MlController {
   @ApiBody({
     description: 'Classify image for adult or weapons content',
   })
-  @Get('v1/classify-image-url')
+  @Get('classify-image-url')
   async classifyImageURL(@Query('url') url: string) {
     return await this.appService.classifyImageURL(url);
   }
@@ -99,7 +99,7 @@ export class MlController {
   @ApiBody({
     description: 'Gets a list of categories of a website',
   })
-  @Get('v1/classify-website')
+  @Get('classify-website')
   async classifyWebsite(@Query('uri') uri: string) {
     if (!this.appService.validateURI(uri)) {
       throw new HttpException({
@@ -113,7 +113,7 @@ export class MlController {
   @ApiBody({
     description: 'Gets a list of categories available for website classification',
   })
-  @Get('v1/website-category-codes')
+  @Get('website-category-codes')
   async getWebsiteCategoryCodes() {
     return enumToJson(WebCategory)
   }
