@@ -76,7 +76,7 @@
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.4.0",
     "@swc/helpers": "~0.5.11",
-    "@techstark/opencv-js": "4.9.0-release.1",
+    "@techstark/opencv-js": "4.9.0-release.3",
     "@types/jquery": "^3.5.30",
     "@types/react-slick": "^0.23.13",
     "@types/swagger-schema-official": "^2.0.25",
