@@ -104,10 +104,11 @@ export class DefaultDataService {
   }
 
   async insertDefaultEmailTemplates(): Promise<void> {
+    this.log.info("Sync email templates");
     const emailTemplates = this.getHtmlsForEmailTemplates(DEFAULT_EMAIL_TEMPLATES);
 
     //update email templates
-    //await this.emailTemplateService.deleteAll()
+    await this.emailTemplateService.deleteAll()
     const serverTemplates: EmailTemplateInterface[] = await this.emailTemplateService.list();
 
     //insert or update templates on the service

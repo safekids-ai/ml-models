@@ -1,4 +1,6 @@
-const {NxWebpackPlugin} = require('@nx/webpack');
+//const {NxWebpackPlugin} = require('@nx/webpack');
+const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {join} = require('path');
 
@@ -7,7 +9,7 @@ module.exports = {
     path: join(__dirname, '../../dist/apps/ml-api'),
   },
   plugins: [
-    new NxWebpackPlugin({
+    new NxAppWebpackPlugin({
       target: 'node',
       compiler: 'tsc',
       main: './src/main.ts',
@@ -26,5 +28,7 @@ module.exports = {
         },
       ],
     }),
+    new webpack.HotModuleReplacementPlugin()
   ],
+  watch: process.env['NODE_ENV'] !== 'production'
 };

@@ -138,7 +138,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         this.log.warn('Template ' + template.name + ' already exists. Not creating.');
         return;
       }
-      this.log.error('AWS Email Service. Unable to do postmark.createTemplate', error);
+      this.log.error('Unable to do postmark.createTemplate', error);
       throw error;
     }
   }
@@ -186,7 +186,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
 
       for (let i=0; i < templates.length; i++) {
         const id = templates[i].id
-        this.log.info("Delete template id: ", id)
+        this.log.info("Deleting template id: ", id)
         await this.delete(id)
       }
   }

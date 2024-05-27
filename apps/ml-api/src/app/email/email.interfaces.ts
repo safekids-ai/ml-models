@@ -2,6 +2,7 @@ interface EmailContentInterface {
   body?: string;
   subject?: string;
   templateName?: string;
+  templateId?: string
 }
 
 interface EmailInterface {
