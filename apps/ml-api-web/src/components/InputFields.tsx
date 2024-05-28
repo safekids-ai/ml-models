@@ -4,7 +4,7 @@ import {Field, FieldProps} from 'formik';
 import {IconButton, Button, TextField, Switch, useTheme, Tooltip} from '@mui/material';
 import {makeStyles} from '@mui/styles'
 import PinInputField from 'react-pin-field';
-import Alert from '@mui/lab/Alert';
+import {Alert} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Visibility from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOffOutlined';
@@ -20,6 +20,7 @@ import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {CalendarIcon} from '../svgs';
 import {CSSProperties} from '@mui/styles';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {styled} from '@mui/material/styles';
 
 type InputProps = {
   name: string;
@@ -629,47 +630,44 @@ export const PasswordField: React.FC<PasswordProps> = (props: PasswordProps) => 
     </Field>
   );
 };
-const usePinStyles = makeStyles((theme: AppTheme) => ({
-  root: {
-    display: 'grid',
-    gridTemplateColumns: ({length}: { length: number }) => `repeat(${length},1fr)`,
-    gridGap: '10px',
-    maxWidth: '410px',
-    margin: 'auto',
-    '& .a-reactPinField__input': {
-      width: '100%',
-      maxWidth: '60px',
-      height: '60px',
-      borderRadius: '6.9px',
-      border: `solid 1px ${theme.colors.lightPeriwinkle}`,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: '16px',
-      textAlign: 'center',
-      '&.-success': {
-        borderColor: theme.palette.primary.main,
-      },
-      '&.-focus': {
-        outline: 'none',
-      },
-    },
-  },
+
+const PinInputContainerStyle = styled('div')<{ length: number }>(({ theme, length }) => ({
+  display: 'grid',
+  gridTemplateColumns: `repeat(${length}, 1fr)`,
+  gridGap: '10px',
+  maxWidth: '410px',
+  margin: 'auto',
 }));
+
+const PinInputFieldStyle: React.CSSProperties = {
+  width: '100%',
+  maxWidth: '60px',
+  height: '60px',
+  borderRadius: '6.9px',
+  border: 'solid 1px lightblue', // Use your theme color here
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: '16px',
+  textAlign: 'center',
+};
+
 type PinProps = {
   length?: number;
   onComplete?: (code: string) => void;
   onChange?: (code: string) => void;
   [index: string]: any;
 };
+
 export const PinField: React.FC<PinProps> = (props: PinProps) => {
-  const classes = usePinStyles({length: props.length || 6});
+  const {length = 6, ...restProps} = props;
   return (
-    <div className={classes.root}>
-      <PinInputField length={6} {...props} />
-    </div>
+    <PinInputContainerStyle length={length}>
+      <PinInputField length={length} {...restProps} style={PinInputFieldStyle} />
+    </PinInputContainerStyle>
   );
 };
+
 type DateFieldProps = {
   name: string;
   label: string;
