@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {Formik, Form, FormikHelpers} from 'formik';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import logo from '../../images/getStartedAlt.png';
 import {MessageContainer} from '../../components/InputFields';
 import {validateName, validatePassword} from '../../utils/validations';
@@ -37,8 +37,8 @@ const initialValues = {
   password: '',
 };
 const Signup: React.FC = () => {
+  const navigate = useNavigate();
   const {signup, verifySignup, data: {signup: signupData = {}} = {}, clearSignup} = useAuth();
-  console.log("Abbas", signupData)
   const [state, setState] = useState<State>({
     step: 0,
     isSubmitting: false,
@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
     (code: string) => {
       setState((state) => ({...state, isSubmitting: true}));
       verifySignup(code, () => {
-        history.push('/signin');
+        navigate('/signin');
       });
     },
     [verifySignup, setState],

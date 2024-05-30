@@ -13,7 +13,7 @@
     "build:web-demo:prod": "APP_ENV=production nx build ml-api-web-demo --configuration=production",
     "build:main-website:prod": "APP_ENV=production nx build main-website-react --configuration=production",
     "start:main-website:prod": "APP_ENV=production nx serve main-website-react --configuration=production",
-    "start:prod": "NODE_ENV=production nx run-many --parallel --target=serve --projects=ml-api,ml-api-web --prod",
+    "start:api:web:dev": "APP_ENV=development NODE_ENV=development nx run-many --parallel --target=serve --projects=ml-api,ml-api-web --configuration=development",
     "start:web-demo:prod": "APP_ENV=production nx serve ml-api-web-demo --configuration=production",
     "start:web:prod": "APP_ENV=production nx serve ml-api-web --configuration=production",
     "start:api:prod": "APP_ENV=production nx serve ml-api --configuration=production",

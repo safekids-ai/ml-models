@@ -631,7 +631,7 @@ export const PasswordField: React.FC<PasswordProps> = (props: PasswordProps) => 
   );
 };
 
-const PinInputContainerStyle = styled('div')<{ length: number }>(({ theme, length }) => ({
+const PinInputContainerStyle = styled('div')<{ length: number }>(({theme, length}) => ({
   display: 'grid',
   gridTemplateColumns: `repeat(${length}, 1fr)`,
   gridGap: '10px',
@@ -663,7 +663,7 @@ export const PinField: React.FC<PinProps> = (props: PinProps) => {
   const {length = 6, ...restProps} = props;
   return (
     <PinInputContainerStyle length={length}>
-      <PinInputField length={length} {...restProps} style={PinInputFieldStyle} />
+      <PinInputField length={length} {...restProps} style={PinInputFieldStyle}/>
     </PinInputContainerStyle>
   );
 };
