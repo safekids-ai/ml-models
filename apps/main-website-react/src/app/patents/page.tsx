@@ -59,7 +59,16 @@ const Patents = () => {
                     target="_blank"
                     href="/docs/patents/11356734.pdf"
                   >
-                    Methods and systems for counseling a user with respect to
+                    <i>#11,356,734</i> - Methods and systems for counseling a user with respect to
+                    supervised content
+                  </a>
+                </p>
+                <p className="text-[#0d6efd] mb-[1rem] text-lg">
+                  <a
+                    target="_blank"
+                    href="/docs/patents/11991415.pdf"
+                  >
+                    <i>#11,991,415</i> - Methods and systems for counseling a user with respect to
                     supervised content
                   </a>
                 </p>
@@ -100,7 +109,7 @@ const Patents = () => {
                     target="_blank"
                     href="/docs/patents/10949774.pdf"
                   >
-                    Methods and systems for supervising displayed content
+                    <i>#10,949,774</i> - Methods and systems for supervising displayed content
                   </a>
                 </p>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
@@ -129,7 +138,7 @@ const Patents = () => {
                     target="_blank"
                     href="/docs/patents/11309086.pdf"
                   >
-                    Methods and systems for interactively counseling a user with
+                    <i>#11,309,086</i> - Methods and systems for interactively counseling a user with
                     respect to supervised content
                   </a>
                 </p>
