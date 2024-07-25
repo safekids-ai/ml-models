@@ -4,10 +4,11 @@ import {visionConfig} from './model'
 import * as Logger from 'abstract-logging';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const cv = require("@techstark/opencv-js");
+//const cv = require("@techstark/opencv-js");
+import cv from "@techstark/opencv-js";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const imageDataUtils = require('@andreekeberg/imagedata')
-
+//const imageDataUtils = require('@andreekeberg/imagedata')
+import imageDataUtils from '@andreekeberg/imagedata';
 
 abstract class Vision {
   public static readonly version: string = "0.0.1";
@@ -22,7 +23,7 @@ abstract class Vision {
 
   public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
-  public async handleCreateSession(onnxFile: string) : Promise<InferenceSession> {
+  public async handleCreateSession(onnxFile: string): Promise<InferenceSession> {
     if (this.logger) {
       this.logger.debug("initialized opencv");
     }
@@ -36,8 +37,8 @@ abstract class Vision {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this;
     if (cv && cv.Mat) {
-       await this.handleCreateSession(this.onnxUrl);
-       return;
+      await this.handleCreateSession(this.onnxUrl);
+      return;
     }
 
     return new Promise((resolve, reject) => {
@@ -93,7 +94,7 @@ abstract class Vision {
 
     const inferenceTime = new Date().getTime() - startTime;
 
-    if(this.logger) {
+    if (this.logger) {
       const totalTime = preProcessingTime + inferenceTime;
       this.logger.debug(`vision: label: ${label} finalLabel: ${finalLabel} maxIndex: ${maxIndex} maxProb: ${maxProb} inferenceTime: ${inferenceTime} totalTime: ${totalTime}`);
     }
@@ -113,10 +114,15 @@ abstract class Vision {
 
 async function getImageTensor(imageInput: ImageData | Buffer): Promise<Tensor> {
   const matC3 = new cv.Mat(224, 224, cv.CV_8UC3);
-  let imageData : ImageData = null;
+  let imageData: ImageData = null;
 
   if (imageInput instanceof Buffer) {
-    imageData = await imageDataUtils.getSync(imageInput);
+    if (typeof window === 'undefined') {
+      const imageDataUtils = require('@andreekeberg/imagedata')
+      imageData = await imageDataUtils.getSync(imageInput);
+    } else {
+      throw new Error("Please provide an ImageData if working on the browser vs. Buffer")
+    }
   } else {
     imageData = imageInput;
   }

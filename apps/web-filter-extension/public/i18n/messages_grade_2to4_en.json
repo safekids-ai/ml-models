@@ -1,0 +1,111 @@
+{
+	"dir": "ltr",
+	"alertMessage": [
+		"This is not what you should be doing, is it?",
+		"This isn't appropriate, is it?",
+		"You didn't mean to click here, right?",
+		"Whoops! Is that what you meant to do?",
+		"Pretty sure you didn't mean to do that, right?",
+		"Are you sure you meant to do that?",
+		"Would you like to try that again?",
+		"Let's try that again, shall we?",
+		"Is this what you should be doing right now?",
+		"That wasn't the right thing to click, was it?",
+		"This isn't what you should be doing right now, is it?",
+		"Is this really the right time for this?",
+		"This is not the right time for this, is it?",
+		"Hmm... Is this what you're meant to be looking at right now?",
+		"Hmm... This isn't what you're meant to be looking at right now, is it?",
+		"Whoops! This isn't what you meant to do, right?"
+	],
+	"informMessageAI": [
+		"Howdy! Our AI thinks this page might be unsafe. <br> <br> If you feel we made a mistake, choose CONTINUE and we'll let an adult know."
+	],
+	"informMessage": [
+		"Hey! When you visit sites related to <Category>, we let an adult know.<br> <br>Want to keep going?"
+	],
+	"prr1.screen1.tellMeMore": "Tell me more",
+	"prr1.screen2.mistake": "If you think we made a mistake by intercepting this site,",
+	"prr1.screen2.letUsKnow": "let us know.",
+	"prr1.feedback.message": "We'll take a look at this site to see why we thought it was a problem.",
+	"prr1.feedback.thanks": "Thanks for your feedback.",
+	"prr3.weapons.1": "This doesn't seem like a good site for you to be on.",
+	"prr3.weapons.2": "Why don't you take a break, and we will let your parent know?",
+	"prr3.selfHarm.1": "It is OK to need help.",
+	"prr3.selfHarm.2": "Call this number for help",
+	"prr3.selfHarm.3": "National Suicide Prevention Lifeline",
+	"prr3.selfHarm.4": "We'll let your parent know you might need someone to talk to now.",
+	"takeMeBack": "Take me back",
+	"iUnderstand": "I UNDERSTAND",
+	"messageParent": "Message my parent",
+	"backToWork": "Back to safety",
+	"prr2Screen1Text1": "It looks like you might be distracted.",
+	"prr2Screen1Text2": "I UNDERSTAND",
+	"PrrLevel2CountDownText1": "After the countdown, let's try again.",
+	"PrrLevel2CountDownText2": "Let's go back. We can try again.",
+	"chooseAParentBelow": "Please pick a parent",
+	"send": "Send",
+	"explicitContentPart1": [
+		"It's normal to want to learn about grown up stuff.",
+		"It's natural to want to learn about adult things."
+	],
+	"explicitContentPart2": [
+		"Did you know that this is not a good way to learn about being a grown up?",
+		"Did you know that stuff like this is often made by hurting women and children?"
+	],
+	"situationalAwarenessPart1": [
+		"We all end up clicking on things we shouldn't.",
+		"Once in a while, we make a mistake.",
+		"Sometimes we click on something we shouldn't."
+	],
+	"situationalAwarenessPart2": [
+		"Did you know that taking a few deep breaths can help you make better choices?",
+		"Did you know that taking a little break can help you make better choices?",
+		"Did you know that doing 10 jumping jacks can help calm your mind?",
+		"Did you know that spending less time in front of a screen may help you sleep better?",
+		"Did you know that too many distractions during the day can make it hard to sleep?"
+	],
+	"communicationQuestions": [
+		"Let's try setting a goal for being online. <br> <span class='choose-one-or-more'>Choose one or more of the following:</span>",
+		"That sounds good. <br> <br> If you reached this goal, how would you feel?",
+		"If you did this, what would happen?",
+		"You are doing well! Keep going! <br> <br> What's in the way of your reaching this goal?"
+	],
+	"questionScreenS": [
+		"What's getting in your way of staying on track?",
+		"What do you want to do about it?"
+	],
+	"questionScreenP": [
+		"What else do you want to tell your parent?"
+	],
+	"questionChoices": [
+		[
+			"Spend more time outside",
+			"Spend less time in front of a screen",
+			"Not get in trouble",
+			"Rest my brain",
+			"Stay focused on school work"
+		],
+		[
+			"Proud of myself",
+			"Confident",
+			"Happy and good",
+			"Energized",
+			"Excited"
+		],
+		[
+			"I would get praise from people who matter to me",
+			"I would do better in school",
+			"I would sleep better",
+			"I would get more freedom at home",
+			"I would not get in trouble"
+		],
+		[
+			"I want to play online right now",
+			"I don't want to do school work right now",
+			"I'm tired",
+			"I want to play with my friends right now",
+			"I'm bored"
+		]
+	]
+}
