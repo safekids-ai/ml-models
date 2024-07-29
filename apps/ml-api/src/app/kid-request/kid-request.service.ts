@@ -15,7 +15,7 @@ import { Op, QueryTypes } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from '../user/entities/user.entity';
 import { UserErrors } from '../consumer/user/users.errors';
-import { addDays } from 'date-fns';
+import {DateUtils} from "../utils/dateUtils"
 
 @Injectable()
 export class KidRequestService {
@@ -60,7 +60,7 @@ export class KidRequestService {
                 type: KidRequestTypes.ASK,
                 accessGranted: false,
                 updatedAt: {
-                    [Op.gt]: addDays(new Date(), -2),
+                    [Op.gt]: DateUtils.addDays(new Date(), -2),
                 },
             },
         });

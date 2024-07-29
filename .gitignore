@@ -39,6 +39,8 @@ testem.log
 Thumbs.db
 
 .nx/cache
+.nx/tmp
+.nx/installation
 
 # Next.js
 .next
@@ -49,3 +51,4 @@ logs
 
 .env
 migrations.json
+
