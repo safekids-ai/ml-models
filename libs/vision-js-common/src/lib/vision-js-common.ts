@@ -2,13 +2,12 @@ import {VisionLabel} from "@safekids-ai/vision-js-types";
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {visionConfig} from './model'
 import * as Logger from 'abstract-logging';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-//const cv = require("@techstark/opencv-js");
 import cv from "@techstark/opencv-js";
+
+//const cv = require("@techstark/opencv-js");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 //const imageDataUtils = require('@andreekeberg/imagedata')
-import imageDataUtils from '@andreekeberg/imagedata';
+//import imageDataUtils from '@andreekeberg/imagedata';
 
 abstract class Vision {
   public static readonly version: string = "0.0.1";
@@ -71,7 +70,8 @@ abstract class Vision {
   //   return this.classifyImageData(imageData);
   // }
 
-  public async classifyImage(imageData: ImageData | Buffer): Promise<VisionLabel> {
+
+  public async classifyImage(imageData: ImageData): Promise<VisionLabel> {
     if (!this.session) {
       throw new Error("Please call init() to initialize the InferenceSession");
     }
@@ -112,20 +112,8 @@ abstract class Vision {
   }
 }
 
-async function getImageTensor(imageInput: ImageData | Buffer): Promise<Tensor> {
+async function getImageTensor(imageData: ImageData): Promise<Tensor> {
   const matC3 = new cv.Mat(224, 224, cv.CV_8UC3);
-  let imageData: ImageData = null;
-
-  if (imageInput instanceof Buffer) {
-    if (typeof window === 'undefined') {
-      const imageDataUtils = require('@andreekeberg/imagedata')
-      imageData = await imageDataUtils.getSync(imageInput);
-    } else {
-      throw new Error("Please provide an ImageData if working on the browser vs. Buffer")
-    }
-  } else {
-    imageData = imageInput;
-  }
 
   const mat = cv.matFromImageData(imageData);
   cv.cvtColor(mat, matC3, cv.COLOR_RGBA2BGR); // RGBA to BGR

@@ -49,7 +49,7 @@ test('weapons', async () => {
 
 test('weapons-as-binary', async () => {
   const buffer = fs.readFileSync(qa_path + "gun1.jpg");
-  const pred = await vision.classifyImage(buffer);
+  const pred = await vision.classifyImageBuffer(buffer);
   expect(pred).toEqual("weapons");
 });
 

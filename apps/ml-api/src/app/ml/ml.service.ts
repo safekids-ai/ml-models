@@ -45,8 +45,8 @@ export class MlService implements OnModuleInit {
     return await this.nlpModel.classifyText(message);
   }
 
-  async classifyImage(input: Buffer | ImageData): Promise<VisionLabel> {
-    return await this.visionModel.classifyImage(input);
+  async classifyImage(input: Buffer): Promise<VisionLabel> {
+    return await this.visionModel.classifyImageBuffer(input);
   }
 
   async classifyImageURL(url: string): Promise<VisionLabel> {

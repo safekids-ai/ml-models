@@ -4,6 +4,8 @@ import {InferenceSession} from "onnxruntime-common";
 import * as Logger from 'abstract-logging';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ort = require('onnxruntime-node');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const imageDataUtils = require('@andreekeberg/imagedata')
 
 class VisionNode extends Vision {
   constructor(modelUrl: string, logger?: Logger) {
@@ -13,6 +15,11 @@ class VisionNode extends Vision {
   public createSession(modelUrl: string): Promise<InferenceSession> {
     return ort.InferenceSession.create(modelUrl,
       {graphOptimizationLevel: 'all'});
+  }
+
+  public async classifyImageBuffer(imageInput: Buffer): Promise<VisionLabel> {
+    const imageData: ImageData = await imageDataUtils.getSync(imageInput);
+    return super.classifyImage(imageData)
   }
 }
 
