@@ -17,7 +17,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { SubscriptionFeedbackService } from '../subscription-feedback/subscription-feedback.service';
 import { SubscriptionFeedbackDto } from '../subscription-feedback/dto/subscription-feedback-dto';
 import { Cron } from '@nestjs/schedule';
-import { addDays } from 'date-fns';
+import {DateUtils} from "../../utils/dateUtils"
 import { QueryTypes } from 'sequelize';
 import { EmailInterface } from '../../email/email.interfaces';
 import { Plan } from '../plan/entities/plan.entity';
@@ -294,7 +294,7 @@ export class SubscriptionService {
     @Cron('0 0 0 * * *')
     async subscriptionCancelOrRenewJob(): Promise<void> {
         this.logger.info('CRON JOB STARTED TO Check Cancel Or Renew Job....', new Date());
-        const tomorrowDate = addDays(new Date(), +1);
+        const tomorrowDate = DateUtils.addDays(new Date(), +1);
         const query =
             'select ' +
             'account_id, ' +
