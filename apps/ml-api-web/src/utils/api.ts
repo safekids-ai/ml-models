@@ -2,6 +2,7 @@ import Axios, {AxiosInstance, AxiosResponse, AxiosRequestConfig, InternalAxiosRe
 import {pathOr} from 'ramda';
 import {createBrowserHistory} from 'history';
 import * as Sentry from '@sentry/react';
+import { SeverityLevel } from '@sentry/types';
 import {logDebug, logError} from './helpers';
 import {GET_NOTIFICATIONS} from './endpoints';
 import {hasStorage} from '../constants';
@@ -65,11 +66,12 @@ let responseInterceptors: ResponseInterceptor[] = [
         accountType === 'SCHOOL' ? history.push('/school-signin') : history.push('/signin');
         localStorage.removeItem('account_type');
       } else if (url !== GET_NOTIFICATIONS) {
+        const url = response.config?.url || 'Unknown URL';
         Sentry.addBreadcrumb({
           category: 'api-response',
           message: 'API response',
-          level: Sentry.Severity.Info,
-          data: {url: response.config?.url},
+          severityLevel: 'info',
+          data: {url: url},
         });
       }
       return response;
@@ -87,7 +89,7 @@ let responseInterceptors: ResponseInterceptor[] = [
       Sentry.addBreadcrumb({
         category: 'api-error',
         message: 'Error in API response',
-        level: Sentry.Severity.Error,
+        severityLevel: 'error',
         data: {response: responseData},
       });
       return Promise.reject(error);
@@ -164,7 +166,7 @@ function setRequestInterceptor(interceptor: Omit<RequestInterceptor, 'id'>) {
     interceptor.onSuccess as (value: InternalAxiosRequestConfig<any>) => InternalAxiosRequestConfig<any> | Promise<InternalAxiosRequestConfig<any>>,
     interceptor.onError
   );
-  return { ...interceptor, id };
+  return {...interceptor, id};
 }
 
 function setInterceptors() {

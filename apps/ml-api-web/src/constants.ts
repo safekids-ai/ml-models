@@ -1,4 +1,4 @@
-export const release = ""//process.env.REACT_APP_SENTRY_RELEASE;
+export const release = import.meta.env.REACT_APP_SENTRY_RELEASE;
 export const productionBuild = import.meta.env.APP_ENV === 'production';
 export const isStaging = import.meta.env.APP_ENV === 'staging';
 export const isProduction = productionBuild;

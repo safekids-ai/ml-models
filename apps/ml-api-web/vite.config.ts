@@ -11,6 +11,7 @@ const APP_ENV = process.env.APP_ENV || 'production'
 let API_URL = process.env.API_URL
 let PUBLIC_URL = process.env.PUBLIC_URL
 let NODE_ENV = process.env.NODE_ENV
+let REACT_APP_SENTRY_RELEASE = process.env.REACT_APP_SENTRY_RELEASE
 
 if (!PUBLIC_URL) {
   PUBLIC_URL = (APP_ENV === 'production') ? "https://app.safekids.ai" : "http://localhost:5200"
@@ -27,7 +28,8 @@ export default defineConfig({
   define: {
     'import.meta.env.API_URL': JSON.stringify(API_URL),
     'import.meta.env.APP_ENV': JSON.stringify(APP_ENV),
-    'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL)
+    'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL),
+    'import.meta.env.REACT_APP_SENTRY_RELEASE': JSON.stringify(REACT_APP_SENTRY_RELEASE)
   },
 
   server: {

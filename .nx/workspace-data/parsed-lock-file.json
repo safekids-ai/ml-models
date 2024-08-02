@@ -6012,6 +6012,15 @@
         "hash": "sha512-6IP278KojOpiAA7vrd1hjhUyn26cl0n0nGsShzic5ztCVs92sTeVRnh7MTB9irDVtAbOEyt/YH6go3h+Jia1pA=="
       }
     },
+    "npm:@sentry/types": {
+      "type": "npm",
+      "name": "npm:@sentry/types",
+      "data": {
+        "version": "8.22.0",
+        "packageName": "@sentry/types",
+        "hash": "sha512-1MLK3xO+uF2oJaa+M98aLIrQsEHzV7xnVWPfE3MhejYLNQebj4rQnQKTut/xZNIF9W0Q+bRcakLarC3ce2a74g=="
+      }
+    },
     "npm:@sentry/utils@7.114.0": {
       "type": "npm",
       "name": "npm:@sentry/utils@7.114.0",

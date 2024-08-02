@@ -122,6 +122,9 @@ importers:
       '@sentry/tracing':
         specifier: ^7.114.0
         version: 7.114.0
+      '@sentry/types':
+        specifier: ^8.22.0
+        version: 8.22.0
       '@stripe/react-stripe-js':
         specifier: ^2.7.3
         version: 2.7.3(@stripe/stripe-js@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4158,6 +4161,10 @@ packages:
 
   '@sentry/types@8.20.0':
     resolution: {integrity: sha512-6IP278KojOpiAA7vrd1hjhUyn26cl0n0nGsShzic5ztCVs92sTeVRnh7MTB9irDVtAbOEyt/YH6go3h+Jia1pA==}
+    engines: {node: '>=14.18'}
+
+  '@sentry/types@8.22.0':
+    resolution: {integrity: sha512-1MLK3xO+uF2oJaa+M98aLIrQsEHzV7xnVWPfE3MhejYLNQebj4rQnQKTut/xZNIF9W0Q+bRcakLarC3ce2a74g==}
     engines: {node: '>=14.18'}
 
   '@sentry/utils@7.114.0':
@@ -18489,6 +18496,8 @@ snapshots:
   '@sentry/types@7.114.0': {}
 
   '@sentry/types@8.20.0': {}
+
+  '@sentry/types@8.22.0': {}
 
   '@sentry/utils@7.114.0':
     dependencies:
