@@ -39,7 +39,9 @@ export default defineConfig({
     port: portPreview,
     host: true,
   },
-
+  build: {
+    sourcemap: true,
+  },
   plugins:
     [
       react(),

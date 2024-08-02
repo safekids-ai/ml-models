@@ -1,6 +1,6 @@
 export class Urls {
-    static signInURL: string = `${process.env.FRONTEND_URL}signin`;
-    static signUpURL: string = `${process.env.FRONTEND_URL}signup`;
+    static signInURL: string = `${import.meta.env.PUBLIC_URL}signin`;
+    static signUpURL: string = `${import.meta.env.PUBLIC_URL}signup`;
 
     static async setupSignInURL(url: string) {
         return `${url}signin`;

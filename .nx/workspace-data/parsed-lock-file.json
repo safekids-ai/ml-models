@@ -5859,6 +5859,15 @@
         "hash": "sha512-sCiI7SOAHq5XsxkixtoMofeSyKd/hVgDV+4145f6nN9m7nLzig4PBQwh2SgK2piJ2mfaXfqcdzA1pShPYldaJA=="
       }
     },
+    "npm:@sentry-internal/tracing": {
+      "type": "npm",
+      "name": "npm:@sentry-internal/tracing",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry-internal/tracing",
+        "hash": "sha512-dOuvfJN7G+3YqLlUY4HIjyWHaRP8vbOgF+OsE5w2l7ZEn1rMAaUbPntAR8AF9GBA6j2zWNoSo8e7GjbJxVofSg=="
+      }
+    },
     "npm:@sentry/browser": {
       "type": "npm",
       "name": "npm:@sentry/browser",
@@ -5940,13 +5949,31 @@
         "hash": "sha512-9MOzQy1UunVBhPOfEuO0JH2ofWAMmZVavTTR/Bo2CkJwI1qjyVF0UKLTXE3l4ujiJnFufOoBsVyKmYWXFerbCw=="
       }
     },
-    "npm:@sentry/core": {
+    "npm:@sentry/core@7.114.0": {
       "type": "npm",
-      "name": "npm:@sentry/core",
+      "name": "npm:@sentry/core@7.114.0",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry/core",
+        "hash": "sha512-YnanVlmulkjgZiVZ9BfY9k6I082n+C+LbZo52MTvx3FY6RE5iyiPMpaOh67oXEZRWcYQEGm+bKruRxLVP6RlbA=="
+      }
+    },
+    "npm:@sentry/core@8.20.0": {
+      "type": "npm",
+      "name": "npm:@sentry/core@8.20.0",
       "data": {
         "version": "8.20.0",
         "packageName": "@sentry/core",
         "hash": "sha512-R81snuw+67VT4aCxr6ShST/s0Y6FlwN2YczhDwaGyzumn5rlvA6A4JtQDeExduNoDDyv4T3LrmW8wlYZn3CJJw=="
+      }
+    },
+    "npm:@sentry/integrations": {
+      "type": "npm",
+      "name": "npm:@sentry/integrations",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry/integrations",
+        "hash": "sha512-BJIBWXGKeIH0ifd7goxOS29fBA8BkEgVVCahs6xIOXBjX1IRS6PmX0zYx/GP23nQTfhJiubv2XPzoYOlZZmDxg=="
       }
     },
     "npm:@sentry/react": {
@@ -5958,18 +5985,45 @@
         "hash": "sha512-vqA0o9ysdfA24/ADhsJwsmCNdUWRu2ycmVN1Sr76v+ZggyOCFzE7XD13kbqk1G3jPb8nptNu/6Zwpcy5pP4mtw=="
       }
     },
-    "npm:@sentry/types": {
+    "npm:@sentry/tracing": {
       "type": "npm",
-      "name": "npm:@sentry/types",
+      "name": "npm:@sentry/tracing",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry/tracing",
+        "hash": "sha512-eldEYGADReZ4jWdN5u35yxLUSTOvjsiZAYd4KBEpf+Ii65n7g/kYOKAjNl7tHbrEG1EsMW4nDPWStUMk1w+tfg=="
+      }
+    },
+    "npm:@sentry/types@7.114.0": {
+      "type": "npm",
+      "name": "npm:@sentry/types@7.114.0",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry/types",
+        "hash": "sha512-tsqkkyL3eJtptmPtT0m9W/bPLkU7ILY7nvwpi1hahA5jrM7ppoU0IMaQWAgTD+U3rzFH40IdXNBFb8Gnqcva4w=="
+      }
+    },
+    "npm:@sentry/types@8.20.0": {
+      "type": "npm",
+      "name": "npm:@sentry/types@8.20.0",
       "data": {
         "version": "8.20.0",
         "packageName": "@sentry/types",
         "hash": "sha512-6IP278KojOpiAA7vrd1hjhUyn26cl0n0nGsShzic5ztCVs92sTeVRnh7MTB9irDVtAbOEyt/YH6go3h+Jia1pA=="
       }
     },
-    "npm:@sentry/utils": {
+    "npm:@sentry/utils@7.114.0": {
       "type": "npm",
-      "name": "npm:@sentry/utils",
+      "name": "npm:@sentry/utils@7.114.0",
+      "data": {
+        "version": "7.114.0",
+        "packageName": "@sentry/utils",
+        "hash": "sha512-319N90McVpupQ6vws4+tfCy/03AdtsU0MurIE4+W5cubHME08HtiEWlfacvAxX+yuKFhvdsO4K4BB/dj54ideg=="
+      }
+    },
+    "npm:@sentry/utils@8.20.0": {
+      "type": "npm",
+      "name": "npm:@sentry/utils@8.20.0",
       "data": {
         "version": "8.20.0",
         "packageName": "@sentry/utils",
@@ -14562,6 +14616,15 @@
         "hash": "sha512-541xKlUw6jr/6gGuk92F+mYM5zaFAc5ahphvkqvNe2bQ6gVBkd6bfrmVJ2t4KDAfikAYZyIqTnktX3i6/aQDrQ=="
       }
     },
+    "npm:immediate": {
+      "type": "npm",
+      "name": "npm:immediate",
+      "data": {
+        "version": "3.0.6",
+        "packageName": "immediate",
+        "hash": "sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ=="
+      }
+    },
     "npm:immer": {
       "type": "npm",
       "name": "npm:immer",
@@ -16632,6 +16695,15 @@
         "hash": "sha512-771TFWFD70G1wLTC4oU2Cw4qvtmNrIw+wRvBtn+okgHl7slJVi7zfNcdmqDL72BojM30VNJ2UHylr1o77U37Jw=="
       }
     },
+    "npm:lie": {
+      "type": "npm",
+      "name": "npm:lie",
+      "data": {
+        "version": "3.1.1",
+        "packageName": "lie",
+        "hash": "sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw=="
+      }
+    },
     "npm:light-my-request": {
       "type": "npm",
       "name": "npm:light-my-request",
@@ -16738,6 +16810,15 @@
         "version": "3.3.1",
         "packageName": "loader-utils",
         "hash": "sha512-FMJTLMXfCLMLfJxcX9PFqX5qD88Z5MRGaZCVzfuqeZSPsyiBzs+pahDQjbIWz2QIzPZz0NX9Zy4FX3lmK6YHIg=="
+      }
+    },
+    "npm:localforage": {
+      "type": "npm",
+      "name": "npm:localforage",
+      "data": {
+        "version": "1.10.0",
+        "packageName": "localforage",
+        "hash": "sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg=="
       }
     },
     "npm:locate-path@3.0.0": {
@@ -37777,32 +37858,32 @@
     },
     {
       "source": "npm:@sentry-internal/browser-utils",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/browser-utils",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/browser-utils",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/feedback",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/feedback",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/feedback",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
       "type": "static"
     },
     {
@@ -37812,17 +37893,17 @@
     },
     {
       "source": "npm:@sentry-internal/replay-canvas",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/replay-canvas",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/replay-canvas",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
       "type": "static"
     },
     {
@@ -37832,17 +37913,32 @@
     },
     {
       "source": "npm:@sentry-internal/replay",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/replay",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry-internal/replay",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry-internal/tracing",
+      "target": "npm:@sentry/core@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry-internal/tracing",
+      "target": "npm:@sentry/types@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry-internal/tracing",
+      "target": "npm:@sentry/utils@7.114.0",
       "type": "static"
     },
     {
@@ -37867,17 +37963,17 @@
     },
     {
       "source": "npm:@sentry/browser",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry/browser",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry/browser",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
       "type": "static"
     },
     {
@@ -37941,13 +38037,43 @@
       "type": "static"
     },
     {
-      "source": "npm:@sentry/core",
-      "target": "npm:@sentry/types",
+      "source": "npm:@sentry/core@7.114.0",
+      "target": "npm:@sentry/types@7.114.0",
       "type": "static"
     },
     {
-      "source": "npm:@sentry/core",
-      "target": "npm:@sentry/utils",
+      "source": "npm:@sentry/core@7.114.0",
+      "target": "npm:@sentry/utils@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/core@8.20.0",
+      "target": "npm:@sentry/types@8.20.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/core@8.20.0",
+      "target": "npm:@sentry/utils@8.20.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/integrations",
+      "target": "npm:@sentry/core@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/integrations",
+      "target": "npm:@sentry/types@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/integrations",
+      "target": "npm:@sentry/utils@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/integrations",
+      "target": "npm:localforage",
       "type": "static"
     },
     {
@@ -37957,17 +38083,17 @@
     },
     {
       "source": "npm:@sentry/react",
-      "target": "npm:@sentry/core",
+      "target": "npm:@sentry/core@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry/react",
-      "target": "npm:@sentry/types",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
       "source": "npm:@sentry/react",
-      "target": "npm:@sentry/utils",
+      "target": "npm:@sentry/utils@8.20.0",
       "type": "static"
     },
     {
@@ -37981,8 +38107,18 @@
       "type": "static"
     },
     {
-      "source": "npm:@sentry/utils",
-      "target": "npm:@sentry/types",
+      "source": "npm:@sentry/tracing",
+      "target": "npm:@sentry-internal/tracing",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/utils@7.114.0",
+      "target": "npm:@sentry/types@7.114.0",
+      "type": "static"
+    },
+    {
+      "source": "npm:@sentry/utils@8.20.0",
+      "target": "npm:@sentry/types@8.20.0",
       "type": "static"
     },
     {
@@ -50771,6 +50907,11 @@
       "type": "static"
     },
     {
+      "source": "npm:lie",
+      "target": "npm:immediate",
+      "type": "static"
+    },
+    {
       "source": "npm:light-my-request",
       "target": "npm:cookie",
       "type": "static"
@@ -50928,6 +51069,11 @@
     {
       "source": "npm:loader-utils@2.0.4",
       "target": "npm:json5@2.2.3",
+      "type": "static"
+    },
+    {
+      "source": "npm:localforage",
+      "target": "npm:lie",
       "type": "static"
     },
     {

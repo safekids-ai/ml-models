@@ -12,7 +12,7 @@ const getUrl = () => {
   return url.length >= 2 ? url[0] + ':' + url[1] : 'http://localhost';
 };
 // const API_URL = 'https://api.safekids.dev/';
-const API_URL = process.env.REACT_APP_API_URL || `${getUrl()}:4001/`;
+const API_URL = import.meta.env.API_URL;
 
 logDebug('Using API:' + API_URL);
 
