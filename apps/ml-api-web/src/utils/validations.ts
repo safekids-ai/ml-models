@@ -72,7 +72,6 @@ export function validatePhoneNumber(value: string, label: string) {
 }
 
 export function validateEmergencyContactPhone(value: string) {
-    // eslint-disable-next-line no-useless-escape
     return /^[\+]?(\d{1})?(\d{1})?(\s)?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{4,6}$/.test(value) ? undefined : 'Please enter a valid number';
 }
 
@@ -110,14 +109,12 @@ export function validateURL(url: string): string | undefined {
 }
 
 export function validateProcessName(name: string): string | undefined {
-    // eslint-disable-next-line no-useless-escape
     const reservedCharacters = /^[^\\/:\*\?"<>\|]+$/; // reserved characters \ / : * ? " < > |
     const reservedNames = /^(AUX|NUL|PRN|CON|LPT[0-9]|COM[0-9])(\.|$)/i; // case-insensitive reserved words and forbidden file names
     return reservedCharacters.test(name) && !reservedNames.test(name) ? undefined : 'Invalid process name';
 }
 
 export function validateWebsite(url: string): string | undefined {
-    // eslint-disable-next-line no-useless-escape
     const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z@:%_\+.~#?&//=]*)/gi;
     const found = url.match(regex);
     if (found && found.length === 1) {

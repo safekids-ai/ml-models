@@ -20,6 +20,16 @@ const Processes = ({ refreshProcesses, unSetRefreshProcesses, selectedKidId, cle
     const [loading, setLoading] = React.useState(false);
     const { showNotification } = useNotificationToast();
 
+    React.useEffect(() => {
+        getFilteredProcesses();
+    }, []);
+    React.useEffect(() => {
+        if (refreshProcesses) {
+            getFilteredProcesses();
+            unSetRefreshProcesses();
+        }
+    }, [refreshProcesses]);
+
     const getFilteredProcesses = React.useCallback(() => {
         setLoading(true);
         getRequest<{}, IFilteredProcesses[]>(GET_FILTERED_PROCESS, {})
@@ -36,18 +46,7 @@ const Processes = ({ refreshProcesses, unSetRefreshProcesses, selectedKidId, cle
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
-
-    React.useEffect(() => {
-        getFilteredProcesses();
-    }, [getFilteredProcesses]);
-    React.useEffect(() => {
-        if (refreshProcesses) {
-            getFilteredProcesses();
-            unSetRefreshProcesses();
-        }
-    }, [getFilteredProcesses, refreshProcesses, unSetRefreshProcesses]);
-
+    }, []);
 
     return (
         <Root>

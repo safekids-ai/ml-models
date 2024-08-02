@@ -1,10 +1,10 @@
 import React, {ReactNode, useState, useEffect, useMemo, useRef, ReactElement} from 'react';
 import {fieldToTextField} from 'formik-mui';
 import {Field, FieldProps} from 'formik';
-import {IconButton, Button, TextField, Switch, useTheme, Tooltip} from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import {IconButton, Button, TextField, Switch, useTheme, Tooltip, InputAdornment} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import PinInputField from 'react-pin-field';
-import Alert from '@mui/lab/Alert';
+import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
 import Visibility from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOffOutlined';
@@ -16,9 +16,11 @@ import {getPasswordStrength} from '../utils/passwordStrength';
 import Loader from './Loader';
 import {isSomething} from '../utils/helpers';
 import {AppTheme} from '../theme';
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {CalendarIcon} from '../svgs';
-import {CSSProperties} from '@mui/styles';
+import {CSSProperties} from '@mui/styles/withStyles';
+import {Routes} from "react-router-dom";
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 
 type InputProps = {
@@ -684,7 +686,6 @@ export const DateField = ({
                             name,
                             label,
                             openTo = 'year',
-                            views,
                             format = 'yyyy',
                             showClear = false,
                             onlyDay = true,
@@ -703,10 +704,8 @@ export const DateField = ({
         return (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              //ABBAS FIX ME inputVariant="outlined"
-              //ABBAS FIX ME style={{width: '100%'}}
               disableFuture
-              //ABBAS FIX ME showTodayButton
+              //showTodayButton
               readOnly={readOnly}
               {...rest}
               className="input-field date-field"
@@ -724,23 +723,26 @@ export const DateField = ({
               name={name}
               label={label}
               openTo={openTo}
-              //ABBAS FIX ME error={!!error && touched}
-
-              //   InputProps={{
-              //     disableUnderline: true,
-              //     endAdornment:
-              //       value && showClear ? (
-              //         <ClearFieldButton
-              //           onClick={() => {
-              //             setFieldValue(name, null);
-              //           }}
-              //           visible
-              //         />
-              //       ) : (
-              //         <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main}/>
-              //       ),
-              //   }}
-              //   views={views}
+              slots={{ textField: TextField }}
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  variant: 'outlined',
+                  error: !!error && touched,
+                  InputProps: {
+                    disableUnderline: true,
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {value && showClear ? (
+                          <ClearFieldButton onClick={() => setFieldValue(name, null)} />
+                        ) : (
+                          <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main} />
+                        )}
+                      </InputAdornment>
+                    ),
+                  },
+                },
+              }}
             />
           </LocalizationProvider>
         );

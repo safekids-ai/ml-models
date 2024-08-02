@@ -24,7 +24,7 @@ export const InputElement = ({ component, placeholder, label, onChange: onChange
     const [shrink, setShrink] = useState(false);
     const [error, setError] = useState(true);
     const onChange = useCallback(
-        (props: any) => {
+        (props) => {
             const { empty, complete, value, error, ...rest } = props;
             console.log('Change', empty, complete, value, rest);
             setError(!!error);

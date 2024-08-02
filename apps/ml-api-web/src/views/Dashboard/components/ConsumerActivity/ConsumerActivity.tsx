@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, MenuItem, Select } from '@mui/material';
 import Loader from '../../../../components/Loader';
 import { getRequest } from '../../../../utils/api';
@@ -19,8 +19,12 @@ const ConsumerActivity = () => {
     const [loading, setLoading] = useState(false);
     const [kids, setkids] = useState<KidInfo[]>([]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getKids = useCallback((filter: string) => {
+    useEffect(() => {
+        setLoading(true);
+        getKids(selectedTimeFilter);
+    }, [selectedTimeFilter]);
+
+    const getKids = (filter: string) => {
         getRequest<{}, KidInfo[]>(GET_CONSUMER_KIDS, {
             start: activityTime(filter),
             end: new Date(),
@@ -38,12 +42,7 @@ const ConsumerActivity = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
-
-    useEffect(() => {
-        setLoading(true);
-        getKids(selectedTimeFilter);
-    }, [getKids, selectedTimeFilter]);
+    };
 
     const onWeekChange = (value: string) => {
         setSelectedTimeFilter(value);
@@ -77,20 +76,12 @@ const ConsumerActivity = () => {
                 <div className="card-row">
                     <div className="card-col">
                         {kids.map((kid, index) => {
-                            if (index % 2 === 0) {
-                                return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter}/>
-                            } else {
-                                return null;
-                            };
+                            if (index % 2 === 0) return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter}/>;
                         })}
                     </div>
                     <div className="card-col">
                         {kids.map((kid, index) => {
-                            if (index % 2 === 1) {
-                                return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter} />;
-                            } else {
-                                return null;
-                            }
+                            if (index % 2 === 1) return <KidCard key={kid?.id} kid={kid} selectedTimeFilter={selectedTimeFilter} />;
                         })}
                     </div>
                 </div>

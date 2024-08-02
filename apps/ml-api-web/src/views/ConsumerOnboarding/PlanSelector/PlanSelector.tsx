@@ -12,7 +12,7 @@ import { ContinueButton } from '../COPPA/COPPA.style';
 import { Root, Title } from './PlanSelector.style';
 import { round } from 'lodash';
 import { PromotionalCodeCard } from '../../../components/PromotionalCodeCard/PromotionalCodeCard';
-import { PaymentMethod, Plan, ActivePlan } from './PlanSelector.type';
+import { Invoice, PaymentMethod, Plan, ActivePlan } from './PlanSelector.type';
 import { PromoCodeInfo } from '../../../components/PromotionalCodeCard/PromotionalCodeCard.type';
 import { getPlanPrice, getAfterDiscountPrice, getPlanName } from './PlanSelector.utils';
 
@@ -56,9 +56,94 @@ export const PlanSelector = ({ nextStep, isOnBoarding = false, onRefresh }: Prop
 
     const [activePlanId, setActivePlanId] = useState<string>('');
     const [activePromoCodeInfo, setActivePromoCodeInfo] = useState<PromoCodeInfo | null>(null);
+    const [nextInvoice, setNextInvoice] = useState<Invoice | null>(null);
 
     const [selectedPlanId, setSelectedPlanId] = useState<string>('');
     const [openPaymentMethodModal, setPaymentMethodModal] = useState<boolean>(false);
+
+    useEffect(() => {
+        setLoading(true);
+        getRequest<{}, any[]>(GET_PLANS, {})
+            .then(({ data }) => {
+                setPlans(data);
+                getActiveplan().then(() => {
+                    getPaymentMethod().then(() => {
+                        setLoading(false);
+                    });
+                });
+            })
+            .catch(() => {
+                setLoading(false);
+                showNotification({ type: 'error', message: 'Failed to get Plans' });
+            });
+    }, []);
+
+    const onCompletePayment = useCallback(
+        async (selectedPlan) => {
+            getPaymentMethod().then(() => {
+                if (selectedPlan) {
+                    !activePlanId
+                        ? postRequest<{}, {}>(`${UPDATE_USER_PLAN}/${selectedPlan}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+                              .then(() => {
+                                  setActivePlanId(selectedPlan);
+                                  setSelectedPlanId('');
+                                  setPaymentMethodModal(false);
+                              })
+                              .catch(() => {
+                                  showNotification({ type: 'error', message: 'Failed to apply the selected plan.' });
+                              })
+                        : putRequest<{}, {}>(`${UPDATE_USER_PLAN}/${selectedPlan}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+                              .then(async () => {
+                                  // wait for fetch updated plan
+                                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                                  setActivePlanId(selectedPlan);
+                                  setSelectedPlanId('');
+                                  onRefresh?.();
+                                  setPaymentMethodModal(false);
+                              })
+                              .catch(() => {
+                                  showNotification({ type: 'error', message: 'Failed to apply the selected plan.' });
+                              });
+                    updateActivePlan(selectedPlan, activePlanId).then(() => {});
+                } else {
+                    setPaymentMethodModal(false);
+                    onRefresh?.();
+                }
+            });
+        },
+        [selectedPlanId, promoCode]
+    );
+
+    const getActiveplan = useCallback(async () => {
+        getRequest<{}, ActivePlan>(GET_USER_PLAN, {})
+            .then((res) => {
+                if (res.data?.promotionCode) {
+                    getRequest<{}, PromoCodeInfo>(`${VERIFY_PROMO_CODE}/${res.data.promotionCode}`, {}).then(({ data }) => {
+                        setActivePromoCodeInfo(data);
+                        setActivePlanId(res.data.planId);
+                        setNextInvoice(res.data.upcomingInvoice);
+                    });
+                } else {
+                    setActivePlanId(res.data.planId);
+                    setNextInvoice(res.data.upcomingInvoice);
+                }
+            })
+            .catch(() => {
+                showNotification({ type: 'error', message: 'Failed to get Plans' });
+            });
+    }, []);
+
+    const getPaymentMethod = useCallback(async () => {
+        getRequest<{}, PaymentMethod>(GET_PAYMENT_METHOD, {})
+            .then(({ data }) => {
+                if (data) {
+                    setActivePaymentMethod(data);
+                }
+            })
+            .catch(() => {
+                showNotification({ type: 'error', message: 'Failed to get payment method.' });
+            });
+    }, []);
 
     const updateActivePlan = useCallback(
         async (plan: Plan, activePlanId: string) => {
@@ -91,90 +176,8 @@ export const PlanSelector = ({ nextStep, isOnBoarding = false, onRefresh }: Prop
                           });
             }
         },
-        [activePaymentMethod, promoCode, onRefresh, showNotification]
+        [activePaymentMethod, activePlanId, selectedPlanId, promoCode]
     );
-    const getPaymentMethod = useCallback(async () => {
-        getRequest<{}, PaymentMethod>(GET_PAYMENT_METHOD, {})
-            .then(({ data }) => {
-                if (data) {
-                    setActivePaymentMethod(data);
-                }
-            })
-            .catch(() => {
-                showNotification({ type: 'error', message: 'Failed to get payment method.' });
-            });
-    }, [showNotification]);
-
-    const onCompletePayment = useCallback(
-        async (selectedPlan: any) => {
-            getPaymentMethod().then(() => {
-                if (selectedPlan) {
-                    !activePlanId
-                        ? postRequest<{}, {}>(`${UPDATE_USER_PLAN}/${selectedPlan}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
-                              .then(() => {
-                                  setActivePlanId(selectedPlan);
-                                  setSelectedPlanId('');
-                                  setPaymentMethodModal(false);
-                              })
-                              .catch(() => {
-                                  showNotification({ type: 'error', message: 'Failed to apply the selected plan.' });
-                              })
-                        : putRequest<{}, {}>(`${UPDATE_USER_PLAN}/${selectedPlan}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
-                              .then(async () => {
-                                  // wait for fetch updated plan
-                                  await new Promise((resolve) => setTimeout(resolve, 2000));
-                                  setActivePlanId(selectedPlan);
-                                  setSelectedPlanId('');
-                                  onRefresh?.();
-                                  setPaymentMethodModal(false);
-                              })
-                              .catch(() => {
-                                  showNotification({ type: 'error', message: 'Failed to apply the selected plan.' });
-                              });
-                    updateActivePlan(selectedPlan, activePlanId).then(() => {});
-                } else {
-                    setPaymentMethodModal(false);
-                    onRefresh?.();
-                }
-            });
-        },
-        [getPaymentMethod, activePlanId, promoCode, updateActivePlan, showNotification, onRefresh]
-    );
-
-    const getActiveplan = useCallback(async () => {
-        getRequest<{}, ActivePlan>(GET_USER_PLAN, {})
-            .then((res) => {
-                if (res.data?.promotionCode) {
-                    getRequest<{}, PromoCodeInfo>(`${VERIFY_PROMO_CODE}/${res.data.promotionCode}`, {}).then(({ data }) => {
-                        setActivePromoCodeInfo(data);
-                        setActivePlanId(res.data.planId);
-                    });
-                } else {
-                    setActivePlanId(res.data.planId);
-                }
-            })
-            .catch(() => {
-                showNotification({ type: 'error', message: 'Failed to get Plans' });
-            });
-    }, [showNotification]);
-
-
-    useEffect(() => {
-        setLoading(true);
-        getRequest<{}, any[]>(GET_PLANS, {})
-            .then(({ data }) => {
-                setPlans(data);
-                getActiveplan().then(() => {
-                    getPaymentMethod().then(() => {
-                        setLoading(false);
-                    });
-                });
-            })
-            .catch(() => {
-                setLoading(false);
-                showNotification({ type: 'error', message: 'Failed to get Plans' });
-            });
-    }, [getActiveplan, getPaymentMethod, showNotification]);
 
     return loading ? (
         <Loader />

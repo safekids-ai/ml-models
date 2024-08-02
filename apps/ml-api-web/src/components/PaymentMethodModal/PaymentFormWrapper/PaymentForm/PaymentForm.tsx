@@ -7,6 +7,7 @@ import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
 import { InputField, SubmitButton, MessageContainer } from '../../../InputFields';
 import { validateFullName, validateEmail, validatePostalCode } from '../../../../utils/validations';
 import { extractErrors, isSomething } from '../../../../utils/helpers';
+import { useMobile } from '../../../../utils/hooks';
 import { any, identity, pathOr } from 'ramda';
 import { postRequest, getRequest } from '../../../../utils/api';
 import { INIT_PAYMENT_METHOD, SAVE_PAYMENT_METHOD } from '../../../../utils/endpoints';
@@ -119,7 +120,7 @@ export const PaymentForm = ({ onBack, onCompletePayment, onFormSubmit, selectedP
                     });
             }
         },
-        [onFormSubmit, elements, stripe, onCompletePayment, selectedPlanId]
+        [onCompletePayment, onFormSubmit, elements, stripe]
     );
     return (
         <Formik

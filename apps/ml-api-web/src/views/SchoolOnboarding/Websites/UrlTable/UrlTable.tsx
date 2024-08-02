@@ -100,13 +100,13 @@ const UrlTable = ({
                                             <UrlContainer>
                                                 {url.hasOwnProperty('isInvalid') ? (
                                                     <AddedUrl invalid={url.isInvalid}>
-                                                        <a target="_blank" href={url.name.search('http') !== -1 ? url.name : `https://${url.name}`} rel="noreferrer">
+                                                        <a target="_blank" href={url.name.search('http') !== -1 ? url.name : `https://${url.name}`}>
                                                             {url.name}
                                                         </a>
                                                     </AddedUrl>
                                                 ) : (
                                                     <span>
-                                                        <a target="_blank" href={`https://${url.name}`} rel="noreferrer">
+                                                        <a target="_blank" href={`https://${url.name}`}>
                                                             {url.name}
                                                         </a>
                                                     </span>
@@ -132,13 +132,13 @@ const UrlTable = ({
                                                 <UrlContainer>
                                                     {url.hasOwnProperty('isInvalid') ? (
                                                         <AddedUrl invalid={url.isInvalid}>
-                                                            <a target="_blank" href={url.name.search('http') !== -1 ? url.name : `https://${url.name}`} rel="noreferrer">
+                                                            <a target="_blank" href={url.name.search('http') !== -1 ? url.name : `https://${url.name}`}>
                                                                 {url.name}
                                                             </a>
                                                         </AddedUrl>
                                                     ) : (
                                                         <span>
-                                                            <a target="_blank" href={`https://${url.name}`} rel="noreferrer">
+                                                            <a target="_blank" href={`https://${url.name}`}>
                                                                 {url.name}
                                                             </a>
                                                         </span>

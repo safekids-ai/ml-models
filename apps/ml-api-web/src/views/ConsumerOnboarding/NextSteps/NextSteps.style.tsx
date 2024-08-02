@@ -178,24 +178,24 @@ export const Description = styled.span`
     color: #000000;
 `;
 
-// const FinishButton = styled.div`
-//     margin-top: 50px !important;
-//     margin-left: 100px;
-//     width: 200px;
-//     & button {
-//         margin-top: 0;
-//     }
-//     & .MuiButton-label {
-//         font-family: 'Lato';
-//         font-style: normal;
-//         font-weight: 700;
-//         font-size: 15px;
-//         line-height: 18px;
-//         text-align: center;
-//         letter-spacing: 1.25px;
-//         text-transform: uppercase;
-//     }
-// `;
+const FinishButton = styled.div`
+    margin-top: 50px !important;
+    margin-left: 100px;
+    width: 200px;
+    & button {
+        margin-top: 0;
+    }
+    & .MuiButton-label {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        text-align: center;
+        letter-spacing: 1.25px;
+        text-transform: uppercase;
+    }
+`;
 
 export const ContinueButton = styled.div`
     justify-content: center;

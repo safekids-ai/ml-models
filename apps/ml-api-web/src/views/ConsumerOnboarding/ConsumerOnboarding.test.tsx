@@ -1,5 +1,5 @@
 import React from 'react';
-import {act, cleanup, render, waitFor} from '@testing-library/react';
+import {act, cleanup, render, wait} from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import COPPA from "./COPPA/COPPA";
 
@@ -11,23 +11,26 @@ const COPPAComponent : JSX.Element = (
 
 test('it renders coppa screen', async () => {
     const { getByText } = render(COPPAComponent);
-    await waitFor(() => expect(getByText("COPPA Parental Consent")).toBeTruthy());
+    await wait();
 
+    expect(getByText("COPPA Parental Consent")).toBeTruthy();
 });
 
 test('it renders legal authority confirmation radio button', async () => {
     const { getByLabelText } = render(COPPAComponent);
-    await waitFor(() => expect(getByLabelText('hasLegalAuthorityToInstall')).toBeTruthy());
+    await wait();
+    expect(getByLabelText('hasLegalAuthorityToInstall')).toBeTruthy();
 });
 
 test('it renders bound by privacy policy checkbox', async () => {
     const { getByLabelText } = render(COPPAComponent);
-    await waitFor(() => expect(getByLabelText('boundByPrivacyPolicy')).toBeTruthy());
+    await wait();
+    expect(getByLabelText('boundByPrivacyPolicy')).toBeTruthy();
 });
 
 test('Next button is disabled until all required fields are filled', async () => {
     const { getByLabelText, getByTestId } = render(COPPAComponent);
-    await waitFor(() => expect(getByLabelText('hasLegalAuthorityToInstall')).toBeTruthy());
+    await wait();
     const hasLegalAuthorityButton = getByLabelText('hasLegalAuthorityToInstall-Yes');
     const boundByPrivacyPolicyCheck = getByLabelText('boundByPrivacyPolicy');
     const NextButton: HTMLElement = getByTestId("COPPA-submit-button");

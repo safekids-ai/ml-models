@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Typography, useTheme } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import { CSSProperties } from '@mui/styles/withStyles';
-
 import { isSomething } from '../utils/helpers';
 import Header from './Header';
 
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
-        [theme.breakpoints.down('lg')]: {
+        [theme.breakpoints.down('md')]: {
             flexDirection: 'column-reverse',
             '& $main': {
                 width: '80%',

@@ -1,17 +1,9 @@
 import React from 'react';
-import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, wait } from '@testing-library/react';
 import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
 import { theme } from '../../theme';
 import { MemoryRouter } from 'react-router';
 import App from '../../App';
-
-
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
 
 
 declare module '@mui/styles/defaultTheme' {
@@ -32,8 +24,8 @@ test('it renders sign in screen', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getAllByText(/Sign In/i)).toBeTruthy());
-
+    await wait();
+    expect(getAllByText(/Sign In/i)).toBeTruthy();
 });
 
 test('it renders email input field', async () => {
@@ -46,7 +38,8 @@ test('it renders email input field', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('email-input-field')).toBeInTheDocument());
+    await wait();
+    expect(getByTestId('email-input-field')).toBeInTheDocument();
 });
 
 test('it renders password input field', async () => {
@@ -59,7 +52,8 @@ test('it renders password input field', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
+    expect(getByTestId('password-input-field')).toBeInTheDocument();
 });
 
 test('it renders password input field', async () => {
@@ -72,7 +66,8 @@ test('it renders password input field', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
+    expect(getByTestId('password-input-field')).toBeInTheDocument();
 });
 
 test('it disables sign in button if wrong email regex is entered', async () => {
@@ -85,13 +80,14 @@ test('it disables sign in button if wrong email regex is entered', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
     const passwordField = getByTestId('password-input-field');
     const emailField = getByTestId('email-input-field');
     const signInButton = getByTestId('signIn-button');
     fireEvent.change(passwordField, { target: { value: 'DummyPassword123A' } });
     fireEvent.change(emailField, { target: { value: 'dummyemail.com' } });
-    await waitFor(() => expect(signInButton).toBeDisabled());
+    await wait();
+    expect(signInButton).toBeDisabled();
 });
 
 test('it enables sign in button if right email regex is entered', async () => {
@@ -104,13 +100,14 @@ test('it enables sign in button if right email regex is entered', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
     const passwordField = getByTestId('password-input-field');
     const emailField = getByTestId('email-input-field');
     const signInButton = getByTestId('signIn-button');
     fireEvent.change(emailField, { target: { value: 'dummy@email.com' } });
     fireEvent.change(passwordField, { target: { value: 'DummyPassword123A' } });
-    await waitFor(() => expect(signInButton).toBeEnabled());
+    await wait();
+    expect(signInButton).toBeEnabled();
 });
 
 test('it disables sign in button if email is not entered', async () => {
@@ -123,13 +120,14 @@ test('it disables sign in button if email is not entered', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
     const passwordField = getByTestId('password-input-field');
     const emailField = getByTestId('email-input-field');
     const signInButton = getByTestId('signIn-button');
     fireEvent.change(passwordField, { target: { value: 'DummyPassword123A' } });
     fireEvent.change(emailField, { target: { value: '' } });
-    await waitFor(() => expect(signInButton).toBeDisabled());
+    await wait();
+    expect(signInButton).toBeDisabled();
 });
 
 test('it disables sign in button if password is not entered', async () => {
@@ -142,13 +140,13 @@ test('it disables sign in button if password is not entered', async () => {
             </ThemeProvider>
         </StyledEngineProvider>,
     );
-    await waitFor(() => expect(getByTestId('password-input-field')).toBeInTheDocument());
+    await wait();
     const passwordField = getByTestId('password-input-field');
     const emailField = getByTestId('email-input-field');
     const signInButton = getByTestId('signIn-button');
     fireEvent.change(passwordField, { target: { value: '' } });
     fireEvent.change(emailField, { target: { value: 'dummyemail.com' } });
-    await waitFor(() => expect(signInButton).toBeDisabled());
+    await wait();
     expect(signInButton).toBeDisabled();
 });
 

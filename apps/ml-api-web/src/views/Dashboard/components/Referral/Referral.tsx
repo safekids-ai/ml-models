@@ -29,7 +29,7 @@ export const Referral = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
+    }, []);
 
     const copyReferralUrl = () => {
         navigator.clipboard.writeText(code);

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Popover, PopoverOrigin } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/MoreVert';
 import { AppTheme } from '../theme';
 

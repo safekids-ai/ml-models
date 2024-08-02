@@ -3,6 +3,8 @@ import { getRequest, history, updateAxios } from '../../utils/api';
 import { useLocation } from 'react-router-dom';
 import { useNotificationToast } from '../../context/NotificationToastContext/NotificationToastContext';
 import { GET_ONBOARDING_STATUS, GET_SCHOOL_USER_PROFILE } from '../../utils/endpoints';
+import { GetUserProfileResponse } from '../../types/api-responses';
+import { logError } from '../../utils/helpers';
 
 const RedirectComponent = () => {
     const { search, pathname } = useLocation();
@@ -68,7 +70,7 @@ const RedirectComponent = () => {
                     history.push('/school-signin');
                 });
         }
-    }, [pathname, search, showNotification]);
+    }, []);
     return <></>;
 };
 

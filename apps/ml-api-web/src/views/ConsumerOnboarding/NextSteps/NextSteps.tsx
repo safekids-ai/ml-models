@@ -6,7 +6,7 @@ import { SubmitButton } from '../../../components/InputFields';
 import { getRequest } from '../../../utils/api';
 import { CONSUMER_KID } from '../../../utils/endpoints';
 import { useNotificationToast } from '../../../context/NotificationToastContext/NotificationToastContext';
-import { ContinueButton, Root, Title, StepsList } from './NextSteps.style';
+import { ContinueButton, Description, Root, Title, StepsList } from './NextSteps.style';
 
 export type KidInfo = {
     id?: string;
@@ -34,7 +34,7 @@ const NextSteps = ({ finishOnboardings }: { finishOnboardings: () => void }) => 
                 });
                 logError('CONSUMER_KID', err);
             });
-    }, [showNotification]);
+    }, []);
 
     const setAccessCode = (ref: any, accessCode: string) => {
         ref?.forEach((input: any, index: number) => (input.value = accessCode[index]));
@@ -53,7 +53,7 @@ const NextSteps = ({ finishOnboardings }: { finishOnboardings: () => void }) => 
                     <span className="step-description">
                         Navigate to{' '}
                         <u>
-                            <a target="_blank" href={'https://chrome.google.com/webstore/detail/safe-kids-ai-at-home/ankjncjgmdnfdnigddppomdlcdkdkpok'} rel="noreferrer">
+                            <a target="_blank" href={'https://chrome.google.com/webstore/detail/safe-kids-ai-at-home/ankjncjgmdnfdnigddppomdlcdkdkpok'}>
                                 home.safekids.ai
                             </a>
                         </u>

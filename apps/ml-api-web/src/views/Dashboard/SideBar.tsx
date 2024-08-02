@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ElementType } from 'react';
 import { Avatar, Tooltip } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import CustomScroll from 'simplebar-react';
 import { NotificationsOutlined, LanguageOutlined } from '@mui/icons-material';
 import 'simplebar/dist/simplebar.min.css';
@@ -290,7 +290,7 @@ const SideBar: React.FC<SidebarProps> = ({ notificationCount = 0, onClick }: Sid
 
                 <div className={classes.user}>
                     {avatarUrl ? (
-                        <img src={avatarUrl} className={classes.loadedImage} alt="Avatar" />
+                        <img src={avatarUrl} className={classes.loadedImage} alt="Avatar Image" />
                     ) : (
                         <Avatar className="avatar">{userFullName && getInitials(userFullName)}</Avatar>
                     )}

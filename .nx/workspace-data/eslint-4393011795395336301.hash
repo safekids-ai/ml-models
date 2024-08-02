@@ -32,7 +32,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -77,7 +77,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -122,7 +122,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -167,7 +167,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -212,7 +212,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -224,7 +224,7 @@
       }
     }
   },
-  "1268495736557806271": {
+  "7316237349206525072": {
     "apps/ml-api": {
       "targets": {
         "lint": {
@@ -257,7 +257,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -302,7 +302,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -314,7 +314,7 @@
       }
     }
   },
-  "9774500600215958241": {
+  "6925872923380198597": {
     "apps/ml-api-web": {
       "targets": {
         "lint": {
@@ -347,7 +347,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -392,7 +392,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -437,7 +437,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -482,7 +482,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -527,7 +527,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -572,7 +572,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -617,7 +617,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -662,7 +662,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -707,7 +707,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -752,7 +752,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -797,7 +797,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -842,7 +842,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -887,7 +887,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -932,7 +932,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -977,7 +977,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -1022,7 +1022,7 @@
             ],
             "description": "Runs ESLint on project",
             "help": {
-              "command": "npx eslint --help",
+              "command": "pnpm exec eslint --help",
               "example": {
                 "options": {
                   "max-warnings": 0
@@ -1035,8 +1035,6 @@
     }
   },
   "3668858888028240928": {},
-  "16207320288937347520": {},
-  "17282928909616029526": {},
-  "4522486602272383384": {},
-  "13949973065027603094": {}
+  "9869721752391712349": {},
+  "17282928909616029526": {}
 }

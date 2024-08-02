@@ -1,7 +1,4 @@
-import {Switch, TextField} from '@mui/material';
-import {TimePicker} from '@mui/x-date-pickers';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {Switch, TextFieldProps} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {SubmitButton} from '../../../components/InputFields';
@@ -16,6 +13,10 @@ import {logError} from '../../../utils/helpers';
 import {Props} from './InterceptionTime.types';
 import {format} from 'date-fns';
 import {useNotificationToast} from '../../../context/NotificationToastContext/NotificationToastContext';
+import {TimePicker} from '@mui/x-date-pickers/TimePicker';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import TextField from '@mui/material/TextField';
 
 const Root = styled.div`
   display: flex;
@@ -336,39 +337,34 @@ const InterceptionTime = ({nextStep, isSettings}: Props) => {
         Please confirm a general set of school hours for your district. Schools will have options to revise as needed
         later.{' '}
       </TimeDescription>
-      <TimePickerContainer>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <TimePickerContainer>
           <TimePicker
             label="School Start Time"
             value={schoolStartTime}
-            onChange={(value: any) => {
-              setSchoolStartTime(value);
-            }}
+            onChange={(newValue) => setSchoolStartTime(newValue)}
           />
-        </LocalizationProvider>
-
-        <LocalizationProvider>
           <TimePicker
             label="School End Time"
             value={schoolEndTime}
-            onChange={(value: any) => setSchoolEndTime(value)}/>
-        </LocalizationProvider>
-      </TimePickerContainer>
+            onChange={(newValue) => setSchoolEndTime(newValue)}
+          />
+        </TimePickerContainer>
+      </LocalizationProvider>
       <TimeTitle>LIGHTS-OFF TIME</TimeTitle>
       <TimeDescription>
         Our system reverts to the interception <b>of all previously selected</b> categories for lights-off time.
       </TimeDescription>
-      <TimePickerContainer>
-        <LocalizationProvider>
-          <TimePicker
-            label="Day End" value={lightOffStartTime}
-            onChange={(value: any) => setLightOffStartTime(value)}/>
-        </LocalizationProvider>
-        <LocalizationProvider>
-          <TimePicker label="Day Start" value={lightOffEndTime}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <TimePickerContainer>
+          <TimePicker label="Day End"
+                      value={lightOffStartTime}
+                      onChange={(value: any) => setLightOffStartTime(value)}/>
+          <TimePicker label="Day Start"
+                      value={lightOffEndTime}
                       onChange={(value: any) => setLightOffEndTime(value)}/>
-        </LocalizationProvider>
-      </TimePickerContainer>
+        </TimePickerContainer>
+      </LocalizationProvider>
       {isSettings ? (
         <SaveButton>
           <SubmitButton isSubmitting={isSubmitting} text="Save" onClick={() => onContinue()}/>

@@ -81,6 +81,7 @@ const AuthenticationProvider: React.FC<any> = (props) => {
         },
         [registrationToken, dispatch]
     );
+    const loginToken = pathOr('', ['login', 'token'], state);
 
     const logout = () => {
         const accountType = localStorage.getItem('account_type');

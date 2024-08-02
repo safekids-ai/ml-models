@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import { getRequest } from '../../../../utils/api';
 import { logError } from '../../../../utils/helpers';
 import { GET_CASUAL_ENGAGEMENT, GET_TOP_INTERCEPT } from '../../../../utils/endpoints';
@@ -83,20 +83,9 @@ const PrrSummary = ({ startDate, endDate }: Props) => {
     const [topIntercept, setTopIntercept] = useState<TopIntercept>();
     const [casualEngagement, setCasualEngagement] = useState<CasualEngagement>();
 
-    const PrrSummaryActivity = useCallback( async (startDate: Date, endDate: Date) => {
-        try {
-            setLoading(true);
-            await getTopIntercept(startDate, endDate);
-            await getCasualEngagement(startDate, endDate);
-            setLoading(false);
-        } catch (error) {
-            logError('Prr Summary ACTIVITY', error);
-            setLoading(false);
-        }
-    }, []);
     useEffect(() => {
         PrrSummaryActivity(startDate, endDate);
-    }, [startDate, endDate, PrrSummaryActivity]);
+    }, [startDate, endDate]);
     const getTopIntercept = async (startDate: Date, endDate: Date) => {
         try {
             const result = await getRequest<{}, any>(GET_TOP_INTERCEPT, {
@@ -122,6 +111,17 @@ const PrrSummary = ({ startDate, endDate }: Props) => {
             setCasualEngagement(payload);
         } catch (error) {
             logError('Get Average and Percentage Casual Engagement ', error);
+        }
+    };
+    const PrrSummaryActivity = async (startDate: Date, endDate: Date) => {
+        try {
+            setLoading(true);
+            await getTopIntercept(startDate, endDate);
+            await getCasualEngagement(startDate, endDate);
+            setLoading(false);
+        } catch (error) {
+            logError('Prr Summary ACTIVITY', error);
+            setLoading(false);
         }
     };
 

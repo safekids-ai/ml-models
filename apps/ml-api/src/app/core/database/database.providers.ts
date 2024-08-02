@@ -149,7 +149,8 @@ export const databaseProviders = [
         Invoice,
         Health,
       ]);
-      await sequelize.sync();
+      //commented out since a sync is dangerous
+      //await sequelize.sync();
       return sequelize;
     },
   },

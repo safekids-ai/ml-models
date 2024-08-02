@@ -9,7 +9,7 @@ import { DELETE_AN_ACCOUNT, LOGIN, CONSUMER_KID } from '../../../src/utils/endpo
  */
 declare var global: any;
 export class Util {
-    private backendURL: string | undefined = import.meta.env.API_URL;
+    private backendURL: string | undefined = process.env.BACKEND_URL;
     private loginResponse: AxiosResponse<any> | undefined;
     private loginKidResponse: AxiosResponse<any> | undefined;
 
@@ -53,7 +53,7 @@ export class Util {
     //     }
     //     const pageTarget = page.target();
     //     //execute click on first tab that triggers opening of new tab:
-    //     await page.waitForSelector(selector);
+    //     await page.waitForXPath(selector);
     //     const element = await page.$x(selector);
     //     await element[0].click();
     //     //check that the first page opened this new page:
@@ -75,7 +75,7 @@ export class Util {
             wait = waitTime;
         }
         await page
-            .waitForSelector(selector, { visible: true, timeout: wait })
+            .waitForXPath(selector, { visible: true, timeout: wait })
             .then(async () => {
                 if (scroll) {
                     await page.evaluate(() => {
@@ -92,10 +92,10 @@ export class Util {
     isChecked = async (page: Page, selector: string): Promise<any> => {
         let checkboxChecked: boolean = false;
         await page
-            .waitForSelector(selector, { visible: true, timeout: 5000 })
+            .waitForXPath(selector, { visible: true, timeout: 5000 })
             .then(async () => {
-                const checkBox = await page.waitForSelector(selector);
-                checkboxChecked = await (await checkBox?.getProperty('checked'))?.jsonValue() as boolean;
+                const checkBox = await page.$x(selector);
+                checkboxChecked = await (await checkBox[0].getProperty('checked')).jsonValue();
             })
             .catch(() => {
                 console.log('Checkbox not present');
@@ -106,11 +106,11 @@ export class Util {
 
     typeF = async (page: Page, selector: string, term: string): Promise<void> => {
         await page
-            .waitForSelector(selector, { visible: true, timeout: 5000 })
+            .waitForXPath(selector, { visible: true, timeout: 5000 })
             .then(async () => {
-                const inputField = await page.waitForSelector(selector);
-                await inputField?.click({ clickCount: 1 });
-                await inputField?.type(term, { delay: 20 });
+                const inputField = await page.$x(selector);
+                await inputField[0].click({ clickCount: 1 });
+                await inputField[0].type(term, { delay: 20 });
             })
             .catch(() => {
                 console.log('Field not present');
@@ -119,12 +119,12 @@ export class Util {
 
     type = async (page: Page, selector: string, term: string): Promise<void> => {
         await page
-            .waitForSelector(selector, { visible: true, timeout: 5000 })
+            .waitForXPath(selector, { visible: true, timeout: 5000 })
             .then(async () => {
-                const inputField = await page.waitForSelector(selector);
-                await inputField?.click({ clickCount: 3 });
-                await inputField?.press('Backspace');
-                await inputField?.type(term, { delay: 20 });
+                const inputField = await page.$x(selector);
+                await inputField[0].click({ clickCount: 3 });
+                await inputField[0].press('Backspace');
+                await inputField[0].type(term, { delay: 20 });
             })
             .catch(() => {
                 console.log('Field not present');
@@ -134,12 +134,11 @@ export class Util {
     getTextValue = async (page: Page, selector: string, scroll?: boolean): Promise<string> => {
         let textValue: string = '';
         await page
-            .waitForSelector(selector, { visible: true, timeout: 2000 })
+            .waitForXPath(selector, { visible: true, timeout: 2000 })
             .then(async () => {
-                const element = await page.waitForSelector(selector);
-                const textObject = await element?.getProperty('textContent');
-                // FIXME: check docs for JSHandle
-                textValue = textObject?.remoteObject as unknown as string;
+                const element = await page.$x(selector);
+                const textObject = await element[0].getProperty('textContent');
+                textValue = textObject._remoteObject.value;
             })
             .catch(() => {
                 textValue = 'Null';
@@ -150,12 +149,11 @@ export class Util {
     getTextValueInputField = async (page: Page, selector: string, scroll?: boolean): Promise<string> => {
         let textValue: string = '';
         await page
-            .waitForSelector(selector, { visible: true, timeout: 2000 })
+            .waitForXPath(selector, { visible: true, timeout: 2000 })
             .then(async () => {
-                const element = await page.waitForSelector(selector);
-                const textObject = await element?.getProperty('value');
-                // FIXME: check docs for JSHandle
-                textValue = textObject?.remoteObject as unknown as string;
+                const element = await page.$x(selector);
+                const textObject = await element[0].getProperty('value');
+                textValue = textObject._remoteObject.value;
             })
             .catch(() => {
                 textValue = 'Null';
@@ -166,10 +164,10 @@ export class Util {
     getNumberOfElements = async (page: Page, selector: string, scroll?: boolean): Promise<number> => {
         let textValue: number = 0;
         await page
-            .waitForSelector(selector, { visible: true, timeout: 2000 })
+            .waitForXPath(selector, { visible: true, timeout: 2000 })
             .then(async () => {
-                const element = await page.waitForSelector(selector);
-                textValue = element?.toString().length ?? 0;
+                const element = await page.$x(selector);
+                textValue = element.length;
             })
             .catch(() => {
                 textValue = NaN;
@@ -180,10 +178,10 @@ export class Util {
     clickOn = async (page: Page, selector: string, scroll?: boolean) => {
         let flag = 'NotClicked';
         await page
-            .waitForSelector(selector, { visible: true, timeout: 2000 })
+            .waitForXPath(selector, { visible: true, timeout: 2000 })
             .then(async () => {
-                const element = await page.waitForSelector(selector);
-                await element?.click();
+                const element = await page.$x(selector);
+                await element[0].click();
                 flag = 'clicked';
             })
             .catch(() => {

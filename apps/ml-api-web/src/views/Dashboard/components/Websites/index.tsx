@@ -18,6 +18,15 @@ export type Props = {
 const Websites = ({ refreshWebsites, unSetRefreshWebsites, selectedKidId, clearSelectedKidId }: Props) => {
     const [filteredURLs, setFilteredURLs] = React.useState<IFilteredWebsites[]>();
     const [loading, setLoading] = React.useState(false);
+    React.useEffect(() => {
+        getFilteredURLs();
+    }, []);
+    React.useEffect(() => {
+        if (refreshWebsites) {
+            getFilteredURLs();
+            unSetRefreshWebsites();
+        }
+    }, [refreshWebsites]);
     const { showNotification } = useNotificationToast();
     const getFilteredURLs = React.useCallback(() => {
         setLoading(true);
@@ -35,16 +44,7 @@ const Websites = ({ refreshWebsites, unSetRefreshWebsites, selectedKidId, clearS
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
-    React.useEffect(() => {
-        getFilteredURLs();
-    }, [getFilteredURLs]);
-    React.useEffect(() => {
-        if (refreshWebsites) {
-            getFilteredURLs();
-            unSetRefreshWebsites();
-        }
-    }, [getFilteredURLs, refreshWebsites, unSetRefreshWebsites]);
+    }, []);
     return (
         <Root>
             <h4>Websites that are always allowed</h4>

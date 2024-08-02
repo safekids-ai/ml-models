@@ -1,12 +1,13 @@
-import { updateAxios, postRequest, history } from '../../utils/api';
+import { updateAxios, postRequest, history, getRequest } from '../../utils/api';
 import { SignupFormValues } from '../../views/Signup/Signup';
-import { pathOr } from 'ramda';
+import { pathOr, propEq, find } from 'ramda';
 import { Dispatch } from 'react';
 import * as Endpoints from '../../utils/endpoints';
-import { LoginResponse, SignupResponse, SignupVerifyResponse } from '../../types/api-responses';
-import { LoginRequest, VerifySignupRequest } from './types';
+import { LoginResponse, SignupResponse, SignupVerifyResponse, VerifyLoginResponse } from '../../types/api-responses';
+import { LoginRequest, VerifySignupRequest, VerifyLoginRequest } from './types';
+import { State } from './authReducer';
 import { isError, getErrorMessage } from '../../utils/helpers';
-import { invalidCredentials, errorMessage, invalidCode, RequestType } from '../../utils/error-messages';
+import { invalidCredentials, errorMessage, invalidCode, RequestType, noNetworkConnection } from '../../utils/error-messages';
 import { MixPanel } from '../../MixPanel';
 
 export const LOGIN_STARTED = 'LOGIN_STARTED',
@@ -161,11 +162,11 @@ export const subscribePlan = (planID: string, token: string) => {
     };
 };
 export const clearSignup = () => ({ type: CLEAR_SIGNUP });
-// const loginVerifySuccess = (data: VerifyLoginResponse) => ({
-//     type: LOGIN_VERIFY_SUCCESS,
-//     payload: data,
-// });
-// const loginVerifyFailed = (message: string) => ({
-//     type: LOGIN_VERIFY_FAILED,
-//     payload: message,
-// });
+const loginVerifySuccess = (data: VerifyLoginResponse) => ({
+    type: LOGIN_VERIFY_SUCCESS,
+    payload: data,
+});
+const loginVerifyFailed = (message: string) => ({
+    type: LOGIN_VERIFY_FAILED,
+    payload: message,
+});

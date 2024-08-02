@@ -45,7 +45,7 @@ const ProcessForm = ({ filteredProcesses, externalSelectedKidId, clearSelectedKi
             setSelectedKidId(externalSelectedKidId || filteredProcesses[0]?.id);
             clearSelectedKidId && clearSelectedKidId();
         }
-    }, [clearSelectedKidId, externalSelectedKidId, filteredProcesses]);
+    }, [externalSelectedKidId]);
 
     const saveData = async () => {
         setBtnLoading(true);

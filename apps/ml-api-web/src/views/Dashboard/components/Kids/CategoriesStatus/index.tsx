@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography} from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import { Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import _ from 'lodash';
 import CategoriesTable from './CategoriesTable';
 import CategoriesHeader from './CategoriesHeader';
@@ -41,6 +41,15 @@ const CategoriesStatus = ({ refreshCategories, unSetRefreshCategories }: Props) 
     const [selectedKidData, setSelectedKidData] = useState<IKid>(defaultKid);
     const [loading, setLoading] = useState(false);
     const [btnLoading, setBtnLoading] = useState(false);
+    useEffect(() => {
+        getFilteredCategories();
+    }, []);
+    useEffect(() => {
+        if (refreshCategories) {
+            getFilteredCategories();
+            unSetRefreshCategories();
+        }
+    }, [refreshCategories]);
     const { showNotification } = useNotificationToast();
     const getFilteredCategories = useCallback(() => {
         setLoading(true);
@@ -65,16 +74,7 @@ const CategoriesStatus = ({ refreshCategories, unSetRefreshCategories }: Props) 
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
-    useEffect(() => {
-        getFilteredCategories();
-    }, [getFilteredCategories]);
-    useEffect(() => {
-        if (refreshCategories) {
-            getFilteredCategories();
-            unSetRefreshCategories();
-        }
-    }, [getFilteredCategories, refreshCategories, unSetRefreshCategories]);
+    }, []);
     const setSelectedKid = (selectedId: string) => {
         const data = kidsData?.find((kData) => selectedId === kData.id);
         setSelectedKidData(data || defaultKid);

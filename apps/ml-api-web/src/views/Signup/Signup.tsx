@@ -3,7 +3,7 @@ import { Formik, Form, FormikHelpers } from 'formik';
 import { Link } from 'react-router-dom';
 import logo from '../../images/getStartedAlt.png';
 import { MessageContainer } from '../../components/InputFields';
-import { validateName, validatePassword } from '../../utils/validations';
+import { validateName, validateEmail, validatePassword } from '../../utils/validations';
 import { extractErrors, isSomething, getFormattedName } from '../../utils/helpers';
 import FormPage from '../../components/FormPage';
 import { useAuth } from '../../context/AuthContext/AuthContext';
@@ -13,7 +13,7 @@ import { postRequest, history } from '../../utils/api';
 import { RESEND_SIGNUP_CODE } from '../../utils/endpoints';
 import { MixPanel } from '../../MixPanel';
 import * as yup from 'yup';
-import { InputContainer, LinkSpan, PasswordInputContainer, SubmitBtnContainer } from './Signup.style';
+import { InputContainer, LinkRef, LinkSpan, PasswordInputContainer, SubmitBtnContainer } from './Signup.style';
 
 export type SignupFormValues = {
     firstName: string;
@@ -95,7 +95,7 @@ const Signup: React.FC = () => {
     );
     const onResend = useCallback(() => {
         postRequest<{ email: string }, {}>(RESEND_SIGNUP_CODE, { email }, { headers: { Authorization: `Bearer ${registrationToken}` } });
-    }, [email, registrationToken]);
+    }, [email]);
 
     return (
         <>

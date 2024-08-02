@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import Loader from '../../../../components/Loader';
 
 const useStyles = makeStyles({
     root: {

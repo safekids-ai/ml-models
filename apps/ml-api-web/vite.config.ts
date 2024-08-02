@@ -45,12 +45,14 @@ export default defineConfig({
       react(),
       nxViteTsPaths(),
     ],
-
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
   // },
-
+  // esbuild: {
+  //   loader: "jsx",
+  //   include: /src\/.*\.[jt]sx?$/,
+  // },
   test: {
     globals: true,
     cache: {

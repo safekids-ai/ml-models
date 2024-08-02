@@ -14,6 +14,7 @@ import CategoriesStatus from '../Kids/CategoriesStatus';
 import AllowedWebsites from '../Websites';
 import { Payment } from '../Payment/Payment';
 import { Referral } from '../Referral/Referral';
+import { CancellationForm } from '../../../../components/CancellationForm/CancellationForm';
 import Processes from '../Processes/Processes';
 
 const Title = styled.span<{ isMobile: boolean }>`
@@ -73,7 +74,7 @@ const WebsiteSettings = () => {
         } else {
             getOrgunit();
         }
-    }, [accountType, search, showNotification]);
+    }, []);
 
     const getOrgunit = () => {
         getRequest<{}, any[]>(GET_ONBOARDING_ORGUNITS, {})

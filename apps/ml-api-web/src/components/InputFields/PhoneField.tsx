@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Field, FieldProps } from 'formik';
-import { makeStyles } from '@mui/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 

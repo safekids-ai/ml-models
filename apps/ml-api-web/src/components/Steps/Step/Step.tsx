@@ -69,7 +69,7 @@ const Step = ({ step, last, done, isActive, isConsumer }: StepProps) => {
         <StepContainer>
             <ImageContainer>
                 <Icon complete={done} active={isActive} consumer={isConsumer}>
-                    {done ? <img src={doneIcon} alt="Done" /> : isActive ? <step.icon /> : ''}
+                    {done ? <img src={doneIcon} /> : isActive ? <step.icon /> : ''}
                 </Icon>
                 <ConnectorContainer>{!last && <StepConnector></StepConnector>}</ConnectorContainer>
             </ImageContainer>

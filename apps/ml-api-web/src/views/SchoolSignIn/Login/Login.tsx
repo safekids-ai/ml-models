@@ -150,7 +150,7 @@ const Login = () => {
                         <GoogleButton
                             isTeacher={false}
                             onClick={() => {
-                                const API_URL = import.meta.env.API_URL || `http://localhost:3000/`;
+                                const API_URL = process.env.REACT_APP_API_URL || `http://localhost:4001/`;
                                 window.open(`${API_URL}auth/google`, '_self');
                             }}
                         >
@@ -167,7 +167,7 @@ const Login = () => {
                         <GoogleButton
                             isTeacher
                             onClick={() => {
-                                const API_URL = import.meta.env.API_URL || `http://localhost:3000/`;
+                                const API_URL = process.env.REACT_APP_API_URL || `http://localhost:4001/`;
                                 window.open(`${API_URL}auth/google/teacher`, '_self');
                             }}
                         >

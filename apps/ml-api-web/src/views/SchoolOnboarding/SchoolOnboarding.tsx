@@ -128,7 +128,7 @@ const SchoolOnboarding = () => {
                     logError('GET ONBOARDING ORG UNITS', err);
                 });
         }
-    }, [isAdmin]);
+    }, []);
 
     const nextStep = (onboardingStep: Number = 0) => {
         // update onboarding step

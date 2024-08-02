@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from '../../../components/InputFields';
 import { getRequest, postRequest } from '../../../utils/api';
@@ -96,7 +96,7 @@ const Categories = ({ ouTree, nextStep, isSettings }: Props) => {
 
     const accountType: string | null = localStorage.getItem('account_type');
 
-    const initaliseTree = useCallback((nodes: any, newCategories: object[], idList: string[], parentCategories: any[], isCategoriesUpdated?: boolean) => {
+    const initaliseTree = (nodes: any, newCategories: object[], idList: string[], parentCategories: any[], isCategoriesUpdated?: boolean) => {
         console.log('i am 2', nodes, newCategories, isCategoriesUpdated);
         for (let i = 0; i < nodes.length; i++) {
             if (!isCategoriesUpdated) {
@@ -118,7 +118,7 @@ const Categories = ({ ouTree, nextStep, isSettings }: Props) => {
             }
         }
         return;
-    }, []);
+    };
 
     useEffect(() => {
         console.log(ouTree);
@@ -147,7 +147,7 @@ const Categories = ({ ouTree, nextStep, isSettings }: Props) => {
                     logError('GET ONBOARDING CATEGORIES', err);
                 });
         }
-    }, [initaliseTree, isSettings, ouTree]);
+    }, [ouTree]);
 
     const selectOUHandler = (node: any) => {
         updateCategories();

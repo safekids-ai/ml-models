@@ -1,7 +1,7 @@
 import { Button, MenuItem } from '@mui/material';
 import { Form, Formik, FieldArray, FormikHelpers } from 'formik';
 import * as yup from 'yup';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { InputField, SelectField, SubmitButton } from '../../../components/InputFields';
 import Loader from '../../../components/Loader';
 import { useNotificationToast } from '../../../context/NotificationToastContext/NotificationToastContext';
@@ -25,7 +25,34 @@ const AddKid = ({ nextStep, isOnBoarding }: Props) => {
     ]);
     const [loading, setLoading] = React.useState(false);
     const { showNotification } = useNotificationToast();
-    const getUserData = useCallback((loading: boolean = true) => {
+    React.useEffect(() => {
+        if (!isOnBoarding) {
+            getUserData();
+        }
+    }, []);
+    const onContinue = (values: { kids: Kid[] }, helpers: FormikHelpers<any>) => {
+        postRequest<{}, any>(CONSUMER_KID, values.kids)
+            .then(() => {
+                nextStep(3);
+                if (!isOnBoarding) {
+                    getUserData(false);
+                    showNotification({
+                        type: 'success',
+                        message: 'Kid added successfully',
+                    });
+                }
+            })
+            .catch((err) => {
+                showNotification({
+                    type: 'error',
+                    message: 'Failed to add kid(s).',
+                });
+                logError('POST_CREATE_KID', err);
+            })
+            .finally(() => helpers.setSubmitting(false));
+    };
+
+    const getUserData = (loading: boolean = true) => {
         setLoading(loading);
         getRequest<{}, KidInfo[]>(CONSUMER_KID, {})
             .then(({ data }) => {
@@ -49,34 +76,7 @@ const AddKid = ({ nextStep, isOnBoarding }: Props) => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [showNotification]);
-    React.useEffect(() => {
-        if (!isOnBoarding) {
-            getUserData();
-        }
-    }, [getUserData, isOnBoarding]);
-    const onContinue = (values: { kids: Kid[] }, helpers: FormikHelpers<any>) => {
-        postRequest<{}, any>(CONSUMER_KID, values.kids)
-            .then(() => {
-                nextStep(3);
-                if (!isOnBoarding) {
-                    getUserData(false);
-                    showNotification({
-                        type: 'success',
-                        message: 'Kid added successfully',
-                    });
-                }
-            })
-            .catch((err) => {
-                showNotification({
-                    type: 'error',
-                    message: 'Failed to add kid(s).',
-                });
-                logError('POST_CREATE_KID', err);
-            })
-            .finally(() => helpers.setSubmitting(false));
     };
-
 
     return (
         <Root isOnBoarding={isOnBoarding}>

@@ -53,6 +53,12 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
     const [activePlan, setActivePlan] = useState<ActivePlan | null>(null);
     const [openPaymentMethodModal, setPaymentMethodModal] = useState<boolean>(false);
 
+    useEffect(() => {
+        getPaymentMethod().then(() => {
+            getActiveplan();
+        });
+    }, []);
+
     const getActiveplan = useCallback(async () => {
         getRequest<{}, ActivePlan>(GET_USER_PLAN, {})
             .then(({ data }) => {
@@ -63,7 +69,13 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
             .catch(() => {
                 showNotification({ type: 'error', message: 'Failed to get Plans' });
             });
-    }, [showNotification]);
+    }, []);
+
+    const onCompletePayment = useCallback(async (data) => {
+        getPaymentMethod().then(() => {
+            setPaymentMethodModal(false);
+        });
+    }, []);
 
     const getPaymentMethod = useCallback(async () => {
         getRequest<{}, PaymentMethod>(GET_PAYMENT_METHOD, {})
@@ -77,21 +89,7 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
             .catch(() => {
                 showNotification({ type: 'error', message: 'Failed to get Payment Method.' });
             });
-    }, [showNotification]);
-
-    useEffect(() => {
-        getPaymentMethod().then(() => {
-            getActiveplan();
-        });
-    }, [getActiveplan, getPaymentMethod]);
-
-
-    const onCompletePayment = useCallback(async () => {
-        getPaymentMethod().then(() => {
-            setPaymentMethodModal(false);
-        });
-    }, [getPaymentMethod]);
-
+    }, [isCardExpired, activePaymentMethod]);
     return (
         <PaymentStyled id="payment">
             <HeadingContainerStyled>

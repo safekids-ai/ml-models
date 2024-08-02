@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, wait } from '@testing-library/react';
 
 import AddKid from './AddKid';
 
@@ -7,13 +7,16 @@ afterEach(cleanup);
 
 
 test('it renders correct title', async () => {
-    const { getAllByText } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getAllByText(/Add Kid/i)).toBeTruthy());
+    const { getAllByText, getByText } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
+    await wait();
+    const title = getAllByText(/Add Kid/i);
+    expect(title).toBeTruthy();
+
 });
 
 test('it renders correct form', async () => {
     const { getByTestId, queryByTestId } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getByTestId('kid-firstname-field')).toBeTruthy());
+    await wait();
     const firstNameField = getByTestId('kid-firstname-field');
     const lastNameField = getByTestId('kid-lastname-field');
     const dOBField = getByTestId('kid-dob-field');
@@ -31,10 +34,10 @@ test('it renders correct form', async () => {
 
 test('it renders a new form when add more button clicked', async () => {
     const { getAllByTestId, getByTestId } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getByTestId('kid-add-button')).toBeTruthy());
+    await wait();
     const addMoreButton = getByTestId('kid-add-button');
     fireEvent.click(addMoreButton);
-    await waitFor(() => expect(getAllByTestId('kid-firstname-field')).toBeTruthy());
+    await wait();
     const firstNameField = getAllByTestId('kid-firstname-field');
     const lastNameField = getAllByTestId('kid-lastname-field');
     const dOBField = getAllByTestId('kid-dob-field');
@@ -48,41 +51,44 @@ test('it renders a new form when add more button clicked', async () => {
 
 test('it deletes a form when remove button clicked', async () => {
     const { getAllByTestId, getByTestId, queryByTestId } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getByTestId('kid-add-button')).toBeTruthy());
+    await wait();
     const addMoreButton = getByTestId('kid-add-button');
     fireEvent.click(addMoreButton);
-    await waitFor(() => expect(getAllByTestId('kid-firstname-field')).toBeTruthy());
+    await wait();
     fireEvent.click(getAllByTestId('remove-kid-button')[0]);
-    await waitFor(() => expect(queryByTestId('remove-kid-button')).not.toBeInTheDocument());
-    
+    await wait();
     const firstNameField = getAllByTestId('kid-firstname-field');
     const lastNameField = getAllByTestId('kid-lastname-field');
     const dOBField = getAllByTestId('kid-dob-field');
+    const removeButton = queryByTestId('remove-kid-button');
 
     expect(firstNameField).toHaveLength(1);
     expect(lastNameField).toHaveLength(1);
     expect(dOBField).toHaveLength(1);
+    expect(removeButton).not.toBeInTheDocument();
 });
 
 test('it enables the submit button with valid values', async () => {
     const { getByTestId } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getByTestId('kid-add-button')).toBeTruthy());
+    await wait();
     const firstNameField = getByTestId('kid-firstname-field');
     const lastNameField = getByTestId('kid-lastname-field');
     const dOBField = getByTestId('kid-dob-field');
     fireEvent.change(firstNameField, { target: { value: 'John' } });
     fireEvent.change(lastNameField, { target: { value: 'Smith' } });
     fireEvent.change(dOBField, { target: { value: '2004' } });
-    // await wait();
+    await wait();
 
     const NextButton = getByTestId('kid-submit-button');
-    //COMMENTED OUT.... PLEASE FIX ME
-    //expect(NextButton).toBeEnabled();
+    expect(NextButton).toBeEnabled();
 });
 
 test('it shows correct text on onboarding flow', async () => {
     const { getAllByText } = render(<AddKid isOnBoarding nextStep={jest.fn()} />);
-    await waitFor(() => expect(getAllByText(/Next/i)).toBeTruthy());
+    await wait();
+    const submitButtonText = getAllByText(/Next/i);
+
+    expect(submitButtonText).toBeTruthy();
 });
 
 test('it shows correct text on setting flow', async () => {
@@ -90,8 +96,10 @@ test('it shows correct text on setting flow', async () => {
         jest.fn();
     });
     const { getAllByText } = render(<AddKid isOnBoarding={false} nextStep={jest.fn()} />);
-    await waitFor(() => expect(getAllByText(/Want to add additional family members\? Press add more button/i)).toBeTruthy());
+    await wait();
+    const addMoreText = getAllByText(/Want to add additional family members\? Press add more button/i);
     const submitButtonText = getAllByText(/Save/i);
 
+    expect(addMoreText).toBeTruthy();
     expect(submitButtonText).toBeTruthy();
 });

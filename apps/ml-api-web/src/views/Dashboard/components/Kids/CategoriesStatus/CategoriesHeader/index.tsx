@@ -1,8 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
+import { TextField } from '@mui/material';
 import { CustomSelectField, SubmitButton } from '../../../../../../components/InputFields';
 import { MenuItem } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import { Root, SelectSection } from './categoriesHeader.style';
 import { IKid } from '../categories.types';
 
@@ -66,7 +67,7 @@ const CategoriesHeader = ({ kidsData, selectedKid, setSelectedKid, enableSave, s
                     console.log(values);
                 }}
             >
-                {() => {
+                {({}) => {
                     return (
                         <form onSubmit={() => {}}>
                             <Root>

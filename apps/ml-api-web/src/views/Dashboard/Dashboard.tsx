@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ClickAwayListener } from '@mui/material';
-import {makeStyles} from '@mui/styles'
-import { Routes, Route, Navigate, useLocation } from 'react-router';
+import {ClickAwayListener, Switch} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Route, useLocation } from 'react-router';
 import { useIdleTimer, workerTimers } from 'react-idle-timer';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -17,6 +17,7 @@ import { StyleProps } from './types';
 import { logError } from '../../utils/helpers';
 import { SchoolUserProvider } from '../../context/SchoolUserContext/SchoolUserContext';
 import { useAuth } from '../../context/AuthContext/AuthContext';
+import {Navigate, Routes} from "react-router-dom";
 
 const useStyles = makeStyles((theme: AppTheme) => ({
     root: {
@@ -66,6 +67,7 @@ const Dashboard: React.FC = () => {
     const location = useLocation();
     const fromOnboarding = pathOr(false, ['state', 'fromOnboarding'], location);
     const { logout } = useAuth();
+    const [isOnboarded, setOnboarded] = useState(false);
     const onIdle = () => {
         logout();
     };
@@ -88,12 +90,14 @@ const Dashboard: React.FC = () => {
                     history.push('/school-onboarding');
                 } else if (response.data.onBoardingStatus === 'IN_PROGRESS' && accountType === 'CONSUMER') {
                     history.push('/onboarding');
+                } else {
+                    setOnboarded(true);
                 }
             })
             .catch((err) => {
                 logError('GET ONBOARDING STATUS', err);
             });
-    }, [accountType]);
+    }, []);
     const [state, setState] = useState({
         loading: !fromOnboarding,
         sidebarOpen: false,
@@ -131,18 +135,18 @@ const Dashboard: React.FC = () => {
             <ScrollContainer className={classes.content}>
                 <Routes>
                     {(accountType === 'SCHOOL' ? schoolPrimaryLinks : consumerPrimaryLinks).map((link, index) => {
-                        return <Route key={`primaryLink-${index}`} path={link.url} element={<link.component/>} />;
-                    })}
+                        return <Route key={`primaryLink-${index}`} path={link.url} element={<link.component />} />;
+                  })}
                     {(accountType === 'SCHOOL' ? schoolSecondaryLinks : consumerSecondaryLinks).map((link, index) => {
-                        return <Route key={`secondaryLink-${index}`} path={link.url} element={<link.component/>} />;
-                    })}
-                    <Route element={<Navigate to="/dashboard" />} />
+                        return <Route key={`secondaryLink-${index}`} path={link.url} element={<link.component />} />;
+                  })}
+                    <Navigate to="/dashboard" />
                 </Routes>
             </ScrollContainer>
         </div>
     );
 };
-const DashboardWrapper: React.FC = (props: any) => {
+const DashboardWrapper: React.FC = () => {
     return (
         <SchoolUserProvider>
             <Dashboard />

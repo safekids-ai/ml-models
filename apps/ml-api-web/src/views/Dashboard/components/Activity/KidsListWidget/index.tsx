@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Button, Tooltip } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import { history } from '../../../../../utils/api';
 import { KidWidgetType } from '../SchoolActivity.type';
 import { CrisisEngagementSection } from './kidsListWidget.style';
@@ -254,7 +254,7 @@ const KidsListWidget = ({ level, event, showViewButton }: Props) => {
                                             </Tooltip>
                                         </p>
                                         <p>
-                                            <b>Checked-In: </b> {res?.read === 1 ? 'Yes' : 'No'}
+                                            <b>Checked-In: </b> {res?.read == 1 ? 'Yes' : 'No'}
                                         </p>
                                     </div>
                                 );

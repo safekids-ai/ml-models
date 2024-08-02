@@ -11,7 +11,7 @@ const ConsumerLogo = ({ className, onboardingInProgress }: ConsumerLogoProps): J
             const token = localStorage.getItem('jwt_token');
             token ? setLink('/dashboard') : setLink('https://safekids.ai/');
         }
-    }, [onboardingInProgress]);
+    }, []);
 
     return (
         <div className={className}>
