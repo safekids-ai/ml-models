@@ -1,22 +1,20 @@
-import React, {FunctionComponent, useEffect, lazy, Suspense, useState} from 'react';
-import {Routes, Route, Navigate, useLocation} from 'react-router-dom';
+import React, { FunctionComponent, useEffect, lazy, Suspense, useState } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
-import {MixPanel} from './MixPanel';
-import {CssBaseline, Switch} from '@mui/material';
-import {AuthProvider} from './context/AuthContext/AuthContext';
+import { MixPanel } from './MixPanel';
+import { CssBaseline } from '@mui/material';
+import { AuthProvider } from './context/AuthContext/AuthContext';
 import NoNetworkNotification from './components/NoNetworkNotification';
 
-import DateFnsUtils from '@date-io/date-fns';
-import MainLoader from './components/MainLoader';
-import {getRequest, updateAxios} from './utils/api';
-import {NotificationToastProvider} from './context/NotificationToastContext/NotificationToastContext';
-import {GET_ACCOUNT_TYPE} from './utils/endpoints';
-import {logError} from './utils/helpers';
+import { getRequest } from './utils/api';
+import { NotificationToastProvider } from './context/NotificationToastContext/NotificationToastContext';
+import { GET_ACCOUNT_TYPE } from './utils/endpoints';
+import { logError } from './utils/helpers';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'; // Updated utility adapter import
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import MainLoader from "./components/MainLoader";
 
-
-// dynamic imports for lower chunck size
+// dynamic imports for lower chunk size
 const Signup = lazy(() => import('./views/Signup/Signup'));
 const SchoolOnboarding = lazy(() => import('./views/SchoolOnboarding/SchoolOnboarding'));
 const ConsumerOnboarding = lazy(() => import('./views/ConsumerOnboarding/ConsumerOnboarding'));
@@ -27,12 +25,7 @@ const Dashboard = lazy(() => import('./views/Dashboard/Dashboard'));
 const RedirectComponent = lazy(() => import('./views/RedirectComponent/RedirectComponent'));
 const CrisisEngagement = lazy(() => import('./views/CrisisEngagement/CrisisEngagement'));
 
-type RouteProps = {
-  path: string;
-  component: FunctionComponent;
-};
-
-const PublicRoute = ({ component: Component }: { component: React.ComponentType }) => {
+const PublicRoute = ({ element }: { element: JSX.Element }) => {
   const token = localStorage.getItem('jwt_token');
   const location = useLocation();
 
@@ -42,11 +35,10 @@ const PublicRoute = ({ component: Component }: { component: React.ComponentType 
     return <Navigate to={`${pathname}${search}`} state={{ fromLogin: true }} />;
   }
 
-  return <Component />;
+  return element;
 };
 
-
-const PrivateRoute = ({ component: Component }: { component: React.ComponentType }) => {
+const PrivateRoute = ({ element }: { element: JSX.Element }) => {
   const { search, pathname } = useLocation();
   const [accountType, setAccountType] = useState<string | null>(localStorage.getItem('account_type'));
   const token = localStorage.getItem('jwt_token');
@@ -72,11 +64,7 @@ const PrivateRoute = ({ component: Component }: { component: React.ComponentType
     return <Navigate to={signInPath} />;
   }
 
-  return <Component />;
-};
-
-window.onerror = (error) => {
-  Sentry.captureException(error);
+  return element;
 };
 
 function App() {
@@ -92,30 +80,31 @@ function App() {
       MixPanel.track('App Close', {});
     };
   }, []);
+
   return (
     <Sentry.ErrorBoundary fallback={<div className="error">Error</div>}>
-      <Suspense fallback={<MainLoader/>}>
+      <Suspense fallback={<MainLoader />}>
         <NotificationToastProvider>
           <NoNetworkNotification>
             <AuthProvider>
               <div className="App">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <CssBaseline/>
+                  <CssBaseline />
                   <Routes>
-                    <Route path="/auth/google/redirect" element={<RedirectComponent/>}/>
-                    <Route path="/auth/google/redirect/teacher" element={<RedirectComponent/>}/>
-                    <Route path="/crisis-management" element={<RedirectComponent/>}/>
+                    <Route path="/auth/google/redirect" element={<RedirectComponent />} />
+                    <Route path="/auth/google/redirect/teacher" element={<RedirectComponent />} />
+                    <Route path="/crisis-management" element={<RedirectComponent />} />
 
                     {/* Public Routes */}
-                    <Route path="/signup" element={<PublicRoute component={Signup} />} />
-                    <Route path="/signin" element={<PublicRoute component={SignIn} />} />
-                    <Route path="/forgot-password" element={<PublicRoute component={ForgotPassword} />} />
-                    <Route path="/school-signin" element={<PublicRoute component={SchoolSignIn} />} />
+                    <Route path="/signup" element={<PublicRoute element={<Signup />} />} />
+                    <Route path="/signin" element={<PublicRoute element={<SignIn />} />} />
+                    <Route path="/forgot-password" element={<PublicRoute element={<ForgotPassword />} />} />
+                    <Route path="/school-signin" element={<PublicRoute element={<SchoolSignIn />} />} />
 
                     {/* Private Routes */}
-                    <Route path="/school-onboarding" element={<PrivateRoute component={SchoolOnboarding} />} />
-                    <Route path="/onboarding" element={<PrivateRoute component={ConsumerOnboarding} />} />
-                    <Route path="/" element={<PrivateRoute component={Dashboard} />} />
+                    <Route path="/school-onboarding" element={<PrivateRoute element={<SchoolOnboarding />} />} />
+                    <Route path="/onboarding" element={<PrivateRoute element={<ConsumerOnboarding />} />} />
+                    <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
 
                     <Route path="*" element={<Navigate to="/signin" />} />
                   </Routes>

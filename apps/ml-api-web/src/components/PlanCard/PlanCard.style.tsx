@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 type Props = {
-    active: boolean;
-    hasDiscount: boolean;
+    $active: boolean;
+    $hasDiscount: boolean;
 };
 
 export const PlanCardStyled = styled.div<Props>`
@@ -11,7 +11,7 @@ export const PlanCardStyled = styled.div<Props>`
     width: 397px;
     height: 359px;
     border-radius: 10px;
-    background-color: ${(props) => (props.active ? '#FA6400' : '#DFE1E654')};
+    background-color: ${(props) => (props.$active ? '#FA6400' : '#DFE1E654')};
     margin-right: 2%;
 
     .top-container {
@@ -29,8 +29,8 @@ export const PlanCardStyled = styled.div<Props>`
         font-size: 50px;
         padding-left: 5%;
         //line-height: 62.85px;
-        text-decoration: ${(props) => (props.hasDiscount ? 'line-through' : 'none')};
-        color: ${(props) => (props.active ? '#FFF' : '#FA6400')};
+        text-decoration: ${(props) => (props.$hasDiscount ? 'line-through' : 'none')};
+        color: ${(props) => (props.$active ? '#FFF' : '#FA6400')};
     }
     .top-container > .discounted-price-text {
         font-family: 'Merriweather';
@@ -39,7 +39,7 @@ export const PlanCardStyled = styled.div<Props>`
         font-weight: 900;
         font-size: 12px;
         padding-left: 5px;
-        color: ${(props) => (props.active ? '#FFF' : '#FA6400')};
+        color: ${(props) => (props.$active ? '#FFF' : '#FA6400')};
     }
 
     .top-container > .plan-tenure {
@@ -57,7 +57,7 @@ export const PlanCardStyled = styled.div<Props>`
         font-weight: 700;
         font-size: 10px;
         letter-spacing: 0.5px;
-        color: ${(props) => (props.active ? '#FFF' : '#FA6400')};
+        color: ${(props) => (props.$active ? '#FFF' : '#FA6400')};
     }
 
     .plan-content {

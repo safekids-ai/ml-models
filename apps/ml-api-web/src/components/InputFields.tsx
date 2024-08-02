@@ -103,36 +103,45 @@ export const SelectField: React.FC<SelectProps> = (props: SelectProps) => {
     onKeyPress,
     ...rest
   } = props;
+
   const ref = useRef<any>(null);
   const [refresh, setRefresh] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, leftDiff: 0 });
 
-  let width = 0;
-  let leftDiff = 0;
-  if (ref.current) {
-    width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
-  }
-  useEffect(
-    function onOpen() {
-      setRefresh(open);
-    },
-    [open, setRefresh]
-  );
+  useEffect(() => {
+    if (ref.current) {
+      const width = ref.current.clientWidth;
+      const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+      if (innerSelect) {
+        const innerWidth = innerSelect.clientWidth;
+        const leftDiff = (width - innerWidth) / 2;
+        setDimensions({ width, leftDiff });
+      }
+    }
+  }, [refresh, open]);
+
   useEffect(() => {
     const element = document.getElementById('menu-' + name);
     if (element) {
       const dropdown = element.getElementsByClassName('MuiMenu-paper')[0] as HTMLElement;
       if (dropdown && dropdown.style) {
         dropdown.classList.add('mui-select-dropdown');
-        dropdown.style.left = parseInt(dropdown.style.left, 10) - leftDiff + 'px !important';
-        dropdown.style.minWidth = width + 'px';
+        dropdown.style.left = `${parseInt(dropdown.style.left, 10) - dimensions.leftDiff}px`;
+        dropdown.style.minWidth = `${dimensions.width}px`;
       }
     }
-  }, [width, leftDiff, refresh, name]);
-  const forwardedProps = variant === 'outlined' ? {} : {disableUnderline: true};
+  }, [dimensions, name]);
+
+  useEffect(
+    function onOpen() {
+      setRefresh(open);
+    },
+    [open, setRefresh]
+  );
+
+  const forwardedProps = variant === 'outlined' ? {} : { disableUnderline: true };
+
   return (
     <Field name={name}>
       {(fieldProps: FieldProps) => {

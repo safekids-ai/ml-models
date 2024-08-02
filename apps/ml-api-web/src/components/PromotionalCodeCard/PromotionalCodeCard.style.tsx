@@ -4,7 +4,7 @@ import { InputField } from '../InputFields';
 import { Form } from 'formik';
 
 type Props = {
-    isActive?: boolean;
+    $isActive?: boolean;
 };
 
 export const CodeInput = styled(InputField)`
@@ -34,14 +34,14 @@ export const CodeInput = styled(InputField)`
 
 export const PromotionalCodeCardStyled = styled(Form)<Props>`
     display: flex;
-    background-color: ${(props) => (props.isActive ? '#FA6400' : '#DFE1E654')};
+    background-color: ${(props) => (props.$isActive ? '#FA6400' : '#DFE1E654')};
     border-radius: 10px;
     width: 100%;
     height: 80px;
     margin-right: 2%;
 
     .left-section {
-        width: ${(props) => (props.isActive ? '583px' : '356px')};
+        width: ${(props) => (props.$isActive ? '583px' : '356px')};
         margin-left: 2%;
         margin-top: 8px;
         font-family: 'Lato';
@@ -50,7 +50,7 @@ export const PromotionalCodeCardStyled = styled(Form)<Props>`
 
         .title {
             width: 113px;
-            color: ${(props) => (props.isActive ? '#FFFFFF' : '#FA6400')};
+            color: ${(props) => (props.$isActive ? '#FFFFFF' : '#FA6400')};
             font-weight: 700;
             font-size: 10px;
             line-height: 12px;

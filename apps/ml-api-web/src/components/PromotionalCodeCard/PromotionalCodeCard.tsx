@@ -62,7 +62,7 @@ export const PromotionalCodeCard = ({ setPromoCode, activePlanId }: Props) => {
             onSubmit={onSubmit}>
             {({ isSubmitting, isValid }) => {
                 return (
-                    <PromotionalCodeCardStyled isActive={!!promoDescription}>
+                    <PromotionalCodeCardStyled $isActive={!!promoDescription}>
                         <div className="left-section">
                             <span className="title">PROMOTIONAL CODE</span>
                             <span className="text-code">{promoDescription || 'If you have a promotional code, enter it here:'}</span>

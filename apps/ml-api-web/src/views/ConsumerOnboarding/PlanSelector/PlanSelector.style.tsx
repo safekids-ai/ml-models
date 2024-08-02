@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface ContentProps {
-    isOnBoarding: boolean;
+    $isOnBoarding: boolean;
 }
 
 export const Title = styled.span<ContentProps>`
@@ -10,7 +10,7 @@ export const Title = styled.span<ContentProps>`
     font-family: 'Merriweather';
     font-style: normal;
     font-weight: 900;
-    font-size: ${(props) => (props.isOnBoarding ? '28px' : '15px')};
+    font-size: ${(props) => (props.$isOnBoarding ? '28px' : '15px')};
     line-height: 35px;
     letter-spacing: -0.25px;
     color: #4a4a4a;

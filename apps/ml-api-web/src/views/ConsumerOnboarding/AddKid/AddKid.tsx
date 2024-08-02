@@ -79,10 +79,10 @@ const AddKid = ({ nextStep, isOnBoarding }: Props) => {
     };
 
     return (
-        <Root isOnBoarding={isOnBoarding}>
+        <Root $isOnBoarding={isOnBoarding}>
             {!loading && (
                 <>
-                    <Title isOnBoarding={isOnBoarding}>Add Kid</Title>
+                    <Title $isOnBoarding={isOnBoarding}>Add Kid</Title>
                     <Description></Description>
                     <div className="content">
                         <Formik

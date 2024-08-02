@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface ContentProps {
-    isOnBoarding: boolean;
+    $isOnBoarding: boolean;
 }
 
 const settingsRemoveSpanStyles = css`
@@ -22,8 +22,8 @@ export const Root = styled.div<ContentProps>`
     position: relative;
     .content {
         position: relative;
-        max-width: ${(props) => (props.isOnBoarding ? '400px' : '100%')};
-        padding-right: ${(props) => (props.isOnBoarding ? '0' : '50px')};
+        max-width: ${(props) => (props.$isOnBoarding ? '400px' : '100%')};
+        padding-right: ${(props) => (props.$isOnBoarding ? '0' : '50px')};
         width: 100%;
         .remove-span {
             margin-bottom: 20px;
@@ -90,7 +90,7 @@ export const Root = styled.div<ContentProps>`
         .add-more-container {
             display: flex;
             align-items: center;
-            margin-top: ${(props) => (props.isOnBoarding ? '10px' : '20px')};
+            margin-top: ${(props) => (props.$isOnBoarding ? '10px' : '20px')};
             span {
                 width: 260px;
                 font-family: 'Lato';
@@ -135,7 +135,7 @@ export const Title = styled.span<ContentProps>`
     font-family: 'Merriweather';
     font-style: normal;
     font-weight: 900;
-    font-size: ${(props) => (props.isOnBoarding ? '28px' : '15px')};
+    font-size: ${(props) => (props.$isOnBoarding ? '28px' : '15px')};
     line-height: 35px;
     letter-spacing: -0.25px;
     color: #4a4a4a;
