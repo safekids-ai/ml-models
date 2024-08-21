@@ -2,9 +2,9 @@ import React from 'react';
 import { format } from 'date-fns';
 import { Button, Tooltip } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { history } from '../../../../../utils/api';
 import { KidWidgetType } from '../SchoolActivity.type';
 import { CrisisEngagementSection } from './kidsListWidget.style';
+import {navigateTo} from "../../../../../utils/navigate";
 
 const useStyles = makeStyles({
     root: {
@@ -179,7 +179,7 @@ const KidsListWidget = ({ level, event, showViewButton }: Props) => {
     const classes = useStyles({});
 
     const viewNotifications = () => {
-        history.push('/notifications');
+        navigateTo('/notifications');
     };
 
     const getDate = (date?: string) => {

@@ -19,13 +19,18 @@ export type KidInfo = {
   categories: [];
 };
 
+
 const NextSteps = ({finishOnboardings}: { finishOnboardings: () => void }) => {
   const [kids, setkids] = useState<KidInfo[]>([]);
   const {showNotification} = useNotificationToast();
   useEffect(() => {
     getRequest<{}, KidInfo[]>(CONSUMER_KID, {})
-      .then(({data}) => {
-        setkids(data);
+      .then((response) => {
+        if (response && response.data) {
+          setkids(response.data);
+        } else {
+          throw new Error('Invalid response format');
+        }
       })
       .catch((err) => {
         showNotification({
@@ -39,6 +44,7 @@ const NextSteps = ({finishOnboardings}: { finishOnboardings: () => void }) => {
   const setAccessCode = (ref: any, accessCode: string) => {
     ref?.forEach((input: any, index: number) => (input.value = accessCode[index]));
   };
+
 
   return (
     <Root>
@@ -73,7 +79,7 @@ const NextSteps = ({finishOnboardings}: { finishOnboardings: () => void }) => {
           {kids.map((kid) => {
             const fullName = `${kid.firstName} ${kid.lastName}`;
             return (
-              <div className="kid-info-container">
+              <div className="kid-info-container" key={kid.id}>
                 <div className="kid-info">
                   <Avatar>{getInitials(fullName)}</Avatar>
                   <span className="kid-name">{`${fullName}`}</span>

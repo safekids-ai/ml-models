@@ -182,7 +182,8 @@ const ProcessForm = ({ filteredProcesses, externalSelectedKidId, clearSelectedKi
                                             variant={'standard'}
                                             className="select-field"
                                             multiple={false}
-                                            value={selectedKidId}
+                                            value={KidsData.some(kData => kData.id === selectedKidId) ? selectedKidId : ''}
+                                          //value={selectedKidId}
                                             onChange={(e: any) => setSelectedKidId(e.target.value)}
                                             SelectProps={{ displayEmpty: true }}>
                                             {KidsData.map((kData) => (

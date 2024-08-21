@@ -13,6 +13,7 @@ import { logError } from './utils/helpers';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import MainLoader from "./components/MainLoader";
+import {NavigateSetter} from "./utils/navigate";
 
 // dynamic imports for lower chunk size
 const Signup = lazy(() => import('./views/Signup/Signup'));
@@ -82,11 +83,21 @@ function App() {
   }, []);
 
   return (
-    <Sentry.ErrorBoundary fallback={<div className="error">Error</div>}>
+    <Sentry.ErrorBoundary fallback={({ error, componentStack }) => (
+      <div className="error">
+        <h1>Something went wrong.</h1>
+        <details style={{ whiteSpace: 'pre-wrap' }}>
+          {error && error.toString()}
+          <br />
+          {componentStack}
+        </details>
+      </div>
+    )}>
       <Suspense fallback={<MainLoader />}>
         <NotificationToastProvider>
           <NoNetworkNotification>
             <AuthProvider>
+              <NavigateSetter />
               <div className="App">
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <CssBaseline />
@@ -104,7 +115,7 @@ function App() {
                     {/* Private Routes */}
                     <Route path="/school-onboarding" element={<PrivateRoute element={<SchoolOnboarding />} />} />
                     <Route path="/onboarding" element={<PrivateRoute element={<ConsumerOnboarding />} />} />
-                    <Route path="/" element={<PrivateRoute element={<Dashboard />} />} />
+                    <Route path="/*" element={<PrivateRoute element={<Dashboard />} />} />
 
                     <Route path="*" element={<Navigate to="/signin" />} />
                   </Routes>

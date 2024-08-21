@@ -13,9 +13,10 @@ import useThunkReducer from 'react-hook-thunk-reducer';
 import { SignupFormValues } from '../../views/Signup/Signup';
 
 import { pathOr } from 'ramda';
-import { updateAxios, history } from '../../utils/api';
+import { updateAxios } from '../../utils/api';
 import { isSomething } from '../../utils/helpers';
 import { hasStorage } from '../../constants';
+import { navigateTo } from '../../utils/navigate';
 
 type AuthContextType = {
     data?: State;
@@ -84,13 +85,13 @@ const AuthenticationProvider: React.FC<any> = (props) => {
     const loginToken = pathOr('', ['login', 'token'], state);
 
     const logout = () => {
-        const accountType = localStorage.getItem('account_type');
-        localStorage.removeItem('jwt_token');
-        localStorage.removeItem('account_type');
-        accountType === 'SCHOOL' ? history.push('/school-signin') : history.push('/signin');
-        dispatch(logoutAction());
-        setRequestSent(false);
-        updateAxios();
+      const accountType = localStorage.getItem('account_type');
+      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('account_type');
+      accountType === 'SCHOOL' ? navigateTo('/school-signin') : navigateTo('/signin');
+      dispatch(logoutAction());
+      setRequestSent(false);
+      updateAxios();
     };
 
     const clearSignup = () => {

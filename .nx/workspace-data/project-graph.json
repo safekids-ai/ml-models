@@ -30045,11 +30045,6 @@
       },
       {
         "source": "ml-api-web",
-        "target": "npm:history",
-        "type": "static"
-      },
-      {
-        "source": "ml-api-web",
         "target": "npm:@sentry/types",
         "type": "static"
       },

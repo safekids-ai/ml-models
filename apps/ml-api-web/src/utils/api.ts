@@ -1,13 +1,11 @@
 import Axios, {AxiosInstance, AxiosResponse, AxiosRequestConfig, InternalAxiosRequestConfig} from 'axios';
 import {pathOr} from 'ramda';
-import {createBrowserHistory} from 'history';
 import * as Sentry from '@sentry/react';
-import { SeverityLevel } from '@sentry/types';
+import {SeverityLevel} from '@sentry/types';
 import {logDebug, logError} from './helpers';
 import {GET_NOTIFICATIONS} from './endpoints';
 import {hasStorage} from '../constants';
-
-export const history = createBrowserHistory();
+import {navigateTo} from "./navigate";
 const getUrl = () => {
   const url = window.location.origin.split(':');
   return url.length >= 2 ? url[0] + ':' + url[1] : 'http://localhost';
@@ -63,7 +61,7 @@ let responseInterceptors: ResponseInterceptor[] = [
       if (!pathOr(false, ['config', 'headers', 'dontRedirect'], response) && response.status === 401) {
         const accountType = localStorage.getItem('account_type');
         localStorage.removeItem('jwt_token');
-        accountType === 'SCHOOL' ? history.push('/school-signin') : history.push('/signin');
+        accountType === 'SCHOOL' ? navigateTo('/school-signin') : navigateTo('/signin');
         localStorage.removeItem('account_type');
       } else if (url !== GET_NOTIFICATIONS) {
         const url = response.config?.url || 'Unknown URL';
@@ -83,7 +81,7 @@ let responseInterceptors: ResponseInterceptor[] = [
       if (responseStatus === 401) {
         const accountType = localStorage.getItem('account_type');
         localStorage.removeItem('jwt_token');
-        accountType === 'SCHOOL' ? history.push('/school-signin') : history.push('/signin');
+        accountType === 'SCHOOL' ? navigateTo('/school-signin') : navigateTo('/signin');
         localStorage.removeItem('account_type');
       }
       Sentry.addBreadcrumb({

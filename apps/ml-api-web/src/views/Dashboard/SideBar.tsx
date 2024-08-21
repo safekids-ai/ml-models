@@ -154,19 +154,19 @@ export const schoolPrimaryLinks: LinkType[] = [
     {
         label: 'Search',
         icon: SearchIcon,
-        url: '/search',
+        url: '/search/*',
         component: SearchPage,
     },
     {
         label: 'Activity',
         icon: DashboardIcon,
-        url: '/dashboard',
+        url: '/dashboard/*',
         component: SchoolActivity,
     },
     {
         label: 'Notifications',
         icon: NotificationsOutlined,
-        url: '/notifications',
+        url: '/notifications/*',
         component: NotificationPage,
     },
 ];
@@ -175,13 +175,13 @@ export const schoolSecondaryLinks: LinkType[] = [
     {
         label: 'Settings',
         icon: SettingsIcon,
-        url: '/settings',
+        url: '/settings/*',
         component: SchoolSettings,
     },
     {
         label: 'Websites',
         icon: LanguageOutlined,
-        url: '/websites',
+        url: '/websites/*',
         component: WebsiteSettings,
     },
 ];
@@ -190,13 +190,13 @@ export const consumerPrimaryLinks: LinkType[] = [
     {
         label: 'Activity',
         icon: DashboardIcon,
-        url: '/dashboard',
+        url: '/dashboard/*',
         component: ConsumerActivity,
     },
     {
         label: 'Notifications',
         icon: NotificationsOutlined,
-        url: '/notifications',
+        url: '/notifications/*',
         component: NotificationPage,
     },
 ];
@@ -204,7 +204,7 @@ export const consumerSecondaryLinks: LinkType[] = [
     {
         label: 'Settings',
         icon: SettingsIcon,
-        url: '/settings',
+        url: '/settings/*',
         component: WebsiteSettings,
     },
 ];

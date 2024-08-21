@@ -9,7 +9,7 @@ import FormPage from '../../components/FormPage';
 import {useAuth} from '../../context/AuthContext/AuthContext';
 import VerifyEmail from './VerifyEmail';
 import {Button} from '@mui/material';
-import {postRequest, history} from '../../utils/api';
+import {postRequest} from '../../utils/api';
 import {useNavigate} from 'react-router-dom';
 import {RESEND_SIGNUP_CODE} from '../../utils/endpoints';
 import {MixPanel} from '../../MixPanel';

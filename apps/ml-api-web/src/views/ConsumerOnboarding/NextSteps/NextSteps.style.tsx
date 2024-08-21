@@ -56,7 +56,6 @@ export const Root = styled.div`
                     }
                 }
                 .access-code-container {
-                     {
                         display: flex;
                         flex-direction: column;
                         margin: 25px 0;
@@ -109,7 +108,6 @@ export const Root = styled.div`
                                     margin-right: 30px;
                                 }
                             }
-                        }
                     }
                 }
             }

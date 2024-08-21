@@ -1,4 +1,4 @@
-import {updateAxios, postRequest, history, getRequest} from '../../utils/api';
+import {updateAxios, postRequest} from '../../utils/api';
 import {SignupFormValues} from '../../views/Signup/Signup';
 import {pathOr, propEq, find} from 'ramda';
 import {Dispatch} from 'react';
@@ -15,6 +15,7 @@ import {
   noNetworkConnection
 } from '../../utils/error-messages';
 import {MixPanel} from '../../MixPanel';
+import {navigateTo} from "../../utils/navigate";
 
 export const LOGIN_STARTED = 'LOGIN_STARTED',
   LOGIN_SUCCESS = 'LOGIN_SUCCESS',
@@ -167,7 +168,7 @@ export const subscribePlan = (planID: string, token: string) => {
     )
       .then(() => {
         dispatch({type: SIGNUP_COMPLETE});
-        history.push('/signin');
+        navigateTo('/signin');
       })
       .catch(() => {
       });

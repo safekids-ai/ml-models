@@ -112,7 +112,9 @@ export const SelectField: React.FC<SelectProps> = (props: SelectProps) => {
   useEffect(() => {
     if (ref.current) {
       const width = ref.current.clientWidth;
-      const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+      const innerSelect = ref.current.querySelector('input')
+
+      //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
       if (innerSelect) {
         const innerWidth = innerSelect.clientWidth;
         const leftDiff = (width - innerWidth) / 2;
@@ -171,7 +173,7 @@ export const SelectField: React.FC<SelectProps> = (props: SelectProps) => {
               },
               onClose: () => setOpen(false),
               MenuProps: {
-                getContentAnchorEl: null,
+                //getContentAnchorEl: null,
                 anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
                 transformOrigin: {vertical: 'top', horizontal: 'center'},
                 anchorEl: ref.current,
@@ -240,9 +242,12 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props: SelectDropd
   let leftDiff = 0;
   if (ref.current) {
     width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
+    const innerSelect = ref.current.querySelector('input')
+    //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+    if(innerSelect) {
+      const innerWidth = innerSelect.clientWidth;
+      leftDiff = (width - innerWidth) / 2;
+    }
   }
   useEffect(
     function onOpen() {
@@ -285,7 +290,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props: SelectDropd
         },
         onClose: () => setOpen(false),
         MenuProps: {
-          getContentAnchorEl: null,
+          //getContentAnchorEl: null,
           anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
           transformOrigin: {vertical: 'top', horizontal: 'center'},
           anchorEl: ref.current,
@@ -345,9 +350,12 @@ export const CustomSelectField: React.FC<CustomSelectProps> = (props: CustomSele
   let leftDiff = 0;
   if (ref.current) {
     width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
+    const innerSelect = ref.current.querySelector('input')
+    //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+    if (innerSelect) {
+      const innerWidth = innerSelect.clientWidth;
+      leftDiff = (width - innerWidth) / 2;
+    }
   }
   useEffect(
     function onOpen() {
@@ -400,7 +408,7 @@ export const CustomSelectField: React.FC<CustomSelectProps> = (props: CustomSele
               },
               onClose: () => setOpen(false),
               MenuProps: {
-                getContentAnchorEl: null,
+                //getContentAnchorEl: null,
                 anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
                 transformOrigin: {vertical: 'top', horizontal: 'center'},
                 anchorEl: ref.current,
