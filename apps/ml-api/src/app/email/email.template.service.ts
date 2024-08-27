@@ -1,31 +1,15 @@
-import { Inject, Injectable } from '@nestjs/common';
-import type { EmailTemplateInterface, EmailTemplateServiceInterface } from './email.interfaces';
+import type {EmailTemplateInterface} from './email.interfaces';
 
-@Injectable()
-export class EmailTemplateService implements EmailTemplateServiceInterface {
-    constructor(@Inject('EmailTemplateServiceImpl') private readonly impl: EmailTemplateServiceInterface) {}
+export abstract class EmailTemplateService {
+  abstract list(): Promise<EmailTemplateInterface[]>;
 
-    async create(template: EmailTemplateInterface): Promise<void> {
-        await this.impl.create(template);
-    }
+  abstract get(id: string): Promise<EmailTemplateInterface>;
 
-    async delete(id: string): Promise<void> {
-        await this.impl.delete(id);
-    }
+  abstract create(template: EmailTemplateInterface): Promise<void>;
 
-  async deleteAll(): Promise<void> {
-    await this.impl.deleteAll();
-  }
+  abstract update(template: EmailTemplateInterface): Promise<void>;
 
-  async get(id: string): Promise<EmailTemplateInterface> {
-        return await this.impl.get(id);
-    }
+  abstract delete(id: string): Promise<void>;
 
-    async list(): Promise<EmailTemplateInterface[]> {
-        return await this.impl.list();
-    }
-
-    async update(template: EmailTemplateInterface): Promise<void> {
-        await this.impl.update(template);
-    }
+  abstract deleteAll(): Promise<void>;
 }

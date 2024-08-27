@@ -19,7 +19,6 @@ export class CommonUtils {
     for (let i = 0; i < 6; i++) {
       code += charset.charAt(Math.floor(Math.random() * charset.length));
     }
-    console.log("Abbas3")
     return code;
   };
 }

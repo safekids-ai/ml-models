@@ -20,6 +20,7 @@
     "@mui/styles": "^5.16.5",
     "@mui/x-date-pickers": "^7.11.1",
     "@nestjs/axios": "^3.0.2",
+    "@nestjs/bullmq": "^10.2.1",
     "@nestjs/cli": "^10.4.2",
     "@nestjs/common": "^10.3.10",
     "@nestjs/config": "^3.2.3",
@@ -59,8 +60,8 @@
     "aws-sdk": "^2.1664.0",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
-    "bee-queue": "^1.7.1",
     "body-parser": "^1.20.2",
+    "bullmq": "^5.12.10",
     "chart.js": "^4.4.3",
     "chokidar": "^3.6.0",
     "class-transformer": "^0.5.1",
@@ -79,6 +80,7 @@
     "gunzip-file": "^0.1.1",
     "history": "^5.3.0",
     "html-react-parser": "^5.1.12",
+    "ioredis": "^5.4.1",
     "jquery": "^3.7.1",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
@@ -100,6 +102,7 @@
     "path": "^0.12.7",
     "pg-hstore": "^2.3.4",
     "postmark": "^4.0.4",
+    "queue": "^7.0.0",
     "ramda": "^0.30.1",
     "react": "18.3.1",
     "react-alice-carousel": "^2.9.1",
@@ -185,6 +188,7 @@
     "@vitest/ui": "~2.0.4",
     "autoprefixer": "^10.4.19",
     "babel-jest": "^29.7.0",
+    "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^12.0.2",
     "cypress": "^13.13.1",
     "dotenv-cli": "^7.4.2",
@@ -283,737 +287,419 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "model_files/nlp.json",
-        "hash": "6828488650529490955"
-      },
-      {
-        "file": ".release-it.json",
-        "hash": "2780748642747433879"
-      },
-      {
-        "file": "assets/images/extension-imgs/kidsPrivacy.png",
-        "hash": "1358662742510204977"
-      },
-      {
-        "file": "assets/markdown/gmail_chromestore.png",
-        "hash": "14972071321845815034"
-      },
-      {
-        "file": ".vscode/settings.json",
-        "hash": "10736989266964588500"
-      },
-      {
-        "file": "scripts/docker_run_web.sh",
-        "hash": "6514873294208658560"
-      },
-      {
-        "file": "assets/images/ICON_Confirm.svg",
-        "hash": "9630750417659198206"
-      },
-      {
-        "file": ".github/workflows/deploy-api.yml",
-        "hash": "2410449401315677983"
-      },
-      {
-        "file": "qa-data/hate.json",
-        "hash": "4937159833438040019"
-      },
-      {
-        "file": "assets/markdown/aahil.png",
-        "hash": "5269900941090442886"
-      },
-      {
-        "file": "scripts/vite-nginx.conf",
-        "hash": "12337008145683229678"
-      },
-      {
-        "file": "tools/scripts/download-script.js",
-        "hash": "1836458613395888856"
-      },
-      {
-        "file": ".github/workflows/build.yml",
-        "hash": "16716967223559811094"
-      },
-      {
-        "file": "model_files/vocab.txt",
-        "hash": "12130435003140145788"
-      },
-      {
-        "file": "pnpm-lock.yaml",
-        "hash": "6169083490161222460"
-      },
-      {
-        "file": "CHANGELOG.md",
-        "hash": "16574977875722051670"
-      },
-      {
-        "file": "docker/build_api_prod.sh",
-        "hash": "4763610671958078170"
-      },
-      {
-        "file": ".github/workflows/deploy-website.yml",
-        "hash": "5552189364233125559"
-      },
-      {
-        "file": ".github/workflows/dependabot-update.yml",
-        "hash": "14664785977504492450"
-      },
-      {
-        "file": "assets/images/icons/icon32.png",
-        "hash": "6456429226051623886"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "235626400633494639"
-      },
-      {
-        "file": "tools/extension/plugins/custom-dynamic-import.ts",
-        "hash": "12520141952022635463"
-      },
-      {
-        "file": "assets/images/extension-imgs/kidsPrivacy-1.svg",
-        "hash": "145076489051068508"
-      },
-      {
-        "file": "tools/extension/reload/initReloadServer.mts",
-        "hash": "16670223077614746726"
-      },
-      {
-        "file": "assets/images/extension-imgs/PrivacyConcern.png",
-        "hash": "9487317989447449783"
-      },
-      {
-        "file": "assets/images/extension-imgs/doneIcon.svg",
-        "hash": "3935109033479686162"
-      },
-      {
-        "file": "version.json",
-        "hash": "15359675768617096827"
-      },
-      {
-        "file": "qa-data/vision/adult1.jpeg.b64",
-        "hash": "11793775713035611398"
-      },
-      {
-        "file": "tools/extension/manifest-parser/index.ts",
-        "hash": "11535418488930787253"
-      },
-      {
-        "file": "tools/extension/reload/utils.ts",
-        "hash": "14746877334320310680"
-      },
-      {
-        "file": "tools/extension/reload/injections/view.ts",
-        "hash": "10782335504627247365"
-      },
-      {
-        "file": "assets/markdown/demo_model.png",
-        "hash": "15169638167123872895"
+        "file": "model_files/vision.json",
+        "hash": "2172719625371543872"
       },
       {
         "file": ".github/workflows/deploy-gmail-extension.yml",
         "hash": "6683042125574650661"
       },
       {
-        "file": "assets/images/extension-imgs/COPPAIcon.svg",
-        "hash": "12725522713785498610"
-      },
-      {
-        "file": "scripts/run_web.js",
-        "hash": "14398916549247334045"
-      },
-      {
-        "file": "assets/images/extension-imgs/safeKids_logo.svg",
-        "hash": "10462866422818870498"
-      },
-      {
-        "file": "assets/markdown/research.png",
-        "hash": "1319176513745959549"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "1762167918778322054"
-      },
-      {
-        "file": "scripts/docker_run_api.sh",
-        "hash": "3782230093077054640"
+        "file": "assets/images/extension-imgs/check-icon.png",
+        "hash": "1012449138318878526"
       },
       {
         "file": "model_files/nlp.onnx",
         "hash": "7394096606768617459"
       },
       {
-        "file": "docker/build_web_prod.sh",
-        "hash": "7422585841390375485"
+        "file": ".release-it.json",
+        "hash": "2780748642747433879"
       },
       {
-        "file": "tools/extension/reload/interpreter/types.ts",
-        "hash": "11650749167489722029"
-      },
-      {
-        "file": "tools/extension/reload/initReloadServer.mjs",
-        "hash": "11691370589862613397"
-      },
-      {
-        "file": "jest.config.ts",
-        "hash": "12333515226966617182"
-      },
-      {
-        "file": "assets/images/extension-imgs/check-icon.png",
-        "hash": "1012449138318878526"
-      },
-      {
-        "file": "assets/images/extension-imgs/inComingEmails.png",
-        "hash": "18029016258767092952"
-      },
-      {
-        "file": "tools/extension/log.ts",
-        "hash": "8209772312061440191"
-      },
-      {
-        "file": "tools/extension/reload/initReloadServer.js",
-        "hash": "11691370589862613397"
-      },
-      {
-        "file": "README_ml.md",
-        "hash": "4598453367181976353"
-      },
-      {
-        "file": "qa-data/vision/clean1.jpg",
-        "hash": "10026931289608154250"
-      },
-      {
-        "file": "qa-data/category.json",
-        "hash": "15616552038470684746"
-      },
-      {
-        "file": "tools/extension/plugins/make-manifest.ts",
-        "hash": "734679162918769463"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
-      },
-      {
-        "file": ".eslintignore",
-        "hash": "7663861978715868291"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "746227632153557778"
-      },
-      {
-        "file": "tools/extension/reload/initReloadClient.ts",
-        "hash": "7009975452789978349"
-      },
-      {
-        "file": "assets/images/icons/icon64.png",
-        "hash": "16459454298361423959"
-      },
-      {
-        "file": "docker/push_web.sh",
-        "hash": "9055902322754622735"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "122231877704216267"
-      },
-      {
-        "file": "tools/extension/plugins/watch-rebuild.ts",
-        "hash": "9818546522872974477"
-      },
-      {
-        "file": "tools/extension/reload/injections/script.js",
-        "hash": "10492396819665194415"
-      },
-      {
-        "file": "assets/markdown/gmail_writing.png",
-        "hash": "6939766944506303611"
-      },
-      {
-        "file": "assets/images/extension-imgs/isThisMsgKind.png",
-        "hash": "2651329867904138769"
-      },
-      {
-        "file": "assets/images/ICON_Reflect.svg",
-        "hash": "9928575951466875998"
-      },
-      {
-        "file": "assets/images/icons/icon16.png",
-        "hash": "11044826375166487489"
-      },
-      {
-        "file": "assets/markdown/gmail_reading.png",
-        "hash": "8924134032935856397"
-      },
-      {
-        "file": "jest.preset.js",
-        "hash": "9430166341120122740"
-      },
-      {
-        "file": "nx.json",
-        "hash": "13300199899845881469"
-      },
-      {
-        "file": "assets/images/icons/icon128.png",
-        "hash": "8403802863974498262"
-      },
-      {
-        "file": ".github/workflows/deploy-api-web.yml.backup",
-        "hash": "16732955165567166125"
-      },
-      {
-        "file": "package.json",
-        "hash": "14591043773105322392"
-      },
-      {
-        "file": "assets/images/extension-imgs/HowToPersonIcon.png",
-        "hash": "9986496929217078473"
-      },
-      {
-        "file": "logo.png",
-        "hash": "16320966664660779209"
-      },
-      {
-        "file": "README.md",
-        "hash": "11949791687635084291"
-      },
-      {
-        "file": "assets/images/extension-imgs/kidsPrivacy-2.png",
-        "hash": "12692620591923046702"
-      },
-      {
-        "file": "assets/images/ICON_Pause.svg",
-        "hash": "4037337911930569031"
-      },
-      {
-        "file": ".github/dependabot.yml",
-        "hash": "4005146587728820804"
+        "file": "qa-data/hate.json",
+        "hash": "4937159833438040019"
       },
       {
         "file": "tools/extension/plugins/add-hmr.ts",
         "hash": "3607972667142558261"
       },
       {
-        "file": "assets/images/extension-imgs/inbox_Img.png",
-        "hash": "15172899260310875575"
-      },
-      {
-        "file": "qa-data/vision/gun1.jpg",
-        "hash": "8618854744819450416"
-      },
-      {
-        "file": "model_files/vision.json",
-        "hash": "2172719625371543872"
-      },
-      {
-        "file": "tools/extension/reload/injections/script.ts",
-        "hash": "17843868156249397302"
-      },
-      {
-        "file": "docker/build_web_dev.sh",
-        "hash": "16026021751796957028"
-      },
-      {
-        "file": ".github/workflows/publish-libs-npm.yml.inprogress",
-        "hash": "737243790778656936"
-      },
-      {
-        "file": "assets/images/extension-imgs/howToPersonIcon.svg",
-        "hash": "11672647467039405346"
-      },
-      {
-        "file": "tools/scripts/update-version.mjs",
-        "hash": "10343814501003160192"
-      },
-      {
-        "file": "assets/images/ICON_Count-Down.svg",
-        "hash": "1530749009156930035"
-      },
-      {
-        "file": "tools/extension/reload/constant.ts",
-        "hash": "6422801460374386338"
-      },
-      {
-        "file": "docker/build_api_dev.sh",
-        "hash": "6626588157667102425"
-      },
-      {
-        "file": ".github/workflows/deploy-web-demo.yml",
-        "hash": "12475240949221733563"
-      },
-      {
-        "file": "tools/extension/reload/rollup.config.mjs",
-        "hash": "6646921151504986987"
-      },
-      {
-        "file": "tools/extension/reload/interpreter/index.ts",
-        "hash": "3763318359332034733"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "6463503721852003635"
-      },
-      {
-        "file": "assets/images/extension-imgs/safeKids_logo.png",
-        "hash": "7136484085928993238"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "16448050467312557263"
-      },
-      {
-        "file": "docker/push_api.sh",
-        "hash": "16191665898980708107"
-      },
-      {
-        "file": "README_Dev.md",
-        "hash": "1910766726503128137"
-      },
-      {
-        "file": "assets/images/extension-imgs/getStarted.png",
-        "hash": "18153224035194245385"
-      },
-      {
-        "file": "assets/images/ICON_Redirect.svg",
-        "hash": "5082042866907928853"
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
       },
       {
         "file": "model_files/vision.onnx",
         "hash": "18268975691495472844"
       },
       {
-        "file": "tools/extension/reload/injections/view.js",
-        "hash": "3651549243002779041"
+        "file": "assets/markdown/gmail_writing.png",
+        "hash": "6939766944506303611"
+      },
+      {
+        "file": "tools/extension/reload/initReloadServer.js",
+        "hash": "11691370589862613397"
+      },
+      {
+        "file": "tools/extension/reload/initReloadServer.mts",
+        "hash": "16670223077614746726"
+      },
+      {
+        "file": ".github/workflows/deploy-api.yml",
+        "hash": "2410449401315677983"
+      },
+      {
+        "file": "assets/images/ICON_Confirm.svg",
+        "hash": "9630750417659198206"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "assets/images/icons/icon16.png",
+        "hash": "11044826375166487489"
+      },
+      {
+        "file": "model_files/vocab.txt",
+        "hash": "12130435003140145788"
+      },
+      {
+        "file": "tools/extension/reload/initReloadServer.mjs",
+        "hash": "11691370589862613397"
+      },
+      {
+        "file": "tools/extension/reload/initReloadClient.ts",
+        "hash": "7009975452789978349"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "hash": "16574977875722051670"
+      },
+      {
+        "file": "assets/images/extension-imgs/getStarted.png",
+        "hash": "18153224035194245385"
+      },
+      {
+        "file": "package.json",
+        "hash": "3864153749655182996"
+      },
+      {
+        "file": "scripts/docker_run_web.sh",
+        "hash": "6514873294208658560"
+      },
+      {
+        "file": "assets/images/extension-imgs/inComingEmails.png",
+        "hash": "18029016258767092952"
+      },
+      {
+        "file": "README_Dev.md",
+        "hash": "1910766726503128137"
+      },
+      {
+        "file": "assets/images/ICON_Count-Down.svg",
+        "hash": "1530749009156930035"
+      },
+      {
+        "file": "tools/scripts/download-script.js",
+        "hash": "1836458613395888856"
+      },
+      {
+        "file": "tools/extension/reload/injections/script.ts",
+        "hash": "17843868156249397302"
+      },
+      {
+        "file": "tools/extension/reload/interpreter/index.ts",
+        "hash": "3763318359332034733"
+      },
+      {
+        "file": "logo.png",
+        "hash": "16320966664660779209"
+      },
+      {
+        "file": "tools/extension/plugins/custom-dynamic-import.ts",
+        "hash": "12520141952022635463"
+      },
+      {
+        "file": "scripts/vite-nginx.conf",
+        "hash": "12337008145683229678"
+      },
+      {
+        "file": "assets/images/ICON_Redirect.svg",
+        "hash": "5082042866907928853"
+      },
+      {
+        "file": "assets/images/extension-imgs/isThisMsgKind.png",
+        "hash": "2651329867904138769"
+      },
+      {
+        "file": "assets/images/extension-imgs/howToPersonIcon.svg",
+        "hash": "11672647467039405346"
+      },
+      {
+        "file": "assets/markdown/gmail_reading.png",
+        "hash": "8924134032935856397"
+      },
+      {
+        "file": "assets/images/ICON_Pause.svg",
+        "hash": "4037337911930569031"
+      },
+      {
+        "file": "assets/markdown/research.png",
+        "hash": "1319176513745959549"
       },
       {
         "file": "assets/images/ICON_Communication.svg",
         "hash": "14517716905713264609"
+      },
+      {
+        "file": "nx.json",
+        "hash": "13300199899845881469"
+      },
+      {
+        "file": "tools/extension/reload/injections/script.js",
+        "hash": "10492396819665194415"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "10736989266964588500"
+      },
+      {
+        "file": ".github/workflows/dependabot-update.yml",
+        "hash": "14664785977504492450"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "16448050467312557263"
+      },
+      {
+        "file": "tools/extension/manifest-parser/index.ts",
+        "hash": "11535418488930787253"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "746227632153557778"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": "assets/images/extension-imgs/kidsPrivacy.png",
+        "hash": "1358662742510204977"
+      },
+      {
+        "file": ".github/workflows/build.yml",
+        "hash": "16716967223559811094"
+      },
+      {
+        "file": "assets/images/icons/icon64.png",
+        "hash": "16459454298361423959"
+      },
+      {
+        "file": "assets/images/extension-imgs/inbox_Img.png",
+        "hash": "15172899260310875575"
+      },
+      {
+        "file": "model_files/nlp.json",
+        "hash": "6828488650529490955"
+      },
+      {
+        "file": "assets/images/extension-imgs/doneIcon.svg",
+        "hash": "3935109033479686162"
+      },
+      {
+        "file": "assets/markdown/aahil.png",
+        "hash": "5269900941090442886"
+      },
+      {
+        "file": "tools/scripts/update-version.mjs",
+        "hash": "10343814501003160192"
+      },
+      {
+        "file": ".github/dependabot.yml",
+        "hash": "4005146587728820804"
+      },
+      {
+        "file": "qa-data/category.json",
+        "hash": "15616552038470684746"
+      },
+      {
+        "file": "assets/images/extension-imgs/safeKids_logo.svg",
+        "hash": "10462866422818870498"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "235626400633494639"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "122231877704216267"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "6463503721852003635"
+      },
+      {
+        "file": "tools/extension/reload/injections/view.ts",
+        "hash": "10782335504627247365"
+      },
+      {
+        "file": "qa-data/vision/gun1.jpg",
+        "hash": "8618854744819450416"
+      },
+      {
+        "file": "assets/images/ICON_Reflect.svg",
+        "hash": "9928575951466875998"
+      },
+      {
+        "file": "assets/markdown/demo_model.png",
+        "hash": "15169638167123872895"
+      },
+      {
+        "file": "tools/extension/reload/interpreter/types.ts",
+        "hash": "11650749167489722029"
+      },
+      {
+        "file": "qa-data/vision/adult1.jpeg.b64",
+        "hash": "11793775713035611398"
+      },
+      {
+        "file": "docker/push_web.sh",
+        "hash": "9055902322754622735"
+      },
+      {
+        "file": "docker/build_web_prod.sh",
+        "hash": "7422585841390375485"
+      },
+      {
+        "file": "assets/images/icons/icon32.png",
+        "hash": "6456429226051623886"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "6526290021358369945"
+      },
+      {
+        "file": "docker/build_api_prod.sh",
+        "hash": "4763610671958078170"
+      },
+      {
+        "file": "assets/images/extension-imgs/COPPAIcon.svg",
+        "hash": "12725522713785498610"
+      },
+      {
+        "file": "tools/extension/reload/rollup.config.mjs",
+        "hash": "6646921151504986987"
+      },
+      {
+        "file": "assets/images/extension-imgs/kidsPrivacy-2.png",
+        "hash": "12692620591923046702"
+      },
+      {
+        "file": "qa-data/vision/clean1.jpg",
+        "hash": "10026931289608154250"
+      },
+      {
+        "file": "version.json",
+        "hash": "15359675768617096827"
+      },
+      {
+        "file": "assets/images/extension-imgs/HowToPersonIcon.png",
+        "hash": "9986496929217078473"
+      },
+      {
+        "file": "scripts/docker_run_api.sh",
+        "hash": "3782230093077054640"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "12333515226966617182"
+      },
+      {
+        "file": ".github/workflows/deploy-website.yml",
+        "hash": "5552189364233125559"
+      },
+      {
+        "file": "assets/images/extension-imgs/safeKids_logo.png",
+        "hash": "7136484085928993238"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "1762167918778322054"
+      },
+      {
+        "file": "docker/push_api.sh",
+        "hash": "16191665898980708107"
+      },
+      {
+        "file": "docker/build_web_dev.sh",
+        "hash": "16026021751796957028"
+      },
+      {
+        "file": "tools/extension/reload/constant.ts",
+        "hash": "6422801460374386338"
+      },
+      {
+        "file": ".github/workflows/deploy-api-web.yml.backup",
+        "hash": "16732955165567166125"
+      },
+      {
+        "file": "README_ml.md",
+        "hash": "4598453367181976353"
+      },
+      {
+        "file": ".github/workflows/deploy-web-demo.yml",
+        "hash": "12475240949221733563"
+      },
+      {
+        "file": "tools/extension/reload/injections/view.js",
+        "hash": "3651549243002779041"
+      },
+      {
+        "file": "scripts/run_web.js",
+        "hash": "14398916549247334045"
+      },
+      {
+        "file": "tools/extension/plugins/watch-rebuild.ts",
+        "hash": "9818546522872974477"
+      },
+      {
+        "file": "tools/extension/reload/utils.ts",
+        "hash": "14746877334320310680"
+      },
+      {
+        "file": "docker/build_api_dev.sh",
+        "hash": "6626588157667102425"
+      },
+      {
+        "file": "assets/images/extension-imgs/PrivacyConcern.png",
+        "hash": "9487317989447449783"
+      },
+      {
+        "file": "assets/markdown/gmail_chromestore.png",
+        "hash": "14972071321845815034"
+      },
+      {
+        "file": "tools/extension/log.ts",
+        "hash": "8209772312061440191"
+      },
+      {
+        "file": ".github/workflows/publish-libs-npm.yml.inprogress",
+        "hash": "737243790778656936"
+      },
+      {
+        "file": "README.md",
+        "hash": "11949791687635084291"
+      },
+      {
+        "file": "tools/extension/plugins/make-manifest.ts",
+        "hash": "734679162918769463"
+      },
+      {
+        "file": "assets/images/extension-imgs/kidsPrivacy-1.svg",
+        "hash": "145076489051068508"
+      },
+      {
+        "file": "assets/images/icons/icon128.png",
+        "hash": "8403802863974498262"
       }
     ],
     "projectFileMap": {
-      "nlp-js-types": [
-        {
-          "file": "libs/nlp-js-types/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/nlp-js-types/jest.config.ts",
-          "hash": "1961766521729687632"
-        },
-        {
-          "file": "libs/nlp-js-types/ng-package.json",
-          "hash": "10349795849936713138"
-        },
-        {
-          "file": "libs/nlp-js-types/package-lock.json",
-          "hash": "14557258168523531532"
-        },
-        {
-          "file": "libs/nlp-js-types/package.json",
-          "hash": "7296294479094699108"
-        },
-        {
-          "file": "libs/nlp-js-types/pnpm-lock.yaml",
-          "hash": "9473872673800482516"
-        },
-        {
-          "file": "libs/nlp-js-types/project.json",
-          "hash": "5575961485660802293"
-        },
-        {
-          "file": "libs/nlp-js-types/src/index.ts",
-          "hash": "18058547691409382780"
-        },
-        {
-          "file": "libs/nlp-js-types/src/lib/nlp-js-types.ts",
-          "hash": "2163317639295281526"
-        },
-        {
-          "file": "libs/nlp-js-types/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/nlp-js-types/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/nlp-js-types/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/nlp-js-types/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "web-categorize": [
-        {
-          "file": "libs/web-categorize/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/web-categorize/jest.config.ts",
-          "hash": "10381533399428602709"
-        },
-        {
-          "file": "libs/web-categorize/ng-package.json",
-          "hash": "14734214394669161397"
-        },
-        {
-          "file": "libs/web-categorize/project.json",
-          "hash": "16026305050776769426"
-        },
-        {
-          "file": "libs/web-categorize/src/index.ts",
-          "hash": "5583342091007089761"
-        },
-        {
-          "file": "libs/web-categorize/src/lib/category-cache.ts",
-          "hash": "2554574175473212501"
-        },
-        {
-          "file": "libs/web-categorize/src/lib/download-utils.ts",
-          "hash": "5916107529500657438",
-          "deps": [
-            "npm:nodejs-file-downloader",
-            "npm:abstract-logging"
-          ]
-        },
-        {
-          "file": "libs/web-categorize/src/lib/web-categorize.ts",
-          "hash": "1760512177241633788",
-          "deps": [
-            "npm:abstract-logging",
-            "npm:tldts",
-            "npm:short-hash"
-          ]
-        },
-        {
-          "file": "libs/web-categorize/src/lib/web-category-content.ts",
-          "hash": "6508823390238852580"
-        },
-        {
-          "file": "libs/web-categorize/src/lib/web-category-reader.ts",
-          "hash": "15009774344364771357",
-          "deps": [
-            "npm:abstract-logging",
-            "npm:gunzip-file"
-          ]
-        },
-        {
-          "file": "libs/web-categorize/src/lib/web-category-types.ts",
-          "hash": "3823741626324308823"
-        },
-        {
-          "file": "libs/web-categorize/src/lib/web-category-utils.ts",
-          "hash": "10279856380208171283",
-          "deps": [
-            "npm:valid-url"
-          ]
-        },
-        {
-          "file": "libs/web-categorize/tsconfig.json",
-          "hash": "10421704360087173529"
-        },
-        {
-          "file": "libs/web-categorize/tsconfig.lib.json",
-          "hash": "1151629112378082701"
-        },
-        {
-          "file": "libs/web-categorize/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/web-categorize/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "gmail-extension-background": [
-        {
-          "file": "apps/gmail-extension/scripts/background/.babelrc",
-          "hash": "11877436663910714680"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/.eslintrc.json",
-          "hash": "16610364691625952355"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/project.json",
-          "hash": "13884055491021392903"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/BackgroundEventHandler.spec.ts",
-          "hash": "6091152761182573439",
-          "deps": [
-            "gmail-extension",
-            "npm:ts-auto-mock"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/BackgroundEventHandler.ts",
-          "hash": "1856844484687265317",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/Onboarding.spec.ts",
-          "hash": "6634121967058594301",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/authService.ts",
-          "hash": "10031691784726126132",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/chromeUtil.ts",
-          "hash": "17019053236595702912"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/emailEventService.ts",
-          "hash": "309081122236041768",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/endpoint.ts",
-          "hash": "13493189486705694673"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/httpService.ts",
-          "hash": "13187455799895529177",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/api/onboarding.ts",
-          "hash": "14744290634178927117",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/ChromeStorage.ts",
-          "hash": "13200669225545293684"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCache.spec.ts",
-          "hash": "9376865882021458268",
-          "deps": [
-            "gmail-extension",
-            "npm:ts-auto-mock"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCache.ts",
-          "hash": "5469366262249379735",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheData.spec.ts",
-          "hash": "8291787611751735087"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheData.ts",
-          "hash": "9046605899574365270"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheListener.ts",
-          "hash": "14597466668109961240"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/chrome/tabListener/onUpdatedTabListener.ts",
-          "hash": "755817288340214466"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/events/EmailEventNotificationQueue.spec.ts",
-          "hash": "7347696096108699238",
-          "deps": [
-            "npm:ts-auto-mock",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/events/EmailEventNotificationQueue.ts",
-          "hash": "7290607325080490456",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/main.ts",
-          "hash": "923423863780316445",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelImpl.ts",
-          "hash": "8789076376002533991",
-          "deps": [
-            "nlp-js-web"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelInterface.ts",
-          "hash": "6485374768995491452"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapper.spec.ts",
-          "hash": "8898519376196716872",
-          "deps": [
-            "npm:jest-chrome",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapper.ts",
-          "hash": "13716376716714023902",
-          "deps": [
-            "gmail-extension",
-            "nlp-js-common",
-            "npm:sbd"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapperInterface.ts",
-          "hash": "17599554073369692095"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/tsconfig.app.json",
-          "hash": "14527765452377923576"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/tsconfig.json",
-          "hash": "1154222265060113307"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/tsconfig.spec.json",
-          "hash": "17874504027954657085"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/background/webpack.config.js",
-          "hash": "5027394248634273711",
-          "deps": [
-            "npm:@nx/webpack",
-            "npm:copy-webpack-plugin",
-            "npm:webpack"
-          ]
-        }
-      ],
       "gmail-extension": [
         {
           "file": "apps/gmail-extension/README.md",
@@ -1058,1341 +744,6 @@
         {
           "file": "apps/gmail-extension/scripts/common/utils/Utils.ts",
           "hash": "1483705397296566484"
-        }
-      ],
-      "vision-js-types": [
-        {
-          "file": "libs/vision-js-types/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/vision-js-types/jest.config.ts",
-          "hash": "1672352926519521667"
-        },
-        {
-          "file": "libs/vision-js-types/ng-package.json",
-          "hash": "3538595807139590966"
-        },
-        {
-          "file": "libs/vision-js-types/package-lock.json",
-          "hash": "15240480191238879283"
-        },
-        {
-          "file": "libs/vision-js-types/package.json",
-          "hash": "8933237162147430067"
-        },
-        {
-          "file": "libs/vision-js-types/pnpm-lock.yaml",
-          "hash": "9473872673800482516"
-        },
-        {
-          "file": "libs/vision-js-types/project.json",
-          "hash": "7397263698082636536"
-        },
-        {
-          "file": "libs/vision-js-types/src/index.ts",
-          "hash": "880384308867541017"
-        },
-        {
-          "file": "libs/vision-js-types/src/lib/vision-js-types.ts",
-          "hash": "10638186200837978625"
-        },
-        {
-          "file": "libs/vision-js-types/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/vision-js-types/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/vision-js-types/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/vision-js-types/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "nlp-js-react-native": [
-        {
-          "file": "libs/nlp-js-react-native/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/nlp-js-react-native/jest.config.ts",
-          "hash": "12390289537722005200"
-        },
-        {
-          "file": "libs/nlp-js-react-native/ng-package.json",
-          "hash": "9784112700455907076"
-        },
-        {
-          "file": "libs/nlp-js-react-native/package-lock.json",
-          "hash": "13388219327509155948"
-        },
-        {
-          "file": "libs/nlp-js-react-native/package.json",
-          "hash": "16159609158546389838",
-          "deps": [
-            "npm:onnxruntime-react-native"
-          ]
-        },
-        {
-          "file": "libs/nlp-js-react-native/project.json",
-          "hash": "12184326132210710839"
-        },
-        {
-          "file": "libs/nlp-js-react-native/src/index.ts",
-          "hash": "1024722685422301072"
-        },
-        {
-          "file": "libs/nlp-js-react-native/src/lib/nlp-js-react-native.spec.ts",
-          "hash": "12607832157761176852"
-        },
-        {
-          "file": "libs/nlp-js-react-native/src/lib/nlp-js-react-native.ts",
-          "hash": "18193488257556732212",
-          "deps": [
-            "nlp-js-common",
-            "npm:onnxruntime-react-native"
-          ]
-        },
-        {
-          "file": "libs/nlp-js-react-native/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/nlp-js-react-native/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/nlp-js-react-native/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/nlp-js-react-native/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "ml-api-types": [
-        {
-          "file": "libs/ml-api-types/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/ml-api-types/jest.config.ts",
-          "hash": "12374158649361122675"
-        },
-        {
-          "file": "libs/ml-api-types/ng-package.json",
-          "hash": "5033976126770400855"
-        },
-        {
-          "file": "libs/ml-api-types/package-lock.json",
-          "hash": "12399962829949445602"
-        },
-        {
-          "file": "libs/ml-api-types/package.json",
-          "hash": "6467179796964078567"
-        },
-        {
-          "file": "libs/ml-api-types/pnpm-lock.yaml",
-          "hash": "9473872673800482516"
-        },
-        {
-          "file": "libs/ml-api-types/project.json",
-          "hash": "15814111870664741115"
-        },
-        {
-          "file": "libs/ml-api-types/src/index.ts",
-          "hash": "9686092914120696205"
-        },
-        {
-          "file": "libs/ml-api-types/src/lib/ml-api-types.ts",
-          "hash": "4385295442662731706"
-        },
-        {
-          "file": "libs/ml-api-types/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/ml-api-types/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/ml-api-types/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/ml-api-types/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "nlp-js-web": [
-        {
-          "file": "libs/nlp-js-web/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/nlp-js-web/jest.config.ts",
-          "hash": "8480627280102103951"
-        },
-        {
-          "file": "libs/nlp-js-web/ng-package.json",
-          "hash": "16461150388157155678"
-        },
-        {
-          "file": "libs/nlp-js-web/package-lock.json",
-          "hash": "15736033525366861648"
-        },
-        {
-          "file": "libs/nlp-js-web/package.json",
-          "hash": "9383847449434841093",
-          "deps": [
-            "npm:onnxruntime-web"
-          ]
-        },
-        {
-          "file": "libs/nlp-js-web/project.json",
-          "hash": "14526790046419114314"
-        },
-        {
-          "file": "libs/nlp-js-web/src/index.ts",
-          "hash": "1576989076034273952"
-        },
-        {
-          "file": "libs/nlp-js-web/src/lib/nlp-js-web.spec.ts",
-          "hash": "12607832157761176852"
-        },
-        {
-          "file": "libs/nlp-js-web/src/lib/nlp-js-web.ts",
-          "hash": "11970478513701499386",
-          "deps": [
-            "nlp-js-common",
-            "npm:onnxruntime-web"
-          ]
-        },
-        {
-          "file": "libs/nlp-js-web/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/nlp-js-web/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/nlp-js-web/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/nlp-js-web/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "vision-js-web": [
-        {
-          "file": "libs/vision-js-web/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/vision-js-web/jest.config.ts",
-          "hash": "17542482461225006443"
-        },
-        {
-          "file": "libs/vision-js-web/ng-package.json",
-          "hash": "16926229396215459650"
-        },
-        {
-          "file": "libs/vision-js-web/package-lock.json",
-          "hash": "5555612532806526900"
-        },
-        {
-          "file": "libs/vision-js-web/package.json",
-          "hash": "4251057625663208007",
-          "deps": [
-            "npm:onnxruntime-node"
-          ]
-        },
-        {
-          "file": "libs/vision-js-web/project.json",
-          "hash": "5899950191950333956"
-        },
-        {
-          "file": "libs/vision-js-web/src/index.ts",
-          "hash": "7037917739224847455"
-        },
-        {
-          "file": "libs/vision-js-web/src/lib/vision-js-web.spec.ts",
-          "hash": "12607832157761176852"
-        },
-        {
-          "file": "libs/vision-js-web/src/lib/vision-js-web.ts",
-          "hash": "16711226759234508945",
-          "deps": [
-            "vision-js-types",
-            "vision-js-common",
-            "npm:onnxruntime-web"
-          ]
-        },
-        {
-          "file": "libs/vision-js-web/tsconfig.json",
-          "hash": "2840670722752396445"
-        },
-        {
-          "file": "libs/vision-js-web/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/vision-js-web/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/vision-js-web/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "gmail-extension-content": [
-        {
-          "file": "apps/gmail-extension/scripts/content/.babelrc",
-          "hash": "11877436663910714680"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/.eslintrc.json",
-          "hash": "18107381890917525385"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/project.json",
-          "hash": "172190498934540373"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/InBoxSdkHandler.ts",
-          "hash": "1792532724819150853",
-          "deps": [
-            "npm:@inboxsdk/core"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/assets/prr.css",
-          "hash": "444393997090411159"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/assets/prrCompose.html",
-          "hash": "12609858545563459831"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/assets/prrFlag.html",
-          "hash": "111214353691995496"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/assets/prrHelp.html",
-          "hash": "15777068750632708778"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/assets/prrRead.html",
-          "hash": "15556244943380855789"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/IdleTimer.ts",
-          "hash": "10952932091503318508",
-          "deps": [
-            "npm:@inboxsdk/core"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxComposeViewHandler.spec.ts",
-          "hash": "13257521623088640569",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "npm:ts-auto-mock"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxComposeViewHandler.ts",
-          "hash": "875653842268879458",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "gmail-extension",
-            "npm:uuid"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxEventHandler.ts",
-          "hash": "8690004133508662933",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxLabels.ts",
-          "hash": "10501839835601402466"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxMessageViewHandler.spec.ts",
-          "hash": "2458410168978497733",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "npm:ts-auto-mock"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxMessageViewHandler.ts",
-          "hash": "13208047931257816415",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxThreadViewHandler.spec.ts",
-          "hash": "6228135605818027859",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "npm:ts-auto-mock"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxToolbarHandler.spec.ts",
-          "hash": "13670174766669536400",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "npm:ts-auto-mock",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxToolbarHandler.ts",
-          "hash": "6168867965295649402",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxBackgroundCommunicator.ts",
-          "hash": "3176353276050988161",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxDialogs.ts",
-          "hash": "7942784918603923768",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxThreadViewHandler.ts",
-          "hash": "9094923252624301185",
-          "deps": [
-            "npm:@inboxsdk/core",
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/main.ts",
-          "hash": "1859571221120331785",
-          "deps": [
-            "gmail-extension"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/src/utils/DOMUtils.ts",
-          "hash": "13377798205056062195"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/tsconfig.app.json",
-          "hash": "1156817524837363888"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/tsconfig.json",
-          "hash": "16415407764694559573"
-        },
-        {
-          "file": "apps/gmail-extension/scripts/content/webpack.config.js",
-          "hash": "15016021176794105273",
-          "deps": [
-            "npm:@nx/webpack",
-            "npm:copy-webpack-plugin"
-          ]
-        }
-      ],
-      "vision-js-node": [
-        {
-          "file": "libs/vision-js-node/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "libs/vision-js-node/jest.config.ts",
-          "hash": "534734874174565383"
-        },
-        {
-          "file": "libs/vision-js-node/ng-package.json",
-          "hash": "8863930932274916870"
-        },
-        {
-          "file": "libs/vision-js-node/package-lock.json",
-          "hash": "9803757405930341278"
-        },
-        {
-          "file": "libs/vision-js-node/package.json",
-          "hash": "12756121290716189448",
-          "deps": [
-            "npm:onnxruntime-node"
-          ]
-        },
-        {
-          "file": "libs/vision-js-node/project.json",
-          "hash": "1505676305607569663"
-        },
-        {
-          "file": "libs/vision-js-node/src/index.ts",
-          "hash": "18016635950512888979"
-        },
-        {
-          "file": "libs/vision-js-node/src/lib/vision-js-node.spec.ts",
-          "hash": "16426664976457209252",
-          "deps": [
-            "npm:@andreekeberg/imagedata"
-          ]
-        },
-        {
-          "file": "libs/vision-js-node/src/lib/vision-js-node.ts",
-          "hash": "11434589857821974568",
-          "deps": [
-            "vision-js-types",
-            "vision-js-common",
-            "npm:onnxruntime-common",
-            "npm:abstract-logging",
-            "npm:onnxruntime-node",
-            "npm:@andreekeberg/imagedata"
-          ]
-        },
-        {
-          "file": "libs/vision-js-node/tsconfig.json",
-          "hash": "7450039135051461349"
-        },
-        {
-          "file": "libs/vision-js-node/tsconfig.lib.json",
-          "hash": "8188472110264778699"
-        },
-        {
-          "file": "libs/vision-js-node/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
-        },
-        {
-          "file": "libs/vision-js-node/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        }
-      ],
-      "main-website-react": [
-        {
-          "file": "apps/main-website-react/.eslintrc.json",
-          "hash": "6603808886260983866"
-        },
-        {
-          "file": "apps/main-website-react/Dockerfile",
-          "hash": "13809755924455876120"
-        },
-        {
-          "file": "apps/main-website-react/index.d.ts",
-          "hash": "5498222895072842432"
-        },
-        {
-          "file": "apps/main-website-react/jest.config.ts",
-          "hash": "15752050374263510731"
-        },
-        {
-          "file": "apps/main-website-react/next-env.d.ts",
-          "hash": "5909181270615354023"
-        },
-        {
-          "file": "apps/main-website-react/next.config.js",
-          "hash": "15309063346888663578",
-          "deps": [
-            "npm:@nx/next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/postcss.config.js",
-          "hash": "2759402739052110475"
-        },
-        {
-          "file": "apps/main-website-react/project.json",
-          "hash": "3693721116096959749"
-        },
-        {
-          "file": "apps/main-website-react/public/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/main-website-react/public/css/slick-theme.css",
-          "hash": "8629750440547018604"
-        },
-        {
-          "file": "apps/main-website-react/public/css/slick.css",
-          "hash": "1933367569367394632"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/ai.pdf",
-          "hash": "17659067760299977147"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/patents/10949774.pdf",
-          "hash": "14106807550636989986"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/patents/11309086.pdf",
-          "hash": "12418165359890420580"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/patents/11356734.pdf",
-          "hash": "5461097801459232201"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/patents/11991415.pdf",
-          "hash": "16801465310268629507"
-        },
-        {
-          "file": "apps/main-website-react/public/docs/prr.pdf",
-          "hash": "9397195790618310889"
-        },
-        {
-          "file": "apps/main-website-react/public/favicon.ico",
-          "hash": "9303420814833116677"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/GTWalsheimProRegular.woff",
-          "hash": "11316022768662980680"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/GTWalsheimProRegular.woff2",
-          "hash": "11417915759434973238"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-black-webfont.woff",
-          "hash": "14026087863718589725"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-black-webfont.woff2",
-          "hash": "8733433449961095964"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-bold-webfont.woff",
-          "hash": "14960976860068263819"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-bold-webfont.woff2",
-          "hash": "5431006509692727793"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-extrabold-webfont.woff",
-          "hash": "4385661401739292285"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-extrabold-webfont.woff2",
-          "hash": "9782105707084444222"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-light-webfont.woff",
-          "hash": "1064007016821444226"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-light-webfont.woff2",
-          "hash": "5054873285343612926"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-medium-webfont.woff",
-          "hash": "16087565304088012637"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-medium-webfont.woff2",
-          "hash": "12444554808319958852"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-regular-webfont.woff",
-          "hash": "4477578567684078381"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-regular-webfont.woff2",
-          "hash": "7113641850846748915"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-semibold-webfont.woff",
-          "hash": "2879148744354611501"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-semibold-webfont.woff2",
-          "hash": "1443657645535597729"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-thin-webfont.woff",
-          "hash": "9698337046604459985"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/gellix-thin-webfont.woff2",
-          "hash": "10336838000166254565"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/slick.eot",
-          "hash": "15818359547558360162"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/slick.svg",
-          "hash": "11905936882828692581"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/slick.ttf",
-          "hash": "1341502254017727958"
-        },
-        {
-          "file": "apps/main-website-react/public/fonts/slick.woff",
-          "hash": "17323146238346941029"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/aahil-founder-play.png",
-          "hash": "2402981913382195098"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/aahil-valliani.png",
-          "hash": "10194422476499634469"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/aahil.png",
-          "hash": "16888871903626401257"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/abbas-valliani.png",
-          "hash": "15989054942906333542"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/allen-j-klein.png",
-          "hash": "2387304052663780126"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/annie-khalid.png",
-          "hash": "2416800131981296999"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/arya-bharath.png",
-          "hash": "17537883114362150267"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/cote.svg",
-          "hash": "11622082902780018067"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/dave-hoffer.png",
-          "hash": "6693430904381422335"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/dezi.png",
-          "hash": "2174775502611979342"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/founder_play.png",
-          "hash": "5175326528329976567"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/hasnain-aslam.png",
-          "hash": "9918195065833123163"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/icon-bio.svg",
-          "hash": "11297616080228964886"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/im-aahil.png",
-          "hash": "1734169428121050965"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/im-abbas.png",
-          "hash": "13128731924172726925"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/img-about-us-banner.png",
-          "hash": "18113171524783467102"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/judith-o-rorke-trigiani.png",
-          "hash": "5588369754281392357"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/kifayat.png",
-          "hash": "3683014745789934308"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/liz-sweigart.png",
-          "hash": "12872191563614776048"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/mobile/img-about-us-banner-mobile.png",
-          "hash": "1544018774149964924"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/pam-wisniewski.png",
-          "hash": "8939044666294575563"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/play.svg",
-          "hash": "3786673974504208446"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/praneeth-bedapudi.png",
-          "hash": "7580398984363326034"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/robert-lundin.png",
-          "hash": "15581174331888118498"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/shahzad-badar.png",
-          "hash": "14359535312595675911"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/sina-yeganeh.png",
-          "hash": "16752424016820629527"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/video-bg.png",
-          "hash": "6042728344580662383"
-        },
-        {
-          "file": "apps/main-website-react/public/images/about-us/zohran-valliani.png",
-          "hash": "563277432527621400"
-        },
-        {
-          "file": "apps/main-website-react/public/images/arrow-right-up-line.svg",
-          "hash": "3575290666447733994"
-        },
-        {
-          "file": "apps/main-website-react/public/images/bg-banner-home.jpg",
-          "hash": "11388294585692925140"
-        },
-        {
-          "file": "apps/main-website-react/public/images/bg-footer.svg",
-          "hash": "4468980525986487295"
-        },
-        {
-          "file": "apps/main-website-react/public/images/bg-safekids.jpg",
-          "hash": "18419270125480716718"
-        },
-        {
-          "file": "apps/main-website-react/public/images/check-point.svg",
-          "hash": "8818727868451316416"
-        },
-        {
-          "file": "apps/main-website-react/public/images/check-point2.svg",
-          "hash": "16192653045216977159"
-        },
-        {
-          "file": "apps/main-website-react/public/images/dots-circles.svg",
-          "hash": "16886096374437514922"
-        },
-        {
-          "file": "apps/main-website-react/public/images/dots.svg",
-          "hash": "15355836769216856160"
-        },
-        {
-          "file": "apps/main-website-react/public/images/favicon.png",
-          "hash": "3252893882244430115"
-        },
-        {
-          "file": "apps/main-website-react/public/images/featured-in-logos old.png",
-          "hash": "6266726200643449586"
-        },
-        {
-          "file": "apps/main-website-react/public/images/featured-in-logos.png",
-          "hash": "1432179523953688934"
-        },
-        {
-          "file": "apps/main-website-react/public/images/go.svg",
-          "hash": "691637735586669010"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/check-point2.svg",
-          "hash": "16192653045216977159"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/dot-point.svg",
-          "hash": "1920327239623980376"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/how_it_works_play.png",
-          "hash": "14817052908639286279"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-1.svg",
-          "hash": "5941863700734726995"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-2.svg",
-          "hash": "14224000101781803477"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-3.svg",
-          "hash": "4930817339273278940"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-check.svg",
-          "hash": "13938756695891749189"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/img-how-it-works-privacy-banner.png",
-          "hash": "17574591118267755676"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/img-how-it-works-privacy.png",
-          "hash": "426832626995184791"
-        },
-        {
-          "file": "apps/main-website-react/public/images/how-it-works-privacy/mobile/img-how-it-works-privacy-banner-mobile.png",
-          "hash": "3593620098439649409"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-arrow-btn.svg",
-          "hash": "12494776015702041933"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-check.svg",
-          "hash": "13938756695891749189"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-session1.png",
-          "hash": "20824063616520959"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-session2.png",
-          "hash": "14560109915515915510"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-session3.png",
-          "hash": "10835638105091458346"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon-stop.svg",
-          "hash": "15042529761731094052"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon1.svg",
-          "hash": "3752884499020595207"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon2.svg",
-          "hash": "18301142082284776481"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon3.svg",
-          "hash": "10330798795785159782"
-        },
-        {
-          "file": "apps/main-website-react/public/images/icon4.svg",
-          "hash": "6139592496996255075"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img-banner-home.png",
-          "hash": "15880110441101891029"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img-banner-home.png.old",
-          "hash": "10641549906951011623"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img1 - Copia.png",
-          "hash": "14804915130293783978"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img1.png",
-          "hash": "7639574012318121505"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img2.png",
-          "hash": "6459432144415782776"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img3.png",
-          "hash": "1682530751822761115"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img4-1-no-scan.png",
-          "hash": "6527532833295995867"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img4-gun-search.png",
-          "hash": "13571939542870033064"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img4-pause-blocked.png",
-          "hash": "10775828032020835967"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img4.png",
-          "hash": "6002707355044533071"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img5.png",
-          "hash": "17317978487233555962"
-        },
-        {
-          "file": "apps/main-website-react/public/images/img6.png",
-          "hash": "3345615615368699330"
-        },
-        {
-          "file": "apps/main-website-react/public/images/logo-footer.svg",
-          "hash": "17690087991517343705"
-        },
-        {
-          "file": "apps/main-website-react/public/images/logo.svg",
-          "hash": "9124446561059022915"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/bg-banner-home-mobile.jpg",
-          "hash": "10841342505588716980"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/bg-footer-mobile.svg",
-          "hash": "4288756767714978350"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/img-banner-home-mobile.png",
-          "hash": "3440296917699480873"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/img3-1.png",
-          "hash": "10962694909064903887"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/img3-2.png",
-          "hash": "10670858251031801479"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/img4-1.png",
-          "hash": "8147029808464351057"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/img4-2.png",
-          "hash": "18418473287834357132"
-        },
-        {
-          "file": "apps/main-website-react/public/images/mobile/menu-mobile.svg",
-          "hash": "969835971952713403"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/arrow-icon-left.svg",
-          "hash": "8017056169493241074"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/arrow-icon-right.svg",
-          "hash": "653173270609947732"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/bg-safekids.jpg",
-          "hash": "18419270125480716718"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/icon-check1.svg",
-          "hash": "15931649326336910624"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/icon-check2.svg",
-          "hash": "13235263884589017584"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/icons-apps.svg",
-          "hash": "9437994800695574387"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/img-products3.png",
-          "hash": "13294856160913277696"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/product-icon1.svg",
-          "hash": "15957873986908505203"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/product-icon2.svg",
-          "hash": "7211263127681130191"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/product-icon3.svg",
-          "hash": "15001408634792917307"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/testimonial1.png",
-          "hash": "9444898865856364104"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/testimonial2.png",
-          "hash": "3190660571012471788"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/testimonial3.png",
-          "hash": "1216656631817919057"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/testimonial4.png",
-          "hash": "12987508553762289681"
-        },
-        {
-          "file": "apps/main-website-react/public/images/products/testimonial5.png",
-          "hash": "14509202493248665045"
-        },
-        {
-          "file": "apps/main-website-react/public/images/stop.svg",
-          "hash": "7009448395090609487"
-        },
-        {
-          "file": "apps/main-website-react/public/images/switche-bg.png",
-          "hash": "1791021978811413054"
-        },
-        {
-          "file": "apps/main-website-react/public/images/switche-bg.svg",
-          "hash": "693219854700634504"
-        },
-        {
-          "file": "apps/main-website-react/public/images/switche-dot-green.svg",
-          "hash": "4502891784349893038"
-        },
-        {
-          "file": "apps/main-website-react/public/images/switche-dot-red.svg",
-          "hash": "15046602423883866064"
-        },
-        {
-          "file": "apps/main-website-react/public/images/switche.svg",
-          "hash": "14708363756369887720"
-        },
-        {
-          "file": "apps/main-website-react/specs/index.spec.tsx",
-          "hash": "7089194200195984762",
-          "deps": [
-            "npm:react",
-            "npm:@testing-library/react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/about-us/page.tsx",
-          "hash": "3971853930047115162",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/global.css",
-          "hash": "10726444918605608831"
-        },
-        {
-          "file": "apps/main-website-react/src/app/how-it-works/page.tsx",
-          "hash": "244529746405550044",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/layout.tsx",
-          "hash": "9481429793541521507",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/not-found.tsx",
-          "hash": "16109562229962499853",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/opensource/page.tsx",
-          "hash": "2717090941636243213",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/page.module.css",
-          "hash": "4786619528779355986"
-        },
-        {
-          "file": "apps/main-website-react/src/app/page.tsx",
-          "hash": "3059567721638773618",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/patents/page.tsx",
-          "hash": "15441678471186071270",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/privacy-policy/page.tsx",
-          "hash": "6194426143974993664",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/products/page.tsx",
-          "hash": "6087039789632050403",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/terms-and-conditions/page.tsx",
-          "hash": "4854773700286336733",
-          "deps": [
-            "npm:next",
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/terms-of-service-for-parents-and-legal-guardians/page.tsx",
-          "hash": "15924286727283947518",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/app/terms-of-service-for-schools/page.tsx",
-          "hash": "13124388393567467557",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/fonts/gellix.ts",
-          "hash": "9577840124911753815",
-          "deps": [
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/footer/Footer.tsx",
-          "hash": "39241386316224924",
-          "deps": [
-            "npm:react",
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/header/Header.tsx",
-          "hash": "4115095779179791368",
-          "deps": [
-            "npm:next",
-            "npm:react",
-            "npm:jquery"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/js/JsClient.tsx",
-          "hash": "7661878116966996121",
-          "deps": [
-            "npm:react",
-            "npm:jquery"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/pages/home/Banner.tsx",
-          "hash": "2456292521650322489",
-          "deps": [
-            "npm:react",
-            "npm:next"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/pages/home/SessionContentHome1.tsx",
-          "hash": "8146972548807633772",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/pages/products/Carousel.tsx",
-          "hash": "18209105330781778165",
-          "deps": [
-            "npm:react",
-            "npm:react-slick",
-            "npm:slick-carousel"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/ui/Dialog.tsx",
-          "hash": "1852840066175965534",
-          "deps": [
-            "npm:react",
-            "npm:@headlessui/react",
-            "npm:@heroicons/react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/ui/FadeInView.tsx",
-          "hash": "17063232923849940647",
-          "deps": [
-            "npm:react",
-            "npm:framer-motion"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/ui/Sheet.tsx",
-          "hash": "747253504459544722",
-          "deps": [
-            "npm:react",
-            "npm:@headlessui/react",
-            "npm:@heroicons/react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/components/ui/VideoPlayer.tsx",
-          "hash": "1952225216094390579",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/hooks/useDeviceSize.tsx",
-          "hash": "8712612720874189254",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/hooks/useInView.tsx",
-          "hash": "4022435228692336925",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/lib/utils.ts",
-          "hash": "6483145186850064023",
-          "deps": [
-            "npm:clsx",
-            "npm:tailwind-merge"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/src/routes/routes.ts",
-          "hash": "8646447204724353480"
-        },
-        {
-          "file": "apps/main-website-react/tailwind.config.js",
-          "hash": "9530210127227690419",
-          "deps": [
-            "npm:@nx/react"
-          ]
-        },
-        {
-          "file": "apps/main-website-react/tsconfig.json",
-          "hash": "1209339213788244436"
-        },
-        {
-          "file": "apps/main-website-react/tsconfig.spec.json",
-          "hash": "6922413205408300107"
         }
       ],
       "ml-api-web": [
@@ -3249,6 +1600,13 @@
           "deps": [
             "npm:react",
             "npm:@mui/material"
+          ]
+        },
+        {
+          "file": "apps/ml-api-web/src/utils/navigate.ts",
+          "hash": "15975122501911028677",
+          "deps": [
+            "npm:react-router-dom"
           ]
         },
         {
@@ -4525,13 +2883,6 @@
             "npm:@vitejs/plugin-react",
             "npm:@nx/vite"
           ]
-        },
-        {
-          "file": "apps/ml-api-web/src/utils/navigate.ts",
-          "hash": "15975122501911028677",
-          "deps": [
-            "npm:react-router-dom"
-          ]
         }
       ],
       "nlp-js-node": [
@@ -4597,66 +2948,1798 @@
           "hash": "11550347367511341917"
         }
       ],
-      "common-plugin": [
+      "main-website-react": [
         {
-          "file": "libs/common-plugin/.eslintrc.json",
-          "hash": "16403475465958696311"
+          "file": "apps/main-website-react/.eslintrc.json",
+          "hash": "6603808886260983866"
         },
         {
-          "file": "libs/common-plugin/README.md",
-          "hash": "18155544153142714431"
+          "file": "apps/main-website-react/Dockerfile",
+          "hash": "13809755924455876120"
         },
         {
-          "file": "libs/common-plugin/executors.json",
-          "hash": "11055860456403758160"
+          "file": "apps/main-website-react/index.d.ts",
+          "hash": "5498222895072842432"
         },
         {
-          "file": "libs/common-plugin/jest.config.ts",
-          "hash": "14391710673493814266"
+          "file": "apps/main-website-react/jest.config.ts",
+          "hash": "15752050374263510731"
         },
         {
-          "file": "libs/common-plugin/package.json",
-          "hash": "12685103080162355465",
+          "file": "apps/main-website-react/next-env.d.ts",
+          "hash": "5909181270615354023"
+        },
+        {
+          "file": "apps/main-website-react/next.config.js",
+          "hash": "15309063346888663578",
           "deps": [
-            "npm:@nx/devkit",
-            "npm:tslib",
-            "npm:fs-extra"
+            "npm:@nx/next"
           ]
         },
         {
-          "file": "libs/common-plugin/project.json",
-          "hash": "304519692682124906"
+          "file": "apps/main-website-react/postcss.config.js",
+          "hash": "2759402739052110475"
         },
         {
-          "file": "libs/common-plugin/src/executors/copy-assets/executor.ts",
-          "hash": "16223386135018450358",
-          "deps": [
-            "npm:fs-extra"
-          ]
+          "file": "apps/main-website-react/project.json",
+          "hash": "3693721116096959749"
         },
         {
-          "file": "libs/common-plugin/src/executors/copy-assets/schema.d.ts",
-          "hash": "14411105229383374925"
-        },
-        {
-          "file": "libs/common-plugin/src/executors/copy-assets/schema.json",
-          "hash": "10780720651861653096"
-        },
-        {
-          "file": "libs/common-plugin/src/index.ts",
+          "file": "apps/main-website-react/public/.gitkeep",
           "hash": "3244421341483603138"
         },
         {
-          "file": "libs/common-plugin/tsconfig.json",
+          "file": "apps/main-website-react/public/css/slick-theme.css",
+          "hash": "8629750440547018604"
+        },
+        {
+          "file": "apps/main-website-react/public/css/slick.css",
+          "hash": "1933367569367394632"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/ai.pdf",
+          "hash": "17659067760299977147"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/patents/10949774.pdf",
+          "hash": "14106807550636989986"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/patents/11309086.pdf",
+          "hash": "12418165359890420580"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/patents/11356734.pdf",
+          "hash": "5461097801459232201"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/patents/11991415.pdf",
+          "hash": "16801465310268629507"
+        },
+        {
+          "file": "apps/main-website-react/public/docs/prr.pdf",
+          "hash": "9397195790618310889"
+        },
+        {
+          "file": "apps/main-website-react/public/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/GTWalsheimProRegular.woff",
+          "hash": "11316022768662980680"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/GTWalsheimProRegular.woff2",
+          "hash": "11417915759434973238"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-black-webfont.woff",
+          "hash": "14026087863718589725"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-black-webfont.woff2",
+          "hash": "8733433449961095964"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-bold-webfont.woff",
+          "hash": "14960976860068263819"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-bold-webfont.woff2",
+          "hash": "5431006509692727793"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-extrabold-webfont.woff",
+          "hash": "4385661401739292285"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-extrabold-webfont.woff2",
+          "hash": "9782105707084444222"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-light-webfont.woff",
+          "hash": "1064007016821444226"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-light-webfont.woff2",
+          "hash": "5054873285343612926"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-medium-webfont.woff",
+          "hash": "16087565304088012637"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-medium-webfont.woff2",
+          "hash": "12444554808319958852"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-regular-webfont.woff",
+          "hash": "4477578567684078381"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-regular-webfont.woff2",
+          "hash": "7113641850846748915"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-semibold-webfont.woff",
+          "hash": "2879148744354611501"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-semibold-webfont.woff2",
+          "hash": "1443657645535597729"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-thin-webfont.woff",
+          "hash": "9698337046604459985"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/gellix-thin-webfont.woff2",
+          "hash": "10336838000166254565"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/slick.eot",
+          "hash": "15818359547558360162"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/slick.svg",
+          "hash": "11905936882828692581"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/slick.ttf",
+          "hash": "1341502254017727958"
+        },
+        {
+          "file": "apps/main-website-react/public/fonts/slick.woff",
+          "hash": "17323146238346941029"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/aahil-founder-play.png",
+          "hash": "2402981913382195098"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/aahil-valliani.png",
+          "hash": "10194422476499634469"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/aahil.png",
+          "hash": "16888871903626401257"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/abbas-valliani.png",
+          "hash": "15989054942906333542"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/allen-j-klein.png",
+          "hash": "2387304052663780126"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/annie-khalid.png",
+          "hash": "2416800131981296999"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/arya-bharath.png",
+          "hash": "17537883114362150267"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/cote.svg",
+          "hash": "11622082902780018067"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/dave-hoffer.png",
+          "hash": "6693430904381422335"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/dezi.png",
+          "hash": "2174775502611979342"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/founder_play.png",
+          "hash": "5175326528329976567"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/hasnain-aslam.png",
+          "hash": "9918195065833123163"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/icon-bio.svg",
+          "hash": "11297616080228964886"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/im-aahil.png",
+          "hash": "1734169428121050965"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/im-abbas.png",
+          "hash": "13128731924172726925"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/img-about-us-banner.png",
+          "hash": "18113171524783467102"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/judith-o-rorke-trigiani.png",
+          "hash": "5588369754281392357"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/kifayat.png",
+          "hash": "3683014745789934308"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/liz-sweigart.png",
+          "hash": "12872191563614776048"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/mobile/img-about-us-banner-mobile.png",
+          "hash": "1544018774149964924"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/pam-wisniewski.png",
+          "hash": "8939044666294575563"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/play.svg",
+          "hash": "3786673974504208446"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/praneeth-bedapudi.png",
+          "hash": "7580398984363326034"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/robert-lundin.png",
+          "hash": "15581174331888118498"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/shahzad-badar.png",
+          "hash": "14359535312595675911"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/sina-yeganeh.png",
+          "hash": "16752424016820629527"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/video-bg.png",
+          "hash": "6042728344580662383"
+        },
+        {
+          "file": "apps/main-website-react/public/images/about-us/zohran-valliani.png",
+          "hash": "563277432527621400"
+        },
+        {
+          "file": "apps/main-website-react/public/images/arrow-right-up-line.svg",
+          "hash": "3575290666447733994"
+        },
+        {
+          "file": "apps/main-website-react/public/images/bg-banner-home.jpg",
+          "hash": "11388294585692925140"
+        },
+        {
+          "file": "apps/main-website-react/public/images/bg-footer.svg",
+          "hash": "4468980525986487295"
+        },
+        {
+          "file": "apps/main-website-react/public/images/bg-safekids.jpg",
+          "hash": "18419270125480716718"
+        },
+        {
+          "file": "apps/main-website-react/public/images/check-point.svg",
+          "hash": "8818727868451316416"
+        },
+        {
+          "file": "apps/main-website-react/public/images/check-point2.svg",
+          "hash": "16192653045216977159"
+        },
+        {
+          "file": "apps/main-website-react/public/images/dots-circles.svg",
+          "hash": "16886096374437514922"
+        },
+        {
+          "file": "apps/main-website-react/public/images/dots.svg",
+          "hash": "15355836769216856160"
+        },
+        {
+          "file": "apps/main-website-react/public/images/favicon.png",
+          "hash": "3252893882244430115"
+        },
+        {
+          "file": "apps/main-website-react/public/images/featured-in-logos old.png",
+          "hash": "6266726200643449586"
+        },
+        {
+          "file": "apps/main-website-react/public/images/featured-in-logos.png",
+          "hash": "1432179523953688934"
+        },
+        {
+          "file": "apps/main-website-react/public/images/go.svg",
+          "hash": "691637735586669010"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/check-point2.svg",
+          "hash": "16192653045216977159"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/dot-point.svg",
+          "hash": "1920327239623980376"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/how_it_works_play.png",
+          "hash": "14817052908639286279"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-1.svg",
+          "hash": "5941863700734726995"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-2.svg",
+          "hash": "14224000101781803477"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-3.svg",
+          "hash": "4930817339273278940"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/icon-check.svg",
+          "hash": "13938756695891749189"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/img-how-it-works-privacy-banner.png",
+          "hash": "17574591118267755676"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/img-how-it-works-privacy.png",
+          "hash": "426832626995184791"
+        },
+        {
+          "file": "apps/main-website-react/public/images/how-it-works-privacy/mobile/img-how-it-works-privacy-banner-mobile.png",
+          "hash": "3593620098439649409"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-arrow-btn.svg",
+          "hash": "12494776015702041933"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-check.svg",
+          "hash": "13938756695891749189"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-session1.png",
+          "hash": "20824063616520959"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-session2.png",
+          "hash": "14560109915515915510"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-session3.png",
+          "hash": "10835638105091458346"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon-stop.svg",
+          "hash": "15042529761731094052"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon1.svg",
+          "hash": "3752884499020595207"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon2.svg",
+          "hash": "18301142082284776481"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon3.svg",
+          "hash": "10330798795785159782"
+        },
+        {
+          "file": "apps/main-website-react/public/images/icon4.svg",
+          "hash": "6139592496996255075"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img-banner-home.png",
+          "hash": "15880110441101891029"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img-banner-home.png.old",
+          "hash": "10641549906951011623"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img1 - Copia.png",
+          "hash": "14804915130293783978"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img1.png",
+          "hash": "7639574012318121505"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img2.png",
+          "hash": "6459432144415782776"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img3.png",
+          "hash": "1682530751822761115"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img4-1-no-scan.png",
+          "hash": "6527532833295995867"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img4-gun-search.png",
+          "hash": "13571939542870033064"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img4-pause-blocked.png",
+          "hash": "10775828032020835967"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img4.png",
+          "hash": "6002707355044533071"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img5.png",
+          "hash": "17317978487233555962"
+        },
+        {
+          "file": "apps/main-website-react/public/images/img6.png",
+          "hash": "3345615615368699330"
+        },
+        {
+          "file": "apps/main-website-react/public/images/logo-footer.svg",
+          "hash": "17690087991517343705"
+        },
+        {
+          "file": "apps/main-website-react/public/images/logo.svg",
+          "hash": "9124446561059022915"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/bg-banner-home-mobile.jpg",
+          "hash": "10841342505588716980"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/bg-footer-mobile.svg",
+          "hash": "4288756767714978350"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/img-banner-home-mobile.png",
+          "hash": "3440296917699480873"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/img3-1.png",
+          "hash": "10962694909064903887"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/img3-2.png",
+          "hash": "10670858251031801479"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/img4-1.png",
+          "hash": "8147029808464351057"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/img4-2.png",
+          "hash": "18418473287834357132"
+        },
+        {
+          "file": "apps/main-website-react/public/images/mobile/menu-mobile.svg",
+          "hash": "969835971952713403"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/arrow-icon-left.svg",
+          "hash": "8017056169493241074"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/arrow-icon-right.svg",
+          "hash": "653173270609947732"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/bg-safekids.jpg",
+          "hash": "18419270125480716718"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/icon-check1.svg",
+          "hash": "15931649326336910624"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/icon-check2.svg",
+          "hash": "13235263884589017584"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/icons-apps.svg",
+          "hash": "9437994800695574387"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/img-products3.png",
+          "hash": "13294856160913277696"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/product-icon1.svg",
+          "hash": "15957873986908505203"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/product-icon2.svg",
+          "hash": "7211263127681130191"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/product-icon3.svg",
+          "hash": "15001408634792917307"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/testimonial1.png",
+          "hash": "9444898865856364104"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/testimonial2.png",
+          "hash": "3190660571012471788"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/testimonial3.png",
+          "hash": "1216656631817919057"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/testimonial4.png",
+          "hash": "12987508553762289681"
+        },
+        {
+          "file": "apps/main-website-react/public/images/products/testimonial5.png",
+          "hash": "14509202493248665045"
+        },
+        {
+          "file": "apps/main-website-react/public/images/stop.svg",
+          "hash": "7009448395090609487"
+        },
+        {
+          "file": "apps/main-website-react/public/images/switche-bg.png",
+          "hash": "1791021978811413054"
+        },
+        {
+          "file": "apps/main-website-react/public/images/switche-bg.svg",
+          "hash": "693219854700634504"
+        },
+        {
+          "file": "apps/main-website-react/public/images/switche-dot-green.svg",
+          "hash": "4502891784349893038"
+        },
+        {
+          "file": "apps/main-website-react/public/images/switche-dot-red.svg",
+          "hash": "15046602423883866064"
+        },
+        {
+          "file": "apps/main-website-react/public/images/switche.svg",
+          "hash": "14708363756369887720"
+        },
+        {
+          "file": "apps/main-website-react/specs/index.spec.tsx",
+          "hash": "7089194200195984762",
+          "deps": [
+            "npm:react",
+            "npm:@testing-library/react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/about-us/page.tsx",
+          "hash": "3971853930047115162",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/global.css",
+          "hash": "10726444918605608831"
+        },
+        {
+          "file": "apps/main-website-react/src/app/how-it-works/page.tsx",
+          "hash": "244529746405550044",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/layout.tsx",
+          "hash": "9481429793541521507",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/not-found.tsx",
+          "hash": "16109562229962499853",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/opensource/page.tsx",
+          "hash": "2717090941636243213",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/page.module.css",
+          "hash": "4786619528779355986"
+        },
+        {
+          "file": "apps/main-website-react/src/app/page.tsx",
+          "hash": "3059567721638773618",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/patents/page.tsx",
+          "hash": "15441678471186071270",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/privacy-policy/page.tsx",
+          "hash": "6194426143974993664",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/products/page.tsx",
+          "hash": "6087039789632050403",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/terms-and-conditions/page.tsx",
+          "hash": "4854773700286336733",
+          "deps": [
+            "npm:next",
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/terms-of-service-for-parents-and-legal-guardians/page.tsx",
+          "hash": "15924286727283947518",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/app/terms-of-service-for-schools/page.tsx",
+          "hash": "13124388393567467557",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/fonts/gellix.ts",
+          "hash": "9577840124911753815",
+          "deps": [
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/footer/Footer.tsx",
+          "hash": "39241386316224924",
+          "deps": [
+            "npm:react",
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/header/Header.tsx",
+          "hash": "4115095779179791368",
+          "deps": [
+            "npm:next",
+            "npm:react",
+            "npm:jquery"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/js/JsClient.tsx",
+          "hash": "7661878116966996121",
+          "deps": [
+            "npm:react",
+            "npm:jquery"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/pages/home/Banner.tsx",
+          "hash": "2456292521650322489",
+          "deps": [
+            "npm:react",
+            "npm:next"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/pages/home/SessionContentHome1.tsx",
+          "hash": "8146972548807633772",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/pages/products/Carousel.tsx",
+          "hash": "18209105330781778165",
+          "deps": [
+            "npm:react",
+            "npm:react-slick",
+            "npm:slick-carousel"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/ui/Dialog.tsx",
+          "hash": "1852840066175965534",
+          "deps": [
+            "npm:react",
+            "npm:@headlessui/react",
+            "npm:@heroicons/react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/ui/FadeInView.tsx",
+          "hash": "17063232923849940647",
+          "deps": [
+            "npm:react",
+            "npm:framer-motion"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/ui/Sheet.tsx",
+          "hash": "747253504459544722",
+          "deps": [
+            "npm:react",
+            "npm:@headlessui/react",
+            "npm:@heroicons/react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/components/ui/VideoPlayer.tsx",
+          "hash": "1952225216094390579",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/hooks/useDeviceSize.tsx",
+          "hash": "8712612720874189254",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/hooks/useInView.tsx",
+          "hash": "4022435228692336925",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/lib/utils.ts",
+          "hash": "6483145186850064023",
+          "deps": [
+            "npm:clsx",
+            "npm:tailwind-merge"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/src/routes/routes.ts",
+          "hash": "8646447204724353480"
+        },
+        {
+          "file": "apps/main-website-react/tailwind.config.js",
+          "hash": "9530210127227690419",
+          "deps": [
+            "npm:@nx/react"
+          ]
+        },
+        {
+          "file": "apps/main-website-react/tsconfig.json",
+          "hash": "1209339213788244436"
+        },
+        {
+          "file": "apps/main-website-react/tsconfig.spec.json",
+          "hash": "6922413205408300107"
+        }
+      ],
+      "vision-js-react-native": [
+        {
+          "file": "libs/vision-js-react-native/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/vision-js-react-native/jest.config.ts",
+          "hash": "10485025974140003412"
+        },
+        {
+          "file": "libs/vision-js-react-native/ng-package.json",
+          "hash": "17902439926580889995"
+        },
+        {
+          "file": "libs/vision-js-react-native/package-lock.json",
+          "hash": "7931309150499067877"
+        },
+        {
+          "file": "libs/vision-js-react-native/package.json",
+          "hash": "16896599250233919684",
+          "deps": [
+            "npm:onnxruntime-react-native"
+          ]
+        },
+        {
+          "file": "libs/vision-js-react-native/project.json",
+          "hash": "17370318382913516943"
+        },
+        {
+          "file": "libs/vision-js-react-native/src/index.ts",
+          "hash": "10005836398085105139"
+        },
+        {
+          "file": "libs/vision-js-react-native/src/lib/vision-js-react-native.spec.ts",
+          "hash": "12607832157761176852"
+        },
+        {
+          "file": "libs/vision-js-react-native/src/lib/vision-js-react-native.ts",
+          "hash": "16711226759234508945",
+          "deps": [
+            "vision-js-types",
+            "vision-js-common",
+            "npm:onnxruntime-web"
+          ]
+        },
+        {
+          "file": "libs/vision-js-react-native/tsconfig.json",
           "hash": "2840670722752396445"
         },
         {
-          "file": "libs/common-plugin/tsconfig.lib.json",
-          "hash": "3632393694954060084"
+          "file": "libs/vision-js-react-native/tsconfig.lib.json",
+          "hash": "8188472110264778699"
         },
         {
-          "file": "libs/common-plugin/tsconfig.spec.json",
+          "file": "libs/vision-js-react-native/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/vision-js-react-native/tsconfig.spec.json",
           "hash": "11550347367511341917"
+        }
+      ],
+      "nlp-js-react-native": [
+        {
+          "file": "libs/nlp-js-react-native/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/nlp-js-react-native/jest.config.ts",
+          "hash": "12390289537722005200"
+        },
+        {
+          "file": "libs/nlp-js-react-native/ng-package.json",
+          "hash": "9784112700455907076"
+        },
+        {
+          "file": "libs/nlp-js-react-native/package-lock.json",
+          "hash": "13388219327509155948"
+        },
+        {
+          "file": "libs/nlp-js-react-native/package.json",
+          "hash": "16159609158546389838",
+          "deps": [
+            "npm:onnxruntime-react-native"
+          ]
+        },
+        {
+          "file": "libs/nlp-js-react-native/project.json",
+          "hash": "12184326132210710839"
+        },
+        {
+          "file": "libs/nlp-js-react-native/src/index.ts",
+          "hash": "1024722685422301072"
+        },
+        {
+          "file": "libs/nlp-js-react-native/src/lib/nlp-js-react-native.spec.ts",
+          "hash": "12607832157761176852"
+        },
+        {
+          "file": "libs/nlp-js-react-native/src/lib/nlp-js-react-native.ts",
+          "hash": "18193488257556732212",
+          "deps": [
+            "nlp-js-common",
+            "npm:onnxruntime-react-native"
+          ]
+        },
+        {
+          "file": "libs/nlp-js-react-native/tsconfig.json",
+          "hash": "2840670722752396445"
+        },
+        {
+          "file": "libs/nlp-js-react-native/tsconfig.lib.json",
+          "hash": "8188472110264778699"
+        },
+        {
+          "file": "libs/nlp-js-react-native/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/nlp-js-react-native/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "vision-js-types": [
+        {
+          "file": "libs/vision-js-types/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/vision-js-types/jest.config.ts",
+          "hash": "1672352926519521667"
+        },
+        {
+          "file": "libs/vision-js-types/ng-package.json",
+          "hash": "3538595807139590966"
+        },
+        {
+          "file": "libs/vision-js-types/package-lock.json",
+          "hash": "15240480191238879283"
+        },
+        {
+          "file": "libs/vision-js-types/package.json",
+          "hash": "8933237162147430067"
+        },
+        {
+          "file": "libs/vision-js-types/pnpm-lock.yaml",
+          "hash": "9473872673800482516"
+        },
+        {
+          "file": "libs/vision-js-types/project.json",
+          "hash": "7397263698082636536"
+        },
+        {
+          "file": "libs/vision-js-types/src/index.ts",
+          "hash": "880384308867541017"
+        },
+        {
+          "file": "libs/vision-js-types/src/lib/vision-js-types.ts",
+          "hash": "10638186200837978625"
+        },
+        {
+          "file": "libs/vision-js-types/tsconfig.json",
+          "hash": "2840670722752396445"
+        },
+        {
+          "file": "libs/vision-js-types/tsconfig.lib.json",
+          "hash": "8188472110264778699"
+        },
+        {
+          "file": "libs/vision-js-types/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/vision-js-types/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "vision-js-common": [
+        {
+          "file": "libs/vision-js-common/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/vision-js-common/jest.config.ts",
+          "hash": "1279800591692379658"
+        },
+        {
+          "file": "libs/vision-js-common/ng-package.json",
+          "hash": "399581977966781773"
+        },
+        {
+          "file": "libs/vision-js-common/package-lock.json",
+          "hash": "16818917502960948128"
+        },
+        {
+          "file": "libs/vision-js-common/package.json",
+          "hash": "13636928527613184052",
+          "deps": [
+            "npm:@techstark/opencv-js",
+            "npm:onnxruntime-common",
+            "npm:sbd",
+            "npm:abstract-logging"
+          ]
+        },
+        {
+          "file": "libs/vision-js-common/pnpm-lock.yaml",
+          "hash": "9473872673800482516"
+        },
+        {
+          "file": "libs/vision-js-common/project.json",
+          "hash": "15334070735551095951"
+        },
+        {
+          "file": "libs/vision-js-common/src/index.ts",
+          "hash": "8160119588649832749"
+        },
+        {
+          "file": "libs/vision-js-common/src/lib/model.ts",
+          "hash": "12174548881437859903"
+        },
+        {
+          "file": "libs/vision-js-common/src/lib/vision-js-common.spec.ts",
+          "hash": "12607832157761176852"
+        },
+        {
+          "file": "libs/vision-js-common/src/lib/vision-js-common.ts",
+          "hash": "4476390779778578292",
+          "deps": [
+            "vision-js-types",
+            "npm:onnxruntime-common",
+            "npm:abstract-logging",
+            "npm:@techstark/opencv-js"
+          ]
+        },
+        {
+          "file": "libs/vision-js-common/tsconfig.json",
+          "hash": "2840670722752396445"
+        },
+        {
+          "file": "libs/vision-js-common/tsconfig.lib.json",
+          "hash": "8188472110264778699"
+        },
+        {
+          "file": "libs/vision-js-common/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/vision-js-common/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "web-categorize": [
+        {
+          "file": "libs/web-categorize/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/web-categorize/jest.config.ts",
+          "hash": "10381533399428602709"
+        },
+        {
+          "file": "libs/web-categorize/ng-package.json",
+          "hash": "14734214394669161397"
+        },
+        {
+          "file": "libs/web-categorize/project.json",
+          "hash": "16026305050776769426"
+        },
+        {
+          "file": "libs/web-categorize/src/index.ts",
+          "hash": "5583342091007089761"
+        },
+        {
+          "file": "libs/web-categorize/src/lib/category-cache.ts",
+          "hash": "2554574175473212501"
+        },
+        {
+          "file": "libs/web-categorize/src/lib/download-utils.ts",
+          "hash": "5916107529500657438",
+          "deps": [
+            "npm:nodejs-file-downloader",
+            "npm:abstract-logging"
+          ]
+        },
+        {
+          "file": "libs/web-categorize/src/lib/web-categorize.ts",
+          "hash": "1760512177241633788",
+          "deps": [
+            "npm:abstract-logging",
+            "npm:tldts",
+            "npm:short-hash"
+          ]
+        },
+        {
+          "file": "libs/web-categorize/src/lib/web-category-content.ts",
+          "hash": "6508823390238852580"
+        },
+        {
+          "file": "libs/web-categorize/src/lib/web-category-reader.ts",
+          "hash": "15009774344364771357",
+          "deps": [
+            "npm:abstract-logging",
+            "npm:gunzip-file"
+          ]
+        },
+        {
+          "file": "libs/web-categorize/src/lib/web-category-types.ts",
+          "hash": "3823741626324308823"
+        },
+        {
+          "file": "libs/web-categorize/src/lib/web-category-utils.ts",
+          "hash": "10279856380208171283",
+          "deps": [
+            "npm:valid-url"
+          ]
+        },
+        {
+          "file": "libs/web-categorize/tsconfig.json",
+          "hash": "10421704360087173529"
+        },
+        {
+          "file": "libs/web-categorize/tsconfig.lib.json",
+          "hash": "1151629112378082701"
+        },
+        {
+          "file": "libs/web-categorize/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/web-categorize/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "ml-api-types": [
+        {
+          "file": "libs/ml-api-types/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/ml-api-types/jest.config.ts",
+          "hash": "12374158649361122675"
+        },
+        {
+          "file": "libs/ml-api-types/ng-package.json",
+          "hash": "5033976126770400855"
+        },
+        {
+          "file": "libs/ml-api-types/package-lock.json",
+          "hash": "12399962829949445602"
+        },
+        {
+          "file": "libs/ml-api-types/package.json",
+          "hash": "6467179796964078567"
+        },
+        {
+          "file": "libs/ml-api-types/pnpm-lock.yaml",
+          "hash": "9473872673800482516"
+        },
+        {
+          "file": "libs/ml-api-types/project.json",
+          "hash": "15814111870664741115"
+        },
+        {
+          "file": "libs/ml-api-types/src/index.ts",
+          "hash": "9686092914120696205"
+        },
+        {
+          "file": "libs/ml-api-types/src/lib/ml-api-types.ts",
+          "hash": "4385295442662731706"
+        },
+        {
+          "file": "libs/ml-api-types/tsconfig.json",
+          "hash": "2840670722752396445"
+        },
+        {
+          "file": "libs/ml-api-types/tsconfig.lib.json",
+          "hash": "8188472110264778699"
+        },
+        {
+          "file": "libs/ml-api-types/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/ml-api-types/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "gmail-extension-ui-onboarding": [
+        {
+          "file": "apps/gmail-extension/ui-onboarding/.eslintrc.json",
+          "hash": "16555498953643626853"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/index.html",
+          "hash": "17841063224033038523"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/jest.config.ts",
+          "hash": "10530398154629914381"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/project.json",
+          "hash": "3348088680563436023"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/common/onBoardingSteps/index.tsx",
+          "hash": "1149593978911623798",
+          "deps": [
+            "npm:react",
+            "npm:styled-components"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/common/onBoardingSteps/onboarding.types.tsx",
+          "hash": "17488434454760770347"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/common/steps/index.tsx",
+          "hash": "1647253114886593536",
+          "deps": [
+            "npm:react",
+            "npm:@mui/material",
+            "npm:@mui/styles"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/common/theme/index.ts",
+          "hash": "4791212556818907463",
+          "deps": [
+            "npm:@mui/material"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/components/button/index.tsx",
+          "hash": "9570318626181837075",
+          "deps": [
+            "npm:react",
+            "npm:@mui/material"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/components/checkbox/index.tsx",
+          "hash": "9302177453520725219",
+          "deps": [
+            "npm:react",
+            "npm:@mui/material"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/components/index.tsx",
+          "hash": "7295945937532142819"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/components/loader/index.tsx",
+          "hash": "13313775564271502122",
+          "deps": [
+            "npm:react",
+            "npm:@mui/material"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/getStarted.style.tsx",
+          "hash": "6911251176358198666",
+          "deps": [
+            "npm:styled-components"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/getStarted.type.tsx",
+          "hash": "1366678823097744630"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/index.spec.tsx.old",
+          "hash": "3621348776267148494"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/index.tsx",
+          "hash": "16244186921530072250",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/index.spec.tsx.old",
+          "hash": "2573246249717083710"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/index.tsx",
+          "hash": "6914095276619185608",
+          "deps": [
+            "npm:react"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/main.style.tsx",
+          "hash": "14795390922760989434",
+          "deps": [
+            "npm:styled-components"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/src/main.tsx",
+          "hash": "10555380508288749856",
+          "deps": [
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/tsconfig.app.json",
+          "hash": "7987642279534014051"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/tsconfig.editor.json",
+          "hash": "17511610827034788226"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/tsconfig.json",
+          "hash": "1722983559047303790"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/tsconfig.spec.json",
+          "hash": "2927375835638640771"
+        },
+        {
+          "file": "apps/gmail-extension/ui-onboarding/vite.config.ts",
+          "hash": "10114095454045096300",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react",
+            "npm:@nx/vite"
+          ]
+        }
+      ],
+      "main-website-react-e2e": [
+        {
+          "file": "apps/main-website-react-e2e/.eslintrc.json",
+          "hash": "14060216369337943343"
+        },
+        {
+          "file": "apps/main-website-react-e2e/cypress.config.ts",
+          "hash": "14599475074201753712",
+          "deps": [
+            "npm:@nx/cypress",
+            "npm:cypress"
+          ]
+        },
+        {
+          "file": "apps/main-website-react-e2e/project.json",
+          "hash": "3729793386385474313"
+        },
+        {
+          "file": "apps/main-website-react-e2e/src/e2e/app.cy.ts",
+          "hash": "4823716644609983973"
+        },
+        {
+          "file": "apps/main-website-react-e2e/src/fixtures/example.json",
+          "hash": "11785586596216172004"
+        },
+        {
+          "file": "apps/main-website-react-e2e/src/support/app.po.ts",
+          "hash": "11157016311132186162"
+        },
+        {
+          "file": "apps/main-website-react-e2e/src/support/commands.ts",
+          "hash": "5397443931564808659"
+        },
+        {
+          "file": "apps/main-website-react-e2e/src/support/e2e.ts",
+          "hash": "1054106023200826784"
+        },
+        {
+          "file": "apps/main-website-react-e2e/tsconfig.json",
+          "hash": "10740392072068377465"
+        }
+      ],
+      "gmail-extension-content": [
+        {
+          "file": "apps/gmail-extension/scripts/content/.babelrc",
+          "hash": "11877436663910714680"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/.eslintrc.json",
+          "hash": "18107381890917525385"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/project.json",
+          "hash": "172190498934540373"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/InBoxSdkHandler.ts",
+          "hash": "1792532724819150853",
+          "deps": [
+            "npm:@inboxsdk/core"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/assets/prr.css",
+          "hash": "444393997090411159"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/assets/prrCompose.html",
+          "hash": "12609858545563459831"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/assets/prrFlag.html",
+          "hash": "111214353691995496"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/assets/prrHelp.html",
+          "hash": "15777068750632708778"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/assets/prrRead.html",
+          "hash": "15556244943380855789"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/IdleTimer.ts",
+          "hash": "10952932091503318508",
+          "deps": [
+            "npm:@inboxsdk/core"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxComposeViewHandler.spec.ts",
+          "hash": "13257521623088640569",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "npm:ts-auto-mock"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxComposeViewHandler.ts",
+          "hash": "875653842268879458",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "gmail-extension",
+            "npm:uuid"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxEventHandler.ts",
+          "hash": "8690004133508662933",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxLabels.ts",
+          "hash": "10501839835601402466"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxMessageViewHandler.spec.ts",
+          "hash": "2458410168978497733",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "npm:ts-auto-mock"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxMessageViewHandler.ts",
+          "hash": "13208047931257816415",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxThreadViewHandler.spec.ts",
+          "hash": "6228135605818027859",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "npm:ts-auto-mock"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxToolbarHandler.spec.ts",
+          "hash": "13670174766669536400",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "npm:ts-auto-mock",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InBoxToolbarHandler.ts",
+          "hash": "6168867965295649402",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxBackgroundCommunicator.ts",
+          "hash": "3176353276050988161",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxDialogs.ts",
+          "hash": "7942784918603923768",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/inbox/InboxThreadViewHandler.ts",
+          "hash": "9094923252624301185",
+          "deps": [
+            "npm:@inboxsdk/core",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/main.ts",
+          "hash": "1859571221120331785",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/src/utils/DOMUtils.ts",
+          "hash": "13377798205056062195"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/tsconfig.app.json",
+          "hash": "1156817524837363888"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/tsconfig.json",
+          "hash": "16415407764694559573"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/content/webpack.config.js",
+          "hash": "15016021176794105273",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:copy-webpack-plugin"
+          ]
+        }
+      ],
+      "nlp-js-web": [
+        {
+          "file": "libs/nlp-js-web/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/nlp-js-web/jest.config.ts",
+          "hash": "8480627280102103951"
+        },
+        {
+          "file": "libs/nlp-js-web/ng-package.json",
+          "hash": "16461150388157155678"
+        },
+        {
+          "file": "libs/nlp-js-web/package-lock.json",
+          "hash": "15736033525366861648"
+        },
+        {
+          "file": "libs/nlp-js-web/package.json",
+          "hash": "9383847449434841093",
+          "deps": [
+            "npm:onnxruntime-web"
+          ]
+        },
+        {
+          "file": "libs/nlp-js-web/project.json",
+          "hash": "14526790046419114314"
+        },
+        {
+          "file": "libs/nlp-js-web/src/index.ts",
+          "hash": "1576989076034273952"
+        },
+        {
+          "file": "libs/nlp-js-web/src/lib/nlp-js-web.spec.ts",
+          "hash": "12607832157761176852"
+        },
+        {
+          "file": "libs/nlp-js-web/src/lib/nlp-js-web.ts",
+          "hash": "11970478513701499386",
+          "deps": [
+            "nlp-js-common",
+            "npm:onnxruntime-web"
+          ]
+        },
+        {
+          "file": "libs/nlp-js-web/tsconfig.json",
+          "hash": "2840670722752396445"
+        },
+        {
+          "file": "libs/nlp-js-web/tsconfig.lib.json",
+          "hash": "8188472110264778699"
+        },
+        {
+          "file": "libs/nlp-js-web/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
+        },
+        {
+          "file": "libs/nlp-js-web/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "gmail-extension-background": [
+        {
+          "file": "apps/gmail-extension/scripts/background/.babelrc",
+          "hash": "11877436663910714680"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/.eslintrc.json",
+          "hash": "16610364691625952355"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/project.json",
+          "hash": "13884055491021392903"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/BackgroundEventHandler.spec.ts",
+          "hash": "6091152761182573439",
+          "deps": [
+            "gmail-extension",
+            "npm:ts-auto-mock"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/BackgroundEventHandler.ts",
+          "hash": "1856844484687265317",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/Onboarding.spec.ts",
+          "hash": "6634121967058594301",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/authService.ts",
+          "hash": "10031691784726126132",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/chromeUtil.ts",
+          "hash": "17019053236595702912"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/emailEventService.ts",
+          "hash": "309081122236041768",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/endpoint.ts",
+          "hash": "13493189486705694673"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/httpService.ts",
+          "hash": "13187455799895529177",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/api/onboarding.ts",
+          "hash": "14744290634178927117",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/ChromeStorage.ts",
+          "hash": "13200669225545293684"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCache.spec.ts",
+          "hash": "9376865882021458268",
+          "deps": [
+            "gmail-extension",
+            "npm:ts-auto-mock"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCache.ts",
+          "hash": "5469366262249379735",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheData.spec.ts",
+          "hash": "8291787611751735087"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheData.ts",
+          "hash": "9046605899574365270"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/cache/NLPResultCacheListener.ts",
+          "hash": "14597466668109961240"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/chrome/tabListener/onUpdatedTabListener.ts",
+          "hash": "755817288340214466"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/events/EmailEventNotificationQueue.spec.ts",
+          "hash": "7347696096108699238",
+          "deps": [
+            "npm:ts-auto-mock",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/events/EmailEventNotificationQueue.ts",
+          "hash": "7290607325080490456",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/main.ts",
+          "hash": "923423863780316445",
+          "deps": [
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelImpl.ts",
+          "hash": "8789076376002533991",
+          "deps": [
+            "nlp-js-web"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelInterface.ts",
+          "hash": "6485374768995491452"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapper.spec.ts",
+          "hash": "8898519376196716872",
+          "deps": [
+            "npm:jest-chrome",
+            "gmail-extension"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapper.ts",
+          "hash": "13716376716714023902",
+          "deps": [
+            "gmail-extension",
+            "nlp-js-common",
+            "npm:sbd"
+          ]
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/src/model/NLPModelWrapperInterface.ts",
+          "hash": "17599554073369692095"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/tsconfig.app.json",
+          "hash": "14527765452377923576"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/tsconfig.json",
+          "hash": "1154222265060113307"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/tsconfig.spec.json",
+          "hash": "17874504027954657085"
+        },
+        {
+          "file": "apps/gmail-extension/scripts/background/webpack.config.js",
+          "hash": "5027394248634273711",
+          "deps": [
+            "npm:@nx/webpack",
+            "npm:copy-webpack-plugin",
+            "npm:webpack"
+          ]
         }
       ],
       "web-filter-extension": [
@@ -6441,273 +6524,213 @@
           ]
         }
       ],
-      "vision-js-common": [
+      "nlp-js-common": [
         {
-          "file": "libs/vision-js-common/.eslintrc.json",
+          "file": "libs/nlp-js-common/.eslintrc.json",
           "hash": "13800677001662881425"
         },
         {
-          "file": "libs/vision-js-common/jest.config.ts",
-          "hash": "1279800591692379658"
+          "file": "libs/nlp-js-common/jest.config.ts",
+          "hash": "10600428937926938607"
         },
         {
-          "file": "libs/vision-js-common/ng-package.json",
-          "hash": "399581977966781773"
+          "file": "libs/nlp-js-common/ng-package.json",
+          "hash": "9653266371539577191"
         },
         {
-          "file": "libs/vision-js-common/package-lock.json",
-          "hash": "16818917502960948128"
+          "file": "libs/nlp-js-common/package-lock.json",
+          "hash": "12319454277210821399"
         },
         {
-          "file": "libs/vision-js-common/package.json",
-          "hash": "13636928527613184052",
+          "file": "libs/nlp-js-common/package.json",
+          "hash": "9864133669438256769",
           "deps": [
-            "npm:@techstark/opencv-js",
             "npm:onnxruntime-common",
             "npm:sbd",
             "npm:abstract-logging"
           ]
         },
         {
-          "file": "libs/vision-js-common/pnpm-lock.yaml",
+          "file": "libs/nlp-js-common/pnpm-lock.yaml",
           "hash": "9473872673800482516"
         },
         {
-          "file": "libs/vision-js-common/project.json",
-          "hash": "15334070735551095951"
+          "file": "libs/nlp-js-common/project.json",
+          "hash": "5197201116351912888"
         },
         {
-          "file": "libs/vision-js-common/src/index.ts",
-          "hash": "8160119588649832749"
+          "file": "libs/nlp-js-common/src/index.ts",
+          "hash": "9375158846539881109"
         },
         {
-          "file": "libs/vision-js-common/src/lib/model.ts",
-          "hash": "12174548881437859903"
+          "file": "libs/nlp-js-common/src/lib/constants.ts",
+          "hash": "1865670027132271673"
         },
         {
-          "file": "libs/vision-js-common/src/lib/vision-js-common.spec.ts",
+          "file": "libs/nlp-js-common/src/lib/model.ts",
+          "hash": "6391299931927493850"
+        },
+        {
+          "file": "libs/nlp-js-common/src/lib/nlp-js-common.spec.ts",
           "hash": "12607832157761176852"
         },
         {
-          "file": "libs/vision-js-common/src/lib/vision-js-common.ts",
-          "hash": "4476390779778578292",
+          "file": "libs/nlp-js-common/src/lib/nlp-js-common.ts",
+          "hash": "9272183578955788437",
           "deps": [
-            "vision-js-types",
             "npm:onnxruntime-common",
+            "npm:sbd",
             "npm:abstract-logging",
-            "npm:@techstark/opencv-js"
+            "nlp-js-types"
           ]
         },
         {
-          "file": "libs/vision-js-common/tsconfig.json",
+          "file": "libs/nlp-js-common/src/lib/tokenizer/bert_vocab.ts",
+          "hash": "15341741596236475248"
+        },
+        {
+          "file": "libs/nlp-js-common/src/lib/tokenizer/index.ts",
+          "hash": "2820994476511550110"
+        },
+        {
+          "file": "libs/nlp-js-common/src/lib/tokenizer/tokenizer.ts",
+          "hash": "11143555946628573528"
+        },
+        {
+          "file": "libs/nlp-js-common/src/lib/tokenizer/wordpiecetokenizer.ts",
+          "hash": "11453432037279044540"
+        },
+        {
+          "file": "libs/nlp-js-common/tsconfig.json",
           "hash": "2840670722752396445"
         },
         {
-          "file": "libs/vision-js-common/tsconfig.lib.json",
+          "file": "libs/nlp-js-common/tsconfig.lib.json",
           "hash": "8188472110264778699"
         },
         {
-          "file": "libs/vision-js-common/tsconfig.lib.prod.json",
+          "file": "libs/nlp-js-common/tsconfig.lib.prod.json",
           "hash": "10697603790192057042"
         },
         {
-          "file": "libs/vision-js-common/tsconfig.spec.json",
+          "file": "libs/nlp-js-common/tsconfig.spec.json",
           "hash": "11550347367511341917"
         }
       ],
-      "ml-api-e2e": [
+      "vision-js-web": [
         {
-          "file": "apps/ml-api-e2e/.eslintrc.json",
+          "file": "libs/vision-js-web/.eslintrc.json",
           "hash": "13800677001662881425"
         },
         {
-          "file": "apps/ml-api-e2e/jest.config.ts",
-          "hash": "6704545198630925147"
+          "file": "libs/vision-js-web/jest.config.ts",
+          "hash": "17542482461225006443"
         },
         {
-          "file": "apps/ml-api-e2e/project.json",
-          "hash": "213573366329861445"
+          "file": "libs/vision-js-web/ng-package.json",
+          "hash": "16926229396215459650"
         },
         {
-          "file": "apps/ml-api-e2e/src/ml-api/ml-api.spec.ts",
-          "hash": "4175243531064182951",
+          "file": "libs/vision-js-web/package-lock.json",
+          "hash": "5555612532806526900"
+        },
+        {
+          "file": "libs/vision-js-web/package.json",
+          "hash": "4251057625663208007",
           "deps": [
-            "npm:axios",
-            "ml-api-types",
-            "nlp-js-types",
+            "npm:onnxruntime-node"
+          ]
+        },
+        {
+          "file": "libs/vision-js-web/project.json",
+          "hash": "5899950191950333956"
+        },
+        {
+          "file": "libs/vision-js-web/src/index.ts",
+          "hash": "7037917739224847455"
+        },
+        {
+          "file": "libs/vision-js-web/src/lib/vision-js-web.spec.ts",
+          "hash": "12607832157761176852"
+        },
+        {
+          "file": "libs/vision-js-web/src/lib/vision-js-web.ts",
+          "hash": "16711226759234508945",
+          "deps": [
             "vision-js-types",
-            "npm:form-data"
+            "vision-js-common",
+            "npm:onnxruntime-web"
           ]
         },
         {
-          "file": "apps/ml-api-e2e/src/support/global-setup.ts",
-          "hash": "2568409276037275290"
+          "file": "libs/vision-js-web/tsconfig.json",
+          "hash": "2840670722752396445"
         },
         {
-          "file": "apps/ml-api-e2e/src/support/global-teardown.ts",
-          "hash": "5275447082211835490"
+          "file": "libs/vision-js-web/tsconfig.lib.json",
+          "hash": "8188472110264778699"
         },
         {
-          "file": "apps/ml-api-e2e/src/support/test-setup.ts",
-          "hash": "10984585515912236441",
-          "deps": [
-            "npm:axios"
-          ]
+          "file": "libs/vision-js-web/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
         },
         {
-          "file": "apps/ml-api-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/ml-api-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
+          "file": "libs/vision-js-web/tsconfig.spec.json",
+          "hash": "11550347367511341917"
         }
       ],
-      "gmail-extension-ui-onboarding": [
+      "nlp-js-types": [
         {
-          "file": "apps/gmail-extension/ui-onboarding/.eslintrc.json",
-          "hash": "16555498953643626853"
+          "file": "libs/nlp-js-types/.eslintrc.json",
+          "hash": "13800677001662881425"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/index.html",
-          "hash": "17841063224033038523"
+          "file": "libs/nlp-js-types/jest.config.ts",
+          "hash": "1961766521729687632"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/jest.config.ts",
-          "hash": "10530398154629914381"
+          "file": "libs/nlp-js-types/ng-package.json",
+          "hash": "10349795849936713138"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/project.json",
-          "hash": "3348088680563436023"
+          "file": "libs/nlp-js-types/package-lock.json",
+          "hash": "14557258168523531532"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/common/onBoardingSteps/index.tsx",
-          "hash": "1149593978911623798",
-          "deps": [
-            "npm:react",
-            "npm:styled-components"
-          ]
+          "file": "libs/nlp-js-types/package.json",
+          "hash": "7296294479094699108"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/common/onBoardingSteps/onboarding.types.tsx",
-          "hash": "17488434454760770347"
+          "file": "libs/nlp-js-types/pnpm-lock.yaml",
+          "hash": "9473872673800482516"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/common/steps/index.tsx",
-          "hash": "1647253114886593536",
-          "deps": [
-            "npm:react",
-            "npm:@mui/material",
-            "npm:@mui/styles"
-          ]
+          "file": "libs/nlp-js-types/project.json",
+          "hash": "5575961485660802293"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/common/theme/index.ts",
-          "hash": "4791212556818907463",
-          "deps": [
-            "npm:@mui/material"
-          ]
+          "file": "libs/nlp-js-types/src/index.ts",
+          "hash": "18058547691409382780"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/components/button/index.tsx",
-          "hash": "9570318626181837075",
-          "deps": [
-            "npm:react",
-            "npm:@mui/material"
-          ]
+          "file": "libs/nlp-js-types/src/lib/nlp-js-types.ts",
+          "hash": "2163317639295281526"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/components/checkbox/index.tsx",
-          "hash": "9302177453520725219",
-          "deps": [
-            "npm:react",
-            "npm:@mui/material"
-          ]
+          "file": "libs/nlp-js-types/tsconfig.json",
+          "hash": "2840670722752396445"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/components/index.tsx",
-          "hash": "7295945937532142819"
+          "file": "libs/nlp-js-types/tsconfig.lib.json",
+          "hash": "8188472110264778699"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/components/loader/index.tsx",
-          "hash": "13313775564271502122",
-          "deps": [
-            "npm:react",
-            "npm:@mui/material"
-          ]
+          "file": "libs/nlp-js-types/tsconfig.lib.prod.json",
+          "hash": "10697603790192057042"
         },
         {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/getStarted.style.tsx",
-          "hash": "6911251176358198666",
-          "deps": [
-            "npm:styled-components"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/getStarted.type.tsx",
-          "hash": "1366678823097744630"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/index.spec.tsx.old",
-          "hash": "3621348776267148494"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/getStarted/index.tsx",
-          "hash": "16244186921530072250",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/index.spec.tsx.old",
-          "hash": "2573246249717083710"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/index.tsx",
-          "hash": "6914095276619185608",
-          "deps": [
-            "npm:react"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/app/onboarding/main/main.style.tsx",
-          "hash": "14795390922760989434",
-          "deps": [
-            "npm:styled-components"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/src/main.tsx",
-          "hash": "10555380508288749856",
-          "deps": [
-            "npm:react",
-            "npm:react-dom"
-          ]
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/tsconfig.app.json",
-          "hash": "7987642279534014051"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/tsconfig.editor.json",
-          "hash": "17511610827034788226"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/tsconfig.json",
-          "hash": "1722983559047303790"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/tsconfig.spec.json",
-          "hash": "2927375835638640771"
-        },
-        {
-          "file": "apps/gmail-extension/ui-onboarding/vite.config.ts",
-          "hash": "10114095454045096300",
-          "deps": [
-            "npm:vite",
-            "npm:@vitejs/plugin-react",
-            "npm:@nx/vite"
-          ]
+          "file": "libs/nlp-js-types/tsconfig.spec.json",
+          "hash": "11550347367511341917"
         }
       ],
       "ml-api": [
@@ -6729,7 +6752,7 @@
         },
         {
           "file": "apps/ml-api/project.json",
-          "hash": "15575730545391864135"
+          "hash": "8005769665028998504"
         },
         {
           "file": "apps/ml-api/src/app/account-license/account-license.errors.ts",
@@ -6993,9 +7016,10 @@
         },
         {
           "file": "apps/ml-api/src/app/activity/activity.module.ts",
-          "hash": "2926133413698829754",
+          "hash": "17719168649906432711",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -7014,7 +7038,7 @@
         },
         {
           "file": "apps/ml-api/src/app/activity/activity.service.ts",
-          "hash": "6869014727357147743",
+          "hash": "7229997566681541582",
           "deps": [
             "npm:@nestjs/common",
             "npm:sequelize",
@@ -7022,9 +7046,11 @@
             "npm:sequelize-typescript",
             "npm:async-retry",
             "npm:@nestjs/config",
-            "npm:bee-queue",
             "npm:redis",
-            "npm:@json2csv/node"
+            "npm:@json2csv/node",
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -7115,12 +7141,13 @@
         },
         {
           "file": "apps/ml-api/src/app/app.module.ts",
-          "hash": "10817664300651482822",
+          "hash": "15652084107001116458",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
             "npm:@nestjs/event-emitter",
-            "npm:@nestjs/throttler"
+            "npm:@nestjs/throttler",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -7791,7 +7818,7 @@
         },
         {
           "file": "apps/ml-api/src/app/billing/subscription/subscription.service.ts",
-          "hash": "8127764601988148934",
+          "hash": "2064162067257930753",
           "deps": [
             "npm:@nestjs/common",
             "npm:stripe",
@@ -7962,7 +7989,7 @@
         },
         {
           "file": "apps/ml-api/src/app/chrome-consumer/chrome.service.ts",
-          "hash": "17262523476534669025",
+          "hash": "3771544275893663447",
           "deps": [
             "npm:express",
             "npm:moment",
@@ -8105,11 +8132,14 @@
         },
         {
           "file": "apps/ml-api/src/app/config/postmark.email.ts",
-          "hash": "15780289743934328885"
+          "hash": "361147739844967300"
         },
         {
           "file": "apps/ml-api/src/app/config/queue.ts",
-          "hash": "4549860211532669636"
+          "hash": "189964620170504730",
+          "deps": [
+            "npm:async-retry"
+          ]
         },
         {
           "file": "apps/ml-api/src/app/config/root.user.ts",
@@ -8177,7 +8207,7 @@
         },
         {
           "file": "apps/ml-api/src/app/consumer/auth/auth.service.ts",
-          "hash": "3695362778147491149",
+          "hash": "5960040151885566451",
           "deps": [
             "npm:@nestjs/common",
             "npm:sequelize-typescript",
@@ -8578,7 +8608,7 @@
         },
         {
           "file": "apps/ml-api/src/app/default-data/default-data.service.ts",
-          "hash": "7106792788073387506",
+          "hash": "63165894395087271",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
@@ -9066,9 +9096,10 @@
         },
         {
           "file": "apps/ml-api/src/app/email-event/email-event.module.ts",
-          "hash": "5151595663768561393",
+          "hash": "3278834211278604832",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -9085,7 +9116,7 @@
         },
         {
           "file": "apps/ml-api/src/app/email-event/email-event.service.ts",
-          "hash": "3025451174043891529",
+          "hash": "1243741407791269479",
           "deps": [
             "npm:@nestjs/common",
             "npm:sequelize",
@@ -9093,7 +9124,9 @@
             "npm:async-retry",
             "npm:uuidv4",
             "npm:redis",
-            "npm:bee-queue"
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -9167,28 +9200,27 @@
         },
         {
           "file": "apps/ml-api/src/app/email/email.interfaces.ts",
-          "hash": "15092948175036403803"
+          "hash": "11950706049557040106"
         },
         {
           "file": "apps/ml-api/src/app/email/email.module.ts",
-          "hash": "4729044613189186618",
+          "hash": "17085044910121848302",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq",
+            "npm:@nestjs/config"
           ]
         },
         {
           "file": "apps/ml-api/src/app/email/email.service.ts",
-          "hash": "14598468310789599156",
+          "hash": "642747555247061878",
           "deps": [
             "npm:@nestjs/common"
           ]
         },
         {
           "file": "apps/ml-api/src/app/email/email.template.service.ts",
-          "hash": "2627501705543950549",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "hash": "3452780192807199990"
         },
         {
           "file": "apps/ml-api/src/app/email/email.templates.ts",
@@ -9196,23 +9228,26 @@
         },
         {
           "file": "apps/ml-api/src/app/email/postmark/postmark.email.service.ts",
-          "hash": "7660942132810411568",
+          "hash": "8149537692020991489",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:bee-queue",
             "npm:redis",
             "npm:async-retry",
-            "npm:postmark"
+            "npm:postmark",
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
           "file": "apps/ml-api/src/app/email/postmark/postmark.email.template.service.ts",
-          "hash": "10301849119441626831",
+          "hash": "4701774184965092735",
           "deps": [
             "npm:@nestjs/config",
             "npm:async-retry",
-            "npm:postmark"
+            "npm:postmark",
+            "npm:@nestjs/common"
           ]
         },
         {
@@ -9608,12 +9643,13 @@
         },
         {
           "file": "apps/ml-api/src/app/health/health-service.ts",
-          "hash": "2603321087105749116",
+          "hash": "16849539616606405087",
           "deps": [
             "npm:@nestjs/common",
             "npm:twilio",
             "npm:postmark",
-            "npm:bee-queue"
+            "npm:@nestjs/config",
+            "npm:ioredis"
           ]
         },
         {
@@ -9657,9 +9693,10 @@
         },
         {
           "file": "apps/ml-api/src/app/inform-prr-visits/inform-prr-visits.module.ts",
-          "hash": "15694940139285360489",
+          "hash": "15541881910623817661",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -9677,14 +9714,16 @@
         },
         {
           "file": "apps/ml-api/src/app/inform-prr-visits/inform-prr-visits.service.ts",
-          "hash": "1530333353088848147",
+          "hash": "5640482405900983467",
           "deps": [
             "npm:@nestjs/common",
             "npm:uuidv4",
             "npm:@nestjs/config",
             "npm:async-retry",
-            "npm:bee-queue",
-            "npm:redis"
+            "npm:redis",
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -10504,7 +10543,7 @@
         },
         {
           "file": "apps/ml-api/src/app/parent-email-config/parent-email-config.service.spec.ts",
-          "hash": "10400480897070902253",
+          "hash": "15549478325473208494",
           "deps": [
             "npm:@nestjs/testing",
             "npm:@nestjs/config",
@@ -10514,13 +10553,11 @@
         },
         {
           "file": "apps/ml-api/src/app/parent-email-config/parent-email-config.service.ts",
-          "hash": "4994516208725031982",
+          "hash": "5503089552738782427",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
-            "npm:uuidv4",
-            "npm:redis",
-            "npm:bee-queue"
+            "npm:uuidv4"
           ]
         },
         {
@@ -10680,9 +10717,10 @@
         },
         {
           "file": "apps/ml-api/src/app/prr-notification/prr-notification.module.ts",
-          "hash": "18255985301155661106",
+          "hash": "10130834101639400387",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -10707,11 +10745,13 @@
         },
         {
           "file": "apps/ml-api/src/app/prr-notification/prr-notification.service.ts",
-          "hash": "2853750639677868715",
+          "hash": "11946934104354478648",
           "deps": [
             "npm:@nestjs/common",
             "npm:uuidv4",
-            "npm:sequelize"
+            "npm:sequelize",
+            "npm:@nestjs/bullmq",
+            "npm:bullmq"
           ]
         },
         {
@@ -10720,12 +10760,14 @@
         },
         {
           "file": "apps/ml-api/src/app/prr-notification/prr.sms.notification.service.ts",
-          "hash": "7809689340150916714",
+          "hash": "15346110072331340983",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/config",
             "npm:redis",
-            "npm:bee-queue"
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:@nestjs/bullmq"
           ]
         },
         {
@@ -10948,7 +10990,7 @@
         },
         {
           "file": "apps/ml-api/src/app/sms/impl/twilio.sms.service.ts",
-          "hash": "11604214360093769778",
+          "hash": "14313633744817468492",
           "deps": [
             "npm:@nestjs/common",
             "npm:async-retry",
@@ -10958,17 +11000,17 @@
         },
         {
           "file": "apps/ml-api/src/app/sms/sms.module.ts",
-          "hash": "17340763157257514636",
+          "hash": "13987916593781484819",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
           ]
         },
         {
           "file": "apps/ml-api/src/app/sms/sms.service.ts",
-          "hash": "6921279720534411890",
+          "hash": "10133634037615580821",
           "deps": [
-            "npm:@nestjs/config",
-            "npm:@nestjs/common"
+            "npm:@nestjs/config"
           ]
         },
         {
@@ -11247,7 +11289,7 @@
         },
         {
           "file": "apps/ml-api/src/app/utils/commonUtils.ts",
-          "hash": "14627621218151177122"
+          "hash": "5250028955870208869"
         },
         {
           "file": "apps/ml-api/src/app/utils/crypto.service.ts",
@@ -11273,6 +11315,15 @@
           "hash": "15497805859540428290",
           "deps": [
             "npm:bcryptjs"
+          ]
+        },
+        {
+          "file": "apps/ml-api/src/app/utils/queue.ts",
+          "hash": "11334501403521699104",
+          "deps": [
+            "npm:bullmq",
+            "npm:ioredis",
+            "npm:async-retry"
           ]
         },
         {
@@ -11372,103 +11423,153 @@
         },
         {
           "file": "apps/ml-api/webpack.config.js",
-          "hash": "1607466363904297235",
+          "hash": "12855307825673885506",
           "deps": [
             "npm:@nx/webpack",
             "npm:copy-webpack-plugin"
           ]
+        },
+        {
+          "file": "apps/ml-api/src/app/utils/url.util.ts",
+          "hash": "1559057226298469163"
+        },
+        {
+          "file": "apps/ml-api/src/app/queue/queue.module.ts",
+          "hash": "6749272990105985796",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/bullmq",
+            "npm:@nestjs/config"
+          ]
         }
       ],
-      "nlp-js-common": [
+      "common-plugin": [
         {
-          "file": "libs/nlp-js-common/.eslintrc.json",
-          "hash": "13800677001662881425"
+          "file": "libs/common-plugin/.eslintrc.json",
+          "hash": "16403475465958696311"
         },
         {
-          "file": "libs/nlp-js-common/jest.config.ts",
-          "hash": "10600428937926938607"
+          "file": "libs/common-plugin/README.md",
+          "hash": "18155544153142714431"
         },
         {
-          "file": "libs/nlp-js-common/ng-package.json",
-          "hash": "9653266371539577191"
+          "file": "libs/common-plugin/executors.json",
+          "hash": "11055860456403758160"
         },
         {
-          "file": "libs/nlp-js-common/package-lock.json",
-          "hash": "12319454277210821399"
+          "file": "libs/common-plugin/jest.config.ts",
+          "hash": "14391710673493814266"
         },
         {
-          "file": "libs/nlp-js-common/package.json",
-          "hash": "9864133669438256769",
+          "file": "libs/common-plugin/package.json",
+          "hash": "12685103080162355465",
           "deps": [
-            "npm:onnxruntime-common",
-            "npm:sbd",
-            "npm:abstract-logging"
+            "npm:@nx/devkit",
+            "npm:tslib",
+            "npm:fs-extra"
           ]
         },
         {
-          "file": "libs/nlp-js-common/pnpm-lock.yaml",
-          "hash": "9473872673800482516"
+          "file": "libs/common-plugin/project.json",
+          "hash": "304519692682124906"
         },
         {
-          "file": "libs/nlp-js-common/project.json",
-          "hash": "5197201116351912888"
-        },
-        {
-          "file": "libs/nlp-js-common/src/index.ts",
-          "hash": "9375158846539881109"
-        },
-        {
-          "file": "libs/nlp-js-common/src/lib/constants.ts",
-          "hash": "1865670027132271673"
-        },
-        {
-          "file": "libs/nlp-js-common/src/lib/model.ts",
-          "hash": "6391299931927493850"
-        },
-        {
-          "file": "libs/nlp-js-common/src/lib/nlp-js-common.spec.ts",
-          "hash": "12607832157761176852"
-        },
-        {
-          "file": "libs/nlp-js-common/src/lib/nlp-js-common.ts",
-          "hash": "9272183578955788437",
+          "file": "libs/common-plugin/src/executors/copy-assets/executor.ts",
+          "hash": "16223386135018450358",
           "deps": [
-            "npm:onnxruntime-common",
-            "npm:sbd",
-            "npm:abstract-logging",
-            "nlp-js-types"
+            "npm:fs-extra"
           ]
         },
         {
-          "file": "libs/nlp-js-common/src/lib/tokenizer/bert_vocab.ts",
-          "hash": "15341741596236475248"
+          "file": "libs/common-plugin/src/executors/copy-assets/schema.d.ts",
+          "hash": "14411105229383374925"
         },
         {
-          "file": "libs/nlp-js-common/src/lib/tokenizer/index.ts",
-          "hash": "2820994476511550110"
+          "file": "libs/common-plugin/src/executors/copy-assets/schema.json",
+          "hash": "10780720651861653096"
         },
         {
-          "file": "libs/nlp-js-common/src/lib/tokenizer/tokenizer.ts",
-          "hash": "11143555946628573528"
+          "file": "libs/common-plugin/src/index.ts",
+          "hash": "3244421341483603138"
         },
         {
-          "file": "libs/nlp-js-common/src/lib/tokenizer/wordpiecetokenizer.ts",
-          "hash": "11453432037279044540"
-        },
-        {
-          "file": "libs/nlp-js-common/tsconfig.json",
+          "file": "libs/common-plugin/tsconfig.json",
           "hash": "2840670722752396445"
         },
         {
-          "file": "libs/nlp-js-common/tsconfig.lib.json",
+          "file": "libs/common-plugin/tsconfig.lib.json",
+          "hash": "3632393694954060084"
+        },
+        {
+          "file": "libs/common-plugin/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        }
+      ],
+      "vision-js-node": [
+        {
+          "file": "libs/vision-js-node/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "libs/vision-js-node/jest.config.ts",
+          "hash": "534734874174565383"
+        },
+        {
+          "file": "libs/vision-js-node/ng-package.json",
+          "hash": "8863930932274916870"
+        },
+        {
+          "file": "libs/vision-js-node/package-lock.json",
+          "hash": "9803757405930341278"
+        },
+        {
+          "file": "libs/vision-js-node/package.json",
+          "hash": "12756121290716189448",
+          "deps": [
+            "npm:onnxruntime-node"
+          ]
+        },
+        {
+          "file": "libs/vision-js-node/project.json",
+          "hash": "1505676305607569663"
+        },
+        {
+          "file": "libs/vision-js-node/src/index.ts",
+          "hash": "18016635950512888979"
+        },
+        {
+          "file": "libs/vision-js-node/src/lib/vision-js-node.spec.ts",
+          "hash": "16426664976457209252",
+          "deps": [
+            "npm:@andreekeberg/imagedata"
+          ]
+        },
+        {
+          "file": "libs/vision-js-node/src/lib/vision-js-node.ts",
+          "hash": "11434589857821974568",
+          "deps": [
+            "vision-js-types",
+            "vision-js-common",
+            "npm:onnxruntime-common",
+            "npm:abstract-logging",
+            "npm:onnxruntime-node",
+            "npm:@andreekeberg/imagedata"
+          ]
+        },
+        {
+          "file": "libs/vision-js-node/tsconfig.json",
+          "hash": "7450039135051461349"
+        },
+        {
+          "file": "libs/vision-js-node/tsconfig.lib.json",
           "hash": "8188472110264778699"
         },
         {
-          "file": "libs/nlp-js-common/tsconfig.lib.prod.json",
+          "file": "libs/vision-js-node/tsconfig.lib.prod.json",
           "hash": "10697603790192057042"
         },
         {
-          "file": "libs/nlp-js-common/tsconfig.spec.json",
+          "file": "libs/vision-js-node/tsconfig.spec.json",
           "hash": "11550347367511341917"
         }
       ],
@@ -11699,108 +11800,52 @@
           ]
         }
       ],
-      "main-website-react-e2e": [
+      "ml-api-e2e": [
         {
-          "file": "apps/main-website-react-e2e/.eslintrc.json",
-          "hash": "14060216369337943343"
-        },
-        {
-          "file": "apps/main-website-react-e2e/cypress.config.ts",
-          "hash": "14599475074201753712",
-          "deps": [
-            "npm:@nx/cypress",
-            "npm:cypress"
-          ]
-        },
-        {
-          "file": "apps/main-website-react-e2e/project.json",
-          "hash": "3729793386385474313"
-        },
-        {
-          "file": "apps/main-website-react-e2e/src/e2e/app.cy.ts",
-          "hash": "4823716644609983973"
-        },
-        {
-          "file": "apps/main-website-react-e2e/src/fixtures/example.json",
-          "hash": "11785586596216172004"
-        },
-        {
-          "file": "apps/main-website-react-e2e/src/support/app.po.ts",
-          "hash": "11157016311132186162"
-        },
-        {
-          "file": "apps/main-website-react-e2e/src/support/commands.ts",
-          "hash": "5397443931564808659"
-        },
-        {
-          "file": "apps/main-website-react-e2e/src/support/e2e.ts",
-          "hash": "1054106023200826784"
-        },
-        {
-          "file": "apps/main-website-react-e2e/tsconfig.json",
-          "hash": "10740392072068377465"
-        }
-      ],
-      "vision-js-react-native": [
-        {
-          "file": "libs/vision-js-react-native/.eslintrc.json",
+          "file": "apps/ml-api-e2e/.eslintrc.json",
           "hash": "13800677001662881425"
         },
         {
-          "file": "libs/vision-js-react-native/jest.config.ts",
-          "hash": "10485025974140003412"
+          "file": "apps/ml-api-e2e/jest.config.ts",
+          "hash": "6704545198630925147"
         },
         {
-          "file": "libs/vision-js-react-native/ng-package.json",
-          "hash": "17902439926580889995"
+          "file": "apps/ml-api-e2e/project.json",
+          "hash": "213573366329861445"
         },
         {
-          "file": "libs/vision-js-react-native/package-lock.json",
-          "hash": "7931309150499067877"
-        },
-        {
-          "file": "libs/vision-js-react-native/package.json",
-          "hash": "16896599250233919684",
+          "file": "apps/ml-api-e2e/src/ml-api/ml-api.spec.ts",
+          "hash": "4175243531064182951",
           "deps": [
-            "npm:onnxruntime-react-native"
-          ]
-        },
-        {
-          "file": "libs/vision-js-react-native/project.json",
-          "hash": "17370318382913516943"
-        },
-        {
-          "file": "libs/vision-js-react-native/src/index.ts",
-          "hash": "10005836398085105139"
-        },
-        {
-          "file": "libs/vision-js-react-native/src/lib/vision-js-react-native.spec.ts",
-          "hash": "12607832157761176852"
-        },
-        {
-          "file": "libs/vision-js-react-native/src/lib/vision-js-react-native.ts",
-          "hash": "16711226759234508945",
-          "deps": [
+            "npm:axios",
+            "ml-api-types",
+            "nlp-js-types",
             "vision-js-types",
-            "vision-js-common",
-            "npm:onnxruntime-web"
+            "npm:form-data"
           ]
         },
         {
-          "file": "libs/vision-js-react-native/tsconfig.json",
-          "hash": "2840670722752396445"
+          "file": "apps/ml-api-e2e/src/support/global-setup.ts",
+          "hash": "2568409276037275290"
         },
         {
-          "file": "libs/vision-js-react-native/tsconfig.lib.json",
-          "hash": "8188472110264778699"
+          "file": "apps/ml-api-e2e/src/support/global-teardown.ts",
+          "hash": "5275447082211835490"
         },
         {
-          "file": "libs/vision-js-react-native/tsconfig.lib.prod.json",
-          "hash": "10697603790192057042"
+          "file": "apps/ml-api-e2e/src/support/test-setup.ts",
+          "hash": "10984585515912236441",
+          "deps": [
+            "npm:axios"
+          ]
         },
         {
-          "file": "libs/vision-js-react-native/tsconfig.spec.json",
-          "hash": "11550347367511341917"
+          "file": "apps/ml-api-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/ml-api-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
         }
       ]
     }

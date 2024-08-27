@@ -30,6 +30,7 @@
       "configurations": {
         "development": {
           "buildTarget": "ml-api:build:development",
+          "watch": true
         },
         "production": {
           "buildTarget": "ml-api:build:production"

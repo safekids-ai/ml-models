@@ -1,22 +1,22 @@
-const {NxWebpackPlugin} = require('@nx/webpack');
+const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {join} = require('path');
 
 module.exports = {
+  watch: process.env['APP_ENV'] !== 'production',
   output: {
     path: join(__dirname, '../../dist/apps/ml-api'),
   },
   plugins: [
-    new NxWebpackPlugin({
+    new NxAppWebpackPlugin({
       target: 'node',
       compiler: 'tsc',
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
       assets: ["./src/assets"],
-      outputHashing: 'none',
-      optimization: process.env['NODE_ENV'] === 'production',
       memoryLimit: 4056,
-      watch: process.env['NODE_ENV'] !== 'production',
+      outputHashing: process.env['APP_ENV'] === 'production' ? 'all' : 'none',
+      optimization: process.env['APP_ENV'] === 'production'
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -26,5 +26,5 @@ module.exports = {
         },
       ],
     }),
-  ],
+  ]
 };

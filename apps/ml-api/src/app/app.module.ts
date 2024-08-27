@@ -87,7 +87,7 @@ import {ThrottlerModule, ThrottlerModuleOptions} from "@nestjs/throttler";
 import {ThrottlerBehindProxyGuard} from "./guards/throttler-behind-proxy-guard";
 import throttleConfig from "./config/throttle";
 import modelConfig from "./config/model";
-import queueConfig from "./config/queue"
+import queueConfig, {QueueConfig} from "./config/queue"
 import categoryConfig from "./config/category"
 import defaultCouponsConfig from "./config/default-coupons"
 import defaultPlansConfig from "./config/default-plans"
@@ -107,6 +107,9 @@ import webappConfig from "./config/webapp"
 import winstonConfig from "./config/winston"
 import {MlModule} from "./ml/ml.module";
 import {TestModule} from "./test/test.module";
+import {BullModule} from "@nestjs/bullmq";
+import {UrlParser} from "./utils/url.util";
+import {QueueModule} from "./queue/queue.module";
 
 const ENV = process.env.APP_ENV || 'development';
 
@@ -163,40 +166,9 @@ console.log('==========================================');
       },
       inject: [ConfigService],
     }),
-
-    ///////////////////////////////////
-    // Email Module
-    ///////////////////////////////////
-    EmailModule.forRootAsync({
-      email: {
-        imports: [ConfigModule, LoggingModule],
-        useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-          return new PostmarkEmailService(configService, loggingService);
-        },
-        provide: 'EmailServiceImpl',
-        inject: [ConfigService, LoggingService],
-      },
-      emailtemplate: {
-        imports: [ConfigModule, LoggingModule],
-        useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-          return new PostmarkEmailTemplateService(configService, loggingService);
-        },
-        provide: 'EmailTemplateServiceImpl',
-        inject: [ConfigService, LoggingService],
-      },
-    }),
-
-    ///////////////////////////////////
-    // Messaging Module
-    ///////////////////////////////////
-    SmsModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-        return new TwilioSmsService(configService, loggingService);
-      },
-      provide: 'SmsImplementation',
-      inject: [ConfigService, LoggingService],
-    }),
+    QueueModule,
+    EmailModule,
+    SmsModule,
     EventEmitterModule.forRoot(),
     MlModule,
     DatabaseModule,

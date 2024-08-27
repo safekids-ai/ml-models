@@ -164,7 +164,7 @@ describe('Parent email config service test', () => {
             });
 
             //when
-            await service.pushMessageToQueue(payload);
+            await service.sendMessage(payload);
 
             //then
             expect(sqs.sendMessage().promise).toBeCalledTimes(1);
@@ -190,7 +190,7 @@ describe('Parent email config service test', () => {
             });
 
             //when
-            service.pushMessageToQueue(payload).catch((e) => {
+            service.sendMessage(payload).catch((e) => {
                 //then
                 expect(sqs.sendMessage().promise).toBeCalledTimes(1);
                 const sendMessageRequest = {

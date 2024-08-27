@@ -174,6 +174,7 @@ export class AuthService {
     await this.userCodeService.create(userCodeDTO);
     await this.emailService.sendEmail({
       id: uuid(),
+      useSupportEmail: true,
       meta: {userId: user.id, VerificationCode: code},
       to: user.email,
       content: {
@@ -213,6 +214,7 @@ export class AuthService {
   private async sendEmail(user: User, userCode: string) {
     await this.emailService.sendEmail({
       id: uuid(),
+      useSupportEmail: true,
       meta: {userId: user.id, VerificationCode: userCode, firstName: user.firstName, lastName: user.lastName},
       to: user.email,
       content: {
