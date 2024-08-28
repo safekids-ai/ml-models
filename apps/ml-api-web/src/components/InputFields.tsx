@@ -655,7 +655,7 @@ const usePinStyles = makeStyles((theme: AppTheme) => ({
     gridGap: '10px',
     maxWidth: '410px',
     margin: 'auto',
-    '& .a-reactPinField__input': {
+    '& input': {
       width: '100%',
       maxWidth: '60px',
       height: '60px',

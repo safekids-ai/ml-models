@@ -92,6 +92,13 @@ export const databaseProviders = [
       }
       config = {...dbOptions, ...config}
       const sequelize = new Sequelize(config);
+      try {
+        await sequelize.authenticate();
+      } catch (error) {
+        const {password, ...connectionSettings} = dbOptions
+        throw new Error(`Unable to connect to database ${JSON.stringify(connectionSettings)} with error:${error}`)
+      }
+
       sequelize.addModels([
         User,
         Account,

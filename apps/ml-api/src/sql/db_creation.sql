@@ -1,3 +1,3 @@
-create database dbname;
-CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON dbname.* TO 'username'@'localhost';
+create database safekids;
+CREATE USER 'safekids'@'localhost' IDENTIFIED BY 'safekids';
+GRANT ALL PRIVILEGES ON safekids.* TO 'safekids'@'localhost';

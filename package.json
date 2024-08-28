@@ -20,7 +20,7 @@
     "start:web:prod": "APP_ENV=production nx serve ml-api-web --configuration=production",
     "start:api:prod": "APP_ENV=production nx serve ml-api --configuration=production",
     "start:api:dev": "NODE_ENV=development APP_ENV=development nx serve ml-api --configuration=development --watch",
-    "build": "nx run-many -t build --prod",
+    "build": "APP_ENV=production NODE_ENV=development nx run-many -t build --configuration=production",
     "build:debug": "nx run-many -t build --verbose",
     "build:debug:nocache": "nx run-many -t build --verbose --skip-nx-cache",
     "build:prod": "nx run-many -t build --prod",

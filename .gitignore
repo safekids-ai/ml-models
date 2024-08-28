@@ -41,6 +41,7 @@ Thumbs.db
 .nx/cache
 .nx/tmp
 .nx/installation
+.nx/workspace-data
 
 # Next.js
 .next
