@@ -28876,11 +28876,6 @@
       },
       {
         "source": "ml-api-web",
-        "target": "npm:rimraf@3.0.2",
-        "type": "static"
-      },
-      {
-        "source": "ml-api-web",
         "target": "npm:jest-chrome",
         "type": "static"
       },

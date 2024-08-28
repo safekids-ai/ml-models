@@ -58,7 +58,7 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/apps/ml-api-web-demo"
+        "reportsDirectory": "../../coverage/apps/ml-api-web-demo",
       }
     },
     "lint": {
