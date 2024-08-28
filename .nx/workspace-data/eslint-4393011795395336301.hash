@@ -1088,5 +1088,51 @@
   "8448904583290578079": {},
   "7335085713077552489": {},
   "1783242076598038047": {},
-  "8906081885774263539": {}
+  "8906081885774263539": {},
+  "3320745255212302761": {
+    "apps/main-website-react": {
+      "targets": {
+        "lint": {
+          "command": "eslint .",
+          "cache": true,
+          "options": {
+            "cwd": "apps/main-website-react",
+            "env": {
+              "ESLINT_USE_FLAT_CONFIG": "false"
+            }
+          },
+          "inputs": [
+            "default",
+            "^default",
+            "{workspaceRoot}/.eslintrc.json",
+            "{projectRoot}/.eslintrc.json",
+            "{workspaceRoot}/tools/eslint-rules/**/*",
+            {
+              "externalDependencies": [
+                "eslint"
+              ]
+            }
+          ],
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "metadata": {
+            "technologies": [
+              "eslint"
+            ],
+            "description": "Runs ESLint on project",
+            "help": {
+              "command": "pnpm exec eslint --help",
+              "example": {
+                "options": {
+                  "max-warnings": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "17107214953750328941": {}
 }
