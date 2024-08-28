@@ -260,300 +260,132 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "qa-data/vision/clean1.jpg",
-        "hash": "10026931289608154250"
-      },
-      {
-        "file": "assets/markdown/gmail_reading.png",
-        "hash": "8924134032935856397"
-      },
-      {
-        "file": ".github/workflows/deploy-web-demo.yml",
-        "hash": "12475240949221733563"
-      },
-      {
-        "file": "assets/images/extension-imgs/kidsPrivacy.png",
-        "hash": "1358662742510204977"
-      },
-      {
-        "file": "model_files/vision.onnx",
-        "hash": "18268975691495472844"
-      },
-      {
-        "file": "assets/images/extension-imgs/inComingEmails.png",
-        "hash": "18029016258767092952"
-      },
-      {
-        "file": "qa-data/category.json",
-        "hash": "15616552038470684746"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "16448050467312557263"
-      },
-      {
-        "file": ".github/workflows/deploy-api-web.yml.backup",
-        "hash": "16732955165567166125"
-      },
-      {
-        "file": "assets/markdown/research.png",
-        "hash": "1319176513745959549"
+        "file": "scripts/docker_run_api.sh",
+        "hash": "3782230093077054640"
       },
       {
         "file": "README_ml.md",
         "hash": "4598453367181976353"
       },
       {
-        "file": "docker/push_api.sh",
-        "hash": "16191665898980708107"
-      },
-      {
-        "file": "assets/images/ICON_Confirm.svg",
-        "hash": "9630750417659198206"
-      },
-      {
-        "file": "assets/images/extension-imgs/check-icon.png",
-        "hash": "1012449138318878526"
-      },
-      {
-        "file": "assets/images/extension-imgs/isThisMsgKind.png",
-        "hash": "2651329867904138769"
-      },
-      {
-        "file": ".eslintignore",
-        "hash": "7663861978715868291"
-      },
-      {
         "file": "jest.config.ts",
         "hash": "12333515226966617182"
-      },
-      {
-        "file": "qa-data/hate.json",
-        "hash": "4937159833438040019"
-      },
-      {
-        "file": "assets/images/ICON_Pause.svg",
-        "hash": "4037337911930569031"
-      },
-      {
-        "file": ".github/workflows/build.yml",
-        "hash": "16716967223559811094"
-      },
-      {
-        "file": ".github/workflows/dependabot-update.yml",
-        "hash": "14664785977504492450"
-      },
-      {
-        "file": "assets/images/extension-imgs/COPPAIcon.svg",
-        "hash": "12725522713785498610"
-      },
-      {
-        "file": "assets/images/icons/icon16.png",
-        "hash": "11044826375166487489"
-      },
-      {
-        "file": "scripts/run_web.js",
-        "hash": "14398916549247334045"
-      },
-      {
-        "file": "docker/push_web.sh",
-        "hash": "9055902322754622735"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "16267754514737964994"
-      },
-      {
-        "file": "assets/images/extension-imgs/HowToPersonIcon.png",
-        "hash": "9986496929217078473"
-      },
-      {
-        "file": "assets/images/icons/icon128.png",
-        "hash": "8403802863974498262"
-      },
-      {
-        "file": "nx.json",
-        "hash": "13300199899845881469"
-      },
-      {
-        "file": "model_files/vision.json",
-        "hash": "2172719625371543872"
-      },
-      {
-        "file": "tools/scripts/update-version.mjs",
-        "hash": "10343814501003160192"
-      },
-      {
-        "file": "qa-data/vision/gun1.jpg",
-        "hash": "8618854744819450416"
-      },
-      {
-        "file": "assets/images/extension-imgs/kidsPrivacy-2.png",
-        "hash": "12692620591923046702"
-      },
-      {
-        "file": "version.json",
-        "hash": "15359675768617096827"
-      },
-      {
-        "file": "docker/build_web_dev.sh",
-        "hash": "16026021751796957028"
-      },
-      {
-        "file": "scripts/docker_run_web.sh",
-        "hash": "6514873294208658560"
-      },
-      {
-        "file": "README_Dev.md",
-        "hash": "1910766726503128137"
-      },
-      {
-        "file": "assets/images/ICON_Reflect.svg",
-        "hash": "9928575951466875998"
-      },
-      {
-        "file": "assets/images/ICON_Redirect.svg",
-        "hash": "5082042866907928853"
-      },
-      {
-        "file": "assets/markdown/gmail_writing.png",
-        "hash": "6939766944506303611"
       },
       {
         "file": "assets/images/extension-imgs/kidsPrivacy-1.svg",
         "hash": "145076489051068508"
       },
       {
-        "file": "logo.png",
-        "hash": "16320966664660779209"
+        "file": ".github/workflows/build.yml",
+        "hash": "16716967223559811094"
       },
       {
-        "file": "assets/images/extension-imgs/getStarted.png",
-        "hash": "18153224035194245385"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "6463503721852003635"
-      },
-      {
-        "file": "assets/markdown/gmail_chromestore.png",
-        "hash": "14972071321845815034"
-      },
-      {
-        "file": "README.md",
-        "hash": "11949791687635084291"
-      },
-      {
-        "file": ".github/workflows/publish-libs-npm.yml.inprogress",
-        "hash": "737243790778656936"
-      },
-      {
-        "file": "assets/images/extension-imgs/safeKids_logo.png",
-        "hash": "7136484085928993238"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "5443105041930014821"
-      },
-      {
-        "file": "pnpm-lock.yaml",
-        "hash": "4532502419170702803"
-      },
-      {
-        "file": "docker/build_web_prod.sh",
-        "hash": "7422585841390375485"
-      },
-      {
-        "file": "assets/images/extension-imgs/PrivacyConcern.png",
-        "hash": "9487317989447449783"
-      },
-      {
-        "file": "scripts/vite-nginx.conf",
-        "hash": "12337008145683229678"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "235626400633494639"
-      },
-      {
-        "file": ".release-it.json",
-        "hash": "2780748642747433879"
-      },
-      {
-        "file": "assets/images/extension-imgs/safeKids_logo.svg",
-        "hash": "10462866422818870498"
+        "file": "assets/images/ICON_Pause.svg",
+        "hash": "4037337911930569031"
       },
       {
         "file": "assets/markdown/demo_model.png",
         "hash": "15169638167123872895"
       },
       {
-        "file": "assets/images/icons/icon32.png",
-        "hash": "6456429226051623886"
-      },
-      {
-        "file": "assets/images/ICON_Communication.svg",
-        "hash": "14517716905713264609"
-      },
-      {
-        "file": "package.json",
-        "hash": "14941350456592667846"
-      },
-      {
         "file": "assets/images/icons/icon64.png",
         "hash": "16459454298361423959"
       },
       {
-        "file": ".vscode/settings.json",
-        "hash": "10736989266964588500"
+        "file": "assets/images/ICON_Redirect.svg",
+        "hash": "5082042866907928853"
       },
       {
-        "file": "jest.preset.js",
-        "hash": "9430166341120122740"
+        "file": "docker/build_web_prod.sh",
+        "hash": "7422585841390375485"
       },
       {
-        "file": "assets/images/extension-imgs/inbox_Img.png",
-        "hash": "15172899260310875575"
+        "file": ".release-it.json",
+        "hash": "2780748642747433879"
       },
       {
-        "file": "model_files/nlp.onnx",
-        "hash": "7394096606768617459"
-      },
-      {
-        "file": "docker/build_api_prod.sh",
-        "hash": "4763610671958078170"
-      },
-      {
-        "file": ".github/workflows/deploy-api.yml",
-        "hash": "2410449401315677983"
-      },
-      {
-        "file": ".github/dependabot.yml",
-        "hash": "4005146587728820804"
-      },
-      {
-        "file": ".github/workflows/deploy-gmail-extension.yml",
-        "hash": "6683042125574650661"
-      },
-      {
-        "file": "assets/markdown/aahil.png",
-        "hash": "5269900941090442886"
+        "file": "CHANGELOG.md",
+        "hash": "2047017787460656931"
       },
       {
         "file": ".eslintrc.json",
         "hash": "746227632153557778"
       },
       {
-        "file": "model_files/vocab.txt",
-        "hash": "12130435003140145788"
+        "file": "qa-data/hate.json",
+        "hash": "4937159833438040019"
       },
       {
-        "file": "scripts/docker_run_api.sh",
-        "hash": "3782230093077054640"
+        "file": "nx.json",
+        "hash": "13300199899845881469"
       },
       {
-        "file": "model_files/nlp.json",
-        "hash": "6828488650529490955"
+        "file": "assets/images/extension-imgs/HowToPersonIcon.png",
+        "hash": "9986496929217078473"
+      },
+      {
+        "file": ".github/workflows/dependabot-update.yml",
+        "hash": "14664785977504492450"
+      },
+      {
+        "file": "assets/images/extension-imgs/isThisMsgKind.png",
+        "hash": "2651329867904138769"
+      },
+      {
+        "file": "model_files/nlp.onnx",
+        "hash": "7394096606768617459"
+      },
+      {
+        "file": "assets/images/extension-imgs/howToPersonIcon.svg",
+        "hash": "11672647467039405346"
+      },
+      {
+        "file": "assets/images/extension-imgs/getStarted.png",
+        "hash": "18153224035194245385"
+      },
+      {
+        "file": "assets/images/icons/icon32.png",
+        "hash": "6456429226051623886"
+      },
+      {
+        "file": "assets/markdown/gmail_reading.png",
+        "hash": "8924134032935856397"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "235626400633494639"
+      },
+      {
+        "file": "assets/markdown/gmail_chromestore.png",
+        "hash": "14972071321845815034"
+      },
+      {
+        "file": "assets/images/extension-imgs/PrivacyConcern.png",
+        "hash": "9487317989447449783"
+      },
+      {
+        "file": "docker/push_api.sh",
+        "hash": "16191665898980708107"
+      },
+      {
+        "file": "assets/images/ICON_Communication.svg",
+        "hash": "14517716905713264609"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "16448050467312557263"
+      },
+      {
+        "file": "package.json",
+        "hash": "14941350456592667846"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "4532502419170702803"
+      },
+      {
+        "file": "assets/markdown/aahil.png",
+        "hash": "5269900941090442886"
       },
       {
         "file": "assets/images/ICON_Count-Down.svg",
@@ -564,36 +396,204 @@
         "hash": "6626588157667102425"
       },
       {
-        "file": ".github/workflows/deploy-website.yml",
-        "hash": "5552189364233125559"
+        "file": "version.json",
+        "hash": "8656200677269152065"
+      },
+      {
+        "file": "assets/images/extension-imgs/inbox_Img.png",
+        "hash": "15172899260310875575"
+      },
+      {
+        "file": "assets/images/extension-imgs/COPPAIcon.svg",
+        "hash": "12725522713785498610"
+      },
+      {
+        "file": "model_files/vocab.txt",
+        "hash": "12130435003140145788"
+      },
+      {
+        "file": "assets/images/extension-imgs/safeKids_logo.svg",
+        "hash": "10462866422818870498"
+      },
+      {
+        "file": "logo.png",
+        "hash": "16320966664660779209"
+      },
+      {
+        "file": "scripts/docker_run_web.sh",
+        "hash": "6514873294208658560"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "16267754514737964994"
+      },
+      {
+        "file": "tools/scripts/update-version.mjs",
+        "hash": "10343814501003160192"
+      },
+      {
+        "file": "assets/images/icons/icon16.png",
+        "hash": "11044826375166487489"
       },
       {
         "file": "tools/scripts/download-script.js",
         "hash": "1836458613395888856"
       },
       {
-        "file": ".gitignore",
-        "hash": "122231877704216267"
+        "file": ".vscode/settings.json",
+        "hash": "10736989266964588500"
+      },
+      {
+        "file": "qa-data/vision/gun1.jpg",
+        "hash": "8618854744819450416"
+      },
+      {
+        "file": "assets/images/extension-imgs/safeKids_logo.png",
+        "hash": "7136484085928993238"
+      },
+      {
+        "file": "assets/markdown/research.png",
+        "hash": "1319176513745959549"
+      },
+      {
+        "file": "docker/push_web.sh",
+        "hash": "9055902322754622735"
+      },
+      {
+        "file": ".github/dependabot.yml",
+        "hash": "4005146587728820804"
+      },
+      {
+        "file": "qa-data/vision/adult1.jpeg.b64",
+        "hash": "11793775713035611398"
       },
       {
         "file": "assets/images/extension-imgs/doneIcon.svg",
         "hash": "3935109033479686162"
       },
       {
-        "file": "assets/images/extension-imgs/howToPersonIcon.svg",
-        "hash": "11672647467039405346"
+        "file": "model_files/nlp.json",
+        "hash": "6828488650529490955"
       },
       {
-        "file": "CHANGELOG.md",
-        "hash": "16574977875722051670"
+        "file": "assets/images/extension-imgs/inComingEmails.png",
+        "hash": "18029016258767092952"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "6463503721852003635"
+      },
+      {
+        "file": ".github/workflows/deploy-api.yml",
+        "hash": "2410449401315677983"
+      },
+      {
+        "file": "model_files/vision.json",
+        "hash": "2172719625371543872"
+      },
+      {
+        "file": ".github/workflows/deploy-api-web.yml.backup",
+        "hash": "16732955165567166125"
+      },
+      {
+        "file": "qa-data/category.json",
+        "hash": "15616552038470684746"
+      },
+      {
+        "file": "model_files/vision.onnx",
+        "hash": "18268975691495472844"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "9430166341120122740"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": "assets/markdown/gmail_writing.png",
+        "hash": "6939766944506303611"
+      },
+      {
+        "file": "README_Dev.md",
+        "hash": "1910766726503128137"
+      },
+      {
+        "file": "assets/images/extension-imgs/check-icon.png",
+        "hash": "1012449138318878526"
+      },
+      {
+        "file": "assets/images/extension-imgs/kidsPrivacy.png",
+        "hash": "1358662742510204977"
+      },
+      {
+        "file": "assets/images/icons/icon128.png",
+        "hash": "8403802863974498262"
       },
       {
         "file": "tsconfig.base.json",
         "hash": "1762167918778322054"
       },
       {
-        "file": "qa-data/vision/adult1.jpeg.b64",
-        "hash": "11793775713035611398"
+        "file": "assets/images/ICON_Reflect.svg",
+        "hash": "9928575951466875998"
+      },
+      {
+        "file": ".github/workflows/publish-libs-npm.yml.inprogress",
+        "hash": "737243790778656936"
+      },
+      {
+        "file": "assets/images/ICON_Confirm.svg",
+        "hash": "9630750417659198206"
+      },
+      {
+        "file": "scripts/vite-nginx.conf",
+        "hash": "12337008145683229678"
+      },
+      {
+        "file": "docker/build_api_prod.sh",
+        "hash": "4763610671958078170"
+      },
+      {
+        "file": "assets/images/extension-imgs/kidsPrivacy-2.png",
+        "hash": "12692620591923046702"
+      },
+      {
+        "file": "docker/build_web_dev.sh",
+        "hash": "16026021751796957028"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "5443105041930014821"
+      },
+      {
+        "file": "qa-data/vision/clean1.jpg",
+        "hash": "10026931289608154250"
+      },
+      {
+        "file": ".github/workflows/deploy-gmail-extension.yml",
+        "hash": "6683042125574650661"
+      },
+      {
+        "file": "scripts/run_web.js",
+        "hash": "14398916549247334045"
+      },
+      {
+        "file": ".github/workflows/deploy-web-demo.yml",
+        "hash": "12475240949221733563"
+      },
+      {
+        "file": "README.md",
+        "hash": "11949791687635084291"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "122231877704216267"
+      },
+      {
+        "file": ".github/workflows/deploy-website.yml",
+        "hash": "5552189364233125559"
       }
     ],
     "projectFileMap": {
