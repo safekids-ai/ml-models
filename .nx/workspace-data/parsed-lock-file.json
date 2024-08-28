@@ -4311,6 +4311,15 @@
         "hash": "sha512-wHpNJDPzM6XtZUOB3gW0J6mkFCSJilzCM3XrHI1o0C8vZmFE1snbmkIXNyoi1eV0Nxh1BMymcgz5vIMJgQtTqw=="
       }
     },
+    "npm:@nestjs/serve-static": {
+      "type": "npm",
+      "name": "npm:@nestjs/serve-static",
+      "data": {
+        "version": "4.0.2",
+        "packageName": "@nestjs/serve-static",
+        "hash": "sha512-cT0vdWN5ar7jDI2NKbhf4LcwJzU4vS5sVpMkVrHuyLcltbrz6JdGi1TfIMMatP2pNiq5Ie/uUdPSFDVaZX/URQ=="
+      }
+    },
     "npm:@nestjs/swagger": {
       "type": "npm",
       "name": "npm:@nestjs/swagger",
@@ -19600,6 +19609,15 @@
         "version": "0.1.7",
         "packageName": "path-to-regexp",
         "hash": "sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ=="
+      }
+    },
+    "npm:path-to-regexp@0.2.5": {
+      "type": "npm",
+      "name": "npm:path-to-regexp@0.2.5",
+      "data": {
+        "version": "0.2.5",
+        "packageName": "path-to-regexp",
+        "hash": "sha512-l6qtdDPIkmAmzEO6egquYDfqQGPMRNGjYtrU13HAXb3YSRrt7HSb1sJY0pKp6o2bAa86tSB6iwaW2JbthPKr7Q=="
       }
     },
     "npm:path-to-regexp@3.2.0": {
@@ -35275,6 +35293,31 @@
     {
       "source": "npm:@nestjs/schematics@9.2.0",
       "target": "npm:typescript",
+      "type": "static"
+    },
+    {
+      "source": "npm:@nestjs/serve-static",
+      "target": "npm:@nestjs/common",
+      "type": "static"
+    },
+    {
+      "source": "npm:@nestjs/serve-static",
+      "target": "npm:@nestjs/core",
+      "type": "static"
+    },
+    {
+      "source": "npm:@nestjs/serve-static",
+      "target": "npm:path-to-regexp@0.2.5",
+      "type": "static"
+    },
+    {
+      "source": "npm:@nestjs/serve-static",
+      "target": "npm:express",
+      "type": "static"
+    },
+    {
+      "source": "npm:@nestjs/serve-static",
+      "target": "npm:fastify",
       "type": "static"
     },
     {

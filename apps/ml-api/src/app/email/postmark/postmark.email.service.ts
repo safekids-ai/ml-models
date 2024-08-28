@@ -61,7 +61,8 @@ export class PostmarkEmailService extends EmailService implements QueueServiceIn
 
   async sendEmail(emailInput: EmailInterface): Promise<void> {
     this.log.debug('Adding email to send queue', emailInput)
-    emailInput.from = (emailInput.useSupportEmail) ? this.fromSupportEmail : this.fromEmail
+    emailInput.from = this.fromEmail
+    //emailInput.from = (emailInput.useSupportEmail) ? this.fromSupportEmail : this.fromEmail
     await this.queue.add('email-job', emailInput)
   }
 
@@ -70,32 +71,50 @@ export class PostmarkEmailService extends EmailService implements QueueServiceIn
     const withoutTemplate = jobs.filter(email => !email.data.content.templateName);
 
     if (withTemplate) {
-      await this.sendPostmarkTemplateBatch(withTemplate.map(job => job.data));
+      await this.sendPostmarkTemplateBatch(withTemplate.map(job => job));
     }
     if (withoutTemplate) {
-      await this.sendPostmarkBatch(withoutTemplate.map(job => job.data))
+      await this.sendPostmarkBatch(withoutTemplate.map(job => job))
     }
   }
 
-  async sendPostmarkTemplateBatch(emails: EmailInterface[]): Promise<postmark.Models.MessageSendingResponse[]> {
+  async sendPostmarkTemplateBatch(emails: Job<EmailInterface>[]): Promise<postmark.Models.MessageSendingResponse[]> {
     const postmarkClient = new postmark.ServerClient(this.serverToken);
-    const params = emails.map((email) => this.createTemplateBatchParams(email));
+    const params = emails.map((email) => this.createTemplateBatchParams(email.data));
 
     const response = await postmarkClient.sendEmailBatchWithTemplates(params);
     this.log.debug(`Postmark email template batch successfully sent.`, emails);
-    this.log.debug("Response", response)
+
+    for (let i = 0; i < response.length; i++) {
+      const res = response[i];
+      if (res.ErrorCode === 0) {
+        this.log.debug(`Job ${emails[i].id} sent successfully:`, emails[i], res);
+      } else {
+        this.log.error(`Job ${emails[i].id} failed to send:`, emails[i], res);
+      }
+    }
+
     return response;
   }
 
-  async sendPostmarkBatch(emails: EmailInterface[]): Promise<postmark.Models.MessageSendingResponse[]> {
+  async sendPostmarkBatch(emails: Job<EmailInterface>[]): Promise<postmark.Models.MessageSendingResponse[]> {
     if (!emails || emails.length == 0) {
-        return
+      return
     }
 
     const postmarkClient = new postmark.ServerClient(this.serverToken);
-    const params = emails.map((email) => this.createBatchParams(email));
+    const params = emails.map((email) => this.createBatchParams(email.data));
     const response = await postmarkClient.sendEmailBatch(params);
     this.log.debug('Postmark email batch successfully sent:', emails);
+
+    for (let i = 0; i < response.length; i++) {
+      const res = response[i];
+      if (res.ErrorCode === 0) {
+        this.log.debug(`Job ${emails[i].id} with message ${emails[i].data} sent successfully:`, res);
+      } else {
+        this.log.error(`Job ${emails[i].id} with message ${emails[i].data} failed to send:`, res);
+      }
+    }
     return response;
   }
 

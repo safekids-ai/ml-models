@@ -13,7 +13,7 @@ module.exports = {
       compiler: 'tsc',
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
-      assets: ["./src/assets"],
+      assets: ["./src/public"],
       memoryLimit: 4056,
       outputHashing: process.env['APP_ENV'] === 'production' ? 'all' : 'none',
       optimization: process.env['APP_ENV'] === 'production'

@@ -1,4 +1,5 @@
 import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import {SmsModule} from './sms/sms.module';
 import {LoggingModule} from './logger/logging.module';
 import {ConfigModule, ConfigService} from '@nestjs/config';
@@ -110,7 +111,7 @@ import {TestModule} from "./test/test.module";
 import {BullModule} from "@nestjs/bullmq";
 import {UrlParser} from "./utils/url.util";
 import {QueueModule} from "./queue/queue.module";
-
+import { join } from 'path';
 const ENV = process.env.APP_ENV || 'development';
 
 console.log('==========================================');
@@ -145,6 +146,12 @@ console.log('==========================================');
         webappConfig,
         winstonConfig
       ]
+    }),
+
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'public'), // Path to your static folder
+      // Optionally, you can set a serveRoot to prefix your static routes
+      // serveRoot: '/static',
     }),
 
     //////////////////////////////////
