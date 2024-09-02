@@ -1,15 +1,15 @@
 import * as Logger from 'abstract-logging';
 import {parse as tldts_parse} from 'tldts';
 
-import {SquidCategory} from "./web-category-content";
-import {CategoryCacheHash} from "./category-cache";
-import {UriUtils} from "./web-category-utils";
-import {CategoryFileReader} from "./web-category-reader";
+import {SquidCategory} from "./static-web-category-content";
+import {CategoryCacheHash} from "./static-category-cache";
+import {UriUtils} from "./static-web-category-utils";
+import {CategoryFileReader} from "./static-web-category-reader";
 import shorthash from 'short-hash';
-import {WebCategory} from "./web-category-types";
+import {StaticWebCategory} from "./static-web-category-types";
 
 interface WebCategoryResult {
-  category: WebCategory
+  category: StaticWebCategory
   categoryStr: string
 }
 
@@ -65,12 +65,12 @@ class HostURLCategorizer {
       const res = this.squidCache.get(publicSuffix)
       if (res) {
         if (res.includes(SquidCategory.ALLOWED_TLDS)) {
-          const cat = WebCategory.UNKNOWN_BUT_CLEAN;
-          return [{category: cat, categoryStr: WebCategory[cat]}]
+          const cat = StaticWebCategory.UNKNOWN_BUT_CLEAN;
+          return [{category: cat, categoryStr: StaticWebCategory[cat]}]
         }
         if (res.includes(SquidCategory.BLOCK_TLDS)) {
-          const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
-          return [{category: cat, categoryStr: WebCategory[cat]}]
+          const cat = StaticWebCategory.UNKNOWN_PERHAPS_BLOCK;
+          return [{category: cat, categoryStr: StaticWebCategory[cat]}]
         }
       }
     }
@@ -79,18 +79,18 @@ class HostURLCategorizer {
     const hostNameResult = this.squidCache.get(hostname)
     if (hostNameResult) {
       if (hostNameResult.includes(SquidCategory.BLOCK_URL)) {
-        const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
-        return [{category: cat, categoryStr: WebCategory[cat]}]
+        const cat = StaticWebCategory.UNKNOWN_PERHAPS_BLOCK;
+        return [{category: cat, categoryStr: StaticWebCategory[cat]}]
       }
       if (hostNameResult.includes(SquidCategory.ALLOWED_URL) || hostNameResult.includes(SquidCategory.ALLOWED_DOMAINS)) {
-        const cat = WebCategory.UNKNOWN_BUT_CLEAN;
-        return [{category: cat, categoryStr: WebCategory[cat]}]
+        const cat = StaticWebCategory.UNKNOWN_BUT_CLEAN;
+        return [{category: cat, categoryStr: StaticWebCategory[cat]}]
       }
-      const cat = WebCategory.UNKNOWN_PERHAPS_BLOCK;
-      return [{category: cat, categoryStr: WebCategory[cat]}]
+      const cat = StaticWebCategory.UNKNOWN_PERHAPS_BLOCK;
+      return [{category: cat, categoryStr: StaticWebCategory[cat]}]
     }
 
-    return  [{category: WebCategory.UNKNOWN, categoryStr: WebCategory[WebCategory.UNKNOWN]}];
+    return  [{category: StaticWebCategory.UNKNOWN, categoryStr: StaticWebCategory[StaticWebCategory.UNKNOWN]}];
   }
 
   categoriesToList(_categories: Array<number>): WebCategoryResult[] {
@@ -100,11 +100,11 @@ class HostURLCategorizer {
       return Array.from(res);
     }
     categories.map(v => {
-      res.add({category: v, categoryStr: WebCategory[v]})
+      res.add({category: v, categoryStr: StaticWebCategory[v]})
     })
 
     return Array.from(res)
   }
 }
 
-export {HostURLCategorizer, WebCategory, WebCategoryResult, UriUtils}
+export {HostURLCategorizer, StaticWebCategory, WebCategoryResult, UriUtils}

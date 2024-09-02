@@ -21,7 +21,6 @@ export interface QueueConfigItem {
 
 export default () => ({
   queueConfig: {
-    url: process.env.REDIS_URL,
     queueEmail: {
       name: "emailQueue",
       workers: process.env.QUEUE_EMAIL_WORKERS || 1,

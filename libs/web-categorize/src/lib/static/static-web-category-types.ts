@@ -1,0 +1,39 @@
+export interface WebCategoryCache {
+  put(key: string, value: StaticWebCategory[]): void;
+  get(key: string): StaticWebCategory[] | undefined;
+}
+
+export enum StaticWebCategory {
+  ADULT_MIXED,
+  ADULT_ANIME,
+  PORN,
+  PROXY_VPN_DDNS,
+  GAMBLING,
+  PIRACY,
+  TRACKERS_ADWARE_MALWARE,
+  STALKERWARE,
+  CRYPTO_JACKING,
+  PHISHING,
+  HACKING,
+  DDOS,
+  DOH_DNS,
+  UNSAFE_SEARCH,
+  URL_SHORTNER,
+  FAKE_NEWS,
+  DRUGS,
+  DANGEROUS_FORUMS,
+  MISC_DANGEROUS_MATERIAL,
+  INAPPROPRIATE_MATERIAL,
+  SOCIAL_MEDIA,
+  CHAT,
+  DATING,
+  SHOPPING,
+  ENTERTAINMENT_CELEBRITY,
+  SEX_EDUCATION,
+  SPORTS,
+  RACY_LINGERIE,
+  GAMING,
+  UNKNOWN_BUT_CLEAN,
+  UNKNOWN_PERHAPS_BLOCK,
+  UNKNOWN
+}

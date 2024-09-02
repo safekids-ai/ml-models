@@ -1,15 +1,15 @@
 import {promises as promiseFs} from "fs";
 import path from "path";
 import {createHash} from "crypto";
-import {DOWNLOADS, SQUID_DOWNLOADS, SquidCategory} from "./web-category-content";
+import {DOWNLOADS, SQUID_DOWNLOADS, SquidCategory} from "./static-web-category-content";
 import fs from "fs";
 import * as readline from 'readline';
 import * as Logger from 'abstract-logging';
-import {CategoryCacheHash} from "./category-cache";
-import {UriUtils} from "./web-category-utils";
+import {CategoryCacheHash} from "./static-category-cache";
+import {UriUtils} from "./static-web-category-utils";
 import gunzip from "gunzip-file"
 import {FileDownloader} from "./download-utils";
-import {WebCategory} from "./web-category-types";
+import {StaticWebCategory} from "./static-web-category-types";
 
 export class CategoryFileReader {
   private fileDownloader:FileDownloader = null;
@@ -73,7 +73,7 @@ export class CategoryFileReader {
     return hash.digest('hex');
   }
 
-  cacheLine(category: WebCategory, line: string) {
+  cacheLine(category: StaticWebCategory, line: string) {
     if (line.startsWith("#")) {
       return
     }
@@ -99,7 +99,7 @@ export class CategoryFileReader {
     this.squidCache.add(line, category)
   }
 
-  async readFile(category: WebCategory | SquidCategory, file, callback) : Promise<void>{
+  async readFile(category: StaticWebCategory | SquidCategory, file, callback) : Promise<void>{
       const exists = fs.existsSync(file)
       const logger = this.logger;
       let count = 0
@@ -125,7 +125,7 @@ export class CategoryFileReader {
 
   async process(): Promise<void> {
     for (const [category, files] of DOWNLOADS) {
-      const categoryName = WebCategory[category]
+      const categoryName = StaticWebCategory[category]
       const categoryDir = path.join(this.getDownloadPath(), categoryName)
 
       for (const file of files) {
@@ -136,10 +136,10 @@ export class CategoryFileReader {
           const decompressedFilePath = path.join(categoryDir, decompressedFileName)
           this.logger.info(`Decompressing file ${filePath} to ${decompressedFilePath}`)
           await this.performGunzip(filePath, decompressedFilePath)
-          await this.readFile(category as WebCategory, decompressedFilePath,
+          await this.readFile(category as StaticWebCategory, decompressedFilePath,
              (category, line) => this.cacheLine(category, line))
         } else {
-          await this.readFile(category as WebCategory, filePath,
+          await this.readFile(category as StaticWebCategory, filePath,
              (category, line) => this.cacheLine(category, line))
         }
       }
@@ -182,7 +182,7 @@ export class CategoryFileReader {
     const downloadPath = await this.createDir()
 
     for (const [category, files] of DOWNLOADS) {
-      const categoryName = WebCategory[category]
+      const categoryName = StaticWebCategory[category]
       const categoryDir = path.join(downloadPath, categoryName)
       await promiseFs.mkdir(categoryDir, {recursive: true})
 

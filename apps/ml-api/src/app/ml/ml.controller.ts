@@ -16,7 +16,7 @@ import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
 import {Limit} from "../guards/limit.guard";
 import {ApiBody, ApiTags} from "@nestjs/swagger";
-import {WebCategory} from "@safekids-ai/web-categorize";
+import {StaticWebCategory} from "@safekids-ai/web-categorize";
 import {enumToJson} from "../app.utils";
 
 @ApiTags('App')
@@ -115,6 +115,6 @@ export class MlController {
   })
   @Get('website-category-codes')
   async getWebsiteCategoryCodes() {
-    return enumToJson(WebCategory)
+    return enumToJson(StaticWebCategory)
   }
 }

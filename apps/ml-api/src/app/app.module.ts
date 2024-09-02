@@ -1,4 +1,5 @@
 import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
+import {CacheModule} from '@nestjs/cache-manager';
 import {SmsModule} from './sms/sms.module';
 import {LoggingModule} from './logger/logging.module';
 import {ConfigModule, ConfigService} from '@nestjs/config';
@@ -83,15 +84,16 @@ import {PromoCodeModule} from './billing/promo-code/promo-code.module';
 import {CouponModule} from './billing/coupon/coupon.module';
 import {SubscriptionFeedbackModule} from './billing/subscription-feedback/subscription-feedback.module';
 import {InvoiceModule} from './billing/invoice/invoice.module';
-import {ThrottlerModule, ThrottlerModuleOptions} from "@nestjs/throttler";
-import {ThrottlerBehindProxyGuard} from "./guards/throttler-behind-proxy-guard";
 import throttleConfig from "./config/throttle";
+import cacheConfig, {CacheConfig} from "./config/cache";
 import modelConfig from "./config/model";
 import queueConfig, {QueueConfig} from "./config/queue"
+import redisConfig, {RedisConfig} from "./config/redis"
 import categoryConfig from "./config/category"
 import defaultCouponsConfig from "./config/default-coupons"
 import defaultPlansConfig from "./config/default-plans"
 import deviceProfileConfig from "./config/device-profile-config"
+import openAIConfig from "./config/openai"
 import eventConfig from "./config/event"
 import expressConfig from "./config/express"
 import globalsConfig from "./config/globals"
@@ -106,11 +108,10 @@ import twilioSmsConfig from "./config/twilio.sms"
 import webappConfig from "./config/webapp"
 import winstonConfig from "./config/winston"
 import {MlModule} from "./ml/ml.module";
-import {TestModule} from "./test/test.module";
-import {BullModule} from "@nestjs/bullmq";
-import {UrlParser} from "./utils/url.util";
 import {QueueModule} from "./queue/queue.module";
-import { join } from 'path';
+import { redisStore } from 'cache-manager-redis-yet';
+import {WebCategoryModule} from "./web-category/web-category.module";
+
 const ENV = process.env.APP_ENV || 'development';
 
 console.log('==========================================');
@@ -124,6 +125,8 @@ console.log('==========================================');
       isGlobal: true,
       cache: false,
       load: [
+        redisConfig,
+        cacheConfig,
         throttleConfig,
         modelConfig,
         queueConfig,
@@ -143,7 +146,8 @@ console.log('==========================================');
         sqlConfig,
         twilioSmsConfig,
         webappConfig,
-        winstonConfig
+        winstonConfig,
+        openAIConfig,
       ]
     }),
 
@@ -155,6 +159,29 @@ console.log('==========================================');
     //   inject: [ConfigService],
     //   useFactory: (config: ConfigService) => config.get<ThrottlerModuleOptions>("throttleConfig"),
     // }),
+
+    //////////////////////////////////
+    // redis module
+    //////////////////////////////////
+    CacheModule.registerAsync({
+      isGlobal: true,
+      imports: [ConfigModule],
+      inject: [ConfigService],
+
+      useFactory: async (configService: ConfigService) => {
+        const redisConfig = configService.get<RedisConfig>("redisConfig");
+        const cacheConfig = configService.get<CacheConfig>("cacheConfig");
+
+        return {
+          store: redisStore,
+          host: redisConfig.host,
+          port: redisConfig.port,
+          password: redisConfig.password,
+          ttl: cacheConfig.ttl,
+          max: cacheConfig.max
+        }
+      }
+    }),
 
     //////////////////////////////////
     // logging module
@@ -242,6 +269,7 @@ console.log('==========================================');
     CouponModule,
     SubscriptionFeedbackModule,
     InvoiceModule,
+    WebCategoryModule
   ],
 })
 export class AppModule implements NestModule {
