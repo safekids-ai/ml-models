@@ -93,7 +93,7 @@ import categoryConfig from "./config/category"
 import defaultCouponsConfig from "./config/default-coupons"
 import defaultPlansConfig from "./config/default-plans"
 import deviceProfileConfig from "./config/device-profile-config"
-import openAIConfig from "./config/openai"
+import aiConfig from "./config/ai-api"
 import eventConfig from "./config/event"
 import expressConfig from "./config/express"
 import globalsConfig from "./config/globals"
@@ -147,7 +147,7 @@ console.log('==========================================');
         twilioSmsConfig,
         webappConfig,
         winstonConfig,
-        openAIConfig,
+        aiConfig,
       ]
     }),
 

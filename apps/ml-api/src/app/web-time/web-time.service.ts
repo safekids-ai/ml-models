@@ -1,9 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateWebTimeDto } from './dto/create-web-time.dto';
 import { UpdateWebTimeDto } from './dto/update-web-time.dto';
-import { ACTIVITY_REPOSITORY, WEBTIME_REPOSITORY } from '../constants';
-import { Activity } from '../activity/entities/activity.entity';
-import { UserService } from '../user/user.service';
+import { WEBTIME_REPOSITORY } from '../constants';
 import { WebTime } from './entities/web-time.entity';
 
 @Injectable()

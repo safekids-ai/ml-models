@@ -1,15 +1,7 @@
-import {DETAIL_WEB_CATEGORY_TYPES} from "./web-category-types";
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import {WebMeta} from "./web-category-types";
 
-type WebMeta = {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  ogType?: string;
-  ogDescription?: string;
-  ogUrl?: string;
-}
 
 class WebContentScraper {
   async getMetadata(url: string): Promise<WebMeta> {

@@ -59,6 +59,7 @@ import {Health} from '../../health/health.entity';
 import {ConfigService} from "@nestjs/config";
 import {SqlConfig} from "../../config/sql";
 import {LoggingService} from "../../logger/logging.service";
+import {WebCategory} from "../../web-category/entities/web-category-entity";
 
 export const databaseProviders = [
   {
@@ -155,6 +156,7 @@ export const databaseProviders = [
         FilteredProcess,
         Invoice,
         Health,
+        WebCategory
       ]);
       //commented out since a sync is dangerous
       //await sequelize.sync();

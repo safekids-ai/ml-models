@@ -1,39 +1,85 @@
-import {Injectable} from "@nestjs/common";
+import {Inject, Injectable, NotFoundException} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import {LoggingService} from "../logger/logging.service";
 import {WebContentScraper, WebMeta} from "@safekids-ai/web-categorize";
 import {WebCategoryType, WebCategorizer} from "@safekids-ai/web-categorize";
-import {OpenAIConfig} from "../config/openai";
+import {WebCategory} from "./entities/web-category-entity";
+import {
+  WEB_CATEGORY_TYPES,
+  WebCategoryProviderType
+} from "../../../../../libs/web-categorize/src/lib/web-category-types";
+import {WEBCATEGORY_REPOSITORY, WEBTIME_REPOSITORY} from "../constants";
+import {WebTime} from "../web-time/entities/web-time.entity";
 
 @Injectable()
 export class WebCategoryService {
-  webCategorizer: WebCategorizer;
-  apiConfig: OpenAIConfig
 
-  constructor(
-    private readonly config: ConfigService,
-    private readonly log: LoggingService,
-  ) {
-    this.apiConfig = config.get<OpenAIConfig>("openAiConfig")
-    this.webCategorizer = new WebCategorizer(this.apiConfig.api_key)
+  constructor(@Inject(WEBCATEGORY_REPOSITORY) private readonly repository: typeof WebCategory,
+              private readonly log: LoggingService,
+              private readonly webCategorizer: WebCategorizer) {
   }
 
-  async categorize(url?: string, text?: string): Promise<WebCategoryType[]> {
-    if (!url && !text) {
-      throw new Error(`Please provide either a url or text. Provided url:${url},text:${text}`)
+  public getProviderName(): WebCategoryProviderType {
+    return this.webCategorizer.getProviderName();
+  }
+
+  async findByUrl(url: string): Promise<WebCategoryType[] | null> {
+    const result = await this.repository.findOne({
+      where: {url},
+      attributes: ['category']
+    });
+    if (result && result.category) {
+      const category = result.getCategory()
+      return category.map(id => {
+        return WEB_CATEGORY_TYPES.find(category => category.id === id);
+      }).filter(category => category !== undefined) as WebCategoryType[];
     }
-    if (!text) {
+    return null;
+  }
+
+  async categorize(url: string, meta?: WebMeta): Promise<WebCategoryType[]> {
+    //return if exists in database
+    const dbValue = await this.findByUrl(url)
+    if (dbValue) {
+      this.log.debug(`Database hit`, url, dbValue)
+      return dbValue
+    }
+
+    //lets categorize it
+    let text = null
+    if (!url && !meta) {
+      throw new Error(`Please provide either a url or text. Provided url:${url},meta:${meta}`)
+    }
+
+    if (!meta) {
       this.log.debug("No text provided. Extracting it from url:", url)
-      const webMeta = await this.getMeta(url)
-      if (webMeta.description) {
-        text = webMeta.description
-      } else if (webMeta.title) {
-        text = webMeta.title
-      }
+      meta = await this.getMeta(url)
     }
-    this.log.debug("Running the following through OpenAI", {url: url, text: text})
+
+    if (meta.description) {
+      text = meta.description
+    } else if (meta.title) {
+      text = meta.title
+    } else {
+      throw new NotFoundException(`Unable to get title or description for url: ${url}`)
+    }
+
+    this.log.debug("Running the following through AI", {url: url, text: text})
     const result = await this.webCategorizer.categorize(text, url)
-    this.log.debug("Found the following categories:", {url: url, text:text, result: result})
+    this.log.debug("Found the following categories:", {url: url, text: text, result: result})
+
+    const source = WebCategoryProviderType[this.getProviderName()]
+
+    const dbStore = await WebCategory.create({
+      url: url,
+      meta: meta,
+      source: source,
+      category: result.map(category => category.id),
+      wrongCategory: false,
+      createdBy: "user",
+      updatedBy: "user"
+    })
+    this.log.debug("Stored web category", dbStore)
     return result
   }
 

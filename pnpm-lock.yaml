@@ -134,6 +134,9 @@ importers:
       '@sentry/types':
         specifier: ^8.22.0
         version: 8.22.0
+      '@sequelize/mysql':
+        specifier: 7.0.0-alpha.41
+        version: 7.0.0-alpha.41
       '@stripe/react-stripe-js':
         specifier: ^2.7.3
         version: 2.7.3(@stripe/stripe-js@4.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -248,6 +251,9 @@ importers:
       googleapis:
         specifier: ^140.0.1
         version: 140.0.1
+      groq-sdk:
+        specifier: ^0.6.1
+        version: 0.6.1
       gunzip-file:
         specifier: ^0.1.1
         version: 0.1.1
@@ -4338,6 +4344,17 @@ packages:
     resolution: {integrity: sha512-+1I5H8dojURiEUGPliDwheQk8dhjp8uV1sMccR/W/zjFrt4wZyPs+Ttp/V7gzm9LDJoNek9tmELert/jQqWTgg==}
     engines: {node: '>=14.18'}
 
+  '@sequelize/core@7.0.0-alpha.41':
+    resolution: {integrity: sha512-4SKtalcOv4NYQTwJdeL0YOQc3ezsEY2c4csUDLH0eoYgFX20CIOthPeX/EMafBmWr/c81+p48x/EyvrntoD6yQ==}
+    engines: {node: '>=18.0.0'}
+
+  '@sequelize/mysql@7.0.0-alpha.41':
+    resolution: {integrity: sha512-UDcDACdkysBRYQdF3k0LPBadve4iKymwjdQqOPmgQIR5PKmankSidPPHaUVte3lVLAQKdWqUAvKGiRQelLbZWg==}
+
+  '@sequelize/utils@7.0.0-alpha.41':
+    resolution: {integrity: sha512-5D2TaI9zPVPS2FmsvElQ8PbXptoCEcS1vBBvbH8yUb7Mn5h+C7vRVEOJPj9cKNWkjj9FXczxTQMLxEy09bjZLw==}
+    engines: {node: '>=18.0.0'}
+
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
 
@@ -5674,6 +5691,9 @@ packages:
 
   bmp-js@0.1.0:
     resolution: {integrity: sha512-vHdS19CnY3hwiNdkaqk93DvjVLfbEcI8mys4UjuWrlX1haDmroo8o4xCzh4wD6DGV6HxRCyauwhHRqMTfERtjw==}
+
+  bnf-parser@3.1.6:
+    resolution: {integrity: sha512-3x0ECh6CghmcAYnY6uiVAOfl263XkWffDq5fQS20ac3k0U7TE5rTWNXTnOTckgmfZc94iharwqCyoV8OAYxYoA==}
 
   body-parser@1.20.2:
     resolution: {integrity: sha512-ml9pReCu3M61kGlqoTm2umSXTlRTuGTx0bfYj+uIUKKYycG5NtSbeetV3faSU6R7ajOPw0g/J1PvK4qNy7s5bA==}
@@ -7879,6 +7899,9 @@ packages:
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
+  groq-sdk@0.6.1:
+    resolution: {integrity: sha512-K+fWWcgvKeOEFePq7Z7L3Jm7s5M2oKddgW2l3iFEczaVXU5yfGNKgQXd4LQzzm64qxpfOLzndwDzQdcOwi7gZA==}
+
   gtoken@7.1.0:
     resolution: {integrity: sha512-pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==}
     engines: {node: '>=14.0.0'}
@@ -8199,6 +8222,10 @@ packages:
   inflection@1.13.4:
     resolution: {integrity: sha512-6I/HUDeYFfuNCVS3td055BaXBwKYuzw7K3ExVMStBowKo9oOAMJIXIHvdyR3iboTCp1b+1i5DSkIZTcwIktuDw==}
     engines: {'0': node >= 0.4.0}
+
+  inflection@3.0.0:
+    resolution: {integrity: sha512-1zEJU1l19SgJlmwqsEyFTbScw/tkMHFenUo//Y0i+XEP83gDFdMvPizAD/WGcE+l1ku12PcTVHQhO6g5E0UCMw==}
+    engines: {node: '>=18.0.0'}
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
@@ -11921,6 +11948,10 @@ packages:
 
   sequelize-pool@7.1.0:
     resolution: {integrity: sha512-G9c0qlIWQSK29pR/5U2JF5dDQeqqHRragoyahj/Nx4KOOQ3CPPfzxnfqFPCSB7x5UgjOgnZ61nSxz+fjDpRlJg==}
+    engines: {node: '>= 10.0.0'}
+
+  sequelize-pool@8.0.0:
+    resolution: {integrity: sha512-xY04c5ctp6lKE4ZoSVo7YJHN5FHVhoYMoH2Z8jWIJG26c9kJSkIjql5HgD9XG5cwJbYMF0Ko2Fhgws20HC90Ug==}
     engines: {node: '>= 10.0.0'}
 
   sequelize-typescript@2.1.6:
@@ -18904,6 +18935,45 @@ snapshots:
     dependencies:
       '@sentry/types': 8.20.0
 
+  '@sequelize/core@7.0.0-alpha.41':
+    dependencies:
+      '@sequelize/utils': 7.0.0-alpha.41
+      '@types/debug': 4.1.12
+      '@types/validator': 13.12.0
+      bnf-parser: 3.1.6
+      chalk: 4.1.2
+      dayjs: 1.11.12
+      debug: 4.3.6(supports-color@8.1.1)
+      dottie: 2.0.6
+      fast-glob: 3.3.2
+      inflection: 3.0.0
+      lodash: 4.17.21
+      retry-as-promised: 7.0.4
+      semver: 7.6.3
+      sequelize-pool: 8.0.0
+      toposort-class: 1.0.1
+      type-fest: 4.23.0
+      uuid: 9.0.1
+      validator: 13.12.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@sequelize/mysql@7.0.0-alpha.41':
+    dependencies:
+      '@sequelize/core': 7.0.0-alpha.41
+      '@sequelize/utils': 7.0.0-alpha.41
+      dayjs: 1.11.12
+      lodash: 4.17.21
+      mysql2: 3.11.0
+      wkx: 0.5.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@sequelize/utils@7.0.0-alpha.41':
+    dependencies:
+      '@types/lodash': 4.17.7
+      lodash: 4.17.21
+
   '@sideway/address@4.1.5':
     dependencies:
       '@hapi/hoek': 9.3.0
@@ -20506,6 +20576,8 @@ snapshots:
   bluebird@3.7.2: {}
 
   bmp-js@0.1.0: {}
+
+  bnf-parser@3.1.6: {}
 
   body-parser@1.20.2:
     dependencies:
@@ -23336,6 +23408,18 @@ snapshots:
 
   graphemer@1.4.0: {}
 
+  groq-sdk@0.6.1:
+    dependencies:
+      '@types/node': 18.19.42
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   gtoken@7.1.0:
     dependencies:
       gaxios: 6.7.0
@@ -23692,6 +23776,8 @@ snapshots:
   indent-string@4.0.0: {}
 
   inflection@1.13.4: {}
+
+  inflection@3.0.0: {}
 
   inflight@1.0.6:
     dependencies:
@@ -28159,6 +28245,8 @@ snapshots:
   seq-queue@0.0.5: {}
 
   sequelize-pool@7.1.0: {}
+
+  sequelize-pool@8.0.0: {}
 
   sequelize-typescript@2.1.6(@types/node@22.0.0)(@types/validator@13.12.0)(reflect-metadata@0.2.2)(sequelize@6.37.3(mysql2@3.11.0)(pg-hstore@2.3.4)):
     dependencies:
