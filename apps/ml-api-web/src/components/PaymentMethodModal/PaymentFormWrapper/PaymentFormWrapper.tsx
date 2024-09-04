@@ -11,7 +11,7 @@ export const PaymentFormWrapper = (props: Props) => {
     const [message, setMessage] = useState('');
     useEffect(function onMount() {
         loadStripe(
-            process.env.REACT_APP_STRIPE_KEY || 'pk_test_51IDWQjJBjodztVXYIRhpttyPAlmT9bLARz6KJcdQ9GYyDhZKEpSpBPAFjTZnZLe0yGi1tRjHzj6cQs3hwLeJYBvr00bjClP2Gn'
+          import.meta.env.REACT_APP_STRIPE_KEY
         )
             .then((stripe) => {
                 setStripe(stripe);
