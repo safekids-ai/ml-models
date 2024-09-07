@@ -40,7 +40,8 @@ const getText = (plan: ActivePlan | null): string => {
             ? `You have cancelled your subscription and will not be charged anymore. Your subscription will end in ${result} (${formatedDate}). If you'd like to resubscribe, please `
             : `You are currently enrolled in the ${plan?.planName}, which will auto renew in ${result} (${formatedDate}). `;
     }
-    return 'Your free trial has ended. You can subscribe to Monthly or Yearly plans. ';
+  return 'Please become a supporter and subscribe to Monthly or Yearly plans. ';
+    // return 'Your free trial has ended. You can subscribe to Monthly or Yearly plans. ';
 };
 
 export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {

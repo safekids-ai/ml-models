@@ -35,15 +35,26 @@ type PlanProps = {
 
 const PlanContent = ({price, type}: PlanProps): JSX.Element => {
   if (type === 'FREE') {
-    return <span>This plan is for Free and has limited features. </span>;
+    return <span>Our software is free and fully functional. But please be a supporter for us to continue our mission. </span>;
+    // return <span>This plan is for Free and has limited features. </span>;
   }
   if (type === 'MONTHLY') {
-    return <span>This plan asks for a monthly payment. Each month we'll notify you of your monthly payment for a total of ${price}.</span>;
+    return <>
+      <span>Thanks for your monthly support. We will continue to build state of art features. </span>
+      <br/>
+      <span>This plan asks for a monthly payment. </span>
+      <br/>
+      <span>Each month we'll notify you of your monthly payment for a total of ${price}.</span>
+    </>
+    // return <span>This plan asks for a monthly payment. Each month we'll notify you of your monthly payment for a total of ${price}.</span>;
   }
   if (type === 'YEARLY') {
     return (
       <>
-        <span>This plan asks for a single payment for the year and provides a ~25% discount.</span>
+        <span>Thanks for your annual support. Your help will go a long way in our software updates. </span>
+        <br/>
+        <span>This plan asks for a single payment for the year.</span>
+        {/*<span>This plan asks for a single payment for the year and provides a ~25% discount.</span>*/}
         <br/>
         <span>Your total is ${price} for the year.</span>{' '}
       </>
@@ -191,8 +202,9 @@ export const PlanSelector = ({nextStep, isOnBoarding = false, onRefresh}: Props)
   ) : (
     <Root $isOnBoarding>
       <Title $isOnBoarding={isOnBoarding}>Plan</Title>
-      <p>Your first 7 days are free, but in order to continue, you must choose a plan and provide your credit card
-        number.</p>
+      <p>Our software is completely free. But please support us financially so we can continue to add state-of-art features.</p>
+      {/*<p>Your first 7 days are free, but in order to continue, you must choose a plan and provide your credit card*/}
+      {/*  number.</p>*/}
       {isOnBoarding && (
         <div className="card-container">
           <PromotionalCodeCard
@@ -223,7 +235,7 @@ export const PlanSelector = ({nextStep, isOnBoarding = false, onRefresh}: Props)
               {plan.planType === 'YEARLY' ? (
                 <PlanContent price={afterDiscountPrice || plan.price} type={plan.planType}/>
               ) : (
-                <PlanContent price={round((afterDiscountPrice || plan.price) * 12, 2)} type={plan.planType}/>
+                <PlanContent price={round((afterDiscountPrice || plan.price), 2)} type={plan.planType}/>
               )}
             </PlanCard>
           );
