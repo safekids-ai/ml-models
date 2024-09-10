@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { EventType } from '../../../../../shared/types/message_types';
-import { PrrCategory } from '../../../../../shared/types/PrrCategory';
-import { PrrLevel } from '../../../../../shared/types/PrrLevel';
-import { HttpUtils } from '../../../../../shared/utils/HttpUtils';
-import useLanguageMessage from '../../../../content/hooks/useLanguageMessage';
-import { closeTab, getRandomLanguageMessage } from '../../common';
-import { MainSection, IconsSection, TextSection, ButtonsSection } from '../../main.style';
+import { EventType } from '@src/shared/types/message_types';
+import { PrrCategory } from '@src/shared/types/PrrCategory';
+import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { HttpUtils } from '@src/shared/utils/HttpUtils';
+import useLanguageMessage from '@src/pages/content/hooks/useLanguageMessage';
+import { closeTab, getRandomLanguageMessage } from '@src/pages/ui-prr/Main/common';
+import { MainSection, IconsSection, TextSection, ButtonsSection } from '@src/pages/ui-prr/Main/main.style';
 type Props = {
     level: PrrLevel;
     onTellMeMoreEvent: () => void;

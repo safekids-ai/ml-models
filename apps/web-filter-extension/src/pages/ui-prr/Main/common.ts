@@ -1,10 +1,10 @@
-import { EventType, PrrCrisisAction, TakeMeBackEvent } from '../../../shared/types/message_types';
-import { PrrLevel } from '../../../shared/types/PrrLevel';
-import { defaultMessages, PrrMessages } from '../../../shared/types/PrrMessage';
-import { EnumUtils } from '../../../shared/utils/EnumUtils';
-import { HttpUtils } from '../../../shared/utils/HttpUtils';
-import { ChromeCommonUtils } from '../../../shared/chrome/utils/ChromeCommonUtils';
-import { PrrCrisis } from '../../../shared/types/PrrCrisis.type';
+import { EventType, PrrCrisisAction, TakeMeBackEvent } from '@src/shared/types/message_types';
+import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { defaultMessages, PrrMessages } from '@src/shared/types/PrrMessage';
+import { EnumUtils } from '@src/shared/utils/EnumUtils';
+import { HttpUtils } from '@src/shared/utils/HttpUtils';
+import { ChromeCommonUtils } from '@src/shared/chrome/utils/ChromeCommonUtils';
+import { PrrCrisis } from '@src/shared/types/PrrCrisis.type';
 
 const is2dStringArray = (x: string | string[] | string[][]): x is string[][] => Array.isArray(x[0]);
 const logger = ChromeCommonUtils.getLogger();

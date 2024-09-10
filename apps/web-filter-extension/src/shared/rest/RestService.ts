@@ -10,7 +10,7 @@ export type RESTService = {
 
 
 export class FetchApiService implements RESTService {
-  baseURL = process.env.BACKEND_URL;
+  baseURL = import.meta.env.API_URL;
   jwtToken = ''; // JWT token
 
   constructor(private readonly chromeUtils: ChromeUtils) {
@@ -26,6 +26,7 @@ export class FetchApiService implements RESTService {
     try {
       const response = await fetch(url, options);
       if (!response.ok && retries > 0) {
+        console.log("ABBAS-retry:" + url + " " + JSON.stringify(options) + "->" + response.statusText);
         await new Promise(resolve => setTimeout(resolve, backoff));
         return this.fetchWithRetry(url, options, retries - 1, backoff * 2);
       }
@@ -56,7 +57,9 @@ export class FetchApiService implements RESTService {
       delete options.body; // GET or HEAD requests cannot have a body
     }
 
-    const response = await this.fetchWithRetry(`${this.baseURL}${path}`, options);
+    console.log("ABBAS:", `${this.baseURL}/${path}` + "-" + JSON.stringify(options))
+
+    const response = await this.fetchWithRetry(`${this.baseURL}/${path}`, options);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -64,23 +67,39 @@ export class FetchApiService implements RESTService {
     return response.json(); // Assuming the server always returns JSON.
   }
 
-  doGet(path): Promise<any> {
+  async doGet(path): Promise<any> {
+    if (!this.jwtToken) {
+      await this.initJWTToken();
+    }
     return this.makeRequest(path, 'GET');
   }
 
-  doPost(path, payload): Promise<any> {
+  async doPost(path, payload): Promise<any> {
+    if (!this.jwtToken) {
+      await this.initJWTToken();
+    }
+
     return this.makeRequest(path, 'POST', payload);
   }
 
-  doPut(path, payload): Promise<any> {
+  async doPut(path, payload): Promise<any> {
+    if (!this.jwtToken) {
+      await this.initJWTToken();
+    }
     return this.makeRequest(path, 'PUT', payload);
   }
 
-  doPatch(path, payload): Promise<any> {
+  async doPatch(path, payload): Promise<any> {
+    if (!this.jwtToken) {
+      await this.initJWTToken();
+    }
     return this.makeRequest(path, 'PATCH', payload);
   }
 
-  doDelete(path, payload): Promise<any> {
+  async doDelete(path, payload): Promise<any> {
+    if (!this.jwtToken) {
+      await this.initJWTToken();
+    }
     return this.makeRequest(path, 'DELETE', payload);
   }
 }

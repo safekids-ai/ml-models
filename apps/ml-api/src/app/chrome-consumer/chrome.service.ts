@@ -42,6 +42,7 @@ import {SubscriptionService} from '../billing/subscription/subscription.service'
 import {Account} from './../accounts/entities/account.entity';
 import {Plan} from '../billing/plan/entities/plan.entity';
 import {WebAppConfig} from "apps/ml-api/src/app/config/webapp";
+import {PlanTypes} from "../billing/plan/plan-types";
 
 @Injectable()
 export class ChromeService {
@@ -267,10 +268,17 @@ export class ChromeService {
    */
   async getOnBoardingStatus(userId: string, accountId: string): Promise<KidConfigDTO> {
     const kidConfigData: KidConfigDTO = await this.kidConfigService.fetch(userId);
-    const plan: Plan = await this.subscriptionService.getSubscriptionPlanByAccountId(accountId);
+
     // convert to plain javascript object -> then added planType field
     const kidConfig: KidConfigDTO = JSON.parse(JSON.stringify(kidConfigData));
-    kidConfig.planType = plan?.planType;
+
+    const plan: Plan = await this.subscriptionService.getSubscriptionPlanByAccountId(accountId);
+    if (!plan) {
+      this.log.debug(`No subscription for user:${userId} and accountId:${accountId}`);
+      kidConfig.planType = PlanTypes.FREE;
+    } else {
+      kidConfig.planType = plan?.planType;
+    }
     return kidConfig;
   }
 

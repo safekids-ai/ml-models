@@ -93,7 +93,7 @@ const LoginForm = ({loginComplete, onboardingFeedbackComplete}: Props): JSX.Elem
     });
   };
   const antIcon = <LoadingOutlined style={{fontSize: 20}} spin/>;
-  const redirectURL = `${import.meta.env.REDIRECT_PORTAL_URL}/signup`;
+  const redirectURL = `${import.meta.env.PUBLIC_URL}/signup`;
   return (
     <Root>
       <div className="form-container">

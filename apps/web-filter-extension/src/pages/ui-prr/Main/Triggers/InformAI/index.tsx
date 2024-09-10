@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { EventType, PrrCrisisAction, PrrInformAIAction } from '../../../../../shared/types/message_types';
-import { PrrLevel } from '../../../../../shared/types/PrrLevel';
-import { HttpUtils } from '../../../../../shared/utils/HttpUtils';
-import useLanguageMessage from '../../../../content/hooks/useLanguageMessage';
-import { getRandomLanguageMessage, aiTakeMeBack, triggerCrisisMessage } from '../../common';
-import { MainSection, IconsSection, TextSection, ButtonsSection } from '../../main.style';
-import { ChromeCommonUtils } from '../../../../../shared/chrome/utils/ChromeCommonUtils';
-import { PrrCategory } from '../../../../../shared/types/PrrCategory';
-import { PrrCrisis } from '../../../../../shared/types/PrrCrisis.type';
-import { PrrInformAI } from '../../../../../shared/types/PrrInformAI';
+import { EventType, PrrCrisisAction, PrrInformAIAction } from '@src/shared/types/message_types';
+import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { HttpUtils } from '@src/shared/utils/HttpUtils';
+import useLanguageMessage from '@src/pages/content/hooks/useLanguageMessage';
+import { getRandomLanguageMessage, aiTakeMeBack, triggerCrisisMessage } from '@src/pages/ui-prr/Main/common';
+import { MainSection, IconsSection, TextSection, ButtonsSection } from '@src/pages/ui-prr/Main/main.style';
+import { ChromeCommonUtils } from '@src/shared/chrome/utils/ChromeCommonUtils';
+import { PrrCategory } from '@src/shared/types/PrrCategory';
+import { PrrCrisis } from '@src/shared/types/PrrCrisis.type';
+import { PrrInformAI } from '@src/shared/types/PrrInformAI';
 
 type Props = {
     level: PrrLevel;

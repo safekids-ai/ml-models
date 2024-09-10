@@ -77,7 +77,7 @@ a {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Pause.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Pause.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -259,7 +259,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Reflect.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Reflect.svg) no-repeat;*/
     background-size: cover;
     transform: translate(-50%, -50%);
     animation-name: step2-reflect;
@@ -273,7 +273,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Pause.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Pause.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -309,7 +309,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Confirm.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Confirm.svg) no-repeat;*/
     background-size: cover;
     transform: translate(-50%, -50%);
     animation-name: step2-reflect;
@@ -555,7 +555,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Pause.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Pause.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -567,7 +567,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Reflect.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Reflect.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -579,7 +579,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Confirm.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Confirm.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -591,7 +591,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Communication.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Communication.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -603,7 +603,7 @@ a:focus {
     top: 50%;
     width: 92px;
     height: 92px;
-    background: url(../../assets/prr/ICON_Count-Down.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Count-Down.svg) no-repeat;*/
     transform: translate(-50%, -50%);
     animation-name: onload-pause;
     animation-duration: 1s;
@@ -653,7 +653,7 @@ a:focus {
 .choices-container .choice-container .icon-confirm {
     width: 30px;
     height: 30px;
-    background: url(../../assets/prr/ICON_Confirm.svg) no-repeat;
+    /*background: url(../../images/PRR/ICON_Confirm.svg) no-repeat;*/
     background-size: cover;
 }
 .choose-one-or-more {

@@ -2,19 +2,19 @@ import 'antd/es/slider/style';
 import React, { useEffect } from 'react';
 
 import './index.css';
-import { ChromeCommonUtils } from '../../../shared/chrome/utils/ChromeCommonUtils';
-import { Language } from '../../../shared/types/Language.type';
-import { EventType, LetUsKnowEvent, TakeMeBackEvent, TellMeMoreEvent } from '../../../shared/types/message_types';
-import { PrrCategory } from '../../../shared/types/PrrCategory';
-import { PrrLevel } from '../../../shared/types/PrrLevel';
-import { defaultMessages } from '../../../shared/types/PrrMessage';
-import { HttpUtils } from '../../../shared/utils/HttpUtils';
+import { ChromeCommonUtils } from '@src/shared/chrome/utils/ChromeCommonUtils';
+import { Language } from '@src/shared/types/Language.type';
+import { EventType, LetUsKnowEvent, TakeMeBackEvent, TellMeMoreEvent } from '@src/shared/types/message_types';
+import { PrrCategory } from '@src/shared/types/PrrCategory';
+import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { defaultMessages } from '@src/shared/types/PrrMessage';
+import { HttpUtils } from '@src/shared/utils/HttpUtils';
 
-import { aiTakeMeBack, getRandomLanguageMessage, triggerInformMessage } from './common';
-import LimitAccessScreen from './PrrLevel2/limitAccessScreen';
-import PrrLevel2 from './PrrLevel2/PrrLevel2';
-import Triggers from './Triggers';
-import { ButtonsSection, TextSection } from './main.style';
+import { aiTakeMeBack, getRandomLanguageMessage, triggerInformMessage } from '@src/pages/ui-prr/Main/common';
+import LimitAccessScreen from '@src/pages/ui-prr/Main/PrrLevel2/limitAccessScreen';
+import PrrLevel2 from '@src/pages/ui-prr/Main/PrrLevel2/PrrLevel2';
+import Triggers from '@src/pages/ui-prr/Main/Triggers';
+import { ButtonsSection, TextSection } from '@src/pages/ui-prr/Main/main.style';
 
 export const Main: React.FC = () => {
     const defaultLanguage = { name: 'English', id: 'en', direction: 'ltr' };

@@ -6,7 +6,7 @@ import { Root, ImageContainer } from '@src/pages/ui-onboarding/GetStartedContain
 import { Props } from '@src/pages/ui-onboarding/GetStartedContainer/GetStarted/GetStarted.type';
 
 const GetStarted = ({ getStartedClicked }: Props): JSX.Element => {
-    const redirectURL = `${import.meta.env.REDIRECT_PORTAL_URL}/signup`;
+    const redirectURL = `${import.meta.env.PUBLIC_URL}/signup`;
     return (
         <Root>
             <div className="text-container">

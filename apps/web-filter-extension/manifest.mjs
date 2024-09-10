@@ -53,11 +53,12 @@ const manifest = {
       matches: ['*://*/*'],
     },
     {
-      resources: ["models/*"],
+      resources: ["src/pages/background/models/*"],
       matches: ["<all_urls>"]
     },
     {
-      resources: ["src/assets/img/*"],
+      // resources: ["src/assets/img/*"],
+      resources: ["images/*"],
       matches: ["<all_urls>"],
       use_dynamic_url: true
     },

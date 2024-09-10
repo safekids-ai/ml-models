@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
-import IconCommunication from '../assets/prr/ICON_Communication.svg';
-import IconConfirm from '../assets/prr/ICON_Confirm.svg';
-import IconCountDown from '../assets/prr/ICON_Count-Down.svg';
-import IconPause from '../assets/prr/ICON_Pause.svg';
-import IconReflect from '../assets/prr/ICON_Reflect.svg';
+import IconCommunication from '/images/PRR/ICON_Communication.svg';
+import IconConfirm from '/images/PRR/ICON_Confirm.svg';
+import IconCountDown from '/images/PRR/ICON_Count-Down.svg';
+import IconPause from '/images/PRR/ICON_Pause.svg';
+import IconReflect from '/images/PRR/ICON_Reflect.svg';
 
 export const MainSection = styled.main`
     padding: 5rem 1rem;

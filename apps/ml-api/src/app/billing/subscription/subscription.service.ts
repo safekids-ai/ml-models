@@ -152,6 +152,9 @@ export class SubscriptionService {
 
   async getSubscriptionPlanByAccountId(accountId: string): Promise<any> {
     const subscription = await this.repository.findOne({where: {accountId}, include: [{model: Plan}]});
+    if (!subscription) {
+      return null;
+    }
     return subscription.plan;
   }
 

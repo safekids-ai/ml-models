@@ -1,12 +1,12 @@
 import React from 'react';
-import { PrrStatus } from '../../../../shared/types/PrrStatus';
+import { PrrStatus } from '@src/shared/types/PrrStatus';
 
-import {PrrLevel} from "../../../../shared/types/PrrLevel";
-import { HttpUtils } from '../../../../shared/utils/HttpUtils';
+import {PrrLevel} from "@src/shared/types/PrrLevel";
+import { HttpUtils } from '@src/shared/utils/HttpUtils';
 
-import AskScreen from './Ask';
-import InformScreen from './Inform';
-import InformAIScreen from './InformAI';
+import AskScreen from '@src/pages/ui-prr/Main/Triggers/Ask';
+import InformScreen from '@src/pages/ui-prr/Main/Triggers/Inform';
+import InformAIScreen from '@src/pages/ui-prr/Main/Triggers/InformAI';
 
 
 type Props = {

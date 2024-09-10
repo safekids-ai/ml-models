@@ -2,12 +2,12 @@ import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { format, addMinutes } from 'date-fns';
 
-import { ChromeCommonUtils } from '../../../../shared/chrome/utils/ChromeCommonUtils';
-import { Language } from '../../../../shared/types/Language.type';
-import { PrrLevel } from '../../../../shared/types/PrrLevel';
-import { defaultMessages } from '../../../../shared/types/PrrMessage';
-import { closeTab } from '../common';
-import { MainSection, IconsSection, TextSection, ButtonsSection, ContainerLevel3 } from '../main.style';
+import { ChromeCommonUtils } from '@src/shared/chrome/utils/ChromeCommonUtils';
+import { Language } from '@src/shared/types/Language.type';
+import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { defaultMessages } from '@src/shared/types/PrrMessage';
+import { closeTab } from '@src/pages/ui-prr/Main/common';
+import { MainSection, IconsSection, TextSection, ButtonsSection, ContainerLevel3 } from '@src/pages/ui-prr/Main/main.style';
 
 type Props = {
     language: Language;

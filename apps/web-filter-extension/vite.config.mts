@@ -33,15 +33,29 @@ const outDir = resolve(rootDir, '../../dist/apps/web-filter-extension');
 const publicDir = resolve(rootDir, 'public');
 const sharedDir = resolve(srcDir, 'shared');
 
-const isDev = process.env.__DEV__ === 'true';
-const isProduction = !isDev;
+const APP_ENV = process.env.APP_ENV || 'production'
+let API_URL = process.env.API_URL
+let PUBLIC_URL = process.env.PUBLIC_URL
+let NODE_ENV = process.env.NODE_ENV
+
+const isProduction = APP_ENV === 'production';
+const isDev = !isProduction;
+
+if (!PUBLIC_URL) {
+  PUBLIC_URL = (isProduction) ? "https://app.safekids.ai" : "http://localhost:5200"
+}
+
+if (!API_URL) {
+  API_URL = (isProduction) ? "https://api.safekids.ai" : "http://localhost:3000";
+}
+
 const WATCHDOG_EXTENSION_ID = "oakeaedpheedicjddocfgpkpjlaocfhf";
-const REDIRECT_PORTAL_URL= (isDev) ? "https://app.safekids.dev" : "https://app.safekids.ai"
 
 // ENABLE HMR IN BACKGROUND SCRIPT
-const enableHmrInBackgroundScript = true;
+const enableHmrInBackgroundScript = NODE_ENV != 'production';
 const cacheInvalidationKeyRef = {current: generateKey()};
 
+console.log(`Building consumer extension with PUBLIC_URL=${PUBLIC_URL} and API_URL=${API_URL} NODE_ENV=${NODE_ENV} ENABLED_HMR=${enableHmrInBackgroundScript}`)
 
 export default defineConfig({
   resolve: {
@@ -57,7 +71,8 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.WATCHDOG_EXTENSION_ID': JSON.stringify(WATCHDOG_EXTENSION_ID),
-    'import.meta.env.REDIRECT_PORTAL_URL': JSON.stringify(REDIRECT_PORTAL_URL),
+    'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL),
+    'import.meta.env.API_URL': JSON.stringify(API_URL),
   },
   plugins: [
     react(),
@@ -65,7 +80,7 @@ export default defineConfig({
     makeManifest({getCacheInvalidationKey}, outDir, manifestFile),
     customDynamicImport(),
     addHmr({background: enableHmrInBackgroundScript, view: true}),
-    isDev && watchRebuild({afterWriteBundle: regenerateCacheInvalidationKey}),
+    enableHmrInBackgroundScript && watchRebuild({afterWriteBundle: regenerateCacheInvalidationKey}),
     viteStaticCopy({
       targets: [
         {
@@ -87,7 +102,7 @@ export default defineConfig({
   build: {
     outDir,
     /** Can slow down build speed. */
-    // sourcemap: isDev,
+    sourcemap: isDev,
     minify: isProduction,
     modulePreload: false,
     reportCompressedSize: isProduction,
@@ -114,8 +129,7 @@ export default defineConfig({
           return `assets/[ext]/${assetFileName}.chunk.[ext]`;
         },
       },
-      plugins: [
-      ]
+      plugins: []
     },
   },
   test: {
