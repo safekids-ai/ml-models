@@ -32,8 +32,14 @@
       ],
       "@safekids-ai/vision-js-types": ["libs/vision-js-types/src/index.ts"],
       "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"],
-      "@safekids-ai/web-categorize": ["libs/web-categorize/src/index.ts"]
-    }
-  },
+      "@safekids-ai/web-categorize": ["libs/web-categorize/src/index.ts"],
+      "@safekids-ai/extension-storage": ["libs/extension-storage/src/index.ts"],
+      "@safekids-ai/extension-shared": ["libs/extension-shared/src/index.ts"],
+      "@safekids-ai/extension-dev-utils": ["libs/extension-dev-utils/src/index.ts"],
+      "@safekids-ai/extension-hmr": ["libs/extension-hmr/src/index.ts"],
+      "@safekids-ai/extension-i18n": ["libs/extension-i18n/src/index.ts"],
+      "@safekids-ai/extension-vite-config": ["libs/extension-vite-config/src/index.mjs"]
+    },
+   },
   "exclude": ["node_modules", "tmp"]
 }
