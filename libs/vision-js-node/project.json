@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/vision-js-node/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -18,12 +19,20 @@
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/vision-js-node/src/index.ts",
         "project": "libs/vision-js-node/ng-package.json",
-        "esbuildOptions" : {
-          "packages" : "external"
+        "esbuildOptions": {
+          "packages": "external"
         },
         "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
         ]
       },
       "configurations": {
@@ -39,9 +48,7 @@
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build vision-js-node"
-        ],
+        "commands": ["pnpm exec nx build vision-js-node"],
         "parallel": false
       }
     },
@@ -58,6 +65,5 @@
         "jestConfig": "libs/vision-js-node/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

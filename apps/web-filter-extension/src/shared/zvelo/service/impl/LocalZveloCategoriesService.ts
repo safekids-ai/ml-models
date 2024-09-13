@@ -1,10 +1,10 @@
-import { ChromeCommonUtils } from '@src/shared/chrome/utils/ChromeCommonUtils';
-import { Logger } from '@src/shared/logging/ConsoleLogger';
-import { ContentResult } from '@src/shared/types/ContentResult';
-import { UrlStatus } from '@src/shared/types/UrlStatus';
-import { PrrCategory } from '@src/shared/types/PrrCategory';
-import { PrrLevel } from '@src/shared/types/PrrLevel';
-import { ZveloCategoryCodes } from '@src/shared/zvelo/utils/ZveloCategoryCodes';
+import { ChromeCommonUtils } from '@shared/chrome/utils/ChromeCommonUtils';
+import { Logger } from '@shared/logging/ConsoleLogger';
+import { ContentResult } from '@shared/types/ContentResult';
+import { UrlStatus } from '@shared/types/UrlStatus';
+import { PrrCategory } from '@shared/types/PrrCategory';
+import { PrrLevel } from '@shared/types/PrrLevel';
+import { ZveloCategoryCodes } from '@shared/zvelo/utils/ZveloCategoryCodes';
 
 export class LocalZveloCategoriesService {
     private zveloCategories: any;
@@ -16,7 +16,7 @@ export class LocalZveloCategoriesService {
     }
 
     private readonly initializeZveloCategories = async (): Promise<void> => {
-        const ZVELO_CATEGORY_PATH = chrome.runtime.getURL('src/pages/data.json');
+        const ZVELO_CATEGORY_PATH = chrome.runtime.getURL('/data/data.json');
         //const ZVELO_CATEGORY_PATH = 'src/pages/content/data.json';
         try {
             const response = await fetch(ZVELO_CATEGORY_PATH);

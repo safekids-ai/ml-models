@@ -1,5 +1,5 @@
-import { SettingsActionTypes } from '@pages/popup/redux/actions/settings';
-import { RootState } from '@pages/popup/redux/reducers';
+import { SettingsActionTypes } from '@shared/redux/actions/settings';
+import { RootState } from '@shared/redux/reducers';
 
 export type ReduxStorage = {
     getState: () => RootState;

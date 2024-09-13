@@ -124,24 +124,24 @@ export function createStorage<D = string>(key: string, fallback: D, config?: Sto
     _emitChange();
   });
 
-  // Listener for live updates from the browser
-  async function _updateFromStorageOnChanged(changes: { [key: string]: chrome.storage.StorageChange }) {
-    // Check if the key we are listening for is in the changes object
-    if (changes[key] === undefined) return;
-
-    const valueOrUpdate: ValueOrUpdate<D> = deserialize(changes[key].newValue);
-
-    if (cache === valueOrUpdate) return;
-
-    cache = await updateCache(valueOrUpdate, cache);
-
-    _emitChange();
-  }
-
-  // Register listener for live updates for our storage area
-  if (liveUpdate) {
-    chrome?.storage[storageEnum].onChanged.addListener(_updateFromStorageOnChanged);
-  }
+  // // Listener for live updates from the browser
+  // async function _updateFromStorageOnChanged(changes: { [key: string]: chrome.storage.StorageChange }) {
+  //   // Check if the key we are listening for is in the changes object
+  //   if (changes[key] === undefined) return;
+  //
+  //   const valueOrUpdate: ValueOrUpdate<D> = deserialize(changes[key].newValue);
+  //
+  //   if (cache === valueOrUpdate) return;
+  //
+  //   cache = await updateCache(valueOrUpdate, cache);
+  //
+  //   _emitChange();
+  // }
+  //
+  // // Register listener for live updates for our storage area
+  // if (liveUpdate) {
+  //   chrome?.storage[storageEnum].onChanged.addListener(_updateFromStorageOnChanged);
+  // }
 
   return {
     get,

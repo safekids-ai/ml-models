@@ -1,65 +1,23 @@
 {
   "name": "web-filter-extension",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/web-filter-extension/src",
+  "sourceRoot": "/src",
   "type": "module",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "defaultConfiguration": "production",
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/web-filter-extension"],
       "options": {
-        "viteConfig" : "apps/web-filter-extension/vite.config.mts",
-        "outputPath": "dist/apps/web-filter-extension",
-        "generatePackageJson": true
+        "command": "node apps/web-filter-extension/build.mjs"
       },
       "configurations": {
         "development": {
-          "mode": "development"
+          "command": "NODE_ENV=development node apps/web-filter-extension/build.mjs"
         },
         "production": {
-          "mode": "production"
-        }
-      },
-      "dependsOn": [
-        {
-          "target": "build:content",
-          "projects": "self"
-        }
-      ]
-    },
-    "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "web-filter-extension:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "web-filter-extension:build:development",
-          "hmr": true
-        },
-        "production": {
-          "buildTarget": "web-filter-extension:build:production",
-          "hmr": false
-        }
-      }
-    },
-    "preview": {
-      "executor": "@nx/vite:preview-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "web-filter-extension:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "web-filter-extension:build:development"
-        },
-        "production": {
-          "buildTarget": "web-filter-extension:build:production"
+          "command": "NODE_ENV=production node apps/web-filter-extension/build.mjs"
         }
       }
     },
@@ -71,21 +29,10 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/web-filter-extension/**/*.{ts,tsx,js,jsx}"
-        ]
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "web-filter-extension:build"
+        "lintFilePatterns": ["apps/web-filter-extension/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": []
+  }
 }

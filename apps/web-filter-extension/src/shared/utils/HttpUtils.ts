@@ -1,4 +1,4 @@
-import { Logger } from '@src/shared/logging/ConsoleLogger';
+import { Logger } from '@shared/logging/ConsoleLogger';
 
 export class HttpUtils {
     static getDomain = (url: string) => {

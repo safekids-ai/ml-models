@@ -1,5 +1,5 @@
-import { ContentResult } from '@src/shared/types/ContentResult';
-import { ZveloConfig } from '@src/shared/zvelo/domain/zvelo.config';
+import { ContentResult } from '@shared/types/ContentResult';
+import { ZveloConfig } from '@shared/zvelo/domain/zvelo.config';
 
 export type UrlCategoryService = {
     /** Initialize categories

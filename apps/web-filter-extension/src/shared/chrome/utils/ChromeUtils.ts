@@ -1,9 +1,9 @@
-import {DEFAULT_TAB_ID, TabIdUrl} from '@pages/background/model/queue/QueueBase';
-import {Credentials} from '@src/shared/types/message_types';
-import {ChromeStorageManager} from '@src/shared/chrome/storage/ChromeStorageManager';
+import {DEFAULT_TAB_ID, TabIdUrl} from '@shared/queue/QueueBase';
+import {Credentials} from '@shared/types/message_types';
+import {ChromeStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import moment from 'moment';
 import Manifest = chrome.runtime.Manifest;
-import {Logger} from '@src/shared/logging/ConsoleLogger';
+import {Logger} from '@shared/logging/ConsoleLogger';
 
 export class ChromeUtils {
   constructor(private readonly logger: Logger, private readonly localStorageManager: ChromeStorageManager) {

@@ -1,5 +1,5 @@
-import { KidConfigDto } from '@src/shared/types/KidConfig.type';
-import { FilteredCategory } from '@src/shared/types/FilteredCategory.type';
+import { KidConfigDto } from '@shared/types/KidConfig.type';
+import { FilteredCategory } from '@shared/types/FilteredCategory.type';
 
 export type Configuration = {
     permissible: string[];

@@ -6,6 +6,7 @@ export const Root = styled.section`
   justify-content: center;
   align-items: center;
   margin-top: 35px;
+
   .heading {
     font-family: "Merriweather";
     font-style: normal;
@@ -18,20 +19,24 @@ export const Root = styled.section`
     width: 530px;
     text-align: center;
   }
+
   .footer {
     margin-top: 50px;
     width: 1000px;
   }
+
   .images-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+
     .image-container {
       display: flex;
       flex-direction: column;
       text-align: center;
       width: 460px;
+
       span {
         font-family: "Lato";
         font-style: normal;

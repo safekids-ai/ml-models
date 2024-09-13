@@ -1,7 +1,11 @@
-import { NotificationQuestionAnswerSet } from '@pages/ui-prr/Main/PrrLevel2/PrrLevel2';
-import { PrrLevel } from '@src/shared/types/PrrLevel';
-import { PrrTrigger } from '@src/shared/types/message_types';
-import { PrrCategory } from '@src/shared/types/PrrCategory';
+import { PrrLevel } from '@shared/types/PrrLevel';
+import { PrrTrigger } from '@shared/types/message_types';
+import { PrrCategory } from '@shared/types/PrrCategory';
+
+export type NotificationQuestionAnswerSet = {
+  query: string;
+  responses: string[];
+};
 
 export type WebUsageTypeDto = {
     userDeviceLinkId?: number;

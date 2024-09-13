@@ -1,12 +1,12 @@
-import { PrrAsk } from '@src/shared/types/PrrAsk.type';
-import { PrrInform } from '@src/shared/types/PrrInform.type';
-import { FilteredCategory } from '@src/shared/types/FilteredCategory.type';
-import { PredictionRequest } from '@src/shared/types/messages';
-import { UserProfile } from '@src/shared/types/UserProfile.type';
-import { PrrLevel } from '@src/shared/types/PrrLevel';
-import { PrrCategory } from '@src/shared/types/PrrCategory';
-import { PrrInformAI } from '@src/shared/types/PrrInformAI';
-import { PrrCrisis } from '@src/shared/types/PrrCrisis.type';
+import { PrrAsk } from '@shared/types/PrrAsk.type';
+import { PrrInform } from '@shared/types/PrrInform.type';
+import { FilteredCategory } from '@shared/types/FilteredCategory.type';
+import { PredictionRequest } from '@shared/types/messages';
+import { UserProfile } from '@shared/types/UserProfile.type';
+import { PrrLevel } from '@shared/types/PrrLevel';
+import { PrrCategory } from '@shared/types/PrrCategory';
+import { PrrInformAI } from '@shared/types/PrrInformAI';
+import { PrrCrisis } from '@shared/types/PrrCrisis.type';
 
 export enum BROWSERS {
     CHROME = 'CHROME',

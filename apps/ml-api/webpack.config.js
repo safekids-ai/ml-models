@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {join} = require('path');
 
 module.exports = {
-  watch: process.env['APP_ENV'] !== 'production',
+  watch: process.env['NODE_ENV'] !== 'production',
   output: {
     path: join(__dirname, '../../dist/apps/ml-api'),
   },
@@ -15,8 +15,8 @@ module.exports = {
       tsConfig: './tsconfig.app.json',
       assets: ["./src/assets"],
       memoryLimit: 4056,
-      outputHashing: process.env['APP_ENV'] === 'production' ? 'all' : 'none',
-      optimization: process.env['APP_ENV'] === 'production'
+      outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
+      optimization: process.env['NODE_ENV'] === 'production'
     }),
     new CopyWebpackPlugin({
       patterns: [

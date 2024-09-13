@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/extension-i18n/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -19,8 +20,16 @@
         "main": "libs/extension-i18n/src/index.ts",
         "project": "libs/extension-i18n/ng-package.json",
         "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
         ]
       },
       "configurations": {
@@ -54,9 +63,7 @@
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build extension-i18n"
-        ],
+        "commands": ["pnpm exec nx build extension-i18n"],
         "parallel": false
       }
     },
@@ -73,6 +80,5 @@
         "jestConfig": "libs/extension-i18n/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

@@ -1,4 +1,4 @@
-import { LocalStorageManager } from '../../../../src/shared/chrome/storage/ChromeStorageManager';
+import { LocalStorageManager } from './ChromeStorageManager';
 
 describe('LocalStorageManager Test', () => {
     let localStorage: LocalStorageManager;

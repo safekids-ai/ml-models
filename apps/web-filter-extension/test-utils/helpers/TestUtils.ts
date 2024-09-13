@@ -1,5 +1,5 @@
-import {ReduxStorage} from '../../src/shared/types/ReduxedStorage.type';
-import {interceptTimeType, settings} from '../../src/pages/popup/redux/reducers/settings';
+import {ReduxStorage} from '../../shared/types/ReduxedStorage.type';
+import {interceptTimeType, settings} from 'apps/web-filter-extension/shared/redux/reducers/settings';
 import {combineReducers, createStore} from 'redux';
 
 export class TestUtils {

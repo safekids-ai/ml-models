@@ -1,6 +1,6 @@
 {
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "name": "gmail-extension-background",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/gmail-extension/scripts/background/src",
   "tags": ["type:script"],
@@ -11,7 +11,7 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/gmail-extension/background",
-        "outputFileName" : "main.js",
+        "outputFileName": "main.js",
         "compiler": "babel",
         "index": "",
         "main": "apps/gmail-extension/scripts/background/src/main.ts",

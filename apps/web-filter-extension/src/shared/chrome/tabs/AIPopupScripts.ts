@@ -1,4 +1,4 @@
-import { BlockResult } from '@src/shared/chrome/tabs/ChromeTabHelper';
+import { BlockResult } from '@shared/chrome/tabs/ChromeTabHelper';
 
 // export const addIframe = (blockResult: any) => {
 //     const iframe = document.createElement('iframe');

@@ -6,7 +6,7 @@ import MessageInterpreter from '../interpreter';
 import { BUILD_COMPLETE, LOCAL_RELOAD_SOCKET_URL } from '../constant';
 import type { PluginConfig } from '../types';
 
-const injectionsPath = path.resolve(__dirname, '..', '..', '..', 'build', 'injections');
+const injectionsPath = path.resolve(__dirname, '..', '..', '..','dist','libs','extension-hmr', 'build', 'injections');
 
 const refreshCode = fs.readFileSync(path.resolve(injectionsPath, 'refresh.js'), 'utf-8');
 const reloadCode = fs.readFileSync(path.resolve(injectionsPath, 'reload.js'), 'utf-8');

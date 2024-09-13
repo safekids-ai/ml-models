@@ -1,9 +1,9 @@
-import { EDUCATION_HOSTS } from '@src/shared/types/education';
+import { EDUCATION_HOSTS } from '@shared/types/education';
 
-import { EducationalCodes } from '@src/shared/chrome/utils/EducationalCodes';
-import { HttpUtils } from '@src/shared/utils/HttpUtils';
-import { Credentials } from '@src/shared/types/message_types';
-import { ConsoleLogger } from '@src/shared/logging/ConsoleLogger';
+import { EducationalCodes } from '@shared/chrome/utils/EducationalCodes';
+import { HttpUtils } from '@shared/utils/HttpUtils';
+import { Credentials } from '@shared/types/message_types';
+import { ConsoleLogger } from '@shared/logging/ConsoleLogger';
 
 // TODO: refactor package and name
 export class ChromeCommonUtils {

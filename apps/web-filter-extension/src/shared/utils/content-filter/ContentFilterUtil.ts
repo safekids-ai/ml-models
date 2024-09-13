@@ -1,7 +1,7 @@
-import { ReduxStorage } from '@src//shared/types/ReduxedStorage.type';
-import { Logger } from '@src//shared/logging/ConsoleLogger';
-import { HttpUtils } from '@src//shared/utils/HttpUtils';
-import { ChromeCommonUtils } from '@src//shared/chrome/utils/ChromeCommonUtils';
+import { ReduxStorage } from '@shared/types/ReduxedStorage.type';
+import { Logger } from '@shared/logging/ConsoleLogger';
+import { HttpUtils } from '@shared/utils/HttpUtils';
+import { ChromeCommonUtils } from '@shared/chrome/utils/ChromeCommonUtils';
 
 export class ContentFilterUtil {
     constructor(private readonly store: ReduxStorage, private readonly logger: Logger) {}

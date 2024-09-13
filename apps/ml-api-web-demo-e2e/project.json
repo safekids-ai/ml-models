@@ -3,6 +3,8 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "/src",
+  "tags": [],
+  "implicitDependencies": ["ml-api-web-demo"],
   "targets": {
     "e2e": {
       "executor": "@nx/cypress:cypress",
@@ -27,7 +29,5 @@
         "lintFilePatterns": ["apps/ml-api-web-demo-e2e/**/*.{js,ts}"]
       }
     }
-  },
-  "implicitDependencies": ["ml-api-web-demo"],
-  "tags": []
+  }
 }

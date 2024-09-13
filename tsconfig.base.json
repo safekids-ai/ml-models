@@ -17,29 +17,25 @@
     "baseUrl": ".",
     "paths": {
       "@safekids-ai/common-plugin": ["libs/common-plugin/src/index.ts"],
+      "@safekids-ai/extension-dev-utils": ["libs/extension-dev-utils/src/index.ts"],
+      "@safekids-ai/extension-hmr": ["libs/extension-hmr/src/index.ts"],
+      "@safekids-ai/extension-i18n": ["libs/extension-i18n/src/index.ts"],
+      "@safekids-ai/extension-shared": ["libs/extension-shared/src/index.ts"],
+      "@safekids-ai/extension-storage": ["libs/extension-storage/src/index.ts"],
+      "@safekids-ai/extension-vite-config": ["libs/extension-vite-config/src/index.mjs"],
       "@safekids-ai/ml-api-types": ["libs/ml-api-types/src/index.ts"],
       "@safekids-ai/nlp-js-common": ["libs/nlp-js-common/src/index.ts"],
       "@safekids-ai/nlp-js-node": ["libs/nlp-js-node/src/index.ts"],
-      "@safekids-ai/nlp-js-react-native": [
-        "libs/nlp-js-react-native/src/index.ts"
-      ],
+      "@safekids-ai/nlp-js-react-native": ["libs/nlp-js-react-native/src/index.ts"],
       "@safekids-ai/nlp-js-types": ["libs/nlp-js-types/src/index.ts"],
       "@safekids-ai/nlp-js-web": ["libs/nlp-js-web/src/index.ts"],
       "@safekids-ai/vision-js-common": ["libs/vision-js-common/src/index.ts"],
       "@safekids-ai/vision-js-node": ["libs/vision-js-node/src/index.ts"],
-      "@safekids-ai/vision-js-react-native": [
-        "libs/vision-js-web/src/index.ts"
-      ],
+      "@safekids-ai/vision-js-react-native": ["libs/vision-js-web/src/index.ts"],
       "@safekids-ai/vision-js-types": ["libs/vision-js-types/src/index.ts"],
       "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"],
-      "@safekids-ai/web-categorize": ["libs/web-categorize/src/index.ts"],
-      "@safekids-ai/extension-storage": ["libs/extension-storage/src/index.ts"],
-      "@safekids-ai/extension-shared": ["libs/extension-shared/src/index.ts"],
-      "@safekids-ai/extension-dev-utils": ["libs/extension-dev-utils/src/index.ts"],
-      "@safekids-ai/extension-hmr": ["libs/extension-hmr/src/index.ts"],
-      "@safekids-ai/extension-i18n": ["libs/extension-i18n/src/index.ts"],
-      "@safekids-ai/extension-vite-config": ["libs/extension-vite-config/src/index.mjs"]
-    },
-   },
+      "@safekids-ai/web-categorize": ["libs/web-categorize/src/index.ts"]
+    }
+  },
   "exclude": ["node_modules", "tmp"]
 }

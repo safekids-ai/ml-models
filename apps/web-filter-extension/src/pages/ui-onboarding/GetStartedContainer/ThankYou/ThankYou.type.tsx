@@ -1,3 +1,3 @@
 export type Props = {
-    customSettings: boolean;
+  customSettings: boolean;
 };

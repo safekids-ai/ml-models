@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/gmail-extension/ui-onboarding/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -51,7 +52,8 @@
         "production": {
           "buildTarget": "gmail-extension-ui-onboarding:build:production"
         }
-      }
+      },
+      "dependsOn": ["build"]
     },
     "test": {
       "executor": "@nx/vite:test",
@@ -65,7 +67,9 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/gmail-extension/ui-onboarding/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/gmail-extension/ui-onboarding/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "serve-static": {
@@ -74,6 +78,5 @@
         "buildTarget": "gmail-extension-ui-onboarding:build"
       }
     }
-  },
-  "tags": []
+  }
 }

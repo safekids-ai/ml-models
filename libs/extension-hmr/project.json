@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/extension-hmr/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -12,16 +13,17 @@
       }
     },
     "build": {
-      "executor": "@nx/esbuild:esbuild",
-      "outputs": ["{options.outputPath}"],
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}",
+        "{workspaceRoot}/dist/libs/extension-hmr/build/injections"
+      ],
       "options": {
-        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
-        "main": "libs/extension-hmr/src/index.ts",
-        "project": "libs/extension-hmr/ng-package.json",
-        "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
-        ]
+        "commands": [
+          "nx run extension-hmr:build-main",
+          "nx run extension-hmr:build-injections"
+        ],
+        "parallel": false
       },
       "configurations": {
         "production": {
@@ -33,12 +35,47 @@
       },
       "defaultConfiguration": "production"
     },
+    "build-injections": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/libs/extension-hmr/build/injections"],
+      "options": {
+        "command": "node libs/extension-hmr/esbuild.config.js"
+      }
+    },
+    "build-main": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/extension-hmr/src/index.ts",
+        "project": "libs/extension-hmr/ng-package.json",
+        "format": ["cjs"],
+        "assets": [
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extension-hmr/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extension-hmr/tsconfig.lib.json"
+        }
+      }
+    },
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build extension-hmr"
-        ],
+        "commands": ["pnpm exec nx run extension-hmr:build"],
         "parallel": false
       }
     },
@@ -55,6 +92,5 @@
         "jestConfig": "libs/extension-hmr/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

@@ -1,9 +1,9 @@
-import {PrrReports} from "@src/shared/prr/PrrReports";
-import { Logger } from '@src/shared/logging/ConsoleLogger';
-import { ReduxStorage } from '@src/shared/types/ReduxedStorage.type';
-import { ChromeStorageManager, LocalStorageManager } from '@src/shared/chrome/storage/ChromeStorageManager';
-import { ChromeTabHelper } from '@src/shared/chrome/tabs/ChromeTabHelper';
-import { ChromeUtils } from '@src/shared/chrome/utils/ChromeUtils';
+import {PrrReports} from "@shared/prr/PrrReports";
+import { Logger } from '@shared/logging/ConsoleLogger';
+import { ReduxStorage } from '@shared/types/ReduxedStorage.type';
+import { ChromeStorageManager, LocalStorageManager } from '@shared/chrome/storage/ChromeStorageManager';
+import { ChromeTabHelper } from '@shared/chrome/tabs/ChromeTabHelper';
+import { ChromeUtils } from '@shared/chrome/utils/ChromeUtils';
 
 /**
  * Factory class to provide instances of chrome helpers

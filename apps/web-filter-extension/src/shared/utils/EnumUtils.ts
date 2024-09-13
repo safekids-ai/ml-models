@@ -1,4 +1,4 @@
-import { PrrCategory } from '@src/shared/types/PrrCategory';
+import { PrrCategory } from '@shared/types/PrrCategory';
 
 export class EnumUtils {
     static getCategoryByValue(value: string): PrrCategory {

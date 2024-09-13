@@ -2,16 +2,16 @@ import {LoadingOutlined} from '@ant-design/icons';
 import React, {useEffect, useState} from 'react';
 import PinInputField from 'react-pin-field';
 
-import {OnboardingStatus} from '@src/pages/ui-onboarding/GetStartedContainer/GetStartedContainer.config';
+import {OnboardingStatus} from '@pages/ui-onboarding/GetStartedContainer/GetStartedContainer.config';
 import {
   CustomSpinner,
   ErrorMessageContainer,
   Root
-} from '@src/pages/ui-onboarding/GetStartedContainer/Login/LoginForm/LoginForm.style';
-import {Props} from '@src/pages/ui-onboarding/GetStartedContainer/Login/LoginForm/LoginForm.type';
-import {defaultMessages} from '@src/shared/types/OnboardingMessage';
-import {EventType} from '@src/shared/types/message_types';
-import {ChromeCommonUtils} from '@src/shared/chrome/utils/ChromeCommonUtils';
+} from '@pages/ui-onboarding/GetStartedContainer/Login/LoginForm/LoginForm.style';
+import {Props} from '@pages/ui-onboarding/GetStartedContainer/Login/LoginForm/LoginForm.type';
+import {defaultMessages} from '@shared/types/OnboardingMessage';
+import {EventType} from '@shared/types/message_types';
+import {ChromeCommonUtils} from '@shared/chrome/utils/ChromeCommonUtils';
 
 const LoginForm = ({loginComplete, onboardingFeedbackComplete}: Props): JSX.Element => {
   const logger = ChromeCommonUtils.getLogger();

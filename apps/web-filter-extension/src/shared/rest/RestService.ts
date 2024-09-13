@@ -1,4 +1,4 @@
-import {ChromeUtils} from '@src/shared/chrome/utils/ChromeUtils';
+import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 
 export type RESTService = {
   doGet: (path: string) => Promise<any>;

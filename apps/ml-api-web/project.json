@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
@@ -51,7 +52,8 @@
         "production": {
           "buildTarget": "ml-api-web:build:production"
         }
-      }
+      },
+      "dependsOn": ["build"]
     },
     "test": {
       "executor": "@nx/vite:test",
@@ -74,6 +76,5 @@
         "buildTarget": "ml-api-web:build"
       }
     }
-  },
-  "tags": []
+  }
 }

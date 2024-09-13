@@ -1,12 +1,12 @@
-import { ChromeUtils } from '../../../../src/shared/chrome/utils/ChromeUtils';
-import { LocalStorageManager } from '../../../../src/shared/chrome/storage/ChromeStorageManager';
-import { PrrCategory } from '../../../../src/shared/types/PrrCategory';
-import { PrrLevel } from '../../../../src/shared/types/PrrLevel';
-import { Credentials } from '../../../../src/shared/types/message_types';
-import { HttpUtils } from '../../../../src/shared/utils/HttpUtils';
+import { ChromeUtils } from './ChromeUtils';
+import { LocalStorageManager } from '../storage/ChromeStorageManager';
+import { PrrCategory } from '../../types/PrrCategory';
+import { PrrLevel } from '../../types/PrrLevel';
+import { Credentials } from '../../types/message_types';
+import { HttpUtils } from '../../utils/HttpUtils';
 import { jest } from '@jest/globals';
 import Tab = chrome.tabs.Tab;
-import { ConsoleLogger, Logger } from '../../../../src/shared/logging/ConsoleLogger';
+import { ConsoleLogger, Logger } from '../../logging/ConsoleLogger';
 
 describe('ChromeUtils Test', () => {
     let service: ChromeUtils;

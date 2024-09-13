@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -19,11 +20,19 @@
         "main": "libs/web-categorize/src/index.ts",
         "project": "libs/web-categorize/ng-package.json",
         "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
         ],
-        "esbuildOptions" : {
-          "packages" : "external"
+        "esbuildOptions": {
+          "packages": "external"
         }
       },
       "configurations": {
@@ -39,9 +48,7 @@
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build web-categorize"
-        ],
+        "commands": ["pnpm exec nx build web-categorize"],
         "parallel": false
       }
     },
@@ -58,6 +65,5 @@
         "jestConfig": "libs/web-categorize/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

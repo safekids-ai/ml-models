@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/extension-vite-config/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -16,11 +17,20 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
-        "main": "libs/extension-vite-config/src/index.mjs",
+        "main": "libs/extension-vite-config/src/index.ts",
         "project": "libs/extension-vite-config/ng-package.json",
+        "format": ["cjs"],
         "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
         ]
       },
       "configurations": {
@@ -36,9 +46,7 @@
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build extension-vite-config"
-        ],
+        "commands": ["pnpm exec nx build extension-vite-config"],
         "parallel": false
       }
     },
@@ -55,6 +63,5 @@
         "jestConfig": "libs/extension-vite-config/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

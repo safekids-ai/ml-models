@@ -1,5 +1,5 @@
 export type Props = {
-    advanceToFeedbackScreen: () => void;
-    onBoardingComplete: () => void;
-    planType?: string
+  advanceToFeedbackScreen: () => void;
+  onBoardingComplete: () => void;
+  planType?: string
 };

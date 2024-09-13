@@ -1,10 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "module": "ESNext",
-    "sourceMap": true,
-    "types": ["@types/chrome"]
-  },
   "files": [],
   "include": [],
   "references": [

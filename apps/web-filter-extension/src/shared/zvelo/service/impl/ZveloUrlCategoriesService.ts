@@ -1,9 +1,9 @@
-import { ContentResult } from '@src/shared/types/ContentResult';
-import { ZveloConfig } from '@src/shared/zvelo/domain/zvelo.config';
-import { UrlCategoryService } from '@src/shared/zvelo/service/UrlCategoryService';
+import { ContentResult } from '@shared/types/ContentResult';
+import { ZveloConfig } from '@shared/zvelo/domain/zvelo.config';
+import { UrlCategoryService } from '@shared/zvelo/service/UrlCategoryService';
 
-import { LocalZveloCategoriesService } from '@src/shared/zvelo/service/impl/LocalZveloCategoriesService';
-import { RESTZveloCategoriesService } from '@src/shared/zvelo/service/impl/RESTZveloCategoriesService';
+import { LocalZveloCategoriesService } from '@shared/zvelo/service/impl/LocalZveloCategoriesService';
+import { RESTZveloCategoriesService } from '@shared/zvelo/service/impl/RESTZveloCategoriesService';
 
 export class ZveloUrlCategoriesService implements UrlCategoryService {
     private zveloConfig: ZveloConfig = {

@@ -1,9 +1,9 @@
 export type Props = {
-    onboardingFeedbackComplete: () => void;
-    currentOnboardingStep?: number;
+  onboardingFeedbackComplete: () => void;
+  currentOnboardingStep?: number;
 };
 
 export type OnboardingFeedbackQuestionAnswerSet = {
-    query: string;
-    responses: string[];
+  query: string;
+  responses: string[];
 };

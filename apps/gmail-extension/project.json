@@ -1,4 +1,5 @@
 {
+  "name": "gmail-extension",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/gmail-extension/",
   "targets": {

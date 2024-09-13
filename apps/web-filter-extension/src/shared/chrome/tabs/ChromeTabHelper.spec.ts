@@ -1,8 +1,8 @@
-import { ConsoleLogger } from '../../../../src/shared/logging/ConsoleLogger';
+import { ConsoleLogger } from '../../logging/ConsoleLogger';
 import { TestUtils } from '../../../../TestUtils';
-import { BlockResult, ChromeTabHelper } from '../../../../src/shared/chrome/tabs/ChromeTabHelper';
-import { PrrLevel } from '../../../../src/shared/types/PrrLevel';
-import { PrrCategory } from '../../../../src/shared/types/PrrCategory';
+import { BlockResult, ChromeTabHelper } from './ChromeTabHelper';
+import { PrrLevel } from '../../types/PrrLevel';
+import { PrrCategory } from '../../types/PrrCategory';
 import UpdateProperties = chrome.tabs.UpdateProperties;
 import Tab = chrome.tabs.Tab;
 import QueryInfo = chrome.tabs.QueryInfo;

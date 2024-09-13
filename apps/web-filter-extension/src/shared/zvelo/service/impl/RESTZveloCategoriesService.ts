@@ -1,7 +1,7 @@
-import { LRUCache } from '@src/shared/cache/LRUCache';
-import { Logger } from '@src/shared/logging/ConsoleLogger';
-import { ZveloConfig } from '@src/shared/zvelo/domain/zvelo.config';
-import { ZveloApiResponse } from '@src/shared/zvelo/domain/ZveloApiResponse';
+import { LRUCache } from '@shared/cache/LRUCache';
+import { Logger } from '@shared/logging/ConsoleLogger';
+import { ZveloConfig } from '@shared/zvelo/domain/zvelo.config';
+import { ZveloApiResponse } from '@shared/zvelo/domain/ZveloApiResponse';
 
 type hasName = {
     name: string;

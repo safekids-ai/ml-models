@@ -1,4 +1,4 @@
-import { AlarmType } from '@src/shared/types/Alam.type';
+import { AlarmType } from '@shared/types/Alam.type';
 
 export class ChromeAlarmUtil {
     static create(name: AlarmType | string, alarmInfo: any): void {

@@ -5,6 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/safekids-ai/ml-models/tree/main/libs/extension-vite-config"

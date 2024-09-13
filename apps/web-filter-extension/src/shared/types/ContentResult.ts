@@ -1,6 +1,6 @@
-import { UrlStatus } from '@src/shared/types/UrlStatus';
-import { PrrCategory } from '@src/shared/types/PrrCategory';
-import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { UrlStatus } from '@shared/types/UrlStatus';
+import { PrrCategory } from '@shared/types/PrrCategory';
+import { PrrLevel } from '@shared/types/PrrLevel';
 
 export type ContentResult = {
     status: string;

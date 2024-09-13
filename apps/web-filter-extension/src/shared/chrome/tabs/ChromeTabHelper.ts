@@ -1,8 +1,8 @@
-import { embedContent } from '@src/shared/chrome/tabs/AIPopupScripts';
-import { Logger } from '@src/shared/logging/ConsoleLogger';
-import { ReduxStorage } from '@src/shared/types/ReduxedStorage.type';
-import { PrrCategory } from '@src/shared/types/PrrCategory';
-import { PrrLevel } from '@src/shared/types/PrrLevel';
+import { embedContent } from '@shared/chrome/tabs/AIPopupScripts';
+import { Logger } from '@shared/logging/ConsoleLogger';
+import { ReduxStorage } from '@shared/types/ReduxedStorage.type';
+import { PrrCategory } from '@shared/types/PrrCategory';
+import { PrrLevel } from '@shared/types/PrrLevel';
 
 export type BlockResult = {
     category: PrrCategory;

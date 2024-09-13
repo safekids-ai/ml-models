@@ -1,4 +1,4 @@
-import { ChromeCommonUtils } from '../../../../src/shared/chrome/utils/ChromeCommonUtils';
+import { ChromeCommonUtils } from './ChromeCommonUtils';
 
 describe('ChromeCommonUtils Test', () => {
     const permissibleUrls = ['cnn.com', 'amazon.com', 'youtube.com', 'ixl.com', 'yahoo.com'];

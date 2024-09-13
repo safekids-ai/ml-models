@@ -1,10 +1,10 @@
-import { ConsoleLogger } from '../../../../src/shared/logging/ConsoleLogger';
-import { ChromeHelperFactory } from '../../../../src/shared/chrome/factory/ChromeHelperFactory';
-import { LocalStorageManager } from '../../../../src/shared/chrome/storage/ChromeStorageManager';
+import { ConsoleLogger } from '../../logging/ConsoleLogger';
+import { ChromeHelperFactory } from './ChromeHelperFactory';
+import { LocalStorageManager } from '../storage/ChromeStorageManager';
 import { TestUtils } from '../../../../TestUtils';
-import { ChromeTabHelper } from '../../../../src/shared/chrome/tabs/ChromeTabHelper';
-import { ChromeUtils } from '../../../../src/shared/chrome/utils/ChromeUtils';
-import { PrrReports } from '../../../../src/shared/prr/PrrReports';
+import { ChromeTabHelper } from '../tabs/ChromeTabHelper';
+import { ChromeUtils } from '../utils/ChromeUtils';
+import { PrrReports } from '../../prr/PrrReports';
 
 describe('ChromeHelperFactory Test', () => {
     let service: ChromeHelperFactory;
