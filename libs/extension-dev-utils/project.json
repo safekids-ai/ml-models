@@ -19,6 +19,7 @@
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/extension-dev-utils/src/index.ts",
         "project": "libs/extension-dev-utils/ng-package.json",
+        "format": ["cjs"],
         "assets": [
           {
             "input": ".",

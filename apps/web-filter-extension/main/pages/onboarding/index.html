@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&display=swap"
+          rel="stylesheet"/>
+  </head>
+  <style>
+    *,
+    ::after,
+    ::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #onboarding,
+    #onboarding > div {
+      height: 100vh;
+    }
+
+    .ant-select-selection {
+      background-color: transparent;
+      outline: none !important;
+      border: 2px solid #000000 !important;
+    }
+
+    .ant-select-item-option-active {
+      background-color: transparent !important;
+    }
+
+    .ant-select-item-option-active:hover {
+      background-color: rgba(250, 100, 0, 0.4) !important;
+      outline: none !important;
+    }
+
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+      background-color: rgba(250, 100, 0, 0.4) !important;
+    }
+
+    .ant-select-item {
+      min-height: 48px !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+    .ant-picker-panel-container .ant-picker-ok button {
+      background: rgba(250, 100, 0, 1);
+      border-color: rgba(250, 100, 0, 1);
+      color: #fff !important;
+    }
+
+    .ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner {
+      background: rgba(250, 100, 0, 1) !important;
+      color: #fff !important;
+    }
+  </style>
+  <body>
+    <div id="onboarding"></div>
+    <script type="module" src="./src/index.tsx"></script>
+  </body>
+</html>

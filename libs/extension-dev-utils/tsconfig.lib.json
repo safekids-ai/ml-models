@@ -1,16 +1,17 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ES2015",
+    "module": "CommonJS",
     "outDir": "../../dist/out-tsc",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declaration": true,
     "sourceMap": true,
-    "types": ["chrome"],
+    "noEmit": false,
+    "moduleResolution": "Node",
+    "target": "ES6",
+    "types": ["chrome", "node"],
+    "lib": ["ESNext", "dom"]
   },
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "lib/injections/**/*"],
   "include": ["src/**/*.ts"]
 }

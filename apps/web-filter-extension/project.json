@@ -4,20 +4,120 @@
   "sourceRoot": "/src",
   "type": "module",
   "projectType": "application",
+  "implicitDependencies": [
+    "extension-hmr",
+    "extension-vite-config",
+    "extension-dev-utils"
+  ],
   "tags": [],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/apps/web-filter-extension"],
       "options": {
-        "command": "node apps/web-filter-extension/build.mjs"
+        "commands": [
+          "nx run web-filter-extension:build-background",
+          "nx run web-filter-extension:build-content",
+          "nx run web-filter-extension:build-onboarding",
+          "nx run web-filter-extension:build-prr",
+          "nx run web-filter-extension:build-popup"
+        ],
+        "parallel": false
+      }
+    },
+    "build-background": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-filter-extension/main/background/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "emptyOutDir": false
       },
       "configurations": {
         "development": {
-          "command": "NODE_ENV=development node apps/web-filter-extension/build.mjs"
+          "mode": "development"
         },
         "production": {
-          "command": "NODE_ENV=production node apps/web-filter-extension/build.mjs"
+          "mode": "production"
+        }
+      }
+    },
+    "build-content": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-filter-extension/main/content/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}/content",
+        "emptyOutDir": false
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-popup": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-filter-extension/main/pages/popup/vite.config.mjs",
+        "outputPath": "../../../dist/{projectRoot}/pages/popup"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-onboarding": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-filter-extension/main/pages/onboarding/vite.config.mjs",
+        "outputPath": "../../../dist/{projectRoot}/pages/onboarding"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-prr": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-filter-extension/main/pages/prr/vite.config.mjs",
+        "outputPath": "../../../dist/{projectRoot}/pages/prr"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
         }
       }
     },
@@ -29,9 +129,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/web-filter-extension/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/web-filter-extension/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     }
   }

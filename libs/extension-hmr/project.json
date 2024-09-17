@@ -49,7 +49,9 @@
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/extension-hmr/src/index.ts",
         "project": "libs/extension-hmr/ng-package.json",
-        "format": ["cjs"],
+        "format": ["esm"],
+        "platform": "node",
+        "external": ["node:fs", "node:path", "ws", "fast-glob"],
         "assets": [
           {
             "input": ".",

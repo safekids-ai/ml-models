@@ -3,33 +3,15 @@
   "compilerOptions": {
     "noEmit": true,
     "baseUrl": ".",
-    "allowJs": false,
-    "jsx": "react-jsx",
-    "target": "ESNext",
-    "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": [
-      "ESNext",
-      "dom",
-      "dom.iterable",
-      "es2015"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "./global.d.ts",
-      "../../node_modules"
-    ],
-    "types": ["chrome","vite/client","jest"],
-    "downlevelIteration": true
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
-    "./src/**/*.spec.ts",
-    "./src/**/*.spec.tsx"
+    "./src/**/*.spec.ts*"
   ],
   "include": [
     "./src/**/*.ts",

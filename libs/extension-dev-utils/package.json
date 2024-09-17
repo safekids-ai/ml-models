@@ -2,6 +2,7 @@
   "name": "@safekids-ai/extension-dev-utils",
   "description": "Safekids Extension Dev Utils",
   "version": "0.0.0-replace",
+  "main": "index.cjs",
   "publishConfig": {
     "access": "public"
   },

@@ -5,6 +5,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "main" : "index.js",
   "type": "module",
   "repository": {
     "type": "git",

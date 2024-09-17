@@ -19,7 +19,6 @@
         "outputPath": "{workspaceRoot}/dist/{projectRoot}",
         "main": "libs/extension-vite-config/src/index.ts",
         "project": "libs/extension-vite-config/ng-package.json",
-        "format": ["cjs"],
         "assets": [
           {
             "input": ".",

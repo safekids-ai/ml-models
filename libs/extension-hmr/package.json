@@ -2,10 +2,7 @@
   "name": "@safekids-ai/extension-hmr",
   "description": "Safekids Extension HMR",
   "version": "0.0.0-replace",
-  "type": "commonjs",
-  "main": "index.js",
-  "module": "index.js",
-  "types": "index.ts",
+  "main": "index.cjs",
   "publishConfig": {
     "access": "public"
   },
