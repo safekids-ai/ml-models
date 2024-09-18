@@ -21,6 +21,7 @@
       "options": {
         "commands": [
           "nx run extension-hmr:build-main",
+          "nx run extension-hmr:build-server",
           "nx run extension-hmr:build-injections"
         ],
         "parallel": false
@@ -50,6 +51,7 @@
         "main": "libs/extension-hmr/src/index.ts",
         "project": "libs/extension-hmr/ng-package.json",
         "format": ["esm"],
+        "deleteOutputPath": false,
         "platform": "node",
         "external": ["node:fs", "node:path", "ws", "fast-glob"],
         "assets": [
@@ -64,6 +66,27 @@
             "output": "/"
           }
         ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extension-hmr/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extension-hmr/tsconfig.lib.json"
+        }
+      }
+    },
+    "build-server": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}/",
+        "deleteOutputPath": false,
+        "main": "libs/extension-hmr/src/lib/runner/NxServerRunner.ts",
+        "project": "libs/extension-hmr/ng-package.json",
+        "format": ["cjs"],
+        "platform": "node",
+        "external": ["node:fs", "node:path", "ws", "fast-glob"]
       },
       "configurations": {
         "production": {

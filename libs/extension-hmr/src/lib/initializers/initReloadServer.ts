@@ -5,7 +5,7 @@ import MessageInterpreter from '../interpreter';
 
 const clientsThatNeedToUpdate: Set<WebSocket> = new Set();
 
-function initReloadServer() {
+export function initReloadServer() {
   const wss = new WebSocketServer({ port: LOCAL_RELOAD_SOCKET_PORT });
 
   wss.on('listening', () => {
@@ -41,5 +41,3 @@ function initReloadServer() {
     throw error;
   });
 }
-
-initReloadServer();

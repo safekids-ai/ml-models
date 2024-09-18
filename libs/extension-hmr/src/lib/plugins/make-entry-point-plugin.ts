@@ -18,15 +18,18 @@ export function makeEntryPointPlugin(): PluginOption {
         throw new Error('Output directory not found');
       }
 
+      if (!fs.existsSync(outputDir)) {
+        console.log(`Output directory does not exist, creating: ${outputDir}`);
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+
       for (const module of Object.values(bundle)) {
         const fileName = path.basename(module.fileName);
         const newFileName = fileName.replace('.js', '_dev.js');
-
         switch (module.type) {
           case 'asset':
             if (fileName.endsWith('.map')) {
               cleanupTargets.add(path.resolve(outputDir, fileName));
-
               const originalFileName = fileName.replace('.map', '');
               const replacedSource = String(module.source).replaceAll(originalFileName, newFileName);
 
@@ -37,6 +40,7 @@ export function makeEntryPointPlugin(): PluginOption {
             break;
 
           case 'chunk': {
+            console.log("writing file to:" + path.resolve(outputDir, newFileName))
             fs.writeFileSync(path.resolve(outputDir, newFileName), module.code);
 
             if (isFirefox) {

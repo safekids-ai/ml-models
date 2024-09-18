@@ -34,8 +34,8 @@ export const loadModels = async (logger: Logger, modelsMap: Map<MLModels, MLMode
 export const init = async (): Promise<void> => {
   const store = await ChromeStore.createStore();
   const {logging} = store.getState().settings;
-
   const logger: Logger = new ConsoleLogger();
+
   /*if (!logging) {
       logger.disable();
       logger.disableDebug();

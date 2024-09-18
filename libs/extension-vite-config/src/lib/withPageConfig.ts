@@ -32,6 +32,13 @@ export function withPageConfig(config) {
           watch: watchOption,
           rollupOptions: {
             external: ['chrome'],
+            onwarn(warning, defaultHandler) {
+              if (warning.code === 'SOURCEMAP_ERROR') {
+                return
+              }
+
+              defaultHandler(warning)
+            },
           },
         },
         define: {

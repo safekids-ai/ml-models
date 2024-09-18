@@ -19,9 +19,16 @@
           "nx run web-filter-extension:build-content",
           "nx run web-filter-extension:build-onboarding",
           "nx run web-filter-extension:build-prr",
-          "nx run web-filter-extension:build-popup"
+          "nx run web-filter-extension:build-popup",
+          "nx run web-filter-extension:load-hmr-server"
         ],
-        "parallel": false
+        "parallel": true
+      }
+    },
+    "load-hmr-server": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ./dist/libs/extension-hmr/NxServerRunner.cjs"
       }
     },
     "build-background": {

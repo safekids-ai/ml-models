@@ -1,2 +1,2 @@
-export const isDev = process.env.__DEV__ === 'true';
+export const isDev = process.env.NODE_ENV === 'development';
 export const isProduction = !isDev;
