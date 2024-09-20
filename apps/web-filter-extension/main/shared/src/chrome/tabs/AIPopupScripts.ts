@@ -26,7 +26,7 @@ export const embedContent = (blockResult: BlockResult, tabId: number): void => {
         const innerContent = document.createElement('iframe');
         innerContent.style.width = '100%';
         innerContent.style.height = '100vh';
-        const prefix = 'chrome-extension://' + chrome.runtime.id + '/src/pages/ui-prr/index.html';
+        const prefix = 'chrome-extension://' + chrome.runtime.id + '/pages/prr/index.html';
         const url = `${prefix}?ai=${blockResult.ai}&status=${blockResult.status}&category=${blockResult.category.toUpperCase()}&level=${
             blockResult.level
         }&host=${blockResult.host}`;

@@ -1,4 +1,4 @@
-import 'antd/lib/checkbox/style/index.css';
+import 'antd/es/slider/style';
 
 import Checkbox from 'antd/lib/checkbox';
 import styled from 'styled-components';

@@ -13,11 +13,6 @@ import {ImageModel} from './model/ImageModel';
 import {NLPModel} from './model/NLPModel';
 import {ChromeCommonUtils} from '@shared/chrome/utils/ChromeCommonUtils';
 
-/**
- * Extension reloading is necessary because the browser automatically caches the css.
- * If you do not use the css of the content script, please delete it.
- */
-//reloadOnUpdate('pages/content/style.scss');
 
 const VISION_MODEL_PATH = 'models/vision.onnx';
 const NLP_MODEL_PATH = 'models/nlp.onnx';
@@ -28,6 +23,7 @@ export const loadModels = async (logger: Logger, modelsMap: Map<MLModels, MLMode
 
   await nlpModelWrapper?.init();
   await mlModelWrapper?.init();
+
   logger.log("Models loaded")
 };
 
@@ -69,7 +65,7 @@ export const init = async (): Promise<void> => {
     logger.error(`Failed to initialize. ${JSON.stringify(error)}`);
   });
 
-  console.log('background loaded');
+  console.log('background loaded 1');
 };
 
 init().catch((e) => ChromeCommonUtils.getLogger().error);

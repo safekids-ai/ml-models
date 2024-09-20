@@ -34,6 +34,7 @@ export class AccessLimitFilter implements ContentFilter {
       const categoryCodes = await this.urlCategoryService.getHostCategoryCodes(lowerHost);
       const isEdu = ChromeCommonUtils.inEducationalCodes(categoryCodes);
       const isAllowed = this.contentFilterUtil.isHostAllowed(lowerHost);
+
       if (isEdu || isAllowed) {
         return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, lowerHost);
       } else {

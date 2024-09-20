@@ -6,20 +6,23 @@ import {createStore} from "redux";
 import {Popup} from "@src/components";
 import {createChromeStore} from "@shared/redux/chrome-storage";
 import {Theme} from "@src/styles/Theme";
-import "antd/lib/style/index.css";
+import 'antd/es/slider/style';
+import 'antd/es/select/style';
+import * as ReactDOM from "react-dom/client";
+
+const root = ReactDOM.createRoot(document.getElementById("popup") as HTMLElement);
 
 chrome.tabs.query({active: true, currentWindow: true}, (_tab) => {
   void (async () => {
     chrome.runtime.connect();
     const store = await createChromeStore();
 
-    render(
+    root.render(
       <Provider store={store}>
         <Theme>
           <Popup/>
         </Theme>
-      </Provider>,
-      document.getElementById("popup")
+      </Provider>
     );
   })();
 });

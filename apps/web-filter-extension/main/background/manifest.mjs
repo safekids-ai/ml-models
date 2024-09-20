@@ -37,15 +37,15 @@ const manifest = deepmerge(
       service_worker: 'background.iife.js',
       type: 'module',
     },
-    // action: {
-    //   default_popup: 'pages/popup/index.html',
-    //   default_icon: {
-    //     16: "icon16.png",
-    //     32: "icon32.png",
-    //     48: "icon64.png",
-    //     128: "icon128.png"
-    //   },
-    // },
+    action: {
+      default_popup: 'pages/popup/index.html',
+      default_icon: {
+        16: "icon16.png",
+        32: "icon32.png",
+        48: "icon64.png",
+        128: "icon128.png"
+      },
+    },
     content_scripts: [
       {
         matches: ['http://*/*', 'https://*/*', '<all_urls>'],

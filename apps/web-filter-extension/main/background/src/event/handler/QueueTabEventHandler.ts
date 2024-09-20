@@ -1,12 +1,9 @@
 import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 import {QueueWrapper} from '@shared/queue/QueueWrapper';
-import {PrrReportManager} from '../../prr/PrrReportManager';
 import {TabEvent} from '../manager/TabEventManager';
-import {DEFAULT_TAB_ID} from '@shared/queue/QueueBase';
 import {TabEventHandler} from './TabEventHandler';
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {ChromeTabHelper} from '@shared/chrome/tabs/ChromeTabHelper';
-import {MLPrrMonitor} from '../../prr/monitor/MLPrrMonitor';
 import {PrrMonitor} from '../../prr/monitor/PrrMonitor';
 
 /**

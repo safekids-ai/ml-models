@@ -71,7 +71,8 @@ export class Filter implements IFilter {
                         this.logger.debug(`Sending blob image request.`);
                         let data = {
                           // @ts-ignore
-                          data: Array.apply(null, new Uint8Array(arrayBuffer)),
+                          //data: Array.apply(null, new Uint8Array(arrayBuffer)),
+                          data: Array.from(new Uint8Array(arrayBuffer)),
                           contentType: type,
                         };
                         let transportData = JSON.stringify(data);
@@ -80,20 +81,20 @@ export class Filter implements IFilter {
                       })
                       .catch((e) => {
                         /* istanbul ignore next */
-                        this.logger.error(`Failed to process image. ${e}`);
+                        this.logger.error(`(1) Failed to process image. ${e}`);
                         reject(request);
                       });
                   })
                   .catch((e) => {
                     /* istanbul ignore next */
-                    this.logger.error(`Failed to process image. ${e}`);
+                    this.logger.error(`(2) Failed to process image. ${e}`);
                     reject(request);
                   });
               })
               .catch((e) => {
                 /* istanbul ignore next */
                 reject(request);
-                this.logger.error(`Failed to process image. ${e}`);
+                this.logger.error(`(3) Failed to process image. ${e}`);
               });
           }
         }

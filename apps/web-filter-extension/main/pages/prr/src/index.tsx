@@ -1,9 +1,10 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 
 import {Main} from '@src/Main';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("prr"));
+root.render(
   <React.StrictMode>
     <React.Suspense fallback="Loading...">
       <div>
@@ -11,5 +12,4 @@ ReactDOM.render(
       </div>
     </React.Suspense>
   </React.StrictMode>,
-  document.getElementById('prr'),
 );

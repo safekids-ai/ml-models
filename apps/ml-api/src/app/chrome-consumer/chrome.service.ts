@@ -107,16 +107,18 @@ export class ChromeService {
     const userObj: User = await this.userService.findOneById(userId);
     urls.accessLimited = userObj.accessLimited;
 
-    const subscription = await this.subscriptionService.findOneByAccountId(accountId);
-    if (!subscription) {
-      urls.subscription = false;
-      if (!account.notifyExpiredExtension) {
-        this.notifiyExtenionExpiredStatus(account);
-        await this.accountService.update(accountId, {notifyExpiredExtension: true});
-      }
-    } else {
-      urls.subscription = true;
-    }
+    //Disable since we don't require subscription anymore
+    // const subscription = await this.subscriptionService.findOneByAccountId(accountId);
+    // if (!subscription) {
+    //   urls.subscription = false;
+    //   if (!account.notifyExpiredExtension) {
+    //     this.notifiyExtenionExpiredStatus(account);
+    //     await this.accountService.update(accountId, {notifyExpiredExtension: true});
+    //   }
+    // } else {
+    //   urls.subscription = true;
+    // }
+    urls.subscription = true;
 
     const events = await this.kidRequestService.findAllByUserDeviceId(userDeviceLinkId, 10);
     urls.informUrls = events?.INFORM;

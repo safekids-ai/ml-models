@@ -1,5 +1,5 @@
-import 'antd/lib/select/style/index.css';
-import 'antd/lib/slider/style/index.css';
+import 'antd/es/slider/style';
+import 'antd/es/select/style';
 
 import {Input} from 'antd';
 import Select from 'antd/lib/select';

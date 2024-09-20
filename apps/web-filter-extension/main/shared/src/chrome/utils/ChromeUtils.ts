@@ -17,7 +17,7 @@ export class ChromeUtils {
   };
 
   prrPageUrl = (blockPRRModel?: any) => {
-    const url = 'chrome-extension://' + chrome.runtime.id + '/src/pages/ui-prr/index.html';
+    const url = 'chrome-extension://' + chrome.runtime.id + '/pages/prr/index.html';
     if (blockPRRModel) {
       let prrUrl = `${url}?ai=${blockPRRModel.ai}&status=${blockPRRModel.status}&category=${blockPRRModel.category.toUpperCase()}&level=${
         blockPRRModel.level

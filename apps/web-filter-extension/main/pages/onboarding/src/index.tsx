@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
 
 import 'antd/es/slider/style';
 import GetStartedContainer from '@src/GetStartedContainer';
@@ -7,11 +7,11 @@ import GetStartedContainer from '@src/GetStartedContainer';
 //refreshOnUpdate('pages/ui-onboarding');
 
 /* istanbul ignore next */
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("onboarding") as HTMLElement);
+root.render(
   <React.StrictMode>
     <React.Suspense fallback="Loading...">
       <GetStartedContainer/>
     </React.Suspense>
-  </React.StrictMode>,
-  document.getElementById('onboarding'),
+  </React.StrictMode>
 );

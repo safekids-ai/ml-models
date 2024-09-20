@@ -166,33 +166,55 @@ export const PlanSelector = ({nextStep, isOnBoarding = false, onRefresh}: Props)
   const updateActivePlan = useCallback(
     async (plan: Plan, activePlanId: string) => {
       setSelectedPlanId(plan.id);
-      if (!activePaymentMethod && plan.planType !== 'FREE') {
-        setSelectedPlanId(plan.id);
-        setPaymentMethodModal(true);
-      } else {
-        !activePlanId
-          ? postRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
-            .then(() => {
-              setActivePlanId(plan.id);
-              setSelectedPlanId('');
-              onRefresh?.();
-            })
-            .catch(() => {
-              showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
-            })
-          : putRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
-            .then(async () => {
-              // wait for fetch updated plan
-              await new Promise((resolve) => setTimeout(resolve, 2000));
-              setActivePlanId(plan.id);
-              setSelectedPlanId('');
+      !activePlanId
+        ? postRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+          .then(() => {
+            setActivePlanId(plan.id);
+            setSelectedPlanId('');
+            onRefresh?.();
+          })
+          .catch(() => {
+            showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
+          })
+        : putRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+          .then(async () => {
+            // wait for fetch updated plan
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            setActivePlanId(plan.id);
+            setSelectedPlanId('');
 
-              onRefresh?.();
-            })
-            .catch(() => {
-              showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
-            });
-      }
+            onRefresh?.();
+          })
+          .catch(() => {
+            showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
+          });
+      // if (!activePaymentMethod && plan.planType !== 'FREE') {
+      //   setSelectedPlanId(plan.id);
+      //   setPaymentMethodModal(true);
+      // } else {
+      //   !activePlanId
+      //     ? postRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+      //       .then(() => {
+      //         setActivePlanId(plan.id);
+      //         setSelectedPlanId('');
+      //         onRefresh?.();
+      //       })
+      //       .catch(() => {
+      //         showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
+      //       })
+      //     : putRequest<{}, any[]>(`${UPDATE_USER_PLAN}/${plan.id}${promoCode ? `?promotioncode=${promoCode}` : ''}`, {})
+      //       .then(async () => {
+      //         // wait for fetch updated plan
+      //         await new Promise((resolve) => setTimeout(resolve, 2000));
+      //         setActivePlanId(plan.id);
+      //         setSelectedPlanId('');
+      //
+      //         onRefresh?.();
+      //       })
+      //       .catch(() => {
+      //         showNotification({type: 'error', message: 'Failed to apply the selected plan.'});
+      //       });
+      // }
     },
     [activePaymentMethod, activePlanId, selectedPlanId, promoCode]
   );
@@ -202,7 +224,8 @@ export const PlanSelector = ({nextStep, isOnBoarding = false, onRefresh}: Props)
   ) : (
     <Root $isOnBoarding>
       <Title $isOnBoarding={isOnBoarding}>Plan</Title>
-      <p>Our software is completely free. But please support us financially so we can continue to add state-of-art features.</p>
+      <p>Our software is completely free. But please support us financially so we can continue to add state-of-art
+        features.</p>
       {/*<p>Your first 7 days are free, but in order to continue, you must choose a plan and provide your credit card*/}
       {/*  number.</p>*/}
       {isOnBoarding && (

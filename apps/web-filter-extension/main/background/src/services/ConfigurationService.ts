@@ -100,7 +100,7 @@ export class ConfigurationServiceImpl implements ConfigurationService {
       } else {
         const localSubscriptionStatus: boolean = await this.storageManager.get('subscriptionStatus');
         this.logger.log(`Local Subscription Status: ${localSubscriptionStatus}`);
-        if (localSubscriptionStatus === false) {
+        if (!localSubscriptionStatus) {
           await this.storageManager.set({subscriptionStatus: true});
           await background.init();
         }

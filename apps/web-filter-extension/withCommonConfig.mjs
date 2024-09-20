@@ -42,6 +42,7 @@ export function withCommonConfig() {
     define: {
       'import.meta.env.WATCHDOG_EXTENSION_ID': JSON.stringify(WATCHDOG_EXTENSION_ID),
       'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL),
+      'import.meta.env.API_URL': JSON.stringify(API_URL),
       'import.meta.env.ZVELO_API': JSON.stringify(ZVELO_API),
       'import.meta.env.ZVELO_API_KEY': JSON.stringify(ZVELO_API_KEY),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')

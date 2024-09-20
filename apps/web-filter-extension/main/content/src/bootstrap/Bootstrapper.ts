@@ -81,7 +81,6 @@ export class ContentBootstrapper implements Bootstrapper {
     const domFilter = domFilterFactory.getDOMFilter(window.location.host);
     // Initialize DOM watcher
     this.domWatcher = new DOMWatcher(document, window.location.host, this.logger, this.store, imageFilter, textFilter, domFilter, contentFilterUtils);
-
     //chrome.runtime.sendMessage({ type: EventType.CHECK_HOST }, this.enableWatcher);
     this.enableWatcher();
     this.logger.debug(`DOM Watcher is initialized...`);

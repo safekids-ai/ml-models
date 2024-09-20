@@ -68,7 +68,7 @@ export class ChromeTabHelper {
     };
 
     private getPRRBlockPage(): string {
-        return 'chrome-extension://' + chrome.runtime.id + '/src/pages/ui-prr/index.html';
+        return 'chrome-extension://' + chrome.runtime.id + '/pages/prr/index.html';
     }
     create(url: string) {
         let counter = 0;
