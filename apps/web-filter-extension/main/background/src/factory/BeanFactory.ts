@@ -6,17 +6,17 @@ import {FetchApiService, RESTService} from '@shared/rest/RestService';
 import {MLModel} from '@shared/types/MLModel.type';
 import {MLModels} from '@shared/types/MLModels';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {ZveloConfig} from '@shared/zvelo/domain/zvelo.config';
+import {WebCategoryConfig} from '@shared/web-category/domain/web-category.config';
 import {
-  LocalZveloCategoriesService
-} from '@shared/zvelo/service/impl/LocalZveloCategoriesService';
+  LocalWebCategoryCategoriesService
+} from '@shared/web-category/service/impl/LocalWebCategoryCategoriesService';
 import {
-  RESTZveloCategoriesService
-} from '@shared/zvelo/service/impl/RESTZveloCategoriesService';
+  RESTWebCategoryService
+} from '@shared/web-category/service/impl/RESTWebCategoryService';
 import {
-  ZveloUrlCategoriesService
-} from '@shared/zvelo/service/impl/ZveloUrlCategoriesService';
-import {UrlCategoryService} from '@shared/zvelo/service/UrlCategoryService';
+  WebUrlCategoriesService
+} from '@shared/web-category/service/impl/WebUrlCategoriesService';
+import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
 import {FilterManager} from '../filter/ContentFilterManager';
 import {MLPrrMonitor} from '../prr/monitor/MLPrrMonitor';
@@ -75,8 +75,8 @@ import {PrrReports} from "@shared/prr/PrrReports";
  */
 export class BeanFactory {
   private readonly LRU_CACHE_MAX = 200;
-  private readonly zveloApiUrl = import.meta.env.ZVELO_API;
-  private readonly zveloApiKey = import.meta.env.ZVELO_API_KEY;
+  private readonly webCategoryApiUrl = import.meta.env.WEB_CATEGORY_API;
+  private readonly webCategoryApiKey = import.meta.env.WEB_CATEGORY_API_KEY;
   private readonly beanMap = new Map<BeanNames, Beans>();
 
   // List of dependencies
@@ -111,10 +111,10 @@ export class BeanFactory {
     this.beanMap.set(BeanNames.ONBOARDING_SERVICE, this.onBoardingService);
 
     const lruCache = new LRUCache<string, number[]>(this.LRU_CACHE_MAX);
-    const localUrlCategoryService = new LocalZveloCategoriesService(this.logger);
-    const restZveloCategoriesService = new RESTZveloCategoriesService(lruCache, this.logger);
+    const localUrlCategoryService = new LocalWebCategoryCategoriesService(this.logger);
+    const restZveloCategoriesService = new RESTWebCategoryService(lruCache, this.logger);
 
-    this.urlCategoryService = new ZveloUrlCategoriesService(localUrlCategoryService, restZveloCategoriesService);
+    this.urlCategoryService = new WebUrlCategoriesService(localUrlCategoryService, restZveloCategoriesService);
     this.beanMap.set(BeanNames.URL_CATEGORY_SERVICE, this.urlCategoryService);
   }
 
@@ -181,11 +181,11 @@ export class BeanFactory {
     const contentFilterUtils = new ContentFilterUtil(this.store, this.logger);
     this.beanMap.set(BeanNames.CONTENT_FILTER_UTILS, contentFilterUtils);
 
-    const zveloConfig: ZveloConfig = {
-      url: this.zveloApiUrl != null ? this.zveloApiUrl : '',
-      key: this.zveloApiKey != null ? this.zveloApiKey : '',
+    const webCategoryConfig: WebCategoryConfig = {
+      url: this.webCategoryApiUrl != null ? this.webCategoryApiUrl : '',
+      key: this.webCategoryApiKey != null ? this.webCategoryApiKey : '',
     };
-    await this.urlCategoryService.initialize(zveloConfig);
+    await this.urlCategoryService.initialize(webCategoryConfig);
   };
 
   getBean = (name: BeanNames): Beans => {

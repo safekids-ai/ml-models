@@ -5,7 +5,7 @@ import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import {FilterInitializer} from './FilterInitializer';
 import {BeanFactory, BeanNames} from '../factory/BeanFactory';
 import {mock} from 'ts-mockito';
-import {ZveloUrlCategoriesService} from '@shared/zvelo/service/impl/ZveloUrlCategoriesService';
+import {ZveloUrlCategoriesService} from '@shared/web-category/service/impl/ZveloUrlCategoriesService';
 import {ContentFilterUtil} from '@shared/utils/content-filter/ContentFilterUtil';
 
 describe('FilterInitializer test', () => {

@@ -1,15 +1,10 @@
 import {Inject, Injectable, NotFoundException} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
 import {LoggingService} from "../logger/logging.service";
-import {WebContentScraper, WebMeta} from "@safekids-ai/web-categorize";
-import {WebCategoryType, WebCategorizer} from "@safekids-ai/web-categorize";
+import {WebCategoryType, WebMeta, WEB_CATEGORY_TYPES, WebCategoryProviderType} from "@safekids-ai/web-category-types";
+import {WebCategorizer, WebContentScraper} from "@safekids-ai/web-category";
 import {WebCategory} from "./entities/web-category-entity";
-import {
-  WEB_CATEGORY_TYPES,
-  WebCategoryProviderType
-} from "../../../../../libs/web-categorize/src/lib/web-category-types";
 import {WEBCATEGORY_REPOSITORY, WEBTIME_REPOSITORY} from "../constants";
-import {WebTime} from "../web-time/entities/web-time.entity";
 
 @Injectable()
 export class WebCategoryService {

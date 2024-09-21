@@ -17,8 +17,8 @@ export const WATCHDOG_EXTENSION_ID = "oakeaedpheedicjddocfgpkpjlaocfhf";
 const APP_ENV = process.env.APP_ENV || 'production'
 let API_URL = process.env.API_URL
 let PUBLIC_URL = process.env.PUBLIC_URL
-let ZVELO_API = process.env.ZVELO_API
-let ZVELO_API_KEY = process.env.ZVELO_API_KEY
+let WEB_CATEGORY_API = process.env.WEB_CATEGORY_API
+let WEB_CATEGORY_API_KEY = process.env.WEB_CATEGORY_API_KEY
 
 const appEnvProd = APP_ENV === 'production';
 const appEnvDev = !appEnvProd;
@@ -43,8 +43,8 @@ export function withCommonConfig() {
       'import.meta.env.WATCHDOG_EXTENSION_ID': JSON.stringify(WATCHDOG_EXTENSION_ID),
       'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL),
       'import.meta.env.API_URL': JSON.stringify(API_URL),
-      'import.meta.env.ZVELO_API': JSON.stringify(ZVELO_API),
-      'import.meta.env.ZVELO_API_KEY': JSON.stringify(ZVELO_API_KEY),
+      'import.meta.env.WEB_CATEGORY_API': JSON.stringify(WEB_CATEGORY_API),
+      'import.meta.env.WEB_CATEGORY_API_KEY': JSON.stringify(WEB_CATEGORY_API_KEY),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
     },
     plugins: [

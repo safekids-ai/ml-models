@@ -5,7 +5,6 @@ import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
 import {ConfigService} from "@nestjs/config";
 import apiLogger from "abstract-logging";
 import axios from "axios";
-import {HostURLCategorizer, WebCategoryResult, UriUtils} from "@safekids-ai/web-categorize";
 import * as path from 'path';
 import * as os from 'os';
 import {ModelConfig} from "../config/model";
@@ -17,7 +16,6 @@ export class MlService implements OnModuleInit {
   visionModel: VisionNode = null;
   nlp_onnx_path: string;
   vision_onnx_path: string;
-  webCategorizer: HostURLCategorizer;
 
   constructor(private readonly log: LoggingService, private readonly configService: ConfigService) {
     if (!log) {
@@ -58,14 +56,6 @@ export class MlService implements OnModuleInit {
     });
     const imageBuffer = Buffer.from(response.data);
     return await this.classifyImage(imageBuffer);
-  }
-
-  classifyWebsite(url: string): WebCategoryResult[] {
-    return this.webCategorizer.getCategory(url)
-  }
-
-  validateURI(uri: string): boolean {
-    return UriUtils.isValidUri(uri)
   }
 
   async onModuleInit(): Promise<void> {

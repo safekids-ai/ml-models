@@ -18,7 +18,7 @@ import {MLModel} from '@shared/types/MLModel.type';
 import {InformEventHandler} from '../event/handler/InformEventHandler';
 import {ChromeCommonUtils} from '@shared/chrome/utils/ChromeCommonUtils';
 import {ChromeAlarmUtil} from '@shared/chrome/alarm/ChromeAlarmUtil';
-import {UrlCategoryService} from '@shared/zvelo/service/UrlCategoryService';
+import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {ContentFilterUtil} from '@shared/utils/content-filter/ContentFilterUtil';
 import {UserService, UserServiceImpl} from '../services/UserService';
 import {TestUtils} from '../../../../test-utils/helpers/TestUtils';

@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
 import {WebCategoryController} from "./web-category-controller";
 import {WebCategoryService} from "./web-category.services";
-import {WebCategorizer, WebCategoryFactory} from "@safekids-ai/web-categorize";
+import {WebCategorizer, WebCategoryFactory} from "@safekids-ai/web-category";
 import {ConfigService} from "@nestjs/config";
 import {LoggingService} from "../logger/logging.service";
 import {AiConfig} from "../config/ai-api";

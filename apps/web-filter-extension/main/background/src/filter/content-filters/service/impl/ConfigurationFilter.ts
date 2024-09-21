@@ -2,7 +2,7 @@ import {ChromeCommonUtils} from '@shared/chrome/utils/ChromeCommonUtils';
 import {ContentResult} from '@shared/types/ContentResult';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {UrlCategoryService} from '@shared/zvelo/service/UrlCategoryService';
+import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {ContentFilter} from '../ContentFilter';
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {UrlStatus} from '@shared/types/UrlStatus';

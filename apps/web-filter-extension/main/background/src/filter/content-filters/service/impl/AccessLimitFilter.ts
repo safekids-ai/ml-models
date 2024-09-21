@@ -5,7 +5,7 @@ import {ContentResult} from '@shared/types/ContentResult';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {UrlCategoryService} from '@shared/zvelo/service/UrlCategoryService';
+import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {ContentFilterChain} from '../../../ContentFilterChain';
 import {ContentFilter} from '../ContentFilter';
 import {Logger} from '@shared/logging/ConsoleLogger';

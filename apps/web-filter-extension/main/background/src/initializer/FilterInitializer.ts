@@ -2,7 +2,7 @@ import {UserService} from '../services/UserService';
 import {ChromeStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {UrlCategoryService} from '@shared/zvelo/service/UrlCategoryService';
+import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {BeanFactory, BeanNames} from '../factory/BeanFactory';
 import {ContentFilter} from '../filter/content-filters/service/ContentFilter';
 import {AccessLimitFilter} from '../filter/content-filters/service/impl/AccessLimitFilter';
