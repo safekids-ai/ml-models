@@ -1,7 +1,7 @@
 import {ConfigurationFilter} from './ConfigurationFilter';
-import {ZveloUrlCategoriesService} from '@shared/web-category/service/impl/ZveloUrlCategoriesService';
-import {LocalZveloCategoriesService} from '@shared/web-category/service/impl/LocalZveloCategoriesService';
-import {RESTZveloCategoriesService} from '@shared/web-category/service/impl/RESTZveloCategoriesService';
+import {WebCategoryUrlCategoriesService} from '@shared/web-category/service/impl/WebCategoryUrlCategoriesService';
+import {LocalWebCategoryCategoriesService} from '@shared/web-category/service/impl/LocalWebCategoryCategoriesService';
+import {RESTWebCategoryCategoriesService} from '@shared/web-category/service/impl/RESTWebCategoryCategoriesService';
 import {LRUCache} from '@shared/cache/LRUCache';
 import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {ConsoleLogger} from '@shared/logging/ConsoleLogger';
@@ -38,9 +38,9 @@ describe('Configuration filter service test', () => {
     },
   ];
   beforeEach(async () => {
-    const localService = new LocalZveloCategoriesService(logger);
-    const restService = new RESTZveloCategoriesService(new LRUCache<string, number[]>(200), logger);
-    urlCategoryService = new ZveloUrlCategoriesService(localService, restService);
+    const localService = new LocalWebCategoryCategoriesService(logger);
+    const restService = new RESTWebCategoryCategoriesService(new LRUCache<string, number[]>(200), logger);
+    urlCategoryService = new WebCategoryUrlCategoriesService(localService, restService);
   });
 
   describe('Execute filter', () => {

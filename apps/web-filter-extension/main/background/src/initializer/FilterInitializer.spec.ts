@@ -5,11 +5,11 @@ import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import {FilterInitializer} from './FilterInitializer';
 import {BeanFactory, BeanNames} from '../factory/BeanFactory';
 import {mock} from 'ts-mockito';
-import {ZveloUrlCategoriesService} from '@shared/web-category/service/impl/ZveloUrlCategoriesService';
+import {WebCategoryUrlCategoriesService} from '@shared/web-category/service/impl/WebCategoryUrlCategoriesService';
 import {ContentFilterUtil} from '@shared/utils/content-filter/ContentFilterUtil';
 
 describe('FilterInitializer test', () => {
-  const urlCategoryService = mock(ZveloUrlCategoriesService);
+  const urlCategoryService = mock(WebCategoryUrlCategoriesService);
   const contentFilterUtils: ContentFilterUtil = mock(ContentFilterUtil);
   const userService: UserService = mock(UserServiceImpl);
 

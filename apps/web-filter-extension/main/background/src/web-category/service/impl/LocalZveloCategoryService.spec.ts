@@ -1,4 +1,4 @@
-import {LocalZveloCategoriesService} from '@shared/web-category/service/impl/LocalZveloCategoriesService';
+import {LocalWebCategoryCategoriesService} from '@shared/web-category/service/impl/LocalWebCategoryCategoriesService';
 import {ConsoleLogger} from '@shared/logging/ConsoleLogger';
 import {jest} from '@jest/globals';
 import {UrlStatus} from '@shared/types/UrlStatus';
@@ -23,11 +23,11 @@ function mockFetchCallFailure() {
   }) as jest.Mock;
 }
 
-describe('Local Zvelo category service test', () => {
-  let service: LocalZveloCategoriesService;
+describe('Local WebCategory category service test', () => {
+  let service: LocalWebCategoryCategoriesService;
   const logger = new ConsoleLogger();
   beforeEach(async () => {
-    service = new LocalZveloCategoriesService(logger);
+    service = new LocalWebCategoryCategoriesService(logger);
   });
 
   beforeAll(() => {
@@ -47,8 +47,8 @@ describe('Local Zvelo category service test', () => {
       await service.initialize();
 
       //then
-      expect(service.getZveloCategories()).toBeTruthy();
-      expect(service.getZveloCategories()).toBe(categories);
+      expect(service.getWebCategoryCategories()).toBeTruthy();
+      expect(service.getWebCategoryCategories()).toBe(categories);
     });
 
     it('Should retry to initialize webCategory categories from file', async () => {
@@ -172,7 +172,7 @@ describe('Local Zvelo category service test', () => {
       const categories = {'facebook.com': codes};
 
       //mock dependencies
-      jest.spyOn(service, 'getZveloCategories').mockReturnValue(categories);
+      jest.spyOn(service, 'getWebCategoryCategories').mockReturnValue(categories);
 
       //when
       const result = await service.getHostCategoryCodes(host);
@@ -187,7 +187,7 @@ describe('Local Zvelo category service test', () => {
       const host = 'newHost.com';
 
       //mock dependencies
-      jest.spyOn(service, 'getZveloCategories').mockReturnValue([]);
+      jest.spyOn(service, 'getWebCategoryCategories').mockReturnValue([]);
 
       //when
       const result = await service.getHostCategoryCodes(host);

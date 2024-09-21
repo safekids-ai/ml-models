@@ -112,9 +112,9 @@ export class BeanFactory {
 
     const lruCache = new LRUCache<string, number[]>(this.LRU_CACHE_MAX);
     const localUrlCategoryService = new LocalWebCategoryCategoriesService(this.logger);
-    const restZveloCategoriesService = new RESTWebCategoryService(lruCache, this.logger);
+    const restWebCategoryCategoriesService = new RESTWebCategoryService(lruCache, this.logger);
 
-    this.urlCategoryService = new WebUrlCategoriesService(localUrlCategoryService, restZveloCategoriesService);
+    this.urlCategoryService = new WebUrlCategoriesService(localUrlCategoryService, restWebCategoryCategoriesService);
     this.beanMap.set(BeanNames.URL_CATEGORY_SERVICE, this.urlCategoryService);
   }
 

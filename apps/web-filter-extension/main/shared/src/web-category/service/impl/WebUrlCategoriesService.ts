@@ -12,24 +12,24 @@ export class WebUrlCategoriesService implements UrlCategoryService {
     };
 
     constructor(
-        private readonly localZveloCategoriesService: LocalWebCategoryCategoriesService,
-        private readonly restZveloCategoriesService: RESTWebCategoryService
+        private readonly localWebCategoryCategoriesService: LocalWebCategoryCategoriesService,
+        private readonly restWebCategoryCategoriesService: RESTWebCategoryService
     ) {}
 
     async initialize(webCategoryConfig: WebCategoryConfig): Promise<void> {
         this.webCategoryConfig = webCategoryConfig;
-        await this.localZveloCategoriesService.initialize();
+        await this.localWebCategoryCategoriesService.initialize();
     }
 
     async getHostCategoryCodes(url: string): Promise<number[]> {
-        const categoryCodes = await this.localZveloCategoriesService.getHostCategoryCodes(url);
+        const categoryCodes = await this.localWebCategoryCategoriesService.getHostCategoryCodes(url);
         if (categoryCodes.length !== 0) {
             return categoryCodes;
         }
-        return await this.restZveloCategoriesService.getHostCategoryCodes(url, this.webCategoryConfig);
+        return await this.restWebCategoryCategoriesService.getHostCategoryCodes(url, this.webCategoryConfig);
     }
 
     getCategoryByCodes(host: string, codes: number[]): ContentResult {
-        return this.localZveloCategoriesService.getCategoryByCodes(host, codes);
+        return this.localWebCategoryCategoriesService.getCategoryByCodes(host, codes);
     }
 }

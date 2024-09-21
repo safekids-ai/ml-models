@@ -13,15 +13,15 @@ export class LocalWebCategoryCategoriesService {
   }
 
   async initialize(): Promise<void> {
-    this.webCategoryCategories = await this.initializeZveloCategories();
+    this.webCategoryCategories = await this.initializeWebCategoryCategories();
   }
 
-  private readonly initializeZveloCategories = async (): Promise<Map<string, number[]>> => {
+  private readonly initializeWebCategoryCategories = async (): Promise<Map<string, number[]>> => {
     const WEB_CATEGORY_PATH = chrome.runtime.getURL('/data/data.json');
     try {
       const response = await fetch(WEB_CATEGORY_PATH);
       if (response.ok) {
-        this.log.info('Zvelo categories initialized successfully...');
+        this.log.info('WebCategory categories initialized successfully...');
         const result =  await response.json();
 
         const startTime = new Date();
@@ -34,17 +34,17 @@ export class LocalWebCategoryCategoriesService {
         this.log.info(`Loaded categories in ${timeDiff} milliseconds...`);
         return urlCategoryMap;
       } else {
-        this.log.error(`An error occurred while initializing Zvelo Categories: ,${JSON.stringify(response)}`);
+        this.log.error(`An error occurred while initializing WebCategory Categories: ,${JSON.stringify(response)}`);
         // try until it is connected
         this.log.debug('Loading webCategory categories again...');
-        setTimeout(this.initializeZveloCategories, 5000);
+        setTimeout(this.initializeWebCategoryCategories, 5000);
       }
     } catch (error) {
       this.log.error('Error in catch in initialize load categories', error)
       this.log.error(`Error occurred in catch in initialize All Categories: ,${JSON.stringify(error)}`);
       // try until it is connected
       this.log.debug('Loading webCategory categories again...');
-      setTimeout(this.initializeZveloCategories, 5000);
+      setTimeout(this.initializeWebCategoryCategories, 5000);
     }
   };
 
@@ -99,7 +99,7 @@ export class LocalWebCategoryCategoriesService {
     };
   };
 
-  getZveloCategories() {
+  getWebCategoryCategories() {
     return this.webCategoryCategories;
   }
 }

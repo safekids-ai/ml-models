@@ -1,23 +1,23 @@
-import {LocalZveloCategoriesService} from '@shared/web-category/service/impl/LocalZveloCategoriesService';
+import {LocalWebCategoryCategoriesService} from '@shared/web-category/service/impl/LocalWebCategoryCategoriesService';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {ConsoleLogger} from '@shared/logging/ConsoleLogger';
-import {ZveloUrlCategoriesService} from '@shared/web-category/service/impl/ZveloUrlCategoriesService';
+import {WebCategoryUrlCategoriesService} from '@shared/web-category/service/impl/WebCategoryUrlCategoriesService';
 import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {LRUCache} from '@shared/cache/LRUCache';
-import {RESTZveloCategoriesService} from '@shared/web-category/service/impl/RESTZveloCategoriesService';
+import {RESTWebCategoryCategoriesService} from '@shared/web-category/service/impl/RESTWebCategoryCategoriesService';
 import {ContentResult} from '@shared/types/ContentResult';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {jest} from '@jest/globals';
 import {UrlStatus} from '@shared/types/UrlStatus';
 
-describe('Zvelo url category service test', () => {
+describe('WebCategory url category service test', () => {
   let service: UrlCategoryService;
   const logger = new ConsoleLogger();
   const lruCache = new LRUCache<string, number[]>(200);
-  const localUrlCategoryService = new LocalZveloCategoriesService(logger);
-  const restZveloCategoriesService = new RESTZveloCategoriesService(lruCache, logger);
+  const localUrlCategoryService = new LocalWebCategoryCategoriesService(logger);
+  const restWebCategoryCategoriesService = new RESTWebCategoryCategoriesService(lruCache, logger);
   beforeEach(async () => {
-    service = new ZveloUrlCategoriesService(localUrlCategoryService, restZveloCategoriesService);
+    service = new WebCategoryUrlCategoriesService(localUrlCategoryService, restWebCategoryCategoriesService);
   });
 
   describe('Initialize webCategory categories from local webCategory service', () => {
@@ -69,7 +69,7 @@ describe('Zvelo url category service test', () => {
 
       //mock dependencies
       jest.spyOn(localUrlCategoryService, 'getHostCategoryCodes').mockResolvedValueOnce([]);
-      jest.spyOn(restZveloCategoriesService, 'getHostCategoryCodes').mockResolvedValueOnce(codes);
+      jest.spyOn(restWebCategoryCategoriesService, 'getHostCategoryCodes').mockResolvedValueOnce(codes);
 
       //when
       const result = await service.getHostCategoryCodes(host);
@@ -79,7 +79,7 @@ describe('Zvelo url category service test', () => {
       // expect(result).toEqual(codes)
       expect(localUrlCategoryService.getHostCategoryCodes).toBeCalledTimes(1);
       expect(localUrlCategoryService.getHostCategoryCodes).toBeCalledWith(host);
-      expect(restZveloCategoriesService.getHostCategoryCodes).toBeCalledTimes(1);
+      expect(restWebCategoryCategoriesService.getHostCategoryCodes).toBeCalledTimes(1);
     });
 
     it('Should not call remote service if codes available in local file', async () => {
@@ -89,7 +89,7 @@ describe('Zvelo url category service test', () => {
 
       //mock dependencies
       jest.spyOn(localUrlCategoryService, 'getHostCategoryCodes').mockResolvedValueOnce([10094]);
-      const restZveloCategoriesServiceSpy = jest.spyOn(restZveloCategoriesService, 'getHostCategoryCodes');
+      const restWebCategoryCategoriesServiceSpy = jest.spyOn(restWebCategoryCategoriesService, 'getHostCategoryCodes');
 
       //when
       const result = await service.getHostCategoryCodes(host);
@@ -99,7 +99,7 @@ describe('Zvelo url category service test', () => {
       // expect(result).toEqual(codes)
       expect(localUrlCategoryService.getHostCategoryCodes).toBeCalledTimes(1);
       expect(localUrlCategoryService.getHostCategoryCodes).toBeCalledWith(host);
-      expect(restZveloCategoriesServiceSpy).toBeCalledTimes(0);
+      expect(restWebCategoryCategoriesServiceSpy).toBeCalledTimes(0);
     });
   });
 });

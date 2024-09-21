@@ -16,7 +16,7 @@ export class RESTWebCategoryService {
     async getHostCategoryCodes(url: string, webCategoryConfig: WebCategoryConfig): Promise<number[]> {
         const cacheCategoryCodes = this.cache.get(url);
         if (cacheCategoryCodes == null) {
-            const newCategory = await this.getZveloCategoryByUrl(url, webCategoryConfig);
+            const newCategory = await this.getWebCategoryCategoryByUrl(url, webCategoryConfig);
             this.log.info(`new category after fetching url, ${JSON.stringify(newCategory)}`);
             if (newCategory != null && newCategory.codes) {
                 this.cache.set(url, newCategory.codes);
@@ -28,13 +28,13 @@ export class RESTWebCategoryService {
         return cacheCategoryCodes;
     }
 
-    readonly getZveloCategoryByUrl = async (url: string, webCategoryConfig: WebCategoryConfig): Promise<WebCategoryApiResponse | undefined> => {
+    readonly getWebCategoryCategoryByUrl = async (url: string, webCategoryConfig: WebCategoryConfig): Promise<WebCategoryApiResponse | undefined> => {
         try {
             return await this.lookupUrl(url, webCategoryConfig);
         } catch (error) {
             // longer than 5 seconds
             if (this.hasName(error) && error.name === 'AbortError') {
-                this.log.error('Zvelo Api Failed to Response back in 5s:');
+                this.log.error('WebCategory Api Failed to Response back in 5s:');
                 return undefined;
             } else {
                 this.log.error(`Some error occurred in webCategory Api: error, ${error}`);
