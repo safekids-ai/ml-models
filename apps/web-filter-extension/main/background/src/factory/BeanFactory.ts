@@ -68,6 +68,7 @@ import {
   InformEventHandler
 } from '../event/handler/InformEventHandler';
 import {PrrReports} from "@shared/prr/PrrReports";
+import {GET_CATEGORY_FROM_HOST} from "../services/endpoints";
 
 /**
  * This class initializes dependencies
@@ -75,8 +76,6 @@ import {PrrReports} from "@shared/prr/PrrReports";
  */
 export class BeanFactory {
   private readonly LRU_CACHE_MAX = 200;
-  private readonly webCategoryApiUrl = import.meta.env.WEB_CATEGORY_API;
-  private readonly webCategoryApiKey = import.meta.env.WEB_CATEGORY_API_KEY;
   private readonly beanMap = new Map<BeanNames, Beans>();
 
   // List of dependencies
@@ -112,7 +111,7 @@ export class BeanFactory {
 
     const lruCache = new LRUCache<string, number[]>(this.LRU_CACHE_MAX);
     const localUrlCategoryService = new LocalWebCategoryCategoriesService(this.logger);
-    const restWebCategoryCategoriesService = new RESTWebCategoryService(lruCache, this.logger);
+    const restWebCategoryCategoriesService = new RESTWebCategoryService(lruCache, this.restService, this.logger);
 
     this.urlCategoryService = new WebUrlCategoriesService(localUrlCategoryService, restWebCategoryCategoriesService);
     this.beanMap.set(BeanNames.URL_CATEGORY_SERVICE, this.urlCategoryService);
@@ -182,8 +181,7 @@ export class BeanFactory {
     this.beanMap.set(BeanNames.CONTENT_FILTER_UTILS, contentFilterUtils);
 
     const webCategoryConfig: WebCategoryConfig = {
-      url: this.webCategoryApiUrl != null ? this.webCategoryApiUrl : '',
-      key: this.webCategoryApiKey != null ? this.webCategoryApiKey : '',
+      url: GET_CATEGORY_FROM_HOST
     };
     await this.urlCategoryService.initialize(webCategoryConfig);
   };

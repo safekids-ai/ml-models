@@ -2,7 +2,7 @@ import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 
 export type RESTService = {
   doGet: (path: string) => Promise<any>;
-  doPost: (path: string, payload?: any) => Promise<any>;
+  doPost: (path: string, payload?: any, options?: any) => Promise<any>;
   doPut: (path: string, payload?: any) => Promise<any>;
   doPatch: (path: string, payload?: any) => Promise<any>;
   doDelete: (path: string, payload?: any) => Promise<any>;
@@ -41,7 +41,7 @@ export class FetchApiService implements RESTService {
     }
   }
 
-  async makeRequest(path, method, payload = null) {
+  async makeRequest(path, method, payload = null, _options?: any) {
     const headers = {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.jwtToken}`,
@@ -51,6 +51,7 @@ export class FetchApiService implements RESTService {
       method,
       headers,
       body: payload ? JSON.stringify(payload) : null,
+      ..._options
     };
 
     if (method === 'GET' || method === 'HEAD') {
@@ -74,12 +75,12 @@ export class FetchApiService implements RESTService {
     return this.makeRequest(path, 'GET');
   }
 
-  async doPost(path, payload): Promise<any> {
+  async doPost(path, payload, options?: any): Promise<any> {
     if (!this.jwtToken) {
       await this.initJWTToken();
     }
 
-    return this.makeRequest(path, 'POST', payload);
+    return this.makeRequest(path, 'POST', payload, options);
   }
 
   async doPut(path, payload): Promise<any> {

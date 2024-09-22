@@ -21,8 +21,8 @@ export class WebUrlCategoriesService implements UrlCategoryService {
         await this.localWebCategoryCategoriesService.initialize();
     }
 
-    async getHostCategoryCodes(url: string): Promise<number[]> {
-        const categoryCodes = await this.localWebCategoryCategoriesService.getHostCategoryCodes(url);
+    async getHostCategoryCodes(host: string, url: string): Promise<number[]> {
+        const categoryCodes = await this.localWebCategoryCategoriesService.getHostCategoryCodes(host);
         if (categoryCodes.length !== 0) {
             return categoryCodes;
         }

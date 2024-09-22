@@ -22,3 +22,6 @@ export const PRR_CRISIS_AI_INFORM = `${PREFIX}/consumer/inform-ai-crisis`;
 
 export const PRR_INFORM_EXT_DISABLE = `${PREFIX}/consumer/ext-uninstall-inform`;
 export const PRR_CANCEL_EXT_DISABLE = `${PREFIX}/consumer/ext-uninstall-cancel`;
+
+export const GET_CATEGORY_FROM_HOST = `v2/web-category`;
+

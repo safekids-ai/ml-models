@@ -11,7 +11,7 @@ export type UrlCategoryService = {
      * @param  url
      * @returns number[]
      */
-    getHostCategoryCodes: (url: string) => Promise<number[]>;
+    getHostCategoryCodes: (host: string, url: string) => Promise<number[]>;
 
     /** Get category from code list
      * @param  host

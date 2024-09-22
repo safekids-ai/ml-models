@@ -1,4 +1,4 @@
 export type WebCategoryConfig = {
-    url: string;
-    key: string;
+    url?: string;
+    key?: string;
 };

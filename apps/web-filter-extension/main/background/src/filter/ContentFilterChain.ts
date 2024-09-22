@@ -12,9 +12,9 @@ export class ContentFilterChain {
   constructor(private readonly filters: ContentFilter[]) {
   }
 
-  execute = async (url: string): Promise<ContentResult> => {
-    const lowerHost = url.trim().toLowerCase();
-    if (lowerHost.startsWith('chrome-extension:') || lowerHost.startsWith('chrome:')) {
+  execute = async (_url: string): Promise<ContentResult> => {
+    const url = _url.trim().toLowerCase();
+    if (url.startsWith('chrome-extension:') || url.startsWith('chrome:')) {
       return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, url);
     } else {
       let result: ContentResult = {
@@ -22,11 +22,11 @@ export class ContentFilterChain {
         category: PrrCategory.UN_KNOWN,
         level: PrrLevel.ZERO,
       };
-      const host = HttpUtils.refineHost(lowerHost);
+      const host = HttpUtils.refineHost(url);
 
       //executing all filters
       for (let i = 0; i < this.filters.length; i++) {
-        result = await this.filters[i].filter(host);
+        result = await this.filters[i].filter(host, url);
 
         if (result.status === UrlStatus.BLOCK) {
           return result;

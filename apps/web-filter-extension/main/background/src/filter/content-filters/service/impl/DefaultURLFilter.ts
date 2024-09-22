@@ -8,7 +8,7 @@ import {DefaultUrls} from "@shared/utils/content-filter/DefaultUrls"
 import {UrlStatus} from '@shared/types/UrlStatus';
 
 export class DefaultURLFilter implements ContentFilter {
-  async filter(lowerHost: string): Promise<ContentResult> {
+  async filter(lowerHost: string, url: string): Promise<ContentResult> {
     if (Object.keys(DefaultUrls.getSearchEngineUrls()).some((h: string) => !(lowerHost.match(h) == null))) {
       return ContentFilterChain.buildContentResult(UrlStatus.BLOCK, PrrCategory.INAPPROPRIATE_FOR_MINORS, PrrLevel.ONE, lowerHost);
     }

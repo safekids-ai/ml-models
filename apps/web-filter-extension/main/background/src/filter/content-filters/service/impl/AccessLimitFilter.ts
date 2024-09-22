@@ -11,6 +11,7 @@ import {ContentFilter} from '../ContentFilter';
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
 import {UrlStatus} from '@shared/types/UrlStatus';
+import {HttpUtils} from "@shared/utils/HttpUtils";
 
 export class AccessLimitFilter implements ContentFilter {
   constructor(
@@ -22,21 +23,26 @@ export class AccessLimitFilter implements ContentFilter {
   ) {
   }
 
-  async filter(lowerHost: string): Promise<ContentResult> {
+  async filter(host: string, url: string): Promise<ContentResult> {
     const userAccessLimited: boolean = await ChromeCommonUtils.readLocalStorage('accessLimited');
     this.logger.log(`AccessLimitFilter -> userAccessLimited: ${userAccessLimited}`);
+
+    if (HttpUtils.isLocalHostOrLocalIP(url)) {
+      return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, host);
+    }
+
     if (userAccessLimited) {
       const {nonPermissibleUrls} = this.store.getState().settings;
-      if (nonPermissibleUrls.includes(lowerHost)) {
-        return ContentFilterChain.buildContentResult(UrlStatus.BLOCK, PrrCategory.ACCESS_LIMITED, PrrLevel.ZERO, lowerHost, PrrCategory.ACCESS_LIMITED);
+      if (nonPermissibleUrls.includes(host)) {
+        return ContentFilterChain.buildContentResult(UrlStatus.BLOCK, PrrCategory.ACCESS_LIMITED, PrrLevel.ZERO, host, PrrCategory.ACCESS_LIMITED);
       }
 
-      const categoryCodes = await this.urlCategoryService.getHostCategoryCodes(lowerHost);
+      const categoryCodes = await this.urlCategoryService.getHostCategoryCodes(host, url);
       const isEdu = ChromeCommonUtils.inEducationalCodes(categoryCodes);
-      const isAllowed = this.contentFilterUtil.isHostAllowed(lowerHost);
+      const isAllowed = this.contentFilterUtil.isHostAllowed(host);
 
       if (isEdu || isAllowed) {
-        return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, lowerHost);
+        return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, host);
       } else {
         try {
           const accessLimitedAt: Date = await ChromeCommonUtils.getAccessLimitedTime();
@@ -51,7 +57,7 @@ export class AccessLimitFilter implements ContentFilter {
               UrlStatus.BLOCK,
               PrrCategory.ACCESS_LIMITED,
               PrrLevel.ZERO,
-              lowerHost,
+              host,
               PrrCategory.ACCESS_LIMITED
             );
           }
@@ -60,6 +66,6 @@ export class AccessLimitFilter implements ContentFilter {
         }
       }
     }
-    return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, lowerHost);
+    return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, host);
   }
 }

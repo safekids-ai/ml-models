@@ -22,7 +22,7 @@ export class WebMetaDto {
   ogUrl?: string;
 }
 
-export class CreateWebCategoryDto {
+export class GetWebCategoryDto {
   @IsNotEmpty()
   url: string;
 
