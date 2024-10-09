@@ -15,7 +15,7 @@ type FilterRequestQueueValue = Array<
 >;
 
 export type IObjectFilter = {
-  analyze: (element: HTMLElement, srcAttribute?: boolean) => void;
+  analyze: (element: HTMLElement | HTMLElement[], srcAttribute?: boolean) => void;
   setSettings: (settings: FilterSettingsType) => void;
 };
 export type FilterSettingsType = {

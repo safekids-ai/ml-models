@@ -15,8 +15,8 @@ import {WebCategoryService} from "./web-category.services";
 import {GoogleOauthGuard} from "../auth/guard/google-oauth.guard";
 import {CacheInterceptor, CacheTTL} from "@nestjs/cache-manager";
 import {LoggingService} from "../logger/logging.service";
-import {WebCategory} from "./entities/web-category-entity";
-import {GetWebCategoryDto} from "./dto/web-category.dto";
+import {WebCategoryUrl} from "apps/ml-api/src/app/web-category/entities/web-category-url-entity";
+import {GetWebCategoryDto, WebCategoryUrlResponseDto} from "apps/ml-api/src/app/web-category/dto/web-category-url.dto";
 import {ConfigService} from "@nestjs/config";
 import {WebCategoryType, WebMeta} from "@safekids-ai/web-category-types";
 import {ChromeExtensionOpenAuthGuard} from "../auth/guard/chrome-extension-auth-open.guard";
@@ -48,12 +48,14 @@ export class WebCategoryController {
 
   @ApiOperation({summary: 'Gets the category of a website.'})
   @ApiBearerAuth()
-  @UseInterceptors(CustomCacheInterceptor)
-  @CacheTTL(60000)
+  //@UseInterceptors(CustomCacheInterceptor)
+  //@CacheTTL(1)
   @UseGuards(ChromeExtensionOpenAuthGuard)
   @Post('v2/web-category')
-  async getCategory(@Body() categoryDto: GetWebCategoryDto): Promise<WebCategoryType[]> {
-    return await this.webCategoryService.categorize(categoryDto.url, categoryDto.meta)
+  async getCategory(@Body() categoryDto: GetWebCategoryDto): Promise<WebCategoryUrlResponseDto> {
+    const resp = await this.webCategoryService.categorize(categoryDto.url, categoryDto.meta)
+    this.log.debug("GetCategoryAPI:", categoryDto, resp);
+    return resp;
   }
 
   @ApiBearerAuth()

@@ -1,7 +1,8 @@
 import {ExceptionFilter, Catch, HttpException, ArgumentsHost, HttpStatus, Logger} from '@nestjs/common';
 import {CommonUtils} from './utils/commonUtils';
-import {BaseError} from 'sequelize';
+import {BaseError, ValidationError} from 'sequelize';
 import {QueryException} from './error/common.exception';
+import {Sequelize} from "sequelize-typescript";
 
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
@@ -26,7 +27,11 @@ export class ErrorFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const status = error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
-    this.logger.error(this.getErrorInfoObject(error, status, ctx), error.stack);
+
+    // Log the error message and stack trace
+    this.logger.error("Original Error:", error);
+    this.logger.error(this.getErrorInfoObject(error, status, ctx), error.stack, 'ErrorFilter');
+
     const responseObject = this.buildResponseObject(error);
     if (status === 500) {
       error.code = 500;
@@ -45,9 +50,6 @@ export class ErrorFilter implements ExceptionFilter {
     return typeof errorMessage === 'string' ? JSON.stringify(errorMessage) : errorMessage;
   }
 
-  /**
-   * Get error object, in case of 5XX, get additional fields like request url, body etc
-   */
   getErrorInfoObject(error, status: number, hostContext): string {
     const errorObject: ErrorInfoObject = {
       message: error.code || status + ' - ' + error.message,
@@ -60,7 +62,6 @@ export class ErrorFilter implements ExceptionFilter {
         errorObject.body = CommonUtils.removeUnsafeFieldsFromObject(request.body);
         errorObject.params = request.params;
         errorObject.userId = request.user?._id;
-
       }
     }
     return JSON.stringify(errorObject, null, 4);

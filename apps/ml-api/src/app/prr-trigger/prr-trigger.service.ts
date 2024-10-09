@@ -3,7 +3,7 @@ import { CreatePrrTriggerDto } from './dto/create-prr-trigger.dto';
 import { UpdatePrrTriggerDto } from './dto/update-prr-trigger.dto';
 import { PRRTRIGGER_REPOSITORY } from '../constants';
 import { QueryException } from '../error/common.exception';
-import { defaultPrrTriggers } from './prr-triggers,default';
+import { defaultPrrTriggers } from './prr-triggers.default';
 import { PrrTrigger } from './entities/prr-trigger.entity';
 
 @Injectable()

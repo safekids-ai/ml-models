@@ -222,9 +222,7 @@ export class ActivityServiceImpl implements ActivityService {
       webUsage.isOffTime = offTimes.isOffTime;
       webUsage.activityTime = new Date();
       const url = endPoint ?? SAVE_ACTIVITY;
-
       const result = await this.restService.doPost(url, webUsage);
-
       this.logger.log(`result: SAVE_ACTIVITY -> ${JSON.stringify(result)}`);
     } catch (error) {
       /* istanbul ignore next */
@@ -253,7 +251,7 @@ export class ActivityServiceImpl implements ActivityService {
   callSaveActivity = async (webUsageDto: WebUsageTypeDto): Promise<void> => {
     this.saveActivity(webUsageDto).catch((e) => {
       /* istanbul ignore next */
-      this.logger.error(`Failed to save activity. ${e}`);
+      this.logger.error(`Failed to save activity. ${e}`, e);
     });
   };
 

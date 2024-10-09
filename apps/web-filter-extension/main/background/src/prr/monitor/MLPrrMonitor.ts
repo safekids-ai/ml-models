@@ -39,6 +39,10 @@ export class MLPrrMonitor implements PrrMonitor {
       prrReport.images?.push(receivedReport.data);
     } else if (receivedReport.model === MLModels.NLP) {
       prrReport.texts?.push(receivedReport.data);
+    } else if (receivedReport.model === MLModels.WEB_CATEGORY) {
+      this.logger.log(`Report for Prr is: ${JSON.stringify(receivedReport)}`);
+      await this.pprTriggerService.trigger(receivedReport);
+      return;
     }
 
     const {images, texts} = prrReport;

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+import '../index.css';
 import {Language} from '@shared/types/Language.type';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {defaultMessages} from '@shared/types/PrrMessage';
@@ -36,20 +37,34 @@ const PrrLevel2CountDown = ({language, category, siteName, level, prr2LimitExcee
 
   return (
     <>
-      <IconsSection>
+      <section className="section icons">
         <ContainerLevel3>
-                    <span className="icon-countDown" id="icon-countDown">
-                        {' '}
-                      <span className="text-count-down">{countdown}</span>{' '}
-                    </span>
+          <span className="icon-countDown" id="icon-countDown">
+              {' '}
+            <span className="text-count-down">{countdown}</span>{' '}
+          </span>
         </ContainerLevel3>
-      </IconsSection>
-      <TextSection>
+      </section>
+      {/*<IconsSection>*/}
+      {/*  <ContainerLevel3>*/}
+      {/*              <span className="icon-countDown" id="icon-countDown">*/}
+      {/*                  {' '}*/}
+      {/*                <span className="text-count-down">{countdown}</span>{' '}*/}
+      {/*              </span>*/}
+      {/*  </ContainerLevel3>*/}
+      {/*</IconsSection>*/}
+
+      <section className="section text">
         <div className="prr2-screenB-text">
           <span>{screenText}</span>
         </div>
-      </TextSection>
-      <ButtonsSection>
+      </section>
+      {/*<TextSection>*/}
+      {/*  <div className="prr2-screenB-text">*/}
+      {/*    <span>{screenText}</span>*/}
+      {/*  </div>*/}
+      {/*</TextSection>*/}
+      <section className="section buttons">
         <div lang={language.id} className="prr2-buttons">
           <a
             id="take-me-back"
@@ -61,7 +76,20 @@ const PrrLevel2CountDown = ({language, category, siteName, level, prr2LimitExcee
             {takeMeBack}
           </a>
         </div>
-      </ButtonsSection>
+      </section>
+      {/*<ButtonsSection>*/}
+      {/*  <div lang={language.id} className="prr2-buttons">*/}
+      {/*    <a*/}
+      {/*      id="take-me-back"*/}
+      {/*      onClick={() => closeTab(true, screenText, category, siteName, prr2LimitExceeded, level, [], [{*/}
+      {/*        query: '',*/}
+      {/*        responses: []*/}
+      {/*      }])}*/}
+      {/*      className={'btn btn-dark' + (countdown !== 1 ? ' disable-button' : '')}>*/}
+      {/*      {takeMeBack}*/}
+      {/*    </a>*/}
+      {/*    </div>*/}
+      {/*  </ButtonsSection>*/}
     </>
   );
 };

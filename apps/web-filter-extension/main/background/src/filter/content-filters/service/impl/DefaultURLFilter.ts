@@ -6,9 +6,10 @@ import {ContentFilter} from '../ContentFilter';
 import {DefaultUrls} from "@shared/utils/content-filter/DefaultUrls"
 
 import {UrlStatus} from '@shared/types/UrlStatus';
+import {WebMeta} from "@safekids-ai/web-category-types";
 
 export class DefaultURLFilter implements ContentFilter {
-  async filter(lowerHost: string, url: string): Promise<ContentResult> {
+  async filter(lowerHost: string, url: string, meta?: WebMeta): Promise<ContentResult> {
     if (Object.keys(DefaultUrls.getSearchEngineUrls()).some((h: string) => !(lowerHost.match(h) == null))) {
       return ContentFilterChain.buildContentResult(UrlStatus.BLOCK, PrrCategory.INAPPROPRIATE_FOR_MINORS, PrrLevel.ONE, lowerHost);
     }

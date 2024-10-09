@@ -1,6 +1,16 @@
 import {Logger} from '@shared/logging/ConsoleLogger';
 
 export class HttpUtils {
+  static getBaseUrl(url: string): string {
+    try {
+      const parsedUrl = new URL(url);
+      return `${parsedUrl.protocol}//${parsedUrl.hostname}`;
+    } catch (error) {
+      console.error("Invalid URL provided:", error);
+      return "";
+    }
+  }
+
   static getDomain = (url: string) => {
     let hostName = url;
     try {
@@ -118,15 +128,10 @@ export class HttpUtils {
   static isLocalHostOrLocalIP(url: string): boolean {
     try {
       const parsedUrl = new URL(url);
-      console.log("*********")
-      console.log("*********")
-      console.log("****" + parsedUrl)
       const hostname = parsedUrl.hostname;
-      console.log("****" + hostname)
 
       // Check for localhost
       if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        console.log("**** TRUE");
         return true;
       }
 

@@ -1,6 +1,6 @@
 import Groq from 'groq-sdk';
 import {WebCategorizer} from "../web-categorizer";
-import {WebCategoryType, WebCategoryProviderType} from "@safekids-ai/web-category-types";
+import {WebCategoryType, WebCategoryProviderType, WebCategoryResponse} from "@safekids-ai/web-category-types";
 import * as Logger from 'abstract-logging';
 
 class GroqWebCategorizer extends WebCategorizer {
@@ -15,7 +15,7 @@ class GroqWebCategorizer extends WebCategorizer {
     return WebCategoryProviderType.GROQ;
   }
 
-  async categorize(websiteText: string, url?: string): Promise<WebCategoryType[]> {
+  async categorize(websiteText: string, url?: string): Promise<WebCategoryResponse> {
     try {
       const response = await this.api.chat.completions.create({
         model: this.model,
@@ -43,7 +43,11 @@ class GroqWebCategorizer extends WebCategorizer {
       const matchedCategories = this.getCategories().filter(cat =>
         categoriesFromResponse?.includes(cat.description)
       );
-      return matchedCategories
+
+      return {
+        types: matchedCategories,
+        probability: 0.8
+      } as WebCategoryResponse;
     } catch (error) {
       throw new Error(`Unable to categorize title ${websiteText} due to ${error}`)
     }

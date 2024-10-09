@@ -5,6 +5,7 @@ import {UrlStatus} from '@shared/types/UrlStatus';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {WebCategoryCodes} from '@shared/web-category/utils/WebCategoryCodes';
+import {IWebCategory} from "@shared/web-category/types/web-category.types";
 
 export class LocalWebCategoryCategoriesService {
   private webCategoryCategories: Map<string, number[]>;
@@ -18,12 +19,12 @@ export class LocalWebCategoryCategoriesService {
 
   private readonly initializeWebCategoryCategories = async (): Promise<Map<string, number[]>> => {
     const WEB_CATEGORY_PATH = chrome.runtime.getURL('/data/data.json');
+
     try {
       const response = await fetch(WEB_CATEGORY_PATH);
       if (response.ok) {
         this.log.info('WebCategory categories initialized successfully...');
-        const result =  await response.json();
-
+        const result = await response.json();
         const startTime = new Date();
         const urlCategoryMap = new Map<string, number[]>();
         for (const item of result) {
@@ -48,13 +49,40 @@ export class LocalWebCategoryCategoriesService {
     }
   };
 
-  getHostCategoryCodes = async (host: string): Promise<number[]> => {
+  getHostCategoryCodes = async (host: string): Promise<IWebCategory> => {
     const localCategories = this.webCategoryCategories.get(host);
     this.log.info(`Found the following Local Category Cache for ${host} -> ${localCategories}`)
-    return localCategories || [];
+    if (localCategories) {
+      return {
+        aiGenerated: false,
+        verified: true,
+        categories: localCategories
+      }
+    }
+    return null;
   };
 
-  getCategoryByCodes = (host: string, codes: number[]): ContentResult => {
+  getCategoryByCodes = (host: string, result: IWebCategory): ContentResult => {
+    if (!result || !result.categories) {
+      return {
+        host,
+        status: UrlStatus.ALLOW,
+        category: PrrCategory.UN_KNOWN,
+        level: PrrLevel.ZERO,
+        key: PrrCategory.UN_KNOWN,
+        name: PrrCategory.UN_KNOWN,
+      };
+    }
+
+    let {aiGenerated, verified, probability} = result;
+    let codes = result.categories;
+
+    const metaFields = {
+      aiGenerated,
+      verified,
+      probability
+    }
+
     if (ChromeCommonUtils.inEducationalCodes(codes)) {
       return {
         host,
@@ -63,6 +91,7 @@ export class LocalWebCategoryCategoriesService {
         level: PrrLevel.ZERO,
         key: PrrCategory.EDUCATIONAL,
         name: PrrCategory.EDUCATIONAL,
+        ...metaFields
       };
     }
 
@@ -87,6 +116,7 @@ export class LocalWebCategoryCategoriesService {
         level: blockedCategory.level,
         key: blockedCategory.key?.toUpperCase(),
         name: blockedCategory.name,
+        ...metaFields
       };
     }
     return {
@@ -96,6 +126,7 @@ export class LocalWebCategoryCategoriesService {
       level: categories.length > 0 ? categories[0].level : PrrLevel.ONE,
       key: categories.length > 0 && categories[0].key ? categories[0].key.toUpperCase() : '',
       name: categories.length > 0 && categories[0].name ? categories[0].name.toUpperCase() : '',
+      ...metaFields
     };
   };
 

@@ -1,7 +1,11 @@
-
 type WebCategoryType = {
   id: number,
   description: string
+}
+
+type WebCategoryResponse = {
+  probability: number,
+  types: WebCategoryType[]
 }
 
 enum WebCategoryProviderType {
@@ -29,10 +33,8 @@ enum WebCategoryTypesEnum {
   INAPPROPRIATE_FOR_MINORS = 17000,
   PHISHING_FRAUD = 18000,
   TERRORISM = 19000,
-  EXTREME_POLITICAL_VIEWS = 20000,
   CYBER_BULLYING = 21000,
-  UNREGULATED_CHAT_ROOMS = 22000,
-  UNVERIFIED_MEDICAL_INFORMATION = 23000,
+  EDUCATION = 22000,
   NONE_OF_ABOVE = 100000
 }
 
@@ -56,10 +58,8 @@ const WEB_CATEGORY_TYPES: WebCategoryType[] = [
   {"id": WebCategoryTypesEnum.INAPPROPRIATE_FOR_MINORS, "description": "Inappropriate for Minors"},
   {"id": WebCategoryTypesEnum.PHISHING_FRAUD, "description": "Phishing/Fraud"},
   {"id": WebCategoryTypesEnum.TERRORISM, "description": "Terrorism"},
-  {"id": WebCategoryTypesEnum.EXTREME_POLITICAL_VIEWS, "description": "Extreme Political Views"},
   {"id": WebCategoryTypesEnum.CYBER_BULLYING, "description": "Cyberbullying"},
-  {"id": WebCategoryTypesEnum.UNREGULATED_CHAT_ROOMS, "description": "Unregulated Chatrooms"},
-  {"id": WebCategoryTypesEnum.UNVERIFIED_MEDICAL_INFORMATION, "description": "Unverified Medical Information"},
+  {"id": WebCategoryTypesEnum.EDUCATION, "description": "Education Related Content"},
   {"id": WebCategoryTypesEnum.NONE_OF_ABOVE, "description": "Other/None of the Above"},
 ];
 
@@ -70,6 +70,39 @@ type WebMeta = {
   ogType?: string;
   ogDescription?: string;
   ogUrl?: string;
+  rating?: string
 }
 
-export {WebCategoryType, WebCategoryProviderType, WebCategoryTypesEnum, WEB_CATEGORY_TYPES, WebMeta}
+class WebCategoryHelper {
+  static getWebCategory(id: WebCategoryTypesEnum): WebCategoryType | undefined {
+    return WEB_CATEGORY_TYPES.find(category => category.id === id);
+  }
+}
+
+class HTMLMetaClassifier {
+  static isAdultMeta(meta: WebMeta) {
+    const adultCodes = ["rta-5042-1996-1400-1577-rta", "adult"]
+    return adultCodes.includes(meta?.rating?.toLowerCase());
+  }
+
+  static isWeaponsMeta(meta: WebMeta) {
+    const isAdult = this.isAdultMeta(meta);
+    if (isAdult) {
+      const titleDescriptions = (meta?.title ?? '') + (meta?.description ?? '');
+      const isWeapons = titleDescriptions?.toLowerCase().includes("gun");
+      return isWeapons;
+    }
+    return false;
+  }
+}
+
+export {
+  WebCategoryType,
+  WebCategoryResponse,
+  WebCategoryProviderType,
+  WebCategoryTypesEnum,
+  WEB_CATEGORY_TYPES,
+  WebMeta,
+  HTMLMetaClassifier,
+  WebCategoryHelper
+}

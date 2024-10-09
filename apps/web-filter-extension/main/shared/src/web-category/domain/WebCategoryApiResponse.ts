@@ -1,3 +1,8 @@
+import {WebCategoryType} from "@safekids-ai/web-category-types";
+
 export type WebCategoryApiResponse = {
-    codes: number[];
+  aiGenerated: boolean;
+  verified: boolean,
+  probability: number,
+  categories: number[];
 };

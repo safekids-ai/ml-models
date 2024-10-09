@@ -63,6 +63,7 @@ export class BackgroundMessageListener implements MessageListener {
 
       case EventType.ANALYZE_IMAGE:
       case EventType.ANALYZE_TEXT:
+      case EventType.ANALYZE_META:
         return await this.predictionRequestHandler.onRequest(message.value, sender);
       case EventType.PAGE_VISIT:
         this.activityService.savePageVisit(message);

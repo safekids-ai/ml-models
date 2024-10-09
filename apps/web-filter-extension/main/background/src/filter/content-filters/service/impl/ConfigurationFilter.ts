@@ -10,6 +10,7 @@ import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 import {HttpUtils} from "@shared/utils/HttpUtils";
 import {ContentFilterChain} from "../../../ContentFilterChain";
 import {PrrLevel} from "@shared/types/PrrLevel";
+import {WebMeta} from "@safekids-ai/web-category-types";
 
 export class ConfigurationFilter implements ContentFilter {
   constructor(
@@ -20,13 +21,16 @@ export class ConfigurationFilter implements ContentFilter {
   ) {
   }
 
-  async filter(host: string, url: string): Promise<ContentResult> {
+  async filter(host: string, url: string, meta?: WebMeta): Promise<ContentResult> {
     if (HttpUtils.isLocalHostOrLocalIP(url)) {
       return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, host);
     }
 
-    const categoryCodes = await this.urlCategoryService.getHostCategoryCodes(host, url);
-    const result = await this.urlCategoryService.getCategoryByCodes(host, categoryCodes);
+    const categoryResult = await this.urlCategoryService.getHostCategoryCodes(host, url, meta);
+
+    this.logger.log(`configuration filter url category result host: ${host}, url:${url} meta: ${meta}`, categoryResult);
+
+    const result = this.urlCategoryService.getCategoryByCodes(host, categoryResult);
 
     this.logger.log(`configuration filter result: ${JSON.stringify(result)}`);
 
@@ -34,7 +38,7 @@ export class ConfigurationFilter implements ContentFilter {
 
     const {permissibleUrls, nonPermissibleUrls, filteredCategories} = this.store.getState().settings;
 
-    if (ChromeCommonUtils.inEducationalCodes(categoryCodes)) {
+    if (ChromeCommonUtils.inEducationalCodes(categoryResult)) {
       result.status = UrlStatus.ALLOW;
     }
 

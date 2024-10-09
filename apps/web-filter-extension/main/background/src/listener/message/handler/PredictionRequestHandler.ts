@@ -7,7 +7,11 @@ import {MLModels} from '@shared/types/MLModels';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {PrrTrigger} from '@shared/types/message_types';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import moment from 'moment';
+import {HTMLMetaClassifier, WebMeta} from "@safekids-ai/web-category-types";
+import {FilterManager} from "src/filter/ContentFilterManager";
+import {ContentResult} from "@shared/types/ContentResult";
+import {PrrLevel} from "@shared/types/PrrLevel";
+import {UrlStatus} from "@shared/types/UrlStatus";
 
 interface RequestHandler {
   onRequest(request: PredictionRequest, sender: chrome.runtime.MessageSender): Promise<PredictionResponse>;
@@ -19,7 +23,8 @@ export class PredictionRequestHandler implements RequestHandler {
     private readonly store: ReduxStorage,
     private readonly queue: QueueWrapper,
     private readonly prrMonitor: PrrMonitor,
-    private readonly chromeUtils: ChromeUtils
+    private readonly chromeUtils: ChromeUtils,
+    private readonly filterManager: FilterManager,
   ) {
   }
 
@@ -40,11 +45,32 @@ export class PredictionRequestHandler implements RequestHandler {
     }
 
     const {nlpEnabled, mlEnabled} = this.store.getState().settings;
-    if ((request.type === 'ANALYZE_TEXT' && !nlpEnabled) || (request.type === 'ANALYZE_IMAGE' && !mlEnabled)) {
-      return response;
+
+    switch (request.type) {
+      case "ANALYZE_TEXT":
+        if (!nlpEnabled) {
+          return response;
+        }
+        break;
+      case "ANALYZE_IMAGE":
+        if (!mlEnabled) {
+          return response;
+        }
+        break;
+      case "ANALYZE_META":
+        return this.handleMetaRequest(request, sender);
     }
     const tabIdUrl = this.chromeUtils.buildTabIdUrl(sender.tab);
-    const modelType = requestType === 'NLP' ? MLModels.NLP : MLModels.VISION;
+
+    let modelType = undefined;
+
+    if (requestType == "NLP") {
+      modelType = MLModels.NLP;
+    } else if (requestType === "ML") {
+      modelType = MLModels.VISION;
+    } else {
+      throw new Error(`Unsupported requestType found ${requestType}`)
+    }
 
     try {
       //send request to predict
@@ -117,4 +143,44 @@ export class PredictionRequestHandler implements RequestHandler {
     response = new PredictionResponse(result, request.url);
     return response;
   };
+
+  handleMetaRequest = async (request: PredictionRequest, sender: chrome.runtime.MessageSender): Promise<PredictionResponse> => {
+    const tabId = sender.tab?.id;
+    const {url, requestType, host, data} = request;
+    const meta: WebMeta = JSON.parse(data)
+    let result: ContentResult = undefined
+    let newReport: PrrReport = {
+      prrTriggerId: PrrTrigger.AI_WEB_CATEGORY,
+      model: MLModels.WEB_CATEGORY,
+      url: host,
+      fullWebUrl: sender.tab?.url,
+      data: url,
+      tabId: tabId,
+      prrTriggered: true,
+      status: 'block',
+      isAiGenerated: true
+    }
+
+    try {
+      result = await this.filterManager.filterUrl(url, meta);
+      if (result.status != UrlStatus.ALLOW) {
+        newReport.level = result.level;
+        newReport.category = result.category
+        this.prrMonitor.report(newReport);
+        return new PredictionResponse(result, request.url);
+      }
+    } catch (error) {
+      this.logger.error(`Unable to get category for url:${url} and meta:${meta}`, error);
+      const isAdult = HTMLMetaClassifier.isAdultMeta(meta);
+      const isWeapons = HTMLMetaClassifier.isWeaponsMeta(meta);
+
+      if (isAdult) {
+        newReport.level = isWeapons ? PrrLevel.THREE : PrrLevel.ONE;
+        newReport.category = isWeapons ? PrrCategory.WEAPONS : PrrCategory.INAPPROPRIATE_FOR_MINORS;
+        this.prrMonitor.report(newReport);
+        return new PredictionResponse(null, request.url);
+      }
+    }
+    return new PredictionResponse(null, request.url);
+  }
 }

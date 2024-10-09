@@ -7,7 +7,7 @@ import {Language} from '@shared/types/Language.type';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {defaultMessages} from '@shared/types/PrrMessage';
 import {closeTab} from '@src/Main/common';
-import {MainSection, IconsSection, TextSection, ButtonsSection, ContainerLevel3} from '../main.style';
+import {MainSection, IconsSection, TextSection, ButtonsSection, ContainerLevel3} from '@src/Main/main.style'
 
 type Props = {
   language: Language;
@@ -42,17 +42,28 @@ const LimitAccessScreen = ({language, category, siteName, level}: Props): JSX.El
 
   return (
     <MainSection>
-      <IconsSection>
+      <section className="section icons">
         <ContainerLevel3>
           <span className="icon-pause" id="icon-pause"></span>
         </ContainerLevel3>
-      </IconsSection>
+      </section>
+      {/*<IconsSection>*/}
+      {/*  <ContainerLevel3>*/}
+      {/*    <span className="icon-pause" id="icon-pause"></span>*/}
+      {/*  </ContainerLevel3>*/}
+      {/*</IconsSection>*/}
       <div className={cx({flex: !!permissibleURL.length})}>
-        <TextSection className="flex">
+        <section className="section text">
           <div
             className={cx('it-looks-like-you-are', {'limited-access-width': !!permissibleURL.length})}
             dangerouslySetInnerHTML={{__html: !!permissibleURL.length ? accessLimitedMessage : accessLimitedMessageForEmptyState}}></div>
-        </TextSection>
+        </section>
+        {/*<TextSection className="flex">*/}
+        {/*  <div*/}
+        {/*    className={cx('it-looks-like-you-are', {'limited-access-width': !!permissibleURL.length})}*/}
+        {/*    dangerouslySetInnerHTML={{__html: !!permissibleURL.length ? accessLimitedMessage : accessLimitedMessageForEmptyState}}></div>*/}
+        {/*</TextSection>*/}
+
         {!!permissibleURL.length && (
           <div className="allowed-url-list-container">
             {permissibleURL.map((url, i) => (
@@ -63,14 +74,22 @@ const LimitAccessScreen = ({language, category, siteName, level}: Props): JSX.El
           </div>
         )}
       </div>
-      <ButtonsSection>
+      <section className="section buttons">
         <div lang={language.id} className="prr2-buttons">
           <a id="take-me-back" onClick={() => closeTab(true, accessLimitedMessage, category, siteName)}
              className="btn btn-dark">
             {iUnderstand}
           </a>
         </div>
-      </ButtonsSection>
+      </section>
+      {/*<ButtonsSection>*/}
+      {/*  <div lang={language.id} className="prr2-buttons">*/}
+      {/*    <a id="take-me-back" onClick={() => closeTab(true, accessLimitedMessage, category, siteName)}*/}
+      {/*       className="btn btn-dark">*/}
+      {/*      {iUnderstand}*/}
+      {/*    </a>*/}
+      {/*  </div>*/}
+      {/*</ButtonsSection>*/}
     </MainSection>
   );
 };

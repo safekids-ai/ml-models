@@ -9,6 +9,7 @@ import {PrrReport} from './monitor/PrrMonitor';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {PrrLevel} from '@shared/types/PrrLevel';
 import {PrrStatus} from '@shared/types/PrrStatus';
+import {UrlTabEventHandler} from "src/event/handler/UrlTabEventHandler";
 
 export type TriggerService = {
   trigger: (prrResult: PrrReport) => Promise<void>;

@@ -1389,11 +1389,14 @@ create index user_device_link_id
 create index user_id
     on web_time (user_id);
 
-CREATE TABLE web_category (
+CREATE TABLE web_category_url (
   url VARCHAR(255) NOT NULL,
   meta JSON NOT NULL,
   source VARCHAR(255) NOT NULL,
   category JSON NOT NULL,
+  ai_generated BOOLEAN DEFAULT NULL,
+  verified BOOLEAN DEFAULT NULL,
+  probability FLOAT DEFAULT NULL,
   wrong_category BOOLEAN DEFAULT NULL,
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
@@ -1401,4 +1404,16 @@ CREATE TABLE web_category (
   created_by VARCHAR(45) DEFAULT NULL,
   updated_by VARCHAR(45) DEFAULT NULL,
   PRIMARY KEY (url)
+);
+
+CREATE TABLE web_category_host (
+  host VARCHAR(255) NOT NULL,
+  category JSON NOT NULL,
+  wrong_category BOOLEAN DEFAULT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL,
+  deleted_at DATETIME DEFAULT NULL,
+  created_by VARCHAR(45) DEFAULT NULL,
+  updated_by VARCHAR(45) DEFAULT NULL,
+  PRIMARY KEY (host)
 );

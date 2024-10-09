@@ -12,6 +12,7 @@ import {Logger} from '@shared/logging/ConsoleLogger';
 import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
 import {UrlStatus} from '@shared/types/UrlStatus';
 import {HttpUtils} from "@shared/utils/HttpUtils";
+import {WebMeta} from "@safekids-ai/web-category-types";
 
 export class AccessLimitFilter implements ContentFilter {
   constructor(
@@ -23,7 +24,7 @@ export class AccessLimitFilter implements ContentFilter {
   ) {
   }
 
-  async filter(host: string, url: string): Promise<ContentResult> {
+  async filter(host: string, url: string, meta?: WebMeta): Promise<ContentResult> {
     const userAccessLimited: boolean = await ChromeCommonUtils.readLocalStorage('accessLimited');
     this.logger.log(`AccessLimitFilter -> userAccessLimited: ${userAccessLimited}`);
 
@@ -37,10 +38,10 @@ export class AccessLimitFilter implements ContentFilter {
         return ContentFilterChain.buildContentResult(UrlStatus.BLOCK, PrrCategory.ACCESS_LIMITED, PrrLevel.ZERO, host, PrrCategory.ACCESS_LIMITED);
       }
 
-      const categoryCodes = await this.urlCategoryService.getHostCategoryCodes(host, url);
-      const isEdu = ChromeCommonUtils.inEducationalCodes(categoryCodes);
+      const categoryResult = await this.urlCategoryService.getHostCategoryCodes(host, url, meta);
+      const isEdu = ChromeCommonUtils.inEducationalCodes(categoryResult);
       const isAllowed = this.contentFilterUtil.isHostAllowed(host);
-
+      this.logger.log(`Filter Host: ${host} url:${url} isEdu:${isEdu} isAllowed:${isAllowed}`);
       if (isEdu || isAllowed) {
         return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, host);
       } else {

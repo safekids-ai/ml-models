@@ -6,6 +6,7 @@ export class ThresholdManagerFactory {
   static getManager(category: string, store: ReduxStorage): PrrThresholdManager {
     switch (category.toUpperCase()) {
       case 'PORN':
+      case 'EXPLICIT':
       case 'ADULT_CONTENT':
         return new ExplicitThresholdManager(store, 'PORN');
       case 'WEAPONS':

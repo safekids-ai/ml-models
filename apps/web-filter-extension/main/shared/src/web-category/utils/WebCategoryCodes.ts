@@ -57,30 +57,12 @@ export class WebCategoryCodes {
       status: UrlStatus.BLOCK,
     },
 
-    [WebCategoryTypesEnum.EXTREME_POLITICAL_VIEWS]: {
-      level: PrrLevel.ONE,
-      key: 'inappropriate_for_minors',
-      categoryName: 'Inappropriate for Minors',
-      category: PrrCategory.INAPPROPRIATE_FOR_MINORS,
-      name: 'Extreme Political Views',
-      status: UrlStatus.BLOCK,
-    },
-
     [WebCategoryTypesEnum.CYBER_BULLYING]: {
       level: PrrLevel.ONE,
       key: 'inappropriate_for_minors',
       categoryName: 'Inappropriate for Minors',
       category: PrrCategory.INAPPROPRIATE_FOR_MINORS,
       name: 'Cyberbullying',
-      status: UrlStatus.BLOCK,
-    },
-
-    [WebCategoryTypesEnum.UNREGULATED_CHAT_ROOMS]: {
-      level: PrrLevel.ONE,
-      key: 'social_media_chat',
-      categoryName: 'Social Media and Chat Rooms',
-      category: PrrCategory.SOCIAL_MEDIA_CHAT,
-      name: 'Unregulated Chat Rooms',
       status: UrlStatus.BLOCK,
     },
 

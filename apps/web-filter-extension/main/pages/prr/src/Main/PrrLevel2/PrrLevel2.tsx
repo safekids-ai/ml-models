@@ -30,21 +30,39 @@ const PrrLevel2 = ({language, category, siteName, level, prr2LimitExceeded}: Pro
                             prr2LimitExceeded={prr2LimitExceeded}/>
       ) : (
         <>
-          <IconsSection>
+          <section className="section icons">
             <ContainerLevel3>
               <span className="icon-pause" id="icon-pause"></span>
             </ContainerLevel3>
-          </IconsSection>
-          <TextSection>
+          </section>
+          {/*<IconsSection>*/}
+          {/*  <ContainerLevel3>*/}
+          {/*    <span className="icon-pause" id="icon-pause"></span>*/}
+          {/*  </ContainerLevel3>*/}
+          {/*</IconsSection>*/}
+
+          <section className="section text">
             <div className="it-looks-like-you-are">{prr2Screen1Text1}</div>
-          </TextSection>
-          <ButtonsSection>
+          </section>
+          {/*<TextSection>*/}
+          {/*  <div className="it-looks-like-you-are">{prr2Screen1Text1}</div>*/}
+          {/*</TextSection>*/}
+
+          <section className="section buttons">
             <div className="prr2-buttons">
               <a id="i-am-good" className="btn btn-dark" onClick={showPrrLevel2CountDownScreen}>
                 {prr2Screen1Text2}
               </a>
             </div>
-          </ButtonsSection>
+          </section>
+
+          {/*<ButtonsSection>*/}
+          {/*  <div className="prr2-buttons">*/}
+          {/*    <a id="i-am-good" className="btn btn-dark" onClick={showPrrLevel2CountDownScreen}>*/}
+          {/*      {prr2Screen1Text2}*/}
+          {/*    </a>*/}
+          {/*  </div>*/}
+          {/*</ButtonsSection>*/}
         </>
       )}
     </>

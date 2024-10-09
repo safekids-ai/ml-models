@@ -57,11 +57,10 @@ export class PrrLevelCheckerImpl implements PrrLevelChecker {
     this.localStorage.set({prr1Counter});
 
     this.logger.debug(`Now Prr 1 Counter = [${prr1Counter}] ,firstPRR2TimeLimit=[${firstPRR2TimeLimit}]`);
-
     if (prr1Counter > prr1LimitLocal && (tabPRRModel.level as PrrLevel) != PrrLevel.THREE) {
       tabPRRModel.level = PrrLevel.TWO;
       // check if user triggers second PRR2 before limit time (first PRR 2 + prr2Threshold min)
-      if (prr2Counter == 1 && firstPRR2TimeLimit && new Date() < new Date(firstPRR2TimeLimit)) {
+      if (prr2Counter >= 1 && firstPRR2TimeLimit && new Date() < new Date(firstPRR2TimeLimit)) {
         this.localStorage.set({prr2LimitExceeded: true});
         tabPRRModel.accessLimited = true;
         prr2Counter = 0;

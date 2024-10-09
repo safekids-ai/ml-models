@@ -29,6 +29,16 @@ export const Footer: React.FC = () => {
     );
   }
 
+  function disableAccess(): void {
+    chrome.runtime.sendMessage(
+      {
+        type: 'LIMIT_ACCESS',
+        value: true,
+        category: 'ADULT_SEXUAL_CONTENT'
+      }
+    );
+  }
+
   const deleteExtension = (): void => {
     chrome.runtime.sendMessage(
       {
@@ -117,6 +127,13 @@ export const Footer: React.FC = () => {
       <div>
         <button data-testid="enableAccessButton" value="Enable Access" onClick={() => enableAccess()}>
           Enable Access
+        </button>
+        {' '}
+      </div>
+      <div>
+        <p></p>
+        <button data-testid="disableAccessButton" value="Limit Access" onClick={() => disableAccess()}>
+          Limit Access
         </button>
         {' '}
       </div>

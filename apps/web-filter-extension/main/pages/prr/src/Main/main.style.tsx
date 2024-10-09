@@ -654,7 +654,7 @@ export const ButtonsSection = styled.section`
   }
 
   .btn-dark {
-    color: #fff !important;
+    color: #fff !important;;
     letter-spacing: 1.25px;
     transition: 0.5s;
     background-color: #343a40 !important;

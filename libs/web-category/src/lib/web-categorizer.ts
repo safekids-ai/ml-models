@@ -1,4 +1,9 @@
-import {WebCategoryType, WEB_CATEGORY_TYPES, WebCategoryProviderType} from "@safekids-ai/web-category-types";
+import {
+  WebCategoryType,
+  WEB_CATEGORY_TYPES,
+  WebCategoryProviderType,
+  WebCategoryResponse
+} from "@safekids-ai/web-category-types";
 import * as Logger from 'abstract-logging';
 
 const CATEGORIES = WEB_CATEGORY_TYPES
@@ -21,7 +26,7 @@ abstract class WebCategorizer {
     return CATEGORY_DESCRIPTIONS
   }
 
-  abstract categorize(title: string, url?: string): Promise<WebCategoryType[]>
+  abstract categorize(title: string, url?: string): Promise<WebCategoryResponse>
 }
 
 export {WebCategorizer}

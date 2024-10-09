@@ -12,6 +12,7 @@ import {DOMWatcher} from '@src/dom/DOMWatcher';
 import {ImageFilter} from '@src/filter/ImageFilter';
 import {TextFilter} from '@src/filter/TextFilter';
 import {Bootstrapper} from "@shared/BootstrapperInterface";
+import {MetaFilter} from "@src/filter/MetaFilter";
 
 /**
  * This class contains methods to bootstrap extension service worker
@@ -58,6 +59,7 @@ export class ContentBootstrapper implements Bootstrapper {
     // initialize the Filters
     const imageFilter = new ImageFilter(this.logger);
     const textFilter = new TextFilter(this.logger);
+    const metaFilter = new MetaFilter(this.logger);
 
     // set settings of image filter
     imageFilter.setSettings({
@@ -76,11 +78,29 @@ export class ContentBootstrapper implements Bootstrapper {
       environment,
     });
 
+    // set settings of text filter
+    metaFilter.setSettings({
+      filterEffect,
+      analyzeLimit: 1,
+      processLimit: 1,
+      showClean,
+      environment,
+    });
+
     const contentFilterUtils = new ContentFilterUtil(this.store, this.logger);
     const domFilterFactory = new DOMFilterFactory();
     const domFilter = domFilterFactory.getDOMFilter(window.location.host);
     // Initialize DOM watcher
-    this.domWatcher = new DOMWatcher(document, window.location.host, this.logger, this.store, imageFilter, textFilter, domFilter, contentFilterUtils);
+    this.domWatcher = new DOMWatcher(document,
+      window.location.host,
+      this.logger,
+      this.store,
+      imageFilter,
+      textFilter,
+      metaFilter,
+      domFilter,
+      contentFilterUtils);
+
     //chrome.runtime.sendMessage({ type: EventType.CHECK_HOST }, this.enableWatcher);
     this.enableWatcher();
     this.logger.debug(`DOM Watcher is initialized...`);

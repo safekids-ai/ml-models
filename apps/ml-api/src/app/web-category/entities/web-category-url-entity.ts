@@ -2,21 +2,24 @@ import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from 'se
 import {Optional} from 'sequelize';
 import {WebCategoryType, WebMeta} from "@safekids-ai/web-category-types";
 
-export interface WebCategoryAttributes {
+export interface WebCategoryUrlAttributes {
   url: string;
   meta: WebMeta;
   source: string;
   category: number[];
+  aiGenerated?: boolean,
+  verified?: boolean,
+  probability?: number,
   wrongCategory?: boolean;
   createdBy?: string;
   updatedBy?: string;
 }
 
-export interface WebCategoryCreationAttributes extends Optional<WebCategoryAttributes, 'wrongCategory'> {
+export interface WebCategoryUrlCreationAttributes extends Optional<WebCategoryUrlAttributes, 'wrongCategory'> {
 }
 
-@Table({tableName: 'web_category', paranoid: true})
-export class WebCategory extends Model<WebCategoryAttributes, WebCategoryCreationAttributes> {
+@Table({tableName: 'web_category_url', paranoid: true})
+export class WebCategoryUrl extends Model<WebCategoryUrlAttributes, WebCategoryUrlCreationAttributes> {
 
   @Column({
     type: DataType.STRING,
@@ -65,6 +68,27 @@ export class WebCategory extends Model<WebCategoryAttributes, WebCategoryCreatio
     }
     this.setDataValue('category', value);
   }
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    field: "ai_generated"
+  })
+  aiGenerated?: boolean;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    field: "verified"
+  })
+  verified?: boolean;
+
+  @Column({
+    type: DataType.FLOAT,
+    allowNull: true,
+    field: "probability"
+  })
+  probability?: number;
 
   @Column({
     type: DataType.BOOLEAN,

@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { PrrTriggers } from '../../prr-trigger/prr-triggers,default';
+import { PrrTriggers } from '../../prr-trigger/prr-triggers.default';
 import { Categories } from '../../category/default-categories';
 import { Category } from '../../category/entities/category.entity';
 import { PrrTrigger } from '../../prr-trigger/entities/prr-trigger.entity';

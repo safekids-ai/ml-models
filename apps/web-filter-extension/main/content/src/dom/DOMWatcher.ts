@@ -8,6 +8,7 @@ import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
 import {ImageUtils} from '@shared/utils/ImageUtils';
 import {HttpUtils} from '@shared/utils/HttpUtils';
 import {DOMEventHandler} from '@src/handler/DOMEventHandler';
+import {MetaFilter} from "@src/filter/MetaFilter";
 
 export type IDOMWatcher = {
   watch: (host: string) => void;
@@ -23,6 +24,7 @@ export class DOMWatcher implements IDOMWatcher {
     private store: ReduxStorage,
     private readonly imageFilter: ImageFilter,
     private readonly textFilter: TextFilter,
+    private readonly metaFilter: MetaFilter,
     private readonly domFilter: DOMFilter,
     private readonly contentFilterUtils: ContentFilterUtil
   ) {
@@ -85,6 +87,11 @@ export class DOMWatcher implements IDOMWatcher {
       }
       this.textFilter.analyze(elem);
     }
+
+    // const metaNodes = element.querySelectorAll('meta,title');
+    // const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
+    //
+    // this.metaFilter.analyze(metaElements);
 
     this.register(element);
   }
@@ -157,6 +164,10 @@ export class DOMWatcher implements IDOMWatcher {
       }
       this.textFilter.analyze(elem);
     }
+
+    // const metaNodes = this.document.querySelectorAll('meta,title');
+    // const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
+    // this.metaFilter.analyze(metaElements);
 
     this.register(document);
 

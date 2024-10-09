@@ -4,15 +4,24 @@ import {PrrLevel} from '@shared/types/PrrLevel';
 import {ContentFilter} from './content-filters/service/ContentFilter';
 import {UrlStatus} from '@shared/types/UrlStatus';
 import {HttpUtils} from '@shared/utils/HttpUtils';
+import {WebMeta} from "@safekids-ai/web-category-types";
+import {DefaultURLFilter} from "src/filter/content-filters/service/impl/DefaultURLFilter";
+import {AccessLimitFilter} from "src/filter/content-filters/service/impl/AccessLimitFilter";
+import {ConfigurationFilter} from "src/filter/content-filters/service/impl/ConfigurationFilter";
 
 /**
  *
  */
 export class ContentFilterChain {
+  //filter pass in are:
+  // DefaultURLFilter
+  // AccessLimitFilter
+  // ConfigurationFilter
+
   constructor(private readonly filters: ContentFilter[]) {
   }
 
-  execute = async (_url: string): Promise<ContentResult> => {
+  execute = async (_url: string, meta?: WebMeta): Promise<ContentResult> => {
     const url = _url.trim().toLowerCase();
     if (url.startsWith('chrome-extension:') || url.startsWith('chrome:')) {
       return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, url);
@@ -26,7 +35,7 @@ export class ContentFilterChain {
 
       //executing all filters
       for (let i = 0; i < this.filters.length; i++) {
-        result = await this.filters[i].filter(host, url);
+        result = await this.filters[i].filter(host, url, meta);
 
         if (result.status === UrlStatus.BLOCK) {
           return result;
@@ -41,13 +50,23 @@ export class ContentFilterChain {
     return host.startsWith('www.') ? host.replace('www.', '') : host;
   }
 
-  static buildContentResult(status: UrlStatus, category: PrrCategory, level: PrrLevel, url?: string, key?: string): ContentResult {
+  static buildContentResult(status: UrlStatus,
+                            category: PrrCategory,
+                            level: PrrLevel,
+                            url?: string,
+                            key?: string,
+                            aiGenerated: boolean = false,
+                            verified: boolean = true,
+                            probability: number = 1): ContentResult {
     return {
       status,
       category,
       level,
       host: url,
       key,
+      aiGenerated,
+      verified,
+      probability
     };
   }
 }

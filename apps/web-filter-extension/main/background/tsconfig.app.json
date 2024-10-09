@@ -30,7 +30,8 @@
       "@safekids-ai/nlp-js-types": ["../../../../libs/nlp-js-types/src/index.ts"],
       "@safekids-ai/vision-js-web": ["../../../../libs/vision-js-web/src/index.ts"],
       "@safekids-ai/vision-js-common": ["../../../../libs/vision-js-common/src/index.ts"],
-      "@safekids-ai/vision-js-types": ["../../../../libs/vision-js-types/src/index.ts"]
+      "@safekids-ai/vision-js-types": ["../../../../libs/vision-js-types/src/index.ts"],
+      "@safekids-ai/web-category-types": ["../../../../libs/web-category-types/src/index.ts"]
     }
   },
   "exclude": [

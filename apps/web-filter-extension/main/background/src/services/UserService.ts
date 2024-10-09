@@ -32,7 +32,7 @@ export class UserServiceImpl implements UserService {
     try {
       this.updateLimitAccessLocally(accessLimited);
       this.logger.debug(`Access is limited: ${accessLimited}`);
-      return await this.restService.doPatch(`${LIMIT_ACCESS_URI}`, {accessLimited, category});
+      await this.restService.doPatch(`${LIMIT_ACCESS_URI}`, {accessLimited, category});
     } catch (error) {
       throw new Error(`An error occurred while updating limit access ${error}`);
     }

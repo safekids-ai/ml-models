@@ -27,6 +27,7 @@ import {UserService} from '../services/UserService';
 import {InformEventHandler} from '../event/handler/InformEventHandler';
 import {Bootstrapper} from "@shared/BootstrapperInterface";
 import {Tabs} from "jest-chrome/types/jest-chrome";
+import {UrlCategoryService} from "@shared/web-category/service/UrlCategoryService";
 
 /**
  * //TODO: have to cleanup dependencies and use of them 09/02/2022
@@ -143,7 +144,7 @@ export class BackgroundBootstrapper implements Bootstrapper {
     const categoryService = this.beanFactory.getBean(BeanNames.CATEGORY_SERVICE) as CategoryService;
     const userService = this.beanFactory.getBean(BeanNames.USER_SERVICE) as UserService;
     const prrMonitor = this.beanFactory.getBean(BeanNames.ML_PRR_OBSERVER) as PrrMonitor;
-    const predictionMessageHandler = new PredictionRequestHandler(this.logger, this.store, queue, prrMonitor, chromeHelperFactory.getChromeUtils());
+    const predictionMessageHandler = new PredictionRequestHandler(this.logger, this.store, queue, prrMonitor, chromeHelperFactory.getChromeUtils(), filterManager);
     const prrActionService = this.beanFactory.getBean(BeanNames.PRR_SERVICE) as PRRActionService;
     const tabVisitManager = this.beanFactory.getBean(BeanNames.TAB_VISIT_MANAGER) as InformEventHandler;
     // TODO: User BeanFactory or DI

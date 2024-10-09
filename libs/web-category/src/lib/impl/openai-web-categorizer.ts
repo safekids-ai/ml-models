@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import {WebCategorizer} from "../web-categorizer";
-import {WebCategoryType, WebCategoryProviderType} from "@safekids-ai/web-category-types";
+import {WebCategoryType, WebCategoryProviderType, WebCategoryResponse} from "@safekids-ai/web-category-types";
 import * as Logger from 'abstract-logging';
 
 class OpenAIWebCategorizer extends WebCategorizer {
@@ -15,7 +15,7 @@ class OpenAIWebCategorizer extends WebCategorizer {
     return WebCategoryProviderType.OPENAI;
   }
 
-  async categorize(websiteText: string, url?: string): Promise<WebCategoryType[]> {
+  async categorize(websiteText: string, url?: string): Promise<WebCategoryResponse> {
     try {
       const response = await this.api.chat.completions.create({
         model: this.model,
@@ -42,7 +42,12 @@ class OpenAIWebCategorizer extends WebCategorizer {
       const matchedCategories = this.getCategories().filter(cat =>
         categoriesFromResponse?.includes(cat.description)
       );
-      return matchedCategories
+
+      return {
+        types: matchedCategories,
+        probability: 1
+      } as WebCategoryResponse;
+
     } catch (error) {
       throw new Error(`Unable to categorize title ${websiteText} due to ${error}`)
     }

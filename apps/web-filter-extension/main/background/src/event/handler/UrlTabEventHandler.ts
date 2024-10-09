@@ -6,9 +6,9 @@ import {TabEvent} from '../manager/TabEventManager';
 import {TabEventHandler} from './TabEventHandler';
 import {UrlStatus} from '@shared/types/UrlStatus';
 import {PrrTrigger} from '@shared/types/message_types';
-import TabChangeInfo = chrome.tabs.TabChangeInfo;
 import {InformEventHandler} from './InformEventHandler';
 import {HttpUtils} from '@shared/utils/HttpUtils';
+import TabChangeInfo = chrome.tabs.TabChangeInfo;
 
 /**
  * Handles Tab events related to URL changes
@@ -49,22 +49,24 @@ export class UrlTabEventHandler implements TabEventHandler {
     if (informUrlExists.status) {
       result.status = UrlStatus.ALLOW;
     }
+    const aiGenerated = !(result.verified || result?.probability > 0.99);
     //add in the queue ->
     if (result.status !== UrlStatus.ALLOW) {
       const prrReport: PrrReport = {
         category: result.category,
         fullWebUrl: tabEvent.tab?.url,
         level: result.level,
-        prrTriggerId: PrrTrigger.URL_INTERCEPTED,
+        prrTriggerId: (aiGenerated) ? PrrTrigger.URL_INTERCEPTED : PrrTrigger.AI_WEB_CATEGORY,
         tabId: tabEvent.tab?.id ? tabEvent.tab?.id : -1,
         url: result.host,
         status: result.status,
-        isAiGenerated: false,
+        isAiGenerated: aiGenerated,
         eventId: informUrlExists.eventId,
       };
       if (result.status === UrlStatus.INFORM) {
         prrReport.eventId = HttpUtils.generateInformUrlId(prrReport.url, tabEvent.tabId);
       }
+
       this.prrMonitor.report(prrReport);
     }
   }
