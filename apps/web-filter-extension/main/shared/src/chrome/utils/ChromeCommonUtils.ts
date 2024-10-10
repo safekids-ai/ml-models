@@ -55,12 +55,20 @@ export class ChromeCommonUtils {
     return false;
   };
 
-  static inEducationalCodes = (categoryResult: IWebCategory): boolean => {
+  static inEducationalCodes = (categoryResult: IWebCategory): [boolean, number] => {
     if (!categoryResult || !categoryResult.categories) {
-      return false;
+      return [false,0];
     }
-
-    return categoryResult.categories.some((r) => EducationalCodes.get().includes(r));
+    const index = categoryResult.categories.findIndex((r) =>
+      EducationalCodes.get().includes(r)
+    );
+    if (index > -1) {
+      const prob = categoryResult.probability[index];
+      if (prob > 0.7) {
+        return [true, prob];
+      }
+    }
+    return [false, 0];
   };
 
   static getEducationHosts() {

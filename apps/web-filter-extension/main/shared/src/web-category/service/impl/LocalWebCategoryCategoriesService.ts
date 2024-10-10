@@ -56,7 +56,8 @@ export class LocalWebCategoryCategoriesService {
       return {
         aiGenerated: false,
         verified: true,
-        categories: localCategories
+        categories: localCategories,
+        probability: (localCategories).map(c => 1.0)
       }
     }
     return null;
@@ -74,16 +75,17 @@ export class LocalWebCategoryCategoriesService {
       };
     }
 
-    let {aiGenerated, verified, probability} = result;
-    let codes = result.categories;
+    let {aiGenerated, verified} = result;
+    let codesAndProbability: Array<[string, number]> =
+      result.categories.map((element, index): [string, number] => [String(element), result.probability[index]]);
 
     const metaFields = {
       aiGenerated,
-      verified,
-      probability
+      verified
     }
 
-    if (ChromeCommonUtils.inEducationalCodes(codes)) {
+    const [isEdu, eduProbability] = ChromeCommonUtils.inEducationalCodes(result);
+    if (isEdu) {
       return {
         host,
         status: UrlStatus.ALLOW,
@@ -91,20 +93,20 @@ export class LocalWebCategoryCategoriesService {
         level: PrrLevel.ZERO,
         key: PrrCategory.EDUCATIONAL,
         name: PrrCategory.EDUCATIONAL,
-        ...metaFields
+        ...metaFields,
+        probability: eduProbability
       };
     }
 
     const webCategoryCodes = WebCategoryCodes.get();
-    const categories: any = codes
-      .map((code: number): any => {
-        if (Object.prototype.hasOwnProperty.call(webCategoryCodes, code)) {
-          return webCategoryCodes[code];
-        }
-        return undefined;
+    const categories: any = codesAndProbability
+      .filter(([code, probability]): any => {
+        return WebCategoryCodes.hasCode(code) && probability >=webCategoryCodes[code].minProbability
       })
-      .filter((c) => c)
-      .sort((a: any, b: any) => (a.level > b.level ? -1 : 1));
+      .map(([code, probability]): any => {
+        return webCategoryCodes[code];
+      })
+      .sort((a: any, b: any) => (a.level > b.level ? -1 : 1))
 
     const blockedCategory = categories.find((c: ContentResult) => c.status === UrlStatus.BLOCK);
 

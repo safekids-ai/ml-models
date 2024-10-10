@@ -88,10 +88,10 @@ export class DOMWatcher implements IDOMWatcher {
       this.textFilter.analyze(elem);
     }
 
-    // const metaNodes = element.querySelectorAll('meta,title');
-    // const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
-    //
-    // this.metaFilter.analyze(metaElements);
+    const metaNodes = element.querySelectorAll('meta,title');
+    const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
+
+    this.metaFilter.analyze(metaElements);
 
     this.register(element);
   }
@@ -165,9 +165,9 @@ export class DOMWatcher implements IDOMWatcher {
       this.textFilter.analyze(elem);
     }
 
-    // const metaNodes = this.document.querySelectorAll('meta,title');
-    // const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
-    // this.metaFilter.analyze(metaElements);
+    const metaNodes = this.document.querySelectorAll('meta,title');
+    const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
+    this.metaFilter.analyze(metaElements);
 
     this.register(document);
 

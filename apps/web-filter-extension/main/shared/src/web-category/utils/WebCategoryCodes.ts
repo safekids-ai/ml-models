@@ -12,6 +12,7 @@ export class WebCategoryCodes {
       category: PrrCategory.SEX_EDUCATION,
       categoryName: 'Sex Education',
       name: 'Sex Education',
+      minProbability: 0.7,
       status: UrlStatus.ALLOW,
     },
     [WebCategoryTypesEnum.INAPPROPRIATE_FOR_MINORS]: {
@@ -20,6 +21,7 @@ export class WebCategoryCodes {
       categoryName: 'Inappropriate for Minors',
       category: PrrCategory.INAPPROPRIATE_FOR_MINORS,
       name: 'Child Inappropriate',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.GAMBLING]: {
@@ -28,6 +30,7 @@ export class WebCategoryCodes {
       categoryName: 'Gambling',
       category: PrrCategory.GAMBLING,
       name: 'Gambling',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.EXPLICIT]: {
@@ -36,6 +39,7 @@ export class WebCategoryCodes {
       categoryName: 'Adult Sexual Content',
       category: PrrCategory.ADULT_SEXUAL_CONTENT,
       name: 'Pornography',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
 
@@ -45,6 +49,7 @@ export class WebCategoryCodes {
       categoryName: 'Proxy/VPN',
       category: PrrCategory.PROXY,
       name: 'Proxy and VPN Bypass Sites',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
 
@@ -54,6 +59,7 @@ export class WebCategoryCodes {
       categoryName: 'Terrorism',
       category: PrrCategory.VIOLENCE,
       name: 'Terrorism Related Content',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
 
@@ -63,6 +69,7 @@ export class WebCategoryCodes {
       categoryName: 'Inappropriate for Minors',
       category: PrrCategory.INAPPROPRIATE_FOR_MINORS,
       name: 'Cyberbullying',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
 
@@ -72,6 +79,7 @@ export class WebCategoryCodes {
       categoryName: 'Tobacco',
       category: PrrCategory.DRUGS_ALCOHOL_TOBACCO,
       name: 'Drug, Alcohol or Tobacco Related',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
 
@@ -81,6 +89,7 @@ export class WebCategoryCodes {
       categoryName: 'Violence',
       category: PrrCategory.VIOLENCE,
       name: 'Violence',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.WEAPONS]: {
@@ -89,6 +98,7 @@ export class WebCategoryCodes {
       categoryName: 'Weapons',
       category: PrrCategory.WEAPONS,
       name: 'Weapons',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.CRIMINAL_MALICIOUS]: {
@@ -97,6 +107,7 @@ export class WebCategoryCodes {
       category: PrrCategory.CRIMINAL_MALICIOUS,
       categoryName: 'Criminal/Malicious',
       name: 'Criminal/Malicious',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.HATE_SPEECH]: {
@@ -105,6 +116,7 @@ export class WebCategoryCodes {
       categoryName: 'Hate Speech',
       category: PrrCategory.HATE_SPEECH,
       name: 'Hate Speech',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.SELF_HARM]: {
@@ -113,6 +125,7 @@ export class WebCategoryCodes {
       category: PrrCategory.SELF_HARM_SUICIDAL_CONTENT,
       categoryName: 'Self Harm/Suicidal Content',
       name: 'Self Harm',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.SOCIAL_MEDIA_CHAT]: {
@@ -121,6 +134,7 @@ export class WebCategoryCodes {
       category: PrrCategory.SOCIAL_MEDIA_CHAT,
       categoryName: 'Social Media and Chat',
       name: 'Social Media Chat',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.ENTERTAINMENT_NEWS_STREAMING]: {
@@ -129,6 +143,7 @@ export class WebCategoryCodes {
       categoryName: 'Entertainment News and Streaming',
       category: PrrCategory.ENTERTAINMENT_NEWS_STREAMING,
       name: 'Entertainment News & Celebrity Sites',
+      minProbability: 0.7,
       status: UrlStatus.ALLOW,
     },
     [WebCategoryTypesEnum.CLOTHING_FASHION]: {
@@ -137,6 +152,7 @@ export class WebCategoryCodes {
       categoryName: 'Clothing, Fashion and Jewelry',
       category: PrrCategory.CLOTHING_FASHION_JEWELRY,
       name: 'Clothing Fashion and Jewelry',
+      minProbability: 0.7,
       status: UrlStatus.ALLOW,
     },
     [WebCategoryTypesEnum.SELF_BODY_IMAGE]: {
@@ -145,6 +161,7 @@ export class WebCategoryCodes {
       category: PrrCategory.BODY_IMAGE,
       categoryName: 'Body Image/Related to Disordered Eating',
       name: 'Body Image/Related to Disordered Eating',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.ONLINE_GAMES]: {
@@ -153,6 +170,7 @@ export class WebCategoryCodes {
       categoryName: 'Online Gaming',
       category: PrrCategory.ONLINE_GAMING,
       name: 'Gaming',
+      minProbability: 0.7,
       status: UrlStatus.ALLOW,
     },
     [WebCategoryTypesEnum.PHISHING_FRAUD]: {
@@ -161,6 +179,7 @@ export class WebCategoryCodes {
       category: PrrCategory.CRIMINAL_MALICIOUS,
       categoryName: 'Criminal/Malicious',
       name: 'Phishing/Fraud',
+      minProbability: 0.7,
       status: UrlStatus.BLOCK,
     },
     [WebCategoryTypesEnum.SHOPPING_PRODUCT_REVIEWS]: {
@@ -169,6 +188,7 @@ export class WebCategoryCodes {
       category: PrrCategory.SHOPPING_PRODUCT_REVIEWS,
       categoryName: 'Shopping and Product Reviews',
       name: 'Shopping and Product Reviews',
+      minProbability: 0.7,
       status: UrlStatus.ALLOW,
     },
   };
@@ -176,11 +196,16 @@ export class WebCategoryCodes {
   private static readonly webCategoryCategoricalCodes: Record<string, {
     categoryName: string;
     name: string;
+    minProbability: number;
     status: UrlStatus
   }> =
     WebCategoryCodes.CATEGORIES_CODES;
 
   static get() {
     return this.webCategoryCategoricalCodes;
+  }
+
+  static hasCode(key: string): boolean {
+    return Object.prototype.hasOwnProperty.call(this.webCategoryCategoricalCodes, key);
   }
 }

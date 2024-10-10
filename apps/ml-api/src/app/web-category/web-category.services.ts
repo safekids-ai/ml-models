@@ -15,6 +15,7 @@ import {WEBCATEGORY_URL_REPOSITORY, WEBCATEGORY_HOST_REPOSITORY} from "../consta
 import {WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
 import {CacheTTL} from "@nestjs/cache-manager";
 import {WebCategoryHost} from "./entities/web-category-host-entity";
+import {hasQueryParams, isRootURL} from "apps/ml-api/src/app/utils/http.util";
 
 @Injectable()
 export class WebCategoryService {
@@ -60,18 +61,25 @@ export class WebCategoryService {
 
     if (result && result.category) {
       const categories = result.getCategory()
+      const probability = result.getProbability()
 
       return {
         aiGenerated: result.aiGenerated,
         verified: result.verified,
         categories: categories,
-        probability: result.probability
+        probability: probability
       }
     }
     return null;
   }
 
   async categorize(url: string, meta?: WebMeta): Promise<WebCategoryUrlResponseDto> {
+    const queryParams = hasQueryParams(url);
+
+    if (queryParams && !meta) {
+      throw new NotFoundException("Cannot categories a url with query parameters and without meta provided. Provided " + url);
+    }
+
     const host = this.getHost(url);
     const hostCategory = await this.getHostCategory(host);
 
@@ -80,7 +88,7 @@ export class WebCategoryService {
         aiGenerated: false,
         verified: true,
         categories: (hostCategory) ? hostCategory.map(cat => cat.id) : [],
-        probability: 1
+        probability: [1]
       }
     }
 
@@ -117,23 +125,25 @@ export class WebCategoryService {
 
     let aiGenerated = false;
     let verified = false;
-    let probability = null;
-    let codes = null;
+    let probability: number[] = null;
+    let codes: number[] = null;
 
     this.log.debug("Running the following through AI", {url: url, text: text})
     try {
       result = await this.webCategorizer.categorize(text, url);
-      if (result) {
-        aiGenerated = true;
-        verified = false;
-        probability = result.probability;
-        codes = result.types.map(category => category.id);
-        if (isAdultMeta) {
-          verified = true;
-          probability = 1;
-          if (!codes || !this.MATURE_CODES.some(code => codes.includes(code))) {
-            codes = (isWeaponsMeta) ? [WebCategoryTypesEnum.WEAPONS] : [WebCategoryTypesEnum.EXPLICIT];
-          }
+      if (!result || result.length == 0) {
+        throw new NotFoundException(`Unable to find categories for ${url}`);
+      }
+      aiGenerated = true;
+      verified = false;
+      probability = result.map(item => item.probability);
+      codes = result.map(item => item.category.id);
+
+      if (isAdultMeta) {
+        verified = true;
+        probability = [1];
+        if (!codes || !this.MATURE_CODES.some(code => codes.includes(code))) {
+          codes = (isWeaponsMeta) ? [WebCategoryTypesEnum.WEAPONS] : [WebCategoryTypesEnum.EXPLICIT];
         }
       }
     } catch (error) {
@@ -142,7 +152,7 @@ export class WebCategoryService {
         const category = (isWeaponsMeta) ? WebCategoryTypesEnum.WEAPONS : WebCategoryTypesEnum.INAPPROPRIATE_FOR_MINORS;
         aiGenerated = false;
         verified = true;
-        probability = 1;
+        probability = [1];
         codes = [WebCategoryHelper.getWebCategory(category).id];
       } else {
         throw error;
@@ -153,21 +163,23 @@ export class WebCategoryService {
 
     const source = WebCategoryProviderType[this.getProviderName()]
     try {
-      const dbStore = await WebCategoryUrl.findOrCreate({
-        where: {url},
-        defaults: {
-          meta: meta,
-          source: source,
-          category: codes,
-          aiGenerated: aiGenerated,
-          verified: verified,
-          probability: probability,
-          wrongCategory: false,
-          createdBy: "user",
-          updatedBy: "user"
-        }
-      })
-      this.log.debug("Stored web category", dbStore)
+      if (url.length < 255 && !queryParams) {
+        const dbStore = WebCategoryUrl.findOrCreate({
+          where: {url},
+          defaults: {
+            meta: meta,
+            source: source,
+            category: codes,
+            aiGenerated: aiGenerated,
+            verified: verified,
+            probability: probability,
+            wrongCategory: false,
+            createdBy: "user",
+            updatedBy: "user"
+          }
+        })
+        this.log.debug("Stored web category", dbStore)
+      }
       return {
         aiGenerated, verified, probability, categories: codes
       }

@@ -37,8 +37,9 @@ export class ConfigurationFilter implements ContentFilter {
     const key: any = result?.key?.toUpperCase() || '';
 
     const {permissibleUrls, nonPermissibleUrls, filteredCategories} = this.store.getState().settings;
+    const [isEdu, eduProbability] = ChromeCommonUtils.inEducationalCodes(categoryResult);
 
-    if (ChromeCommonUtils.inEducationalCodes(categoryResult)) {
+    if (isEdu) {
       result.status = UrlStatus.ALLOW;
     }
 

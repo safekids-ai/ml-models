@@ -42,12 +42,11 @@ export class RESTWebCategoryService {
     } catch (error) {
       // longer than 5 seconds
       if (this.hasName(error) && error.name === 'AbortError') {
-        this.log.error('WebCategory Api Failed to Response back in 5s:');
+        this.log.error(`WebCategory Api Failed to Response back in 5s for url:${url}:`);
         return undefined;
-      } else {
-        this.log.error(`Some error occurred in webCategory Api: error, ${error}`);
-        return await this.lookupUrl(url, webCategoryConfig);
       }
+      this.log.error(`WebCategory lookup error for ${url}`, error);
+      return undefined;
     }
   };
 
@@ -72,7 +71,7 @@ export class RESTWebCategoryService {
 
       response = await this.restService.doPost(config.url,
         {
-          url: baseUrl,
+          url: url,
           meta: meta
         },
         {signal: controller.signal});

@@ -51,5 +51,5 @@ export class WebCategoryUrlResponseDto {
   categories: number[];
 
   @ApiProperty()
-  probability: number;
+  probability: number[];
 }

@@ -9,7 +9,7 @@ export interface WebCategoryUrlAttributes {
   category: number[];
   aiGenerated?: boolean,
   verified?: boolean,
-  probability?: number,
+  probability?: number[],
   wrongCategory?: boolean;
   createdBy?: string;
   updatedBy?: string;
@@ -70,6 +70,32 @@ export class WebCategoryUrl extends Model<WebCategoryUrlAttributes, WebCategoryU
   }
 
   @Column({
+    type: DataType.JSON,
+    allowNull: true,
+    field: "probability",
+    validate: {
+      isArrayOfNumbers(value: any) {
+        if (!Array.isArray(value) || !value.every((item) => typeof item === 'number')) {
+          throw new Error('Probability must be an array of numbers');
+        }
+      }
+    }
+  })
+  probability!: number[];
+
+  getProbability(): number[] {
+    const rawValue = this.getDataValue('probability');
+    return Array.isArray(rawValue) ? rawValue : [];
+  }
+
+  setProbability(value: number[]) {
+    if (!Array.isArray(value) || !value.every(item => typeof item === 'number')) {
+      throw new Error('Probability must be an array of numbers');
+    }
+    this.setDataValue('probability', value);
+  }
+
+  @Column({
     type: DataType.BOOLEAN,
     allowNull: true,
     field: "ai_generated"
@@ -82,13 +108,6 @@ export class WebCategoryUrl extends Model<WebCategoryUrlAttributes, WebCategoryU
     field: "verified"
   })
   verified?: boolean;
-
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: true,
-    field: "probability"
-  })
-  probability?: number;
 
   @Column({
     type: DataType.BOOLEAN,

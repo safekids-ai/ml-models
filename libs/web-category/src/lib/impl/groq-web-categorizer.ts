@@ -1,7 +1,13 @@
 import Groq from 'groq-sdk';
 import {WebCategorizer} from "../web-categorizer";
-import {WebCategoryType, WebCategoryProviderType, WebCategoryResponse} from "@safekids-ai/web-category-types";
+import {
+  WebCategoryType,
+  WebCategoryProviderType,
+  WebCategoryResponse,
+  WebCategoryResponseItem
+} from "@safekids-ai/web-category-types";
 import * as Logger from 'abstract-logging';
+import {j} from "vite/dist/node/types.d-aGj9QkWt";
 
 class GroqWebCategorizer extends WebCategorizer {
   api: Groq
@@ -30,24 +36,35 @@ class GroqWebCategorizer extends WebCategorizer {
           },
           {
             role: "user",
-            content: `Categorize the following website text and URL, and return multiple categories if applicable (no explanation, make sure the answer is from the list of categories provided): "${websiteText}"${url ? ` and URL: "${url}"` : ''}`,
+            content: `Categorize the following website text and URL, and return multiple categories if applicable (no explanation, make sure the answer is from the list of categories provided along with a probability, e.g. Adult Sexual Content:0.5,Gambling:0.3 etc.): "${websiteText}"${url ? ` and URL: "${url}"` : ''}`,
           },
         ],
       });
 
-      console.log(JSON.stringify(response))
+      if (this.logger) {
+        this.logger.log(`Groq AI: text:${websiteText} url:${url}`, response)
+      }
+
       const categoriesFromResponse = response.choices[0].message?.content
         .split(",")
-        .map(category => category.trim());
+        .map(category => {
+          const [type,probability] = category.split(":");
+          return {
+            type: type,
+            probability: (probability) ? parseFloat(probability) : 0.5
+          }
+        });
 
-      const matchedCategories = this.getCategories().filter(cat =>
-        categoriesFromResponse?.includes(cat.description)
-      );
+      const matchedCategories: WebCategoryResponseItem[] = categoriesFromResponse
+        .filter(i => this.getCategoriesAsString().includes(i.type))
+        .map(j => {
+          return {
+            category: this.getCategories().find(c => c.description === j.type),
+            probability: j.probability
+          }
+        });
 
-      return {
-        types: matchedCategories,
-        probability: 0.8
-      } as WebCategoryResponse;
+      return matchedCategories;
     } catch (error) {
       throw new Error(`Unable to categorize title ${websiteText} due to ${error}`)
     }

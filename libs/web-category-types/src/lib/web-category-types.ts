@@ -3,10 +3,12 @@ type WebCategoryType = {
   description: string
 }
 
-type WebCategoryResponse = {
+type WebCategoryResponseItem = {
   probability: number,
-  types: WebCategoryType[]
+  category: WebCategoryType
 }
+
+type WebCategoryResponse = WebCategoryResponseItem[]
 
 enum WebCategoryProviderType {
   OPENAI,
@@ -99,6 +101,7 @@ class HTMLMetaClassifier {
 export {
   WebCategoryType,
   WebCategoryResponse,
+  WebCategoryResponseItem,
   WebCategoryProviderType,
   WebCategoryTypesEnum,
   WEB_CATEGORY_TYPES,

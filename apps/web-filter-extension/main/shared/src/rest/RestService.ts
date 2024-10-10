@@ -69,7 +69,6 @@ export class FetchApiService implements RESTService {
     const contentType = response.headers.get('Content-Type');
     const contentLength = response.headers.get('Content-Length');
     const isJson = (contentType) ? contentType.includes('application/json') : false;
-
     console.log("ABBAS-HTTP RESPONSE1:",
       `${this.baseURL}/${path}->\nstatus: ${response.status}\ncontent-type: ${response.headers.get("Content-Type")}\n`) ;
 

@@ -39,7 +39,7 @@ export class AccessLimitFilter implements ContentFilter {
       }
 
       const categoryResult = await this.urlCategoryService.getHostCategoryCodes(host, url, meta);
-      const isEdu = ChromeCommonUtils.inEducationalCodes(categoryResult);
+      const [isEdu, eduProbability] = ChromeCommonUtils.inEducationalCodes(categoryResult);
       const isAllowed = this.contentFilterUtil.isHostAllowed(host);
       this.logger.log(`Filter Host: ${host} url:${url} isEdu:${isEdu} isAllowed:${isAllowed}`);
       if (isEdu || isAllowed) {
