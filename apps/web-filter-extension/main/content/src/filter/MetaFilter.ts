@@ -3,7 +3,7 @@ import {PredictionRequest, PredictionResponse} from '@shared/types/messages';
 import {HttpUtils} from '@shared/utils/HttpUtils';
 
 import {Filter, FilterSettingsType, IObjectFilter} from '@src/filter/Filter';
-import {WebMeta} from "@safekids-ai/web-category-types";
+import {HTMLWebData} from "@safekids-ai/web-category-types";
 
 export class MetaFilter extends Filter implements IObjectFilter {
   private readonly elements: Set<string>;
@@ -20,6 +20,8 @@ export class MetaFilter extends Filter implements IObjectFilter {
   }
 
   public analyze(elements: HTMLElement[]): void {
+    const htmlText = this.extractText(elements);
+
     const titleElement = elements.find((element): element is HTMLTitleElement =>
       element.tagName.toLowerCase() === 'title'
     );
@@ -28,10 +30,12 @@ export class MetaFilter extends Filter implements IObjectFilter {
       return element.tagName.toLowerCase() === 'meta';
     });
 
-    let meta: WebMeta = {};
+    let htmlData: HTMLWebData = {
+      htmlText
+    };
 
     if (titleElement) {
-      meta.title = titleElement.text;
+      htmlData.title = titleElement.text;
     }
 
     metaElements.forEach(element => {
@@ -41,22 +45,22 @@ export class MetaFilter extends Filter implements IObjectFilter {
       if (name && content) {
         switch (name) {
           case 'description':
-            meta.description = content;
+            htmlData.description = content;
             break;
           case 'rating':
-            meta.rating = content;
+            htmlData.rating = content;
             break;
         }
       }
     });
 
     // Call the analysis function with the meta object
-    if (meta.title || meta.description || meta.rating) {
-      this._analyzeText(meta);
+    if (htmlData.title || htmlData.description || htmlData.rating || htmlData.htmlText?.length > 50) {
+      this._analyzeText(htmlData);
     }
   }
 
-  private _analyzeText(meta: WebMeta): void {
+  private _analyzeText(meta: HTMLWebData): void {
     this.logger.debug("Sending url page category Request:", meta);
     const value = new PredictionRequest(window.location.href, 'ANALYZE_META', 'NLP_META', window.location.href, JSON.stringify(meta));
     const request = {type: 'ANALYZE_META', value};
@@ -69,4 +73,16 @@ export class MetaFilter extends Filter implements IObjectFilter {
       }
     });
   }
+
+  private extractText(elements: HTMLElement[]): string {
+    const allowedElements = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span'];
+    const extractedText = [];
+    elements.forEach((el) => {
+      if (allowedElements.includes(el.tagName.toLowerCase()) && el.innerText.trim()) {
+        extractedText.push(el.innerText.trim());
+      }
+    });
+    return extractedText.join('\n');
+  }
+
 }

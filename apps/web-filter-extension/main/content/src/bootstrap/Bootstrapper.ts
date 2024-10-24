@@ -108,7 +108,7 @@ export class ContentBootstrapper implements Bootstrapper {
 
   enableWatcher = (): void => {
     this.domWatcher?.watch();
-    this.domWatcher?.onLoad();
+    // this.domWatcher?.onLoad();
   };
 
   getDomWatcher = (): DOMWatcher | undefined => {

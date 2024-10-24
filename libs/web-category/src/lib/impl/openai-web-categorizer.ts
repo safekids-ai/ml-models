@@ -59,7 +59,9 @@ class OpenAIWebCategorizer extends WebCategorizer {
           }
         });
 
-      return matchedCategories;
+      return {
+        categories: matchedCategories
+      };
     } catch (error) {
       throw new Error(`Unable to categorize title ${websiteText} due to ${error}`)
     }

@@ -9,6 +9,7 @@ export type BlockResult = {
     level: PrrLevel;
     host: string;
     ai: boolean;
+    aiProbability: number | undefined,
     status: string;
     eventId?: string;
 };

@@ -71,7 +71,7 @@ export class LocalWebCategoryCategoriesService {
         category: PrrCategory.UN_KNOWN,
         level: PrrLevel.ZERO,
         key: PrrCategory.UN_KNOWN,
-        name: PrrCategory.UN_KNOWN,
+        name: PrrCategory.UN_KNOWN
       };
     }
 
@@ -104,12 +104,11 @@ export class LocalWebCategoryCategoriesService {
         return WebCategoryCodes.hasCode(code) && probability >=webCategoryCodes[code].minProbability
       })
       .map(([code, probability]): any => {
-        return webCategoryCodes[code];
+        return { ...webCategoryCodes[code], probability };
       })
       .sort((a: any, b: any) => (a.level > b.level ? -1 : 1))
 
     const blockedCategory = categories.find((c: ContentResult) => c.status === UrlStatus.BLOCK);
-
     if (blockedCategory && Object.keys(blockedCategory).length > 0) {
       return {
         host,
@@ -118,7 +117,8 @@ export class LocalWebCategoryCategoriesService {
         level: blockedCategory.level,
         key: blockedCategory.key?.toUpperCase(),
         name: blockedCategory.name,
-        ...metaFields
+        ...metaFields,
+        probability: blockedCategory.probability
       };
     }
     return {

@@ -52,19 +52,22 @@ export class ChromeCommonUtils {
     } else if (ChromeCommonUtils.EDUCATION_HOSTS.hasOwnProperty(lowerHost)) {
       return true;
     }
+    if (host.endsWith("edu")) {
+      return true;
+    }
     return false;
   };
 
   static inEducationalCodes = (categoryResult: IWebCategory): [boolean, number] => {
     if (!categoryResult || !categoryResult.categories) {
-      return [false,0];
+      return [false, 0];
     }
     const index = categoryResult.categories.findIndex((r) =>
       EducationalCodes.get().includes(r)
     );
     if (index > -1) {
       const prob = categoryResult.probability[index];
-      if (prob > 0.7) {
+      if (prob > 0.5) {
         return [true, prob];
       }
     }

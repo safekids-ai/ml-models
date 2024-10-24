@@ -3,7 +3,7 @@ import {Type} from "class-transformer";
 import {IsAtLeastOneFieldRequired} from "../../utils/validator.util";
 import {ApiProperty} from "@nestjs/swagger";
 import {WebCategoryUrl} from "apps/ml-api/src/app/web-category/entities/web-category-url-entity";
-import {WebCategoryType} from "@safekids-ai/web-category-types";
+import {HTMLWebData, WebCategoryType} from "@safekids-ai/web-category-types";
 
 export class WebMetaDto {
   @IsOptional()
@@ -31,13 +31,7 @@ export class WebMetaDto {
 export class GetWebCategoryDto {
   @IsNotEmpty()
   url: string;
-
-  // @ValidateNested()
-  // @Type(() => WebMetaDto)
-  // @IsAtLeastOneFieldRequired({
-  //   message: 'At least one of the fields (title, description, keywords, ogType, ogDescription, ogUrl) must be provided.',
-  // })
-  meta: WebMetaDto;
+  htmlMeta?: HTMLWebData;
 }
 
 export class WebCategoryUrlResponseDto {
@@ -52,4 +46,7 @@ export class WebCategoryUrlResponseDto {
 
   @ApiProperty()
   probability: number[];
+
+  @ApiProperty()
+  rawCategory?: string;
 }

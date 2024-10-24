@@ -4,10 +4,9 @@ import {PrrLevel} from '@shared/types/PrrLevel';
 import {ContentFilter} from './content-filters/service/ContentFilter';
 import {UrlStatus} from '@shared/types/UrlStatus';
 import {HttpUtils} from '@shared/utils/HttpUtils';
-import {WebMeta} from "@safekids-ai/web-category-types";
-import {DefaultURLFilter} from "src/filter/content-filters/service/impl/DefaultURLFilter";
-import {AccessLimitFilter} from "src/filter/content-filters/service/impl/AccessLimitFilter";
-import {ConfigurationFilter} from "src/filter/content-filters/service/impl/ConfigurationFilter";
+import {HTMLWebData} from "@safekids-ai/web-category-types";
+import {IWebCategory} from "@shared/web-category/types/web-category.types";
+import {Logger} from "@shared/logging/ConsoleLogger";
 
 /**
  *
@@ -18,30 +17,32 @@ export class ContentFilterChain {
   // AccessLimitFilter
   // ConfigurationFilter
 
-  constructor(private readonly filters: ContentFilter[]) {
+  constructor(private readonly logger: Logger,
+              private readonly filters: ContentFilter[]) {
   }
 
-  execute = async (_url: string, meta?: WebMeta): Promise<ContentResult> => {
+  execute = async (_url: string, htmlData?: HTMLWebData, category?: IWebCategory): Promise<ContentResult> => {
     const url = _url.trim().toLowerCase();
+    let defaultAllow = ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, url);
+
     if (url.startsWith('chrome-extension:') || url.startsWith('chrome:')) {
-      return ContentFilterChain.buildContentResult(UrlStatus.ALLOW, PrrCategory.ALLOWED, PrrLevel.ZERO, url);
+      return defaultAllow;
     } else {
-      let result: ContentResult = {
-        status: UrlStatus.ALLOW,
-        category: PrrCategory.UN_KNOWN,
-        level: PrrLevel.ZERO,
-      };
+      let result = undefined;
       const host = HttpUtils.refineHost(url);
 
       //executing all filters
       for (let i = 0; i < this.filters.length; i++) {
-        result = await this.filters[i].filter(host, url, meta);
+        const filter = this.filters[i];
+        result = await filter.filter(host, url, htmlData);
 
-        if (result.status === UrlStatus.BLOCK) {
+        if (result) {
+          this.logger.log(`Configuration filter found result. Filter: ${filter.constructor.name} Host: ${host} Url: ${url} result:${JSON.stringify(result)}`);
           return result;
         }
       }
-      return result;
+      this.logger.log(`Configuration filter did not find result. Host: ${host} Url: ${url}. Allowing website. Returning ${JSON.stringify(defaultAllow)}`);
+      return defaultAllow;
     }
   };
 

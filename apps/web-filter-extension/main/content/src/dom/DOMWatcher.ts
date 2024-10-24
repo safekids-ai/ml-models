@@ -29,6 +29,26 @@ export class DOMWatcher implements IDOMWatcher {
     private readonly contentFilterUtils: ContentFilterUtil
   ) {
     this.observer = new MutationObserver(this.callback.bind(this));
+
+    // Check if page is hidden and wait until it becomes visible
+    if (document.visibilityState === 'hidden') {
+      this.logger.log(`Page is in hidden state (likely prerendered), waiting for visibility...`);
+      document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+    } else {
+      this.handleVisibilityChange();
+    }
+  }
+
+  private isVisible(): boolean {
+    return this.document.visibilityState === "visible";
+  }
+
+  private handleVisibilityChange(): void {
+    if (document.visibilityState === 'visible') {
+      this.logger.log(`Page is now visible, running onLoad...`);
+      document.removeEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+      this.onLoad();
+    }
   }
 
   public watch(): void {
@@ -45,6 +65,10 @@ export class DOMWatcher implements IDOMWatcher {
 
   /* istanbul ignore next */
   callback(mutationsList: MutationRecord[]): void {
+    if (!this.isVisible()) {
+      return;
+    }
+
     for (let i = 0; i < mutationsList.length; i++) {
       const mutation = mutationsList[i];
       /* istanbul ignore next */
@@ -88,10 +112,9 @@ export class DOMWatcher implements IDOMWatcher {
       this.textFilter.analyze(elem);
     }
 
-    const metaNodes = element.querySelectorAll('meta,title');
-    const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
-
-    this.metaFilter.analyze(metaElements);
+    // const txtNodes = this.document.querySelectorAll('p,h1,h2,h3,h4,h5,h6,div,span');
+    // const textElements: HTMLElement[] = [...txtNodes] as HTMLElement[];
+    // this.metaFilter.analyze(textElements);
 
     this.register(element);
   }
@@ -165,9 +188,11 @@ export class DOMWatcher implements IDOMWatcher {
       this.textFilter.analyze(elem);
     }
 
-    const metaNodes = this.document.querySelectorAll('meta,title');
-    const metaElements: HTMLElement[] = [...metaNodes] as HTMLElement[];
-    this.metaFilter.analyze(metaElements);
+    //analyzing all text on the page
+    const txtNodes = this.document.querySelectorAll('meta,title,p,h1,h2,h3,h4,h5,h6,div,span');
+    const textElements: HTMLElement[] = [...txtNodes] as HTMLElement[];
+    this.logger.log(`Sending meta request for ${this.host}`);
+    this.metaFilter.analyze(textElements);
 
     this.register(document);
 

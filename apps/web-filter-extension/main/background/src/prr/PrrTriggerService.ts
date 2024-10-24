@@ -45,9 +45,15 @@ export class PrrTriggerService implements TriggerService {
       level: prrResult.level ?? PrrLevel.ZERO,
       host: prrReport.fullWebUrl ?? '',
       ai: prrReport?.isAiGenerated === undefined ? false : prrReport?.isAiGenerated,
+      aiProbability: prrReport?.aiProbability,
       status: prrReport.status ?? PrrStatus.UN_KNOWN,
       eventId: prrReport.eventId,
     };
+
+    if (blockResult.ai && blockResult.aiProbability && blockResult.aiProbability > 0.98) {
+      blockResult.ai = false;
+    }
+
     if (blockResult.ai) {
       this.chromeTabHelper.displayPopup(prrReport.tabId, blockResult);
     } else {

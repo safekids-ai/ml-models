@@ -11,6 +11,32 @@ export type RESTService = {
   doDelete: (path: string, payload?: any) => Promise<any>;
 };
 
+export class HttpException extends Error {
+  public httpCode: number;
+  public httpDescription: string;
+  protected retryableHttpCodes = [500, 502, 503, 504, 408, 429];
+
+  //protected noRetryableHttpCodes = [400, 401, 403, 404, 409];
+
+  constructor(httpCode: number, httpDescription: string) {
+    super(httpDescription);
+    this.httpCode = httpCode;
+    this.httpDescription = httpDescription;
+    this.name = this.constructor.name;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+
+  public isRetryable(): boolean {
+    return this.retryableHttpCodes.includes(this.httpCode);
+  }
+}
+
+export class HttpNotFoundException extends HttpException {
+  constructor(description: string = 'Not Found') {
+    super(404, description);
+  }
+}
+
 export class FetchApiService implements RESTService {
   baseURL = import.meta.env.API_URL;
   jwtToken = ''; // JWT token
@@ -27,15 +53,21 @@ export class FetchApiService implements RESTService {
   async fetchWithRetry(url, options, retries = 3, backoff = 300) {
     try {
       const response = await fetch(url, options);
-      if (!response.ok && retries > 0) {
-        console.log("ABBAS-retry:" + url + " " + JSON.stringify(options) + "->" + response.statusText);
-        await new Promise(resolve => setTimeout(resolve, backoff));
-        return this.fetchWithRetry(url, options, retries - 1, backoff * 2);
+      if (!response.ok) {
+        switch (response.status) {
+          case 404:
+            throw new HttpNotFoundException(response.statusText);
+          default: {
+            throw new HttpException(response.status, response.statusText);
+          }
+        }
       }
-      if (!response.ok) throw new Error(response.statusText);
       return response;
     } catch (error) {
-      if (retries > 0) {
+      const isHttpException = error instanceof HttpException;
+      const isRetryable = (isHttpException) ? error.isRetryable() : true;
+
+      if (retries > 0 && isRetryable) {
         await new Promise(resolve => setTimeout(resolve, backoff));
         return this.fetchWithRetry(url, options, retries - 1, backoff * 2);
       }
@@ -70,7 +102,7 @@ export class FetchApiService implements RESTService {
     const contentLength = response.headers.get('Content-Length');
     const isJson = (contentType) ? contentType.includes('application/json') : false;
     console.log("ABBAS-HTTP RESPONSE1:",
-      `${this.baseURL}/${path}->\nstatus: ${response.status}\ncontent-type: ${response.headers.get("Content-Type")}\n`) ;
+      `${this.baseURL}/${path}->\nstatus: ${response.status}\ncontent-type: ${response.headers.get("Content-Type")}\n`);
 
     if (isJson) {
       const result = await response.json()

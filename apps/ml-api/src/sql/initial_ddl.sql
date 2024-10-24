@@ -1391,10 +1391,11 @@ create index user_id
 
 CREATE TABLE web_category_url (
   url VARCHAR(255) NOT NULL,
-  meta JSON NOT NULL,
+  htmlData JSON NOT NULL,
   source VARCHAR(255) NOT NULL,
   category JSON NOT NULL,
   probability JSON NULL,
+  raw_category JSON NULL,
   ai_generated BOOLEAN DEFAULT NULL,
   verified BOOLEAN DEFAULT NULL,
   wrong_category BOOLEAN DEFAULT NULL,

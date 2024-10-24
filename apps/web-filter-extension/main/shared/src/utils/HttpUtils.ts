@@ -1,6 +1,15 @@
 import {Logger} from '@shared/logging/ConsoleLogger';
 
 export class HttpUtils {
+  static isRootDomain(url: string): boolean {
+    try {
+      const parsedUrl = new URL(url);
+      return parsedUrl.pathname === "/";
+    } catch (e) {
+      return false;
+    }
+  }
+
   static getBaseUrl(url: string): string {
     try {
       const parsedUrl = new URL(url);

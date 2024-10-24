@@ -30,7 +30,7 @@ abstract class WebCategorizer {
     return CATEGORY_DESCRIPTIONS
   }
 
-  abstract categorize(title: string, url?: string): Promise<WebCategoryResponse>
+  abstract categorize(text: string, url?: string): Promise<WebCategoryResponse>
 }
 
 export {WebCategorizer}

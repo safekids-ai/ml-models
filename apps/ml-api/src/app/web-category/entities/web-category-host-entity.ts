@@ -1,6 +1,6 @@
 import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from 'sequelize-typescript';
 import {Optional} from 'sequelize';
-import {WebCategoryType, WebMeta} from "@safekids-ai/web-category-types";
+import {WebCategoryType, HTMLWebData} from "@safekids-ai/web-category-types";
 
 export interface WebCategoryHostAttributes {
   host: string;

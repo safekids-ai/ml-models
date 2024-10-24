@@ -1,9 +1,10 @@
 import {ContentResult} from '@shared/types/ContentResult';
 import {ContentFilterChain} from './ContentFilterChain';
-import {WebMeta} from "@safekids-ai/web-category-types";
+import {HTMLWebData} from "@safekids-ai/web-category-types";
+import {IWebCategory} from "@shared/web-category/types/web-category.types";
 
 export type FilterManager = {
-  filterUrl: (url: string, meta?: WebMeta) => Promise<ContentResult>;
+  filterUrl: (url: string, htmlData?: HTMLWebData, category?: IWebCategory) => Promise<ContentResult>;
 };
 
 /**
@@ -13,7 +14,7 @@ export class ContentFilterManager implements FilterManager {
   constructor(private readonly chain: ContentFilterChain) {
   }
 
-  async filterUrl(url: string, meta?: WebMeta): Promise<ContentResult> {
-    return await this.chain.execute(url, meta);
+  async filterUrl(url: string, htmlData?: HTMLWebData, category?: IWebCategory): Promise<ContentResult> {
+    return await this.chain.execute(url, htmlData, category);
   }
 }

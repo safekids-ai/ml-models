@@ -8,20 +8,24 @@ type WebCategoryResponseItem = {
   category: WebCategoryType
 }
 
-type WebCategoryResponse = WebCategoryResponseItem[]
+type WebCategoryResponse = {
+  categories: WebCategoryResponseItem[],
+  rawCategory?: string
+}
 
 enum WebCategoryProviderType {
   OPENAI,
-  GROQ
+  GROQ,
+  GOOGLE
 }
 
 enum WebCategoryTypesEnum {
   EXPLICIT = 1000,
   SELF_BODY_IMAGE = 2000,
-  CLOTHING_FASHION = 3000,
+  CLOTHING_FASHION_BEAUTY = 3000,
   CRIMINAL_MALICIOUS = 4000,
   DRUGS_ALCOHOL = 5000,
-  ENTERTAINMENT_NEWS_STREAMING = 6000,
+  ENTERTAINMENT_STREAMING_VIDEO = 6000,
   ONLINE_GAMES = 7000,
   GAMBLING = 8000,
   HATE_SPEECH = 9000,
@@ -43,10 +47,10 @@ enum WebCategoryTypesEnum {
 const WEB_CATEGORY_TYPES: WebCategoryType[] = [
   {"id": WebCategoryTypesEnum.EXPLICIT, "description": "Adult Sexual Content"},
   {"id": WebCategoryTypesEnum.SELF_BODY_IMAGE, "description": "Body Image/Related to Disordered Eating"},
-  {"id": WebCategoryTypesEnum.CLOTHING_FASHION, "description": "Clothing, Fashion and Jewelry"},
+  {"id": WebCategoryTypesEnum.CLOTHING_FASHION_BEAUTY, "description": "Clothing, Fashion and Jewelry and Beauty"},
   {"id": WebCategoryTypesEnum.CRIMINAL_MALICIOUS, "description": "Criminal/Malicious"},
   {"id": WebCategoryTypesEnum.DRUGS_ALCOHOL, "description": "Drugs/Alcohol/Tobacco Related"},
-  {"id": WebCategoryTypesEnum.ENTERTAINMENT_NEWS_STREAMING, "description": "Entertainment News and Streaming"},
+  {"id": WebCategoryTypesEnum.ENTERTAINMENT_STREAMING_VIDEO, "description": "Entertainment Video Streaming"},
   {"id": WebCategoryTypesEnum.ONLINE_GAMES, "description": "Online Games"},
   {"id": WebCategoryTypesEnum.GAMBLING, "description": "Gambling"},
   {"id": WebCategoryTypesEnum.HATE_SPEECH, "description": "Hate Speech"},
@@ -65,29 +69,34 @@ const WEB_CATEGORY_TYPES: WebCategoryType[] = [
   {"id": WebCategoryTypesEnum.NONE_OF_ABOVE, "description": "Other/None of the Above"},
 ];
 
-type WebMeta = {
+type HTMLWebData = {
   title?: string;
   description?: string;
   keywords?: string;
   ogType?: string;
   ogDescription?: string;
   ogUrl?: string;
-  rating?: string
+  rating?: string;
+  htmlText?: string;
 }
 
 class WebCategoryHelper {
   static getWebCategory(id: WebCategoryTypesEnum): WebCategoryType | undefined {
     return WEB_CATEGORY_TYPES.find(category => category.id === id);
   }
+
+  static getNoneCategory() : WebCategoryType {
+    return WebCategoryHelper.getWebCategory(WebCategoryTypesEnum.NONE_OF_ABOVE)
+  }
 }
 
 class HTMLMetaClassifier {
-  static isAdultMeta(meta: WebMeta) {
+  static isAdultMeta(meta: HTMLWebData) {
     const adultCodes = ["rta-5042-1996-1400-1577-rta", "adult"]
     return adultCodes.includes(meta?.rating?.toLowerCase());
   }
 
-  static isWeaponsMeta(meta: WebMeta) {
+  static isWeaponsMeta(meta: HTMLWebData) {
     const isAdult = this.isAdultMeta(meta);
     if (isAdult) {
       const titleDescriptions = (meta?.title ?? '') + (meta?.description ?? '');
@@ -105,7 +114,7 @@ export {
   WebCategoryProviderType,
   WebCategoryTypesEnum,
   WEB_CATEGORY_TYPES,
-  WebMeta,
+  HTMLWebData,
   HTMLMetaClassifier,
   WebCategoryHelper
 }

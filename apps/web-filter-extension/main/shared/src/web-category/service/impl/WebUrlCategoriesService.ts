@@ -4,7 +4,7 @@ import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryServic
 
 import {LocalWebCategoryCategoriesService} from '@shared/web-category/service/impl/LocalWebCategoryCategoriesService';
 import {RESTWebCategoryService} from '@shared/web-category/service/impl/RESTWebCategoryService';
-import {WebMeta} from "@safekids-ai/web-category-types";
+import {HTMLWebData} from "@safekids-ai/web-category-types";
 import {IWebCategory} from "@shared/web-category/types/web-category.types";
 
 export class WebUrlCategoriesService implements UrlCategoryService {
@@ -23,7 +23,7 @@ export class WebUrlCategoriesService implements UrlCategoryService {
     await this.localWebCategoryCategoriesService.initialize();
   }
 
-  async getHostCategoryCodes(host: string, url: string, meta?: WebMeta): Promise<IWebCategory> {
+  async getHostCategoryCodes(host: string, url: string, meta?: HTMLWebData): Promise<IWebCategory> {
     const result = await this.localWebCategoryCategoriesService.getHostCategoryCodes(host);
     if (result && result.categories) {
       return result;

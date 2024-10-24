@@ -5,14 +5,13 @@ import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
 import {UrlCategoryService} from '@shared/web-category/service/UrlCategoryService';
 import {BeanFactory, BeanNames} from '../factory/BeanFactory';
 import {ContentFilter} from '../filter/content-filters/service/ContentFilter';
-import {AccessLimitFilter} from '../filter/content-filters/service/impl/AccessLimitFilter';
-import {ConfigurationFilter} from '../filter/content-filters/service/impl/ConfigurationFilter';
-import {DefaultURLFilter} from '../filter/content-filters/service/impl/DefaultURLFilter';
 import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
 import {ContentFilterChain} from '../filter/ContentFilterChain';
 import {ContentFilterManager, FilterManager} from '../filter/ContentFilterManager';
 import {Initializer} from './Initializer';
 import {ChromeHelperFactory} from '@shared/chrome/factory/ChromeHelperFactory';
+import {StaticHostURLFilter} from "../filter/content-filters/service/impl/StaticHostAndURLFilter";
+import {DynamicCategoryFilter} from "../filter/content-filters/service/impl/DynamicCategoryFilter";
 
 export class FilterInitializer implements Initializer {
   constructor(
@@ -26,7 +25,7 @@ export class FilterInitializer implements Initializer {
   init = async (): Promise<boolean> => {
     try {
       // TODO: send filter Manager as dependency
-      const filterChain = new ContentFilterChain(this.createContentFilters());
+      const filterChain = new ContentFilterChain(this.logger, this.createContentFilters());
       const filterManager: FilterManager = new ContentFilterManager(filterChain);
       this.beanFactory.addBean(BeanNames.URL_FILTER_MANAGER, filterManager);
       return true;
@@ -57,14 +56,12 @@ export class FilterInitializer implements Initializer {
     }
     const chromeHelperFactory = this.beanFactory.getBean(BeanNames.CHROME_HELPERS_FACTORY) as ChromeHelperFactory;
 
-    const defaultURLFilter = new DefaultURLFilter();
-    const accessLimitFilter = new AccessLimitFilter(this.logger, this.store, contentFilterUtils, userService, urlCategoryService);
-    const configurationFilter = new ConfigurationFilter(this.logger, this.store, urlCategoryService, chromeHelperFactory.getChromeUtils());
+    const staticHostFilter = new StaticHostURLFilter(this.logger, this.store, chromeHelperFactory.getChromeUtils());
+    const dynamicCategoryFilter = new DynamicCategoryFilter(this.logger, this.store, urlCategoryService, userService);
 
     const filters = [];
-    filters.push(defaultURLFilter);
-    filters.push(accessLimitFilter);
-    filters.push(configurationFilter);
+    filters.push(staticHostFilter);
+    filters.push(dynamicCategoryFilter);
 
     return filters;
   };

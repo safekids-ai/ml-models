@@ -22,6 +22,7 @@ export type PrrReport = {
   accessLimited?: boolean;
   prrTriggerId?: PrrTrigger;
   isAiGenerated?: boolean;
+  aiProbability?: number;
   eventId?: string;
 };
 

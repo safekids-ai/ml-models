@@ -7,7 +7,7 @@ import {MLModels} from '@shared/types/MLModels';
 import {PrrCategory} from '@shared/types/PrrCategory';
 import {PrrTrigger} from '@shared/types/message_types';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {HTMLMetaClassifier, WebMeta} from "@safekids-ai/web-category-types";
+import {HTMLMetaClassifier, HTMLWebData} from "@safekids-ai/web-category-types";
 import {FilterManager} from "src/filter/ContentFilterManager";
 import {ContentResult} from "@shared/types/ContentResult";
 import {PrrLevel} from "@shared/types/PrrLevel";
@@ -147,7 +147,7 @@ export class PredictionRequestHandler implements RequestHandler {
   handleMetaRequest = async (request: PredictionRequest, sender: chrome.runtime.MessageSender): Promise<PredictionResponse> => {
     const tabId = sender.tab?.id;
     const {url, requestType, host, data} = request;
-    const meta: WebMeta = JSON.parse(data)
+    const meta: HTMLWebData = JSON.parse(data)
     let result: ContentResult = undefined
     let newReport: PrrReport = {
       prrTriggerId: PrrTrigger.AI_WEB_CATEGORY,
@@ -166,6 +166,7 @@ export class PredictionRequestHandler implements RequestHandler {
       if (result.status != UrlStatus.ALLOW) {
         newReport.level = result.level;
         newReport.category = result.category
+        newReport.aiProbability = result.probability;
         this.prrMonitor.report(newReport);
         return new PredictionResponse(result, request.url);
       }

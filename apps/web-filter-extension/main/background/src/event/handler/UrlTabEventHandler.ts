@@ -38,10 +38,13 @@ export class UrlTabEventHandler implements TabEventHandler {
 
   async onUpdated(tabInfo: TabChangeInfo, tabEvent: TabEvent): Promise<void> {
     if (tabInfo.status === 'loading') {
-      if (!!tabEvent?.tab?.url && !(tabEvent.tab?.url.startsWith('chrome-extension:') || tabEvent.tab?.url.startsWith('chrome:'))) {
+      const chromeUrl = tabEvent.tab?.url.startsWith('chrome-extension:') || tabEvent.tab?.url.startsWith('chrome:');
+
+      if (tabEvent?.tab?.url && !(chromeUrl)) {
         this.prrMonitor.reset(tabEvent.tab?.id as number);
       }
     }
+
     this.logger.log(`onUpdated - url-> ${tabEvent.tab?.url ? tabEvent.tab.url : 'url does not exist'}`);
     const result = await this.filterManager.filterUrl(tabEvent.tab?.url ? tabEvent.tab.url : '');
     const informUrlExists = await this.tabVisitManager.checkUrlStatus(tabEvent.tab?.id, tabEvent.tab?.url);
@@ -49,7 +52,7 @@ export class UrlTabEventHandler implements TabEventHandler {
     if (informUrlExists.status) {
       result.status = UrlStatus.ALLOW;
     }
-    const aiGenerated = !(result.verified || result?.probability > 0.99);
+    const aiGenerated = !result.verified;
     //add in the queue ->
     if (result.status !== UrlStatus.ALLOW) {
       const prrReport: PrrReport = {
@@ -61,12 +64,12 @@ export class UrlTabEventHandler implements TabEventHandler {
         url: result.host,
         status: result.status,
         isAiGenerated: aiGenerated,
+        aiProbability: result.probability,
         eventId: informUrlExists.eventId,
       };
       if (result.status === UrlStatus.INFORM) {
         prrReport.eventId = HttpUtils.generateInformUrlId(prrReport.url, tabEvent.tabId);
       }
-
       this.prrMonitor.report(prrReport);
     }
   }

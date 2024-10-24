@@ -1,18 +1,19 @@
 import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from 'sequelize-typescript';
 import {Optional} from 'sequelize';
-import {WebCategoryType, WebMeta} from "@safekids-ai/web-category-types";
+import {WebCategoryType, HTMLWebData} from "@safekids-ai/web-category-types";
 
 export interface WebCategoryUrlAttributes {
-  url: string;
-  meta: WebMeta;
-  source: string;
-  category: number[];
+  url: string,
+  meta: HTMLWebData,
+  source: string,
+  category: number[],
+  rawCategory?: string,
   aiGenerated?: boolean,
   verified?: boolean,
   probability?: number[],
-  wrongCategory?: boolean;
-  createdBy?: string;
-  updatedBy?: string;
+  wrongCategory?: boolean,
+  createdBy?: string,
+  updatedBy?: string,
 }
 
 export interface WebCategoryUrlCreationAttributes extends Optional<WebCategoryUrlAttributes, 'wrongCategory'> {
@@ -34,7 +35,7 @@ export class WebCategoryUrl extends Model<WebCategoryUrlAttributes, WebCategoryU
     allowNull: false,
     field: "meta"
   })
-  meta!: WebMeta;
+  meta!: HTMLWebData;
 
   @Column({
     type: DataType.STRING,
@@ -94,6 +95,13 @@ export class WebCategoryUrl extends Model<WebCategoryUrlAttributes, WebCategoryU
     }
     this.setDataValue('probability', value);
   }
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true,
+    field: "raw_category",
+  })
+  rawCategory?: string;
 
   @Column({
     type: DataType.BOOLEAN,

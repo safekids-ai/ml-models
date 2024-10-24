@@ -7,7 +7,7 @@ import {
   WebCategoryProviderType, WebCategoryResponse,
   WebCategoryType,
   WebCategoryTypesEnum,
-  WebMeta
+  HTMLWebData
 } from "@safekids-ai/web-category-types";
 import {WebCategorizer, WebContentScraper} from "@safekids-ai/web-category";
 import {WebCategoryUrl} from "./entities/web-category-url-entity";
@@ -16,6 +16,7 @@ import {WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
 import {CacheTTL} from "@nestjs/cache-manager";
 import {WebCategoryHost} from "./entities/web-category-host-entity";
 import {hasQueryParams, isRootURL} from "apps/ml-api/src/app/utils/http.util";
+import {StringUtils} from "../utils/stringUtils";
 
 @Injectable()
 export class WebCategoryService {
@@ -67,20 +68,44 @@ export class WebCategoryService {
         aiGenerated: result.aiGenerated,
         verified: result.verified,
         categories: categories,
-        probability: probability
+        probability: probability,
+        rawCategory: null
       }
     }
     return null;
   }
 
-  async categorize(url: string, meta?: WebMeta): Promise<WebCategoryUrlResponseDto> {
-    const queryParams = hasQueryParams(url);
+  async categorizeText(_text: string, url?: string): Promise<WebCategoryUrlResponseDto> {
+    const text = StringUtils.ltrim(_text, 1000);
+    if (!text || text.length < 20) {
+      throw Error(`Text is < 20 characters. Provide more. text:${text} url:${url}`);
+    }
 
-    if (queryParams && !meta) {
-      throw new NotFoundException("Cannot categories a url with query parameters and without meta provided. Provided " + url);
+    let result: WebCategoryResponse = await this.webCategorizer.categorize(text);
+
+    if (!result || !result.categories || result.categories.length == 0) {
+      throw new NotFoundException(`Unable to find categories for text:${text} url:${url}`);
+    }
+
+    let probability = result.categories.map(item => item.probability);
+    let categories = result.categories.map(item => item.category.id);
+    let rawCategory = result.rawCategory;
+
+    this.log.debug(`[AI Request]: text:${text} result:${rawCategory}`);
+
+    return {
+      aiGenerated: true, verified: false, probability, categories, rawCategory
+    }
+  }
+
+  async categorize(url: string, htmlData: HTMLWebData): Promise<WebCategoryUrlResponseDto> {
+    if (!url) {
+      throw new Error(`Please provide either a url or text. Provided url:${url}`)
     }
 
     const host = this.getHost(url);
+
+    //check if a host has a category (at the root level)
     const hostCategory = await this.getHostCategory(host);
 
     if (hostCategory) {
@@ -92,34 +117,54 @@ export class WebCategoryService {
       }
     }
 
-    //return if exists in database
+    //return if url category exists in database
     const dbValue = await this.getURL(url)
     if (dbValue) {
       this.log.debug(`Database hit`, url, dbValue)
       return dbValue
     }
 
-    //lets categorize it
-    let text = null
-    if (!url && !meta) {
-      throw new Error(`Please provide either a url or text. Provided url:${url},meta:${meta}`)
+    const isHtmlData = (htmlData) ? htmlData.description || htmlData.htmlText || htmlData.ogDescription : false;
+
+    if (!isHtmlData) {
+      throw new NotFoundException(`No web html data provided for url:${url}`);
     }
 
-    if (!meta) {
-      this.log.debug("No text provided. Extracting it from url:", url)
-      meta = await this.getMeta(url)
+    //extract html data if not provided
+    // let scrapedHtmlData: HTMLWebData = null;
+    //
+    // try {
+    //   scrapedHtmlData = await this.getHtmlData(url);
+    //   htmlData = scrapedHtmlData;
+    // } catch (error) {
+    //   this.log.debug(`Unable to get html data for url:${url} due to ${error}`);
+    //   if (!htmlData) {
+    //     throw error;
+    //   }
+    // }
+
+    let text = null;
+
+    if (htmlData.description) {
+      text = htmlData.description
+    } else if (htmlData.ogDescription) {
+      text = htmlData.ogDescription
+    } else if (htmlData.title) {
+      text = htmlData.title
     }
 
-    if (meta.description) {
-      text = meta.description
-    } else if (meta.title && meta.title.length > 50) {
-      text = meta.title
-    } else if (!meta.rating) {
-      throw new NotFoundException(`Unable to get title or description for url: ${url}`)
+    //add keywords
+    if (htmlData.keywords) {
+      text = text + "\n" + htmlData.keywords;
     }
 
-    const isAdultMeta = HTMLMetaClassifier.isAdultMeta(meta);
-    const isWeaponsMeta = HTMLMetaClassifier.isWeaponsMeta(meta);
+    //adjust for the content of the page
+    if (htmlData.htmlText) {
+      text = (text) ? text + "\n" + htmlData.htmlText : htmlData.htmlText;
+    }
+
+    const isAdultMeta = HTMLMetaClassifier.isAdultMeta(htmlData);
+    const isWeaponsMeta = HTMLMetaClassifier.isWeaponsMeta(htmlData);
 
     let result: WebCategoryResponse = undefined;
 
@@ -127,17 +172,15 @@ export class WebCategoryService {
     let verified = false;
     let probability: number[] = null;
     let codes: number[] = null;
+    let rawCategoryJson: string = null;
 
-    this.log.debug("Running the following through AI", {url: url, text: text})
     try {
-      result = await this.webCategorizer.categorize(text, url);
-      if (!result || result.length == 0) {
+      const resp = await this.categorizeText(text, url);
+      ({aiGenerated, verified, probability, categories: codes, rawCategory: rawCategoryJson} = resp);
+
+      if (!resp || !codes || codes.length == 0) {
         throw new NotFoundException(`Unable to find categories for ${url}`);
       }
-      aiGenerated = true;
-      verified = false;
-      probability = result.map(item => item.probability);
-      codes = result.map(item => item.category.id);
 
       if (isAdultMeta) {
         verified = true;
@@ -148,7 +191,7 @@ export class WebCategoryService {
       }
     } catch (error) {
       if (isAdultMeta) {
-        this.log.debug(`Ignoring error in classifier since adult meta: ${url} -> ${meta}`, error);
+        this.log.debug(`Ignoring error in classifier since adult meta: ${url}`, error);
         const category = (isWeaponsMeta) ? WebCategoryTypesEnum.WEAPONS : WebCategoryTypesEnum.INAPPROPRIATE_FOR_MINORS;
         aiGenerated = false;
         verified = true;
@@ -159,26 +202,27 @@ export class WebCategoryService {
       }
     }
 
-    this.log.debug("Found the following categories:", {url: url, text: text, result: result})
+    const { htmlText, ...metaData } = htmlData;
 
     const source = WebCategoryProviderType[this.getProviderName()]
     try {
-      if (url.length < 255 && !queryParams) {
-        const dbStore = WebCategoryUrl.findOrCreate({
-          where: {url},
-          defaults: {
-            meta: meta,
-            source: source,
-            category: codes,
-            aiGenerated: aiGenerated,
-            verified: verified,
-            probability: probability,
-            wrongCategory: false,
-            createdBy: "user",
-            updatedBy: "user"
-          }
-        })
-        this.log.debug("Stored web category", dbStore)
+      if (url.length < 255) {
+        // const dbStore = WebCategoryUrl.findOrCreate({
+        //   where: {url},
+        //   defaults: {
+        //     meta: metaData,
+        //     source: source,
+        //     category: codes,
+        //     rawCategory: rawCategoryJson,
+        //     aiGenerated: aiGenerated,
+        //     verified: verified,
+        //     probability: probability,
+        //     wrongCategory: false,
+        //     createdBy: "user",
+        //     updatedBy: "user"
+        //   }
+        // })
+        //this.log.debug("Stored web category", dbStore)
       }
       return {
         aiGenerated, verified, probability, categories: codes
@@ -188,8 +232,8 @@ export class WebCategoryService {
     }
   }
 
-  async getMeta(url: string): Promise<WebMeta> {
+  async getHtmlData(url: string): Promise<HTMLWebData> {
     const helper = new WebContentScraper()
-    return helper.getMetadata(url)
+    return helper.getHtmlData(url)
   }
 }
