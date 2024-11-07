@@ -68,38 +68,58 @@ const Banner = () => {
               <div className="featured-logos hidden lg:block not-italic font-medium text-lg leading-[45px] xl:leading-[24px] tracking-[0.21em] uppercase pt-[4rem]">
                 Featured in
                 <br />
-                <img
-                  src="/images/featured-in-logos.png"
-                  alt=""
-                  useMap="#image-map"
-                />
-                <map name="image-map">
-                  <area
-                    shape="rect"
-                    coords="0,0,135,86"
+                <br/>
+                <div
+                  style={{ display: 'flex', gap: '50px', alignItems: 'center' }}
+                >
+                  <a
+                    href="https://www.abcactionnews.com/news/anchors-report/brothers-create-app-using-new-approach-to-keep-kids-safe-while-online"
+                    target="_blank"
+                    aria-label=""
+                  >
+                    <img
+                      src="/images/abc_logo.jpeg"
+                      alt="ABC"
+                      style={{ height: '50px', minWidth: '50px' }}
+                    />
+                  </a>
+
+                  <a
                     href="https://www.fox13news.com/news/teen-creates-app-to-protect-kids-from-social-media-says-total-ban-wont-work"
-                    alt="FOX 13"
-                  />
-                  <area
-                    shape="rect"
-                    coords="135,0,235,86"
-                    href="https://www.globenewswire.com/news-release/2022/09/28/2524695/0/en/Safe-Kids-AI-Launches-New-Gmail-Extension-Aimed-At-Helping-Kids-Make-Better-Decisions-Online.html"
-                    alt=""
-                  />
-                  <area
-                    shape="rect"
-                    coords="235,0,400,86"
-                    href="https://www.aol.com/news/teen-creates-app-protect-kids-033535236.html"
-                    alt=""
-                  />
-                  <area
-                    shape="rect"
-                    coords="400,0,900,86"
-                    href="https://finance.yahoo.com/news/safe-kids-ai-launches-gmail-185100986.html"
-                    alt=""
-                  />
-                  {/* Add more <area> tags for additional clickable areas */}
-                </map>
+                    target="_blank"
+                    aria-label=""
+                  >
+                    <img
+                      src="/images/fox_logo.png"
+                      alt="FOX 13"
+                      style={{ height: '50px',minWidth: '50px' }}
+                    />
+                  </a>
+
+                  <a
+                    href="https://calmatters.org/education/2024/07/web-filter/"
+                    target="_blank"
+                    aria-label=""
+                  >
+                    <img
+                      src="/images/cal_matters_logo.png"
+                      alt="CalMatters"
+                      style={{ height: '50px',minWidth: '200px' }}
+                    />
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/posts/aahil-valliani-910996220_my-first-radio-interview-on-wiod-610-am-activity-7182475412231352320-4kx3/"
+                    target="_blank"
+                    aria-label=""
+                  >
+                    <img
+                      src="/images/wiod_logo.png"
+                      alt="WIOD"
+                      style={{ height: '50px', minWidth: '50px' }}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -114,19 +134,71 @@ const Banner = () => {
               className="lg:hidden mx-auto"
               alt=""
             />
-            <div className="featured-logos lg:hidden not-italic font-medium text-lg leading-[45px] tracking-[0.21em] uppercase pt-[1.5rem]">
+            <div
+              className="featured-logos lg:hidden not-italic font-medium text-lg leading-[45px] tracking-[0.21em] uppercase pt-[1.5rem]">
               Featured in
               <br />
-              <img
-                src="/images/featured-in-logos.png"
-                className="img-logos"
-                alt=""
-              />
+              <div
+                style={{ display: 'flex', gap: '50px', alignItems: 'center' }}
+              >
+                <a
+                  href="https://www.abcactionnews.com/news/anchors-report/brothers-create-app-using-new-approach-to-keep-kids-safe-while-online"
+                  target="_blank"
+                  aria-label=""
+                >
+                  <img
+                    src="/images/abc_logo.jpeg"
+                    alt="ABC"
+                    style={{ height: '50px', minWidth: '50px' }}
+                  />
+                </a>
+
+                <a
+                  href="https://www.fox13news.com/news/teen-creates-app-to-protect-kids-from-social-media-says-total-ban-wont-work"
+                  target="_blank"
+                  aria-label=""
+                >
+                  <img
+                    src="/images/fox_logo.png"
+                    alt="FOX 13"
+                    style={{ height: '50px', minWidth: '50px' }}
+                  />
+                </a>
+
+                <a
+                  href="https://calmatters.org/education/2024/07/web-filter/"
+                  target="_blank"
+                  aria-label=""
+                >
+                  <img
+                    src="/images/cal_matters_logo.png"
+                    alt="CalMatters"
+                    style={{ height: '50px', minWidth: '100px' }}
+                  />
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/posts/aahil-valliani-910996220_my-first-radio-interview-on-wiod-610-am-activity-7182475412231352320-4kx3/"
+                  target="_blank"
+                  aria-label=""
+                >
+                  <img
+                    src="/images/wiod_logo.png"
+                    alt="WIOD"
+                    style={{ height: '50px', minWidth: '50px' }}
+                  />
+                </a>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-      <VideoPlayer videoSrc='https://www.youtube.com/embed/1KCg9eU9e68?autoplay=1' open={modalOpen} setOpen={setModalOpen} />
+      <VideoPlayer
+        videoSrc="https://www.youtube.com/embed/1KCg9eU9e68?autoplay=1"
+        open={modalOpen}
+        setOpen={setModalOpen}
+      />
     </section>
   );
 };
