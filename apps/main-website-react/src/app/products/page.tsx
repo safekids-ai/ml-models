@@ -2,10 +2,10 @@ import React from 'react';
 import Carousel from '../../components/pages/products/Carousel';
 import FadeInView from '../../components/ui/FadeInView';
 import { gellix } from '../../components/fonts/gellix';
+
 const Products = () => {
   return (
     <div id="contentWrapper">
-      
       {/* Session Content Products 1 */}
       <section className="pt-[6rem] pb-[3rem] lg:pt-[10rem] pb-[5rem]">
         <div className="container-custom mx-auto">
@@ -16,8 +16,7 @@ const Products = () => {
                 <span className="check-point" />
               </h1>
               <h2 className="text-[38px] leading-[42px] py-[1rem] sm:text-[48px] sm:leading-[52px] font-extrabold font-gallix-extrabold">
-                An added layer {' '}
-                <span className="color2">of protection</span>
+                An added layer <span className="color2">of protection</span>
               </h2>
             </div>
             <div className="lg:w-8/12 w-full lg:mx-auto">
@@ -30,9 +29,8 @@ const Products = () => {
                 <div>
                   <h2 className="text-[32px] text-center sm:text-left">
                     Most advanced AI powered filter that looks for{' '}
-                    <span className="color2">intent{' '}</span>
-                    and{' '}
-                    <span className="color2">re-inforces</span> positive
+                    <span className="color2">intent </span>
+                    and <span className="color2">re-inforces</span> positive
                     behavior in kids{' '}
                   </h2>
                 </div>
@@ -80,6 +78,16 @@ const Products = () => {
                 src="https://youtube.com/embed/79Tw1E0h-cQ?rel-0"
                 allowFullScreen={true}
               />
+              <div className="pt-4">
+                <iframe
+                  frameBorder={0}
+                  width="100%"
+                  height={329}
+                  className="embed-responsive-item"
+                  src="https://youtube.com/embed/jVvqryUcj34?rel-0"
+                  allowFullScreen={true}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -95,7 +103,9 @@ const Products = () => {
                   src="images/products/product-icon2.svg"
                   alt=""
                 />
-                <p className={`text-[#4BC58A] font-medium not-italic ${gellix.className} text-[20px] leading-[30px] mb-[1.5rem] sm:mb-[2rem] sm:px-[3rem] xl:px-[0] xl:text-[22px] min-[1920px]:text-[24px] min-[1920px]:leading-[35px]`}>
+                <p
+                  className={`text-[#4BC58A] font-medium not-italic ${gellix.className} text-[20px] leading-[30px] mb-[1.5rem] sm:mb-[2rem] sm:px-[3rem] xl:px-[0] xl:text-[22px] min-[1920px]:text-[24px] min-[1920px]:leading-[35px]`}
+                >
                   Contact us for help. We're available to listen and find
                   effective solutions to assist you. Let us know how we can
                   help.
@@ -119,7 +129,9 @@ const Products = () => {
                   src="images/products/product-icon3.svg"
                   alt=""
                 />
-                <p className={`text-[#765FEF] font-medium not-italic ${gellix.className} text-[20px] leading-[30px] mb-[1.5rem] sm:mb-[2rem] sm:px-[3rem] xl:px-[0] xl:text-[22px] min-[1920px]:text-[24px] min-[1920px]:leading-[35px]`}>
+                <p
+                  className={`text-[#765FEF] font-medium not-italic ${gellix.className} text-[20px] leading-[30px] mb-[1.5rem] sm:mb-[2rem] sm:px-[3rem] xl:px-[0] xl:text-[22px] min-[1920px]:text-[24px] min-[1920px]:leading-[35px]`}
+                >
                   Our email application is free for a limited time and helps
                   kids identify bullying for both incoming and outgoing emails.
                 </p>
