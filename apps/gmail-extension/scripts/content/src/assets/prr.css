@@ -324,11 +324,20 @@ btn_sk {
 }
 
 .sk_toxic {
-    border-bottom: 2px solid red;
-    -webkit-text-decoration-style: wavy;
-    -moz-text-decoration-style: wavy;
-    text-decoration-style: wavy;
     position: relative;
+    display: inline;
+}
+
+.sk_toxic::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: red;
+    background-size: 6px 2px;
+    pointer-events: none;
 }
 
 .hover-panel {
