@@ -9,5 +9,6 @@
         "destination": "dist/apps/gmail-extension/manifest.json"
       }
     }
-  }
+  },
+  "include": ["apps/gmail-extension/**/*"]
 }

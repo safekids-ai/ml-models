@@ -1,14 +1,14 @@
-import {ComposeView} from "@inboxsdk/core";
-import {EmailNotificationEvent, EventType, Flag} from "../../../common/types/events.types";
-import {PrrUserAction} from "../../../common/enum/prrAction";
-import {EmailMessage} from "../../../common/types/EmailMessage";
-import {ComposeOption} from "../InBoxSdkHandler";
-import {InboxBackgroundCommunicator} from "./InboxBackgroundCommunicator";
-import {IInboxEventHandler} from "./InBoxEventHandler";
-import {IdleTimer} from "./IdleTimer";
-import {IInboxDialogs} from "./InboxDialogs";
-import {DOMUtils} from "../utils/DOMUtils";
-import {v4 as uuidv4} from 'uuid';
+import { ComposeView } from "@inboxsdk/core";
+import { EmailNotificationEvent, EventType, Flag } from "../../../common/types/events.types";
+import { PrrUserAction } from "../../../common/enum/prrAction";
+import { EmailMessage } from "../../../common/types/EmailMessage";
+import { ComposeOption } from "../InBoxSdkHandler";
+import { InboxBackgroundCommunicator } from "./InboxBackgroundCommunicator";
+import { IInboxEventHandler } from "./InBoxEventHandler";
+import { IdleTimer } from "./IdleTimer";
+import { IInboxDialogs } from "./InboxDialogs";
+import { DOMUtils } from "../utils/DOMUtils";
+import { v4 as uuidv4 } from 'uuid';
 
 export class InBoxComposeViewHandler {
   set modelRunner(value: InboxBackgroundCommunicator) {
@@ -26,6 +26,9 @@ export class InBoxComposeViewHandler {
   private interval: any;
   private oldComposeText: string;
   private composeView: ComposeView | null;
+
+  // Set to store dismissed text
+  private dismissedText = new Set<String>();
 
   constructor(modelRunner: InboxBackgroundCommunicator, prrDialog: IInboxDialogs, eventHandler: IInboxEventHandler) {
     this._modelRunner = modelRunner;
@@ -45,6 +48,9 @@ export class InBoxComposeViewHandler {
       }
     });
     this.idleTimer.startMonitoring();
+
+    // Clear dismissed text on start
+    this.dismissedText.clear();
 
     //add button to check compose message
     composeView.addButton({
@@ -74,6 +80,9 @@ export class InBoxComposeViewHandler {
       //reset on destroy
       myself.resetParams();
 
+      // Clear dismissed text on destroy
+      myself.dismissedText.clear();
+
       if (myself.interval != null) {
         clearInterval(myself.interval);
       }
@@ -92,16 +101,21 @@ export class InBoxComposeViewHandler {
   }
 
   async onInBoxCompose(composeView: ComposeView, event: any): Promise<void> {
+    console.log("onInBoxCompose");
+
     if (!this.messsageClean) {
       event.cancel();
     }
 
     if (this.messsageClean) {
       this.resetParams();
+
+      // Clear dismissed text on reset
+      this.dismissedText.clear();
       return;
     }
 
-    const message = {subject: composeView.getSubject(), body: composeView.getTextContent()};
+    const message = { subject: composeView.getSubject(), body: composeView.getTextContent() };
     const toxic = await this._modelRunner.isToxicAsync(null, null, message.subject + "." + message.body, 300, true);
 
     if (!toxic) {
@@ -129,6 +143,9 @@ export class InBoxComposeViewHandler {
         return;
       }
       event.mlFlag = Flag.UNKIND
+
+      await this.highlightToxicText(composeView);
+
       const forceToChangeMessage = (this._attemptsToChangeMessage < this.maxForcedRetries);
       const prrResponse = forceToChangeMessage ? await this.prrDialog.doPRRComposeForceChange() :
         await this.prrDialog.doPRRComposeSendItAnyway();
@@ -175,10 +192,12 @@ export class InBoxComposeViewHandler {
     for (const node of nodes) {
       //console.log("Node:" + node.nodeName + "->" + node.nodeType);
       if (node.nodeType == Node.TEXT_NODE) {
-        const plainText = node.textContent;
-        const toxic = await this._modelRunner.isToxicAsync(null, null, plainText, 100, true);
-        if (toxic) {
-          nodesToHighlight.add(node);
+        const plainText = node.textContent.replace(/\n/g, "").trim();
+        if (!this.dismissedText.has(plainText)) {
+          const toxic = await this._modelRunner.isToxicAsync(null, null, plainText, 100, true);
+          if (toxic) {
+            nodesToHighlight.add(node);
+          }
         }
       }
     }
@@ -219,6 +238,124 @@ export class InBoxComposeViewHandler {
         }
       }
     }
+
+    document.querySelectorAll(".sk_toxic").forEach(item => {
+      const handleMouseEnter = () => {
+        console.log("MOUSE EVENT ALIVE");
+        // Create hover panel
+        const panel = document.createElement('div');
+        panel.className = 'hover-panel';
+
+        // Add content
+        const content = document.createElement('div');
+        content.className = "hover-panel-content";
+        content.textContent = "This sentence doesn't look kind";
+
+        // Add button
+        const button = document.createElement('button');
+        button.className = 'hover-panel-button';
+        button.textContent = '🗑️Dismiss';
+        // Add logo
+        const logo = document.createElement('div');
+        logo.className = 'hover-panel-logo';
+        const logoImg = document.createElement('img');
+        logoImg.src = chrome.runtime.getURL('public/html/logo.svg');
+        logoImg.alt = 'Logo';
+        logo.appendChild(logoImg);
+
+        // Assemble panel
+        panel.appendChild(content);
+        panel.appendChild(button);
+        panel.appendChild(logo);
+
+        // Add panel to element
+        item.appendChild(panel);
+
+        // Create an invisible area between text and panel
+        const buffer = document.createElement('div');
+        buffer.style.position = 'absolute';
+        buffer.style.top = '100%';
+        buffer.style.left = '0';
+        buffer.style.width = '100%';
+        buffer.style.height = '8px'; // Same as margin-top of panel
+        item.appendChild(buffer);
+
+        // const rect = panel.getBoundingClientRect();
+
+        // if (rect.right > window.innerWidth) {
+        //   panel.style.left = 'auto';
+        //   panel.style.right = '0';
+        // }
+
+        // if (rect.bottom > window.innerHeight) {
+        //   panel.style.top = 'auto';
+        //   panel.style.bottom = '100%';
+        //   panel.style.marginTop = '0';
+        //   panel.style.marginBottom = '8px';
+        // }
+
+        // Add hover handlers to keep panel visible
+        let timeoutId = null;
+        const hidePanel = () => {
+          timeoutId = setTimeout(() => {
+            if (panel && panel.parentNode) {
+              panel.remove();
+            }
+            if (buffer && buffer.parentNode) {
+              buffer.remove();
+            }
+          }, 200);
+        };
+
+        const cancelHide = () => {
+          clearTimeout(timeoutId);
+        };
+
+        panel.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+        });
+
+        panel.addEventListener('mouseenter', cancelHide);
+        panel.addEventListener('mouseleave', hidePanel);
+        buffer.addEventListener('mouseenter', cancelHide);
+        buffer.addEventListener('mouseleave', hidePanel);
+        item.addEventListener('mouseleave', hidePanel);
+
+        // Add click handler
+        button.addEventListener('click', async () => {
+          item.classList.remove("sk_toxic");
+
+          let originalText = '';
+
+          // Find the text node (should be the first child due to how we structured it)
+          if (item.firstChild && item.firstChild.nodeType === Node.TEXT_NODE) {
+            originalText = item.firstChild.textContent;
+          } else {
+            // If somehow the structure is different, get text content excluding the panel
+            originalText = Array.from(item.childNodes)
+              .filter(node => node.nodeType === Node.TEXT_NODE)
+              .map(node => node.textContent)
+              .join('');
+          }
+
+          // Create new text node with original text only
+          const textNode = document.createTextNode(originalText);
+
+          // Replace the span with just the text
+          if (item.parentNode) {
+            item.parentNode.replaceChild(textNode, item);
+            this.dismissedText.add(originalText.replace(/\n/g, "").trim());
+          }
+
+          // item.removeEventListener('mouseenter', handleMouseEnter);
+          hidePanel();
+
+          await this.highlightToxicText(_composeView);
+        });
+      }
+
+      item.addEventListener('mouseenter', handleMouseEnter);
+    });
   }
 
   get threadId(): string {
