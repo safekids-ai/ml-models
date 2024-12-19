@@ -27,6 +27,7 @@ export class InBoxComposeViewHandler {
   private oldComposeText: string;
   private composeView: ComposeView | null;
 
+  // Set to store dismissed text
   private dismissedText = new Set<String>();
 
   constructor(modelRunner: InboxBackgroundCommunicator, prrDialog: IInboxDialogs, eventHandler: IInboxEventHandler) {
@@ -48,6 +49,7 @@ export class InBoxComposeViewHandler {
     });
     this.idleTimer.startMonitoring();
 
+    // Clear dismissed text on start
     this.dismissedText.clear();
 
     //add button to check compose message
@@ -78,6 +80,9 @@ export class InBoxComposeViewHandler {
       //reset on destroy
       myself.resetParams();
 
+      // Clear dismissed text on destroy
+      myself.dismissedText.clear();
+
       if (myself.interval != null) {
         clearInterval(myself.interval);
       }
@@ -96,12 +101,17 @@ export class InBoxComposeViewHandler {
   }
 
   async onInBoxCompose(composeView: ComposeView, event: any): Promise<void> {
+    console.log("onInBoxCompose");
+
     if (!this.messsageClean) {
       event.cancel();
     }
 
     if (this.messsageClean) {
       this.resetParams();
+
+      // Clear dismissed text on reset
+      this.dismissedText.clear();
       return;
     }
 
@@ -301,6 +311,10 @@ export class InBoxComposeViewHandler {
           clearTimeout(timeoutId);
         };
 
+        panel.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+        });
+
         panel.addEventListener('mouseenter', cancelHide);
         panel.addEventListener('mouseleave', hidePanel);
         buffer.addEventListener('mouseenter', cancelHide);
@@ -308,7 +322,7 @@ export class InBoxComposeViewHandler {
         item.addEventListener('mouseleave', hidePanel);
 
         // Add click handler
-        button.addEventListener('click', () => {
+        button.addEventListener('click', async () => {
           item.classList.remove("sk_toxic");
 
           let originalText = '';
@@ -335,6 +349,8 @@ export class InBoxComposeViewHandler {
 
           // item.removeEventListener('mouseenter', handleMouseEnter);
           hidePanel();
+
+          await this.highlightToxicText(_composeView);
         });
       }
 

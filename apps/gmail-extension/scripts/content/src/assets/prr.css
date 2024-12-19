@@ -353,6 +353,18 @@ btn_sk {
     padding: 12px;
     margin-top: 8px;
     z-index: 1000;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+}
+
+.hover-panel * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .hover-panel::before {
@@ -373,6 +385,10 @@ btn_sk {
     color: #333;
     margin-bottom: 10px;
     padding-left: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .hover-panel-button {
@@ -384,12 +400,20 @@ btn_sk {
     transition: background-color 0.2s;
     background-color: transparent;
     border: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .hover-panel-logo {
     margin-top: 6px;
     padding-right: 6px;
     text-align: right;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .hover-panel-button:hover {
