@@ -7,7 +7,7 @@ type IFilter = {
   reset: () => void;
 };
 
-type FilterRequestQueueValue = Array<
+type FilterRequestCacheValue = Array<
   Array<{
     resolve: (value: PredictionResponse) => void;
     reject: (error: PredictionRequest) => void;
@@ -30,12 +30,12 @@ export type FilterSettingsType = {
 export class Filter implements IFilter {
   protected counter: number;
   protected violationCounter: number;
-  private readonly requestQueue: Map<string, FilterRequestQueueValue>;
+  private readonly requestCache: Map<string, FilterRequestCacheValue>;
 
   constructor(protected logger: Logger) {
     this.counter = 0;
     this.violationCounter = 0;
-    this.requestQueue = new Map();
+    this.requestCache = new Map();
   }
 
   public reset(url?: string) {
@@ -43,7 +43,7 @@ export class Filter implements IFilter {
     this.violationCounter = 0;
     if (url) {
       // @ts-ignore
-      this.requestQueue.set(url, null);
+      this.requestCache.set(url, null);
     }
   }
 
@@ -51,79 +51,36 @@ export class Filter implements IFilter {
   protected async requestToAnalyzeImage(request: PredictionRequest): Promise<PredictionResponse> {
     return new Promise((resolve, reject) => {
       const queueName = request.url;
-      try {
-        if (this.requestQueue.has(queueName)) {
-          this.requestQueue.get(queueName)?.push([{resolve, reject}]);
-        } else {
-          this.requestQueue.set(queueName, [[{resolve, reject}]]);
-          if (ImageUtils.isBase64(request.url)) {
-            this.logger.debug(`sending Base64 image request.`);
-            this._requestToAnalyzeImage(request);
-          } else {
-            fetch(request.url)
-              .then((response) => {
-                response
-                  .blob()
-                  .then((blob) => {
-                    const type = blob.type;
-                    blob.arrayBuffer()
-                      .then((arrayBuffer: ArrayBuffer) => {
-                        this.logger.debug(`Sending blob image request.`);
-                        let data = {
-                          // @ts-ignore
-                          //data: Array.apply(null, new Uint8Array(arrayBuffer)),
-                          data: Array.from(new Uint8Array(arrayBuffer)),
-                          contentType: type,
-                        };
-                        let transportData = JSON.stringify(data);
-                        request.data = transportData;
-                        this._requestToAnalyzeImage(request);
-                      })
-                      .catch((e) => {
-                        /* istanbul ignore next */
-                        this.logger.error(`(1) Failed to process image. ${e}`);
-                        reject(request);
-                      });
-                  })
-                  .catch((e) => {
-                    /* istanbul ignore next */
-                    this.logger.error(`(2) Failed to process image. ${e}`);
-                    reject(request);
-                  });
-              })
-              .catch((e) => {
-                /* istanbul ignore next */
+      if (this.requestCache.has(queueName)) {
+        this.requestCache.get(queueName)?.push([{resolve, reject}]);
+      } else {
+        this.requestCache.set(queueName, [[{resolve, reject}]]);
+        try {
+          this._requestToAnalyzeImage(request);
+        } catch (error) {
+          if (this.requestCache.has(queueName)) {
+            const queue = this.requestCache.get(queueName);
+            if (queue != null) {
+              for (const [{reject}] of queue) {
                 reject(request);
-                this.logger.error(`(3) Failed to process image. ${e}`);
-              });
-          }
-        }
-      } catch {
-        if (this.requestQueue.has(queueName)) {
-          const queue = this.requestQueue.get(queueName);
-          if (queue != null) {
-            for (const [{reject}] of queue) {
-              reject(request);
+              }
+            } else {
+              throw new Error('unable to fetch queue after requestToAnalyzeImage');
             }
-          } else {
-            throw new Error('unable to fetch queue after requestToAnalyzeImage');
           }
-        } else {
-          /* istanbul ignore next */
-          reject(request);
         }
-        this.requestQueue.delete(queueName);
       }
     });
   }
 
   protected _requestToAnalyzeImage(value: PredictionRequest): void {
     const request = {type: value.type, value};
+
     chrome.runtime.sendMessage(request, (response: PredictionResponse) => {
       if (chrome.runtime.lastError !== null && chrome.runtime.lastError !== undefined) {
         throw new Error('unable to get response.');
       }
-      const url = this.requestQueue.get(value.url);
+      const url = this.requestCache.get(value.url);
       if (url != null) {
         for (const [{resolve}] of url) {
           resolve(response);
@@ -133,7 +90,7 @@ export class Filter implements IFilter {
         throw new Error('unable to get url after call to private _requestToAnalyzeImage');
       }
 
-      this.requestQueue.delete(value.url);
+      this.requestCache.delete(value.url);
     });
   }
 }

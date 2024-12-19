@@ -1,6 +1,7 @@
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {MLModel, ModelSettings} from '@shared/types/MLModel.type';
 import {HttpUtils} from '@shared/utils/HttpUtils';
+import {VisionWeb} from '@safekids-ai/vision-js-web';
 
 const [resizeToWidth, resizeToHeight] = [640, 640];
 
@@ -16,7 +17,7 @@ export class ImageModel implements MLModel {
   private readonly secondFilterPercentages: Map<string, number> = new Map();
   private _ready: boolean = false;
 
-  constructor(private readonly model: any, private readonly logger: Logger, settings: ModelSettings) {
+  constructor(private readonly model: VisionWeb, private readonly logger: Logger, settings: ModelSettings) {
     this.setSettings(settings);
   }
 
@@ -72,7 +73,7 @@ export class ImageModel implements MLModel {
     const urlData = !(url === '') && url.startsWith('data:') ? HttpUtils.shortenURL(url, 50, 20) : url;
     this.logger.debug(`starting processing ML [${urlData}]`);
 
-    const prediction: any = await this.model.classifyImageData(image);
+    const prediction: any = await this.model.classifyImage(image);
     // const valid_detections_data = valid_detections.dataSync();
 
     return prediction as string;

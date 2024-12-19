@@ -47,7 +47,6 @@ export class PredictionQueue extends QueueBase {
       return;
     }
     const model = this.models.get(type);
-
     if (model != null) {
       model
         .predict(image, url)

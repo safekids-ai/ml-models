@@ -36,7 +36,7 @@ abstract class Vision {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this;
     if (cv && cv.Mat) {
-      await this.handleCreateSession(this.onnxUrl);
+      this.session = await this.handleCreateSession(this.onnxUrl);
       return;
     }
 

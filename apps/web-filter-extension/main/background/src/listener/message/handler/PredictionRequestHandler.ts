@@ -75,12 +75,12 @@ export class PredictionRequestHandler implements RequestHandler {
     try {
       //send request to predict
       result = await this.queue.predict(url, tabIdUrl, modelType, data);
-      result = result.toUpperCase();
-      //this.logger.debug(`Prediction is [${result}] for ${url}, model = ${modelType}`)
+      result = (result) ? result.toUpperCase() : result;
+      this.logger.debug(`Prediction is [${result}] for ${url}, model = ${modelType}`)
     } catch (e) {
       result = undefined;
       //TODO: absorbing error for now. investing the root cause for the issue
-      //this.logger.error(`Error occurred while predicting url[${url}]`);
+      this.logger.error(`Error occurred while predicting url[${url}]`, e);
     }
 
     let type = null;

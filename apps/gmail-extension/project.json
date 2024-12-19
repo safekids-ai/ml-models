@@ -1,13 +1,108 @@
 {
   "name": "gmail-extension",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/gmail-extension/",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "/src",
+  "type": "module",
+  "projectType": "application",
+  "implicitDependencies": [
+    "extension-hmr",
+    "extension-vite-config",
+    "extension-dev-utils"
+  ],
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@safekids-ai/common-plugin:copy-assets",
+      "executor": "nx:run-commands",
       "options": {
-        "source": "apps/gmail-extension/manifest.json",
-        "destination": "dist/apps/gmail-extension/manifest.json"
+        "commands": [
+          "nx run gmail-extension:build-background",
+          "nx run gmail-extension:build-content",
+          "nx run gmail-extension:build-onboarding",
+          "nx run gmail-extension:load-hmr-server"
+        ],
+        "parallel": true
+      }
+    },
+    "load-hmr-server": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ./dist/libs/extension-hmr/NxServerRunner.cjs"
+      }
+    },
+    "build-background": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/gmail-extension/main/background/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "emptyOutDir": false
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-content": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/gmail-extension/main/content/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}/content",
+        "emptyOutDir": false
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-onboarding": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/gmail-extension/main/pages/onboarding/vite.config.mjs",
+        "outputPath": "../../../dist/{projectRoot}/pages/onboarding"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/gmail-extension/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/gmail-extension/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     }
   }

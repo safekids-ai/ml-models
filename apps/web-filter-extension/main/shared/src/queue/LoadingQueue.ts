@@ -1,7 +1,7 @@
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {MLModel} from '@shared/types/MLModel.type';
 import {ReduxStorage} from '@shared/types/ReduxedStorage.type';
-import {ImageUtils} from '@shared/utils/ImageUtils';
+import {ImageContent, ImageUtils} from '@shared/utils/ImageUtils';
 import {ConcurrentQueue} from './ConcurrentQueue';
 import {PredictionQueue} from './PredictionQueue';
 import {requestQueueValue, TabIdUrl} from './QueueBase';
@@ -44,31 +44,11 @@ export class LoadingQueue extends PredictionQueue {
 
   /* istanbul ignore next */
   private async loadImage(url: string, data?: string): Promise<ImageData | string> {
-    let byteArray: Uint8Array;
-    let imageType: string;
-    if (data) {
-      let receivedData = JSON.parse(data);
-      imageType = receivedData.contentType;
-      byteArray = new Uint8Array(receivedData.data);
-    } else {
-      imageType = url.substring('data:image/'.length, url.indexOf(';base64'));
-      const byteCharacters = atob(url.replace(/^data:image\/(png|jpeg|jpg);base64,/, ''));
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      byteArray = new Uint8Array(byteNumbers);
-    }
-    /* istanbul ignore next */
-    return new Promise((resolve, reject) => {
-      ImageUtils.byteArrayToImageData(byteArray, imageType)
-        .then((imageData: any) => {
-          resolve(imageData);
-        })
-        .catch((error: any) => {
-          reject(error);
-        });
-    });
+    let image:ImageContent = JSON.parse(data);
+
+    let {imageType, imageData} = image;
+    imageData = new Uint8Array(Object.values(imageData));
+    return ImageUtils.byteArrayToImageData(imageData, imageType);
   }
 
   /* istanbul ignore next */

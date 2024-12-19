@@ -5,7 +5,7 @@ import {TextFilter} from '@src/filter/TextFilter';
 import {DOMProcessor} from '@src/dom/DOMProcessor';
 import {DOMFilter} from '@src/dom/DOMFilterFactory';
 import {ContentFilterUtil} from "@shared/utils/content-filter/ContentFilterUtil"
-import {ImageUtils} from '@shared/utils/ImageUtils';
+import {ImageContent, ImageUtils} from '@shared/utils/ImageUtils';
 import {HttpUtils} from '@shared/utils/HttpUtils';
 import {DOMEventHandler} from '@src/handler/DOMEventHandler';
 import {MetaFilter} from "@src/filter/MetaFilter";
@@ -86,35 +86,34 @@ export class DOMWatcher implements IDOMWatcher {
       this.domFilter?.filter(element as HTMLElement);
     }
 
-    const images = element.getElementsByTagName('img');
-    const sortedImages = ImageUtils.sort(images);
-    for (let i = 0; i < sortedImages.length; i++) {
-      this.imageFilter.analyzeImage(sortedImages[i]);
-    }
-    const bgImages = DOMProcessor.getBackgroundImages(element);
-    for (let i = 0; i < bgImages.length; i++) {
-      const img = document.createElement('img');
-      img.src = bgImages[i];
-      img.height = img.width = 50;
-      this.imageFilter.analyzeImage(img);
-    }
-
-    const headings1 = element.querySelectorAll('a,h3');
-    for (let i = 0; i < headings1.length; i++) {
-      const elem = headings1[i] as HTMLElement;
-      if (elem.closest('.ytd-promoted-sparkles-web-renderer') != null) {
-        continue;
-      }
-      const parentElement = elem.parentElement;
-      if (parentElement?.nodeName.toUpperCase() === 'A') {
-        continue;
-      }
-      this.textFilter.analyze(elem);
-    }
-
-    // const txtNodes = this.document.querySelectorAll('p,h1,h2,h3,h4,h5,h6,div,span');
-    // const textElements: HTMLElement[] = [...txtNodes] as HTMLElement[];
-    // this.metaFilter.analyze(textElements);
+    // let {mlProcessLimit, nlpProcessLimit} = this.store.getState().settings;
+    // const images: ImageContent[] = ImageUtils.getImages(element as HTMLElement);
+    // const sortedImages = ImageUtils.sort(images);
+    // const imagesTotal = sortedImages.length === 0 || sortedImages.length <= mlProcessLimit ? sortedImages.length : mlProcessLimit;
+    //
+    // for (let i = 0; i < imagesTotal; i++) {
+    //   const image = sortedImages[i];
+    //   if (image) {
+    //     ImageUtils.extractImageData(image).then(imageContent => {
+    //       if (imageContent) {
+    //         this.imageFilter.analyzeImage(imageContent);
+    //       }
+    //     });
+    //   }
+    // }
+    //
+    // const headings1 = element.querySelectorAll('a,h3');
+    // for (let i = 0; i < headings1.length; i++) {
+    //   const elem = headings1[i] as HTMLElement;
+    //   if (elem.closest('.ytd-promoted-sparkles-web-renderer') != null) {
+    //     continue;
+    //   }
+    //   const parentElement = elem.parentElement;
+    //   if (parentElement?.nodeName.toUpperCase() === 'A') {
+    //     continue;
+    //   }
+    //   this.textFilter.analyze(elem);
+    // }
 
     this.register(element);
   }
@@ -131,9 +130,9 @@ export class DOMWatcher implements IDOMWatcher {
   }
 
   checkAttributeMutation(target: Node): void {
-    if ((target as HTMLImageElement).nodeName === 'IMG') {
-      this.imageFilter.analyzeImage(target as HTMLImageElement);
-    }
+    // if ((target as HTMLImageElement).nodeName === 'IMG') {
+    //   this.imageFilter.analyzeImage(target as HTMLImageElement);
+    // }
   }
 
   private static getConfig(): MutationObserverInit {
@@ -158,25 +157,21 @@ export class DOMWatcher implements IDOMWatcher {
       this.domFilter?.filter(this.document.body);
     }
 
-    const {mlProcessLimit, nlpProcessLimit} = this.store.getState().settings;
-    const images = this.document.getElementsByTagName('img');
+    let {mlProcessLimit, nlpProcessLimit} = this.store.getState().settings;
+    const images: ImageContent[] = ImageUtils.getImages(this.document.body);
     const sortedImages = ImageUtils.sort(images);
     const imagesTotal = sortedImages.length === 0 || sortedImages.length <= mlProcessLimit ? sortedImages.length : mlProcessLimit;
-    for (let i = 0; i < imagesTotal; i++) {
-      if (sortedImages[i]) {
-        this.imageFilter.analyzeImage(sortedImages[i]);
-      }
-    }
-    // get elements that have images as background
-    // TODO: find a smart way to merge img and background images
-    const bgImages = DOMProcessor.getBackgroundImages(this.document.body);
-    const totalBGImages = bgImages.length === 0 || bgImages.length <= mlProcessLimit ? bgImages.length : mlProcessLimit;
-    for (let i = 0; i < totalBGImages; i++) {
-      const img = this.document.createElement('img');
-      img.src = bgImages[i];
-      img.height = img.width = 50;
-      this.imageFilter.analyzeImage(img);
-    }
+
+    // for (let i = 0; i < imagesTotal; i++) {
+    //   if (sortedImages[i]) {
+    //     ImageUtils.extractImageData(sortedImages[i]).then(imageContent => {
+    //       if (imageContent) {
+    //         this.imageFilter.analyzeImage(imageContent);
+    //       }
+    //     });
+    //   }
+    // }
+
     const headings1 = this.document.querySelectorAll('a,h3');
     const total = headings1.length === 0 || headings1.length <= nlpProcessLimit ? headings1.length : nlpProcessLimit;
     for (let i = 0; i < total; i++) {

@@ -7,12 +7,32 @@ import {IWebCategory} from "@shared/web-category/types/web-category.types";
 import {WebCategoryApiResponse} from "@shared/web-category/domain/WebCategoryApiResponse";
 import {HttpUtils} from "@shared/utils/HttpUtils";
 import {AbortError} from "redis";
+import {htmlToText} from 'html-to-text';
 
 type hasName = {
   name: string;
 };
 
 export class RESTWebCategoryService {
+  private readonly htmlTextOptions = {
+    wordwrap: null, // Disable word wrapping for long text blocks
+    selectors: [
+      {selector: 'title', format: 'skip'},  // Skip <title> (can handle separately)
+      {selector: 'h1', format: 'heading'},  // Handle <h1> headings
+      {selector: 'h2', format: 'heading'},  // Handle <h2> headings
+      {selector: 'div', format: 'block'},   // Include <div> elements
+      {selector: 'span', format: 'inline'}, // Include <span> elements (inline text)
+      {selector: 'p', format: 'paragraph'}, // Include paragraphs
+      {selector: 'form', format: 'skip'},   // Skip forms
+      {selector: 'select', format: 'skip'}, // Skip combo boxes
+      {selector: 'input', format: 'skip'},  // Skip input fields
+      {selector: 'button', format: 'skip'}, // Skip buttons
+      {selector: 'img', format: 'skip'},    // Skip images (embedded data URI or otherwise)
+      {selector: '[src^="data:"]', format: 'skip'},  // Skip any elements with base64-encoded data URIs
+    ],
+    limits: {maxInputLength: 1000000}, // Adjust to handle larger HTML input
+  };
+
   constructor(private readonly cache: LRUCache<string, IWebCategory>,
               private readonly restService: RESTService,
               private readonly log: Logger) {
@@ -69,13 +89,23 @@ export class RESTWebCategoryService {
       const baseUrl = HttpUtils.getBaseUrl(url);
       const isRoot = HttpUtils.isRootDomain(baseUrl);
 
+      let htmlDataModified = htmlData;
       this.log.debug(`[CategoryRequest] for baseUrl:${baseUrl} and url=${url}`, htmlData);
-      const htmlTextTrimmed = (htmlData?.htmlText) ? htmlData.htmlText.substring(0, Math.min(1000, htmlData.htmlText.length)) : undefined;
-      const htmlDataTrimmed = {...htmlData, htmlText: htmlTextTrimmed};
+
+      if (htmlData?.htmlText) {
+        let htmlText = htmlData.htmlText;
+        htmlText = htmlText.substring(0, Math.min(10000, htmlText.length));
+        htmlText = htmlToText(htmlText, this.htmlTextOptions);
+        if (htmlText && htmlText.length > 0) {
+          htmlText = htmlText.substring(0, Math.min(1000, htmlText.length));
+        }
+        htmlDataModified = {...htmlData, htmlText: htmlText};
+      }
+
       response = await this.restService.doPost(config.url,
         {
           url: url,
-          htmlMeta: (isRoot) ? htmlDataTrimmed : null
+          htmlMeta: (isRoot) ? htmlDataModified : null
         },
         {signal: controller.signal});
 

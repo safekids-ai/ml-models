@@ -207,22 +207,22 @@ export class WebCategoryService {
     const source = WebCategoryProviderType[this.getProviderName()]
     try {
       if (url.length < 255) {
-        // const dbStore = WebCategoryUrl.findOrCreate({
-        //   where: {url},
-        //   defaults: {
-        //     meta: metaData,
-        //     source: source,
-        //     category: codes,
-        //     rawCategory: rawCategoryJson,
-        //     aiGenerated: aiGenerated,
-        //     verified: verified,
-        //     probability: probability,
-        //     wrongCategory: false,
-        //     createdBy: "user",
-        //     updatedBy: "user"
-        //   }
-        // })
-        //this.log.debug("Stored web category", dbStore)
+        const dbStore = WebCategoryUrl.findOrCreate({
+          where: {url},
+          defaults: {
+            meta: metaData,
+            source: source,
+            category: codes,
+            rawCategory: rawCategoryJson,
+            aiGenerated: aiGenerated,
+            verified: verified,
+            probability: probability,
+            wrongCategory: false,
+            createdBy: "user",
+            updatedBy: "user"
+          }
+        })
+        this.log.debug("Stored web category", dbStore)
       }
       return {
         aiGenerated, verified, probability, categories: codes

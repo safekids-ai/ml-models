@@ -41,6 +41,7 @@ const googleMapping: { [key: string]: WebCategoryTypesEnum[] } = {
   "/Sensitive Subjects/Self-Harm": [WebCategoryTypesEnum.SELF_HARM],
   "/Sensitive Subjects/Violence & Abuse": [WebCategoryTypesEnum.VIOLENCE],
   "/Sensitive Subjects/War & Conflict": [WebCategoryTypesEnum.VIOLENCE],
+  "/Shopping/Shopping Portals": [WebCategoryTypesEnum.SHOPPING_PRODUCT_REVIEWS],
   "/Shopping/Apparel/Apparel Services": [WebCategoryTypesEnum.SHOPPING_PRODUCT_REVIEWS, WebCategoryTypesEnum.CLOTHING_FASHION_BEAUTY],
   "/Shopping/Apparel/Athletic Apparel": [WebCategoryTypesEnum.SHOPPING_PRODUCT_REVIEWS, WebCategoryTypesEnum.CLOTHING_FASHION_BEAUTY],
   "/Shopping/Apparel/Casual Apparel": [WebCategoryTypesEnum.SHOPPING_PRODUCT_REVIEWS, WebCategoryTypesEnum.CLOTHING_FASHION_BEAUTY],

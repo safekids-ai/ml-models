@@ -7,6 +7,8 @@
     "release": "dotenv release-it --",
     "release:dist:only": "release-it --no-increment --no-npm --no-git --no-github.release --no-plugins --ci",
     "publish:npm": "nx run-many --target=publish --projects=nlp-js-common,nlp-js-node,nlp-js-web,vision-js-common,vision-js-node,vision-js-web --parallel=false",
+    "gmail": "APP_ENV=production NODE_ENV=production nx run gmail-extension:build --configuration=production",
+    "gmail:dev": "APP_ENV=development NODE_ENV=development nx run gmail-extension:build --configuration=development --watch",
     "start:web-filter-extension:dev": "APP_ENV=development NODE_ENV=development nx run web-filter-extension:build --configuration=development --watch",
     "start": "nx run-many --parallel --target=serve --projects=ml-api,ml-api-web",
     "build:api:prod": "APP_ENV=production NODE_ENV=production nx build ml-api --configuration=production",
