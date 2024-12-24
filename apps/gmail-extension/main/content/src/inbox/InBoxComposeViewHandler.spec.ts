@@ -188,6 +188,7 @@ describe("content => InBoxComposeViewHandler", () => {
 
     const composeViewInstance = new ComposeViewClass();
     const mockComposeView = mock<typeof composeViewInstance>();
+
     when(mockComposeView.destroyed).thenReturn(destroyView);
 
     jest.spyOn(mockEventHandler, "notifyActivity");
