@@ -12,7 +12,8 @@ import {Logger} from "@shared/utils/Logger";
 import {EmailEventService} from "./api/emailEventService";
 import {NLPModelWrapperInterface} from "./model/NLPModelWrapperInterface";
 import {MessageId} from "@shared/types/MessageId";
-import {createMock} from "ts-auto-mock";
+import { mock, instance, when, verify } from 'ts-mockito';
+
 import MessageSender = chrome.runtime.MessageSender;
 import {HttpService} from "./api/httpService";
 import {OnBoardingService} from "./api/onboarding";
@@ -20,15 +21,20 @@ import {EmailEvent} from "@shared/types/EmailEvent";
 
 class MockEmailService extends EmailEventService {
     async sendEvent(event: EmailNotificationEvent | any): Promise<EmailNotificationEvent> {
-        const mockEvent = createMock<EmailNotificationEvent>();
+        const mockEvent = mock<EmailNotificationEvent>();
         return Promise.resolve(mockEvent);
     }
 }
 
 //common mock implementations
+jest.mock('src/constants', () => ({
+  ENVIRONMENT: 'development',
+  API_URL: 'http://localhost:3000'
+}));
+
 const logger = new Logger();
-const httpService = createMock<HttpService>();
-const onBoardingService = createMock<OnBoardingService>();
+const httpService = mock<HttpService>();
+const onBoardingService = mock<OnBoardingService>();
 const mockEmailService = new MockEmailService(logger,httpService,onBoardingService);
 const mockNlpWrapperToxic = {
     isToxic: jest.fn( (a, b, c) => new Promise( (resolve) => resolve(true))),
@@ -83,7 +89,7 @@ describe ("BackgroundEventHandler", () => {
         const jkl = {type: MessageId.GET_ML_TOXIC_STATUS, val: {ids:["jkl"]} as ToxicStatusRequestEvent};
         const request5 = {type: MessageId.GET_ML_TOXIC_STATUS, val: {ids:["mno", "pqr", "ghi", "jkl", "klm"]} as ToxicStatusRequestEvent};
         const emptyData = {type: MessageId.GET_ML_TOXIC_STATUS, val: {ids:[]} as ToxicStatusRequestEvent};
-        const mockSender = createMock<MessageSender>();
+        const mockSender = mock<MessageSender>();
 
         //cache hits
         eventHandler.onMessage(emptyData, mockSender, (response: any) => {
@@ -174,7 +180,7 @@ describe ("BackgroundEventHandler", () => {
             val: {eventType: EventType.EMAIL_READ_EVENT, email: {body: "toxic message", from: null, messageId: "toxic", subject: "test", threadId: null, to: null}} as EmailEvent
         };
 
-        const mockSender = createMock<MessageSender>();
+        const mockSender = mock<MessageSender>();
 
         //cache hits
         eventHandler.onMessage(messageCacheClean, mockSender, (response: any) => {
@@ -234,7 +240,7 @@ describe ("BackgroundEventHandler", () => {
         const messageCacheToxic = {type: MessageId.GET_NLP_CtoB, val: {id:"ghi", idType:IDType.THREAD_VIEW} as NLPRequestEvent};
         const messageDirectClean = {type: MessageId.GET_NLP_CtoB, val: {id:"zzz", idType:IDType.THREAD_VIEW} as NLPRequestEvent};
         const messageDirectToxic = {type: MessageId.GET_NLP_CtoB, val: {id:"toxic", idType:IDType.THREAD_VIEW, text: "toxic message"} as NLPRequestEvent};
-        const mockSender = createMock<MessageSender>();
+        const mockSender = mock<MessageSender>();
 
         //cache hits
         eventHandler.onMessage(messageCacheClean, mockSender, (response: any) => {
@@ -287,11 +293,11 @@ describe ("BackgroundEventHandler", () => {
     });
 
     test.skip ('saveOptIn', async () => {
-        const mockOnboardingService= createMock<OnBoardingService>();
-        const customChromeStorage = createMock<IChromeStorage>();
+        const mockOnboardingService= mock<OnBoardingService>();
+        const customChromeStorage = mock<IChromeStorage>();
         const cache = await new NLPResultCache(logger, customChromeStorage, "1.0");
-        let mockNlpWrapperCustom = createMock<NLPModelWrapperInterface>();
-        let mockSender = createMock<MessageSender>();
+        let mockNlpWrapperCustom = mock<NLPModelWrapperInterface>();
+        let mockSender = mock<MessageSender>();
         jest.spyOn(mockOnboardingService,"saveUserOnboarding").mockImplementation();
 
         const eventHandler = new BackgroundEventHandler(logger, cache, mockNlpWrapperCustom, mockEmailService,mockOnboardingService);

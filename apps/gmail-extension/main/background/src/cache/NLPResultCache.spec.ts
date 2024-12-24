@@ -1,11 +1,11 @@
-import {NLPResultCache} from "./cache/NLPResultCache";
+import {NLPResultCache} from "./NLPResultCache";
 import {Logger} from "@shared/utils/Logger";
-import {IChromeStorage} from "./cache/ChromeStorage";
-import {createMock} from "ts-auto-mock";
+import {IChromeStorage} from "./ChromeStorage";
+import { mock, instance, when, verify } from 'ts-mockito';
 import {
     NLPResultCacheListenerInterface
-} from "./cache/NLPResultCacheListener";
-import {NLPResultCacheData} from "./cache/NLPResultCacheData";
+} from "./NLPResultCacheListener";
+import {NLPResultCacheData} from "./NLPResultCacheData";
 
 const logger = new Logger();
 
@@ -64,7 +64,7 @@ describe ("background => NLPResultCache.load with version update", () => {
 describe ("background => NLPResultCache.load without version update", () => {
 
     test ('load success', async () => {
-        const mockListener = createMock<NLPResultCacheListenerInterface>();
+        const mockListener = mock<NLPResultCacheListenerInterface>();
         mockListener.onCacheLoadSuccess = jest.fn( (a: NLPResultCacheData) => {
             expect(a.isToxic("mno")).toBe(false);
             expect(a.isToxic("stu")).toBe(true);
@@ -98,7 +98,7 @@ describe ("background => NLPResultCache.load without version update", () => {
             set: jest.fn( () => new Promise( () => {
             })),
         } as IChromeStorage;
-        const mockListener = createMock<NLPResultCacheListenerInterface>();
+        const mockListener = mock<NLPResultCacheListenerInterface>();
 
         mockListener.onCacheLoadFail = jest.fn( (a: Error) => {
             expect(a).toStrictEqual(new Error("test error"));

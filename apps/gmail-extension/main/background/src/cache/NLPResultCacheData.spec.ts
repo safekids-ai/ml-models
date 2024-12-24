@@ -1,4 +1,4 @@
-import {NLPResultCacheData} from "./cache/NLPResultCacheData";
+import {NLPResultCacheData} from "./NLPResultCacheData";
 
 describe ("NLPResultCacheData", () => {
     test('all methods', async () => {

@@ -117,7 +117,6 @@ export class InBoxComposeViewHandler {
       emailEvent.mlFlag = Flag.KIND
       emailEvent.threadId = this._threadId;
       this.eventHandler.notifyActivity(emailEvent)
-
       //reset params
       //this.resetParams();
       this.messsageClean = true;

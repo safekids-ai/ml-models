@@ -1,8 +1,8 @@
-import {IInboxDialogs} from "apps/gmail-extension/main/content/src/inbox/InboxDialogs";
-import {IInboxEventHandler} from "apps/gmail-extension/main/content/src/inbox/InBoxEventHandler";
+import {IInboxDialogs} from "./InboxDialogs";
+import {IInboxEventHandler} from "./InBoxEventHandler";
 import {ComposeView, Contact, MessageView, SimpleElementView, ThreadView} from "@inboxsdk/core";
-import {createMock} from 'ts-auto-mock';
-import {InBoxMessageViewHandler} from "apps/gmail-extension/main/content/src/inbox/InBoxMessageViewHandler";
+import { mock, instance, when, verify } from 'ts-mockito';
+import {InBoxMessageViewHandler} from "./InBoxMessageViewHandler";
 
 const mockModelToxic = {
     handleMLEmailEvent: jest.fn((a): Promise<boolean> => new Promise((resolve) => resolve(true))),
@@ -107,14 +107,14 @@ describe("content => InBoxMessageViewHandler", () => {
     });
 
     const mockMessageViewHandler = (subject: string, body: string, isLoaded: boolean, toxic: boolean, closeMessageOnPRR: boolean, destroyAfterModel: boolean) => {
-        const mockEventHandler = createMock<IInboxEventHandler>();
-        const mockDialogs = createMock<IInboxDialogs>();
-        const event = createMock<StubEvent>();
-        const messageView = createMock<MessageView>();
-        const threadView = createMock<ThreadView>();
-        const mockFromContact = createMock<Contact>();
-        const htmlBodyElement = createMock<HTMLElement>();
-        const noticeBarElement = createMock<SimpleElementView>();
+        const mockEventHandler = mock<IInboxEventHandler>();
+        const mockDialogs = mock<IInboxDialogs>();
+        const event = mock<StubEvent>();
+        const messageView = mock<MessageView>();
+        const threadView = mock<ThreadView>();
+        const mockFromContact = mock<Contact>();
+        const htmlBodyElement = mock<HTMLElement>();
+        const noticeBarElement = mock<SimpleElementView>();
         const noticeBarHTMLElement = document.createElement("div");
 
         //html body

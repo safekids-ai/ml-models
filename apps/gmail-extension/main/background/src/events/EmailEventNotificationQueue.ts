@@ -1,7 +1,7 @@
-import {NLPResultCacheListenerInterface} from "./cache/NLPResultCacheListener";
+import {NLPResultCacheListenerInterface} from "../cache/NLPResultCacheListener";
 import {EmailNotificationEvent, EventType} from "@shared/types/events.types";
-import {EmailEventService} from "./api/emailEventService";
-import {NLPResultCacheData} from "./cache/NLPResultCacheData";
+import {EmailEventService} from "../api/emailEventService";
+import {NLPResultCacheData} from "../cache/NLPResultCacheData";
 
 export class EmailEventNotificationQueue implements NLPResultCacheListenerInterface {
   private cache: NLPResultCacheData;

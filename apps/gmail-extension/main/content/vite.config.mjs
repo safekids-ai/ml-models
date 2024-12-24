@@ -33,5 +33,8 @@ export default withPageConfig({
         outDir: outDir,
       },
       publicDir: resolve(_dirname, 'public'),
-    })
+    }),
+  test: {
+    environment: 'jsdom',
+  },
 });

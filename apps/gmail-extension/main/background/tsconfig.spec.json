@@ -1,29 +1,23 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc",
-    "types": [
-      "vitest/globals",
-      "vitest/importMeta",
-      "vite/client",
-      "node",
-      "vitest",
-      "jest",
-      ""
-    ]
+    "noEmit": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "types": ["jest", "node", "chrome"]
   },
   "include": [
-    "vite.config.mts",
-    "old-src/**/*.test.ts",
-    "old-src/**/*.spec.ts",
-    "old-src/**/*.test.tsx",
-    "old-src/**/*.spec.tsx",
-    "old-src/**/*.test.js",
-    "old-src/**/*.spec.js",
-    "old-src/**/*.test.jsx",
-    "old-src/**/*.spec.jsx",
-    "old-src/**/*.d.ts",
-    "test-utils/app/*"
+    "jest.config.ts",
+    "jest.setup.ts",
+    "./src/**/*.spec.ts",
+    "./src/**/*.spec.tsx",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
   ],
-  "types": ["@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

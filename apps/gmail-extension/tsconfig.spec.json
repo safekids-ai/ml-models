@@ -14,15 +14,10 @@
   },
   "include": [
     "vite.config.mts",
-    "old-src/**/*.test.ts",
-    "old-src/**/*.spec.ts",
-    "old-src/**/*.test.tsx",
-    "old-src/**/*.spec.tsx",
-    "old-src/**/*.test.js",
-    "old-src/**/*.spec.js",
-    "old-src/**/*.test.jsx",
-    "old-src/**/*.spec.jsx",
-    "old-src/**/*.d.ts",
+    "jest.config.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts",
     "test-utils/app/*"
   ],
   "types": ["@nx/react/typings/cssmodule.d.ts", "@nx/react/typings/image.d.ts"]

@@ -30,7 +30,10 @@ export default withPageConfig({
           },
         }
       },
-      outDir: resolve(_dirname, "..", "..","dist"),
+      outDir: resolve(_dirname, "..", "..", "dist"),
       publicDir: resolve(_dirname, 'public'),
-    })
+    }),
+  test: {
+    environment: 'jsdom',
+  },
 });

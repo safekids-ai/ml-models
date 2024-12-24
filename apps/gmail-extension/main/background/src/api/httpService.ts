@@ -1,5 +1,6 @@
 import {ILogger} from "@shared/utils/Logger";
 import {getJWTToken} from "./chromeUtil";
+import {API_URL} from "../constants"
 
 export enum HTTPMethod {
   POST = "POST",
@@ -36,7 +37,7 @@ export const httpError = (status:number, statusMessage: string) => {
 
 export class HttpService {
   private readonly config: RequestInit;
-  private readonly backendUrl = import.meta.env.API_URL;
+  private readonly backendUrl = API_URL;
   constructor(private logger: ILogger) {
     this.config = {
       mode: "cors",

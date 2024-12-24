@@ -23,6 +23,16 @@
         "parallel": true
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run gmail-extension:test-background",
+          "nx run gmail-extension:test-content"
+        ],
+        "parallel": true
+      }
+    },
     "load-hmr-server": {
       "executor": "nx:run-commands",
       "options": {
@@ -88,10 +98,16 @@
         }
       }
     },
-    "test": {
+    "test-background": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/gmail-extension/jest.config.ts"
+        "jestConfig": "apps/gmail-extension/main/background/jest.config.ts"
+      }
+    },
+    "test-content": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/gmail-extension/main/content/jest.config.ts"
       }
     },
     "lint": {

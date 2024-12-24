@@ -1,12 +1,12 @@
-import {EmailEventNotificationQueue} from "./events/EmailEventNotificationQueue";
-import {createMock} from "ts-auto-mock";
-import {EmailEventService} from "./api/emailEventService";
+import {EmailEventNotificationQueue} from "./EmailEventNotificationQueue";
+import { mock, instance, when, verify } from 'ts-mockito';
+import {EmailEventService} from "../api/emailEventService";
 import {EmailNotificationEvent, EventType} from "@shared/types/events.types";
-import {NLPResultCacheData} from "./cache/NLPResultCacheData";
+import {NLPResultCacheData} from "../cache/NLPResultCacheData";
 
 describe("EmailEventNotificationQueueTest", () => {
     test('send a not thread read event', async () => {
-        const emailService = createMock<EmailEventService>();
+        const emailService = mock<EmailEventService>();
         jest.spyOn(emailService, "sendEvent");
 
         const queue = new EmailEventNotificationQueue(emailService, 10);
@@ -19,7 +19,7 @@ describe("EmailEventNotificationQueueTest", () => {
     });
 
     test('send a thread read event without max messages', async () => {
-        const emailService = createMock<EmailEventService>();
+        const emailService = mock<EmailEventService>();
         jest.spyOn(emailService, "sendEvent");
 
         const queue = new EmailEventNotificationQueue(emailService, 10);
@@ -32,7 +32,7 @@ describe("EmailEventNotificationQueueTest", () => {
 
 
     test('send a thread read event and sent it since max messages exceeded', async () => {
-        const emailService = createMock<EmailEventService>();
+        const emailService = mock<EmailEventService>();
         jest.spyOn(emailService, "sendEvent");
 
         const queue = new EmailEventNotificationQueue(emailService, 0);
@@ -45,7 +45,7 @@ describe("EmailEventNotificationQueueTest", () => {
     });
 
     test('flush messages after cache load success', async () => {
-        const emailService = createMock<EmailEventService>();
+        const emailService = mock<EmailEventService>();
         jest.spyOn(emailService, "sendEvent");
 
         const queue = new EmailEventNotificationQueue(emailService, 5);
@@ -69,7 +69,7 @@ describe("EmailEventNotificationQueueTest", () => {
     });
 
     test('flush messages after cache load failure', async () => {
-        const emailService = createMock<EmailEventService>();
+        const emailService = mock<EmailEventService>();
         jest.spyOn(emailService, "sendEvent");
 
         const queue = new EmailEventNotificationQueue(emailService, 4);

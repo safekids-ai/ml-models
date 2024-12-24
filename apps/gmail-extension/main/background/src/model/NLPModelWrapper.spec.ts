@@ -1,6 +1,6 @@
 import {chrome} from 'jest-chrome';
-import {NLPModelWrapper} from "./model/NLPModelWrapper";
-import {NLPModelInterface} from "./model/NLPModelInterface";
+import {NLPModelWrapper} from "./NLPModelWrapper";
+import {NLPModelInterface} from "./NLPModelInterface";
 import {ILogger, Logger} from "@shared/utils/Logger";
 
 const logger = new Logger();

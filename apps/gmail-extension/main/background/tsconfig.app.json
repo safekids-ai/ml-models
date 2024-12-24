@@ -4,6 +4,7 @@
     "noEmit": true,
     "baseUrl": "./",
     "allowJs": true,
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -18,9 +19,6 @@
       "ES2021"
     ],
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "../../../../node_modules"
-    ],
     "types": ["chrome","vite/client","jest"],
     "downlevelIteration": true,
     "paths": {

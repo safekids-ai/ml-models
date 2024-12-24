@@ -57,6 +57,6 @@ export default defineConfig({
     watch: watchOption,
     rollupOptions: {
       external: ['chrome'],
-    }
+    },
   }
 });
