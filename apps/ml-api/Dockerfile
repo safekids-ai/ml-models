@@ -9,7 +9,7 @@ RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk 
 RUN pnpm install --ignore-scripts --frozen-lockfile
 COPY . .
 
-RUN pnpm run build:api:prod
+RUN pnpm run api
 
 EXPOSE $API_PORT
 

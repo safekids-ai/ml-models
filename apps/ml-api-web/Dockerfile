@@ -9,7 +9,7 @@ COPY . .
 ENV API_URL=$API_URL
 ENV NODE_ENV=production
 
-RUN pnpm run build:web:prod
+RUN pnpm run web
 
 FROM nginx:latest AS deployer
 

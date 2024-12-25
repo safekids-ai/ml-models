@@ -5,7 +5,7 @@ RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk 
 
 RUN pnpm install --ignore-scripts --frozen-lockfile
 COPY . .
-RUN pnpm run build:main-website:prod
+RUN pnpm run homepage
 
 FROM node:slim AS deployer
 ARG WEB_PORT=3000
