@@ -4,20 +4,20 @@ import {
     Heading,
     Stack,
     Text,
-    Button,
     Icon,
     IconProps,
+    Box,
+    Image
   } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link } from '../components/ui/link'
 
-  const Illustration = (props: IconProps) => {
+  const Illustration = () => {
     return (
-      <Icon
-        width="100%"
+      <svg
+        width='70%'
         viewBox="0 0 702 448"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}>
+        xmlns="http://www.w3.org/2000/svg" className='svg'>
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -819,7 +819,7 @@ import { Link } from 'react-router-dom'
             <stop offset="1" stopColor="#FD9500" />
           </linearGradient>
         </defs>
-      </Icon>
+      </svg>
     )
   }
 
@@ -829,8 +829,8 @@ import { Link } from 'react-router-dom'
         <Stack
           textAlign={'center'}
           align={'center'}
-          spacing={{ base: 8, md: 10 }}
-          py={{ base: 20, md: 28 }}>
+          gap={{ base: 8, md: 10 }}
+          pt={{ base: 18, md: 14 }}>
           <Heading
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
@@ -843,23 +843,22 @@ import { Link } from 'react-router-dom'
           <Text color={'gray.500'} maxW={'3xl'}>
             Use our models to detect toxic speech, search intent, and explicit/violent images.
           </Text>
-          <Stack spacing={6} direction={'row'}>
-            <Button
+          <Stack gap={6} direction={'row'}>
+            <Link
               rounded={'full'}
               px={6}
               colorScheme={'orange'}
               backgroundColor={'orange.400'}
               _hover={{ bg: 'orange.500' }}
-              as={Link}
               to="/hate">
               Get started
-            </Button>
-            <Button as={Link} to="/docs" rounded={'full'} px={6}>
+            </Link>
+            <Link to="/docs" rounded={'full'} px={6}>
               Learn more
-            </Button>
+            </Link>
           </Stack>
-          <Flex w={'full'}>
-            <Illustration height={{ sm: '24rem', lg: '28rem' }} mt={{ base: 12, sm: 16 }} />
+          <Flex w={'full'} mt={{ base: 12, sm: 16 }} justifyContent={'center'}>
+              <Illustration />        
           </Flex>
         </Stack>
       </Container>

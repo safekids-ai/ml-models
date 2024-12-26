@@ -1,10 +1,10 @@
-import { Flex, Avatar, AvatarBadge, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { Avatar } from "../ui/avatar";
 
 const Header = () => {
   return (
-    <Flex w="100%">
-      <Avatar size="lg" name="Dan Abrahmov" src="https://bit.ly/dan-abramov">
-        <AvatarBadge boxSize="1.25em" bg="green.500" />
+    <Flex w="100%" pb={2}>
+      <Avatar size="lg" name="Dan Abrahmov" src="https://bit.ly/dan-abramov" colorPalette='teal'>
       </Avatar>
       <Flex flexDirection="column" mx="5" justify="center">
         <Text fontSize="lg" fontWeight="bold">

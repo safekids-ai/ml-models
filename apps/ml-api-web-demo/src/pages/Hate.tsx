@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
-import Divider from "../components/messages/Divider";
 import Footer from "../components/messages/Footer";
 import Header from "../components/messages/Header";
 import Messages, { Message } from "../components/messages/Messages";
@@ -37,12 +36,10 @@ const Hate = () => {
   };
 
   return (
-    <Flex w="100%" h="100vh" justify="center" marginTop="4">
-      <Flex w={{base: "100%", md: "100%", xl: "40%"}} h="80%" flexDir="column">
+    <Flex w="100%" h='calc(100vh - 112px)' justify="center" marginTop="4">
+      <Flex w={{base: "100%", md: "100%", xl: "40%"}} flexDir="column" divideY='3px'>
         <Header />
-        <Divider />
         <Messages messages={messages} />
-        <Divider />
         <Footer
           inputMessage={inputMessage}
           setInputMessage={setInputMessage}

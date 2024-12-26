@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
-import TextClassificationPrompt from '../components/nlp/TextClassificationPrompt';
-import {Link, useLocation} from 'react-router-dom';
-import {Button, Container, Flex, Heading, Stack, Text, Box, VStack, Code, Divider} from "@chakra-ui/react";
-
+import {Container, Heading, Stack, Text, Box, Code} from "@chakra-ui/react";
+import { Button } from '../components/ui/button';
+import { Link } from '../components/ui/link';
 const Docs = () => {
   useEffect(() => {
     // Get the hash from the URL
@@ -23,7 +22,7 @@ const Docs = () => {
       <Stack
         textAlign={'center'}
         align={'center'}
-        spacing={{base: 8, md: 10}}
+        gap={{base: 8, md: 10}}
         py={{base: 20, md: 28}}>
         <Heading
           fontWeight={600}
@@ -37,8 +36,8 @@ const Docs = () => {
         <Text color={'gray.500'} maxW={'3xl'}>
           Use our models to detect hate speech, search intent, and explicit/violent images.
         </Text>
-        <Stack spacing={6} direction={'row'}>
-          <Button
+        <Stack gap={6} direction={'row'}>
+          <Link
             rounded={'full'}
             px={6}
             colorScheme={'orange'}
@@ -47,10 +46,10 @@ const Docs = () => {
             as={Link}
             to="/hate">
             Get started
-          </Button>
-          <Button as={Link} to="/docs" rounded={'full'} px={6}>
+          </Link>
+          <Link to="/docs" rounded={'full'} px={6}>
             Learn more
-          </Button>
+          </Link>
         </Stack>
         <Box>
         <Stack textAlign={'left'}
