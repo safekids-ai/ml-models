@@ -6,7 +6,7 @@ import {ConfigService} from "@nestjs/config";
 import {LoggingService} from "../logger/logging.service";
 import {AiConfig} from "../config/ai-api";
 import {webTimeProviders} from "../web-time/webtime.providers";
-import {webCategoryProviders} from "apps/ml-api/src/app/web-category/web-category.providers";
+import {webCategoryProviders} from "./web-category.providers";
 
 @Module({
   controllers: [WebCategoryController],

@@ -21,7 +21,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {CalendarIcon} from '../svgs';
 import {CSSProperties} from '@mui/styles/withStyles';
 import {Routes} from "react-router-dom";
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 type InputProps = {
   name: string;

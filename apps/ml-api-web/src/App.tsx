@@ -11,9 +11,10 @@ import { NotificationToastProvider } from './context/NotificationToastContext/No
 import { GET_ACCOUNT_TYPE } from './utils/endpoints';
 import { logError } from './utils/helpers';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import MainLoader from "./components/MainLoader";
 import {NavigateSetter} from "./utils/navigate";
+import { JSX } from 'react';
 
 // dynamic imports for lower chunk size
 const Signup = lazy(() => import('./views/Signup/Signup'));

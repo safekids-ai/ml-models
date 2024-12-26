@@ -13,9 +13,8 @@ import {WebCategorizer, WebContentScraper} from "@safekids-ai/web-category";
 import {WebCategoryUrl} from "./entities/web-category-url-entity";
 import {WEBCATEGORY_URL_REPOSITORY, WEBCATEGORY_HOST_REPOSITORY} from "../constants";
 import {WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
-import {CacheTTL} from "@nestjs/cache-manager";
+// import {CacheTTL} from "@nestjs/cache-manager";
 import {WebCategoryHost} from "./entities/web-category-host-entity";
-import {hasQueryParams, isRootURL} from "apps/ml-api/src/app/utils/http.util";
 import {StringUtils} from "../utils/stringUtils";
 
 @Injectable()
@@ -38,7 +37,7 @@ export class WebCategoryService {
     return parsedUrl.hostname;
   }
 
-  @CacheTTL(1)
+  // @CacheTTL(1)
   async getHostCategory(host: string): Promise<WebCategoryType[]> {
     const result = await this.hostRepository.findOne({
       where: {host},
@@ -53,7 +52,7 @@ export class WebCategoryService {
   }
 
 
-  @CacheTTL(1)
+  // @CacheTTL(1)
   async getURL(url: string): Promise<WebCategoryUrlResponseDto | null> {
     const result = await this.repository.findOne({
       where: {url},
@@ -81,15 +80,15 @@ export class WebCategoryService {
       throw Error(`Text is < 20 characters. Provide more. text:${text} url:${url}`);
     }
 
-    let result: WebCategoryResponse = await this.webCategorizer.categorize(text);
+    const result: WebCategoryResponse = await this.webCategorizer.categorize(text);
 
     if (!result || !result.categories || result.categories.length == 0) {
       throw new NotFoundException(`Unable to find categories for text:${text} url:${url}`);
     }
 
-    let probability = result.categories.map(item => item.probability);
-    let categories = result.categories.map(item => item.category.id);
-    let rawCategory = result.rawCategory;
+    const probability = result.categories.map(item => item.probability);
+    const categories = result.categories.map(item => item.category.id);
+    const rawCategory = result.rawCategory;
 
     this.log.debug(`[AI Request]: text:${text} result:${rawCategory}`);
 

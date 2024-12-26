@@ -28,12 +28,11 @@ import {ActivityAiDataCreationAttributes} from '../activity-ai-data/entities/act
 import {ActivityAiDataService} from '../activity-ai-data/activity-ai-data.service';
 import {ConfigService} from '@nestjs/config';
 import {RedisClientOptions, createClient as createRedisClient} from 'redis';
-import {QueueConfig, QueueConfigItem} from "apps/ml-api/src/app/config/queue";
+import {QueueConfig, QueueConfigItem} from "../config/queue";
 
 import {AsyncParser} from '@json2csv/node';
 import {WebAppConfig} from "../config/webapp";
 import {Job, Queue} from "bullmq";
-import IORedis from "ioredis";
 import {BatchProcessor} from "../utils/queue";
 import {InjectQueue} from "@nestjs/bullmq";
 

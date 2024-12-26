@@ -4,7 +4,7 @@ import {Coupon} from './entities/coupon.entity';
 import {CouponStatus} from './coupon.status.enum';
 import {QueryException} from '../../error/common.exception';
 import {ConfigService} from '@nestjs/config';
-import {DefaultCouponConfig} from "apps/ml-api/src/app/config/default-coupons";
+import {DefaultCouponConfig} from "../../config/default-coupons";
 
 @Injectable()
 export class CouponService {

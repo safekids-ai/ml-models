@@ -36,7 +36,7 @@ import {PlanTypes} from '../../billing/plan/plan-types';
 import {QueryTypes} from 'sequelize';
 import {Subscription} from '../../billing/subscription/entities/subscription.entity';
 import {UserCodeCreationAttributes} from '../user-code/entities/user-code.entity';
-import {ExpressConfig} from "apps/ml-api/src/app/config/express";
+import {ExpressConfig} from "../../config/express";
 
 @Injectable()
 export class AuthService {

@@ -9,7 +9,7 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 
-import {MlService} from 'apps/ml-api/src/app/ml/ml.service';
+import {MlService} from './ml.service';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {FileInterceptor} from "@nestjs/platform-express";

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreatePrrManagerDto } from './dto/create-prr-manager.dto';
 import { UpdatePrrManagerDto } from './dto/update-prr-manager.dto';
 import { ConfigService} from '@nestjs/config';
-import {WebAppConfig} from "apps/ml-api/src/app/config/webapp";
+import {WebAppConfig} from "../config/webapp";
 
 @Injectable()
 export class PrrManagerService {

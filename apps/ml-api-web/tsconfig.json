@@ -7,7 +7,9 @@
     "strict": false,
     "types": [
       "vite/client",
-      "vitest"
+      "vitest",
+      "react",
+      "react-dom"
     ],
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,

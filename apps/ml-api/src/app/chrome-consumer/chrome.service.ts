@@ -41,7 +41,7 @@ import {KidConfigDTO} from '../kid-config/dto/kid-config.dto';
 import {SubscriptionService} from '../billing/subscription/subscription.service';
 import {Account} from './../accounts/entities/account.entity';
 import {Plan} from '../billing/plan/entities/plan.entity';
-import {WebAppConfig} from "apps/ml-api/src/app/config/webapp";
+import {WebAppConfig} from "../config/webapp";
 import {PlanTypes} from "../billing/plan/plan-types";
 
 @Injectable()

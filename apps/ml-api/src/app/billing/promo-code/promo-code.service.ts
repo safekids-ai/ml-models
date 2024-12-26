@@ -17,7 +17,7 @@ import {SubscriptionService} from '../subscription/subscription.service';
 import {CouponService} from '../coupon/coupon.service';
 import {CreateSubscriptionDto} from '../subscription/dto/createSubscriptionDto';
 import {PromoCodeDto} from './dto/promo-code.dto';
-import {WebAppConfig} from "apps/ml-api/src/app/config/webapp";
+import {WebAppConfig} from "../../config/webapp";
 
 @Injectable()
 export class PromoCodeService {

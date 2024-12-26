@@ -12,30 +12,28 @@ import {
 } from '@nestjs/common';
 import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
 import {WebCategoryService} from "./web-category.services";
-import {GoogleOauthGuard} from "../auth/guard/google-oauth.guard";
-import {CacheInterceptor, CacheTTL} from "@nestjs/cache-manager";
+// import {CacheInterceptor, CacheTTL} from "@nestjs/cache-manager";
 import {LoggingService} from "../logger/logging.service";
-import {WebCategoryUrl} from "apps/ml-api/src/app/web-category/entities/web-category-url-entity";
-import {GetWebCategoryDto, WebCategoryUrlResponseDto} from "apps/ml-api/src/app/web-category/dto/web-category-url.dto";
+import {GetWebCategoryDto, WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
 import {ConfigService} from "@nestjs/config";
-import {WebCategoryType, HTMLWebData} from "@safekids-ai/web-category-types";
+import {HTMLWebData} from "@safekids-ai/web-category-types";
 import {ChromeExtensionOpenAuthGuard} from "../auth/guard/chrome-extension-auth-open.guard";
-import {StringUtils} from "apps/ml-api/src/app/utils/stringUtils";
+import {StringUtils} from "../utils/stringUtils";
 
 
-@Injectable()
-export class CustomCacheInterceptor extends CacheInterceptor {
-  trackBy(context: ExecutionContext): string | undefined {
-    const request = context.switchToHttp().getRequest();
-    const meta = request.body;
-
-    if (!meta || !meta.url) {
-      return undefined;
-    }
-
-    return `wc:${meta.url}`;
-  }
-}
+// @Injectable()
+// export class CustomCacheInterceptor extends CacheInterceptor {
+//   trackBy(context: ExecutionContext): string | undefined {
+//     const request = context.switchToHttp().getRequest();
+//     const meta = request.body;
+//
+//     if (!meta || !meta.url) {
+//       return undefined;
+//     }
+//
+//     return `wc:${meta.url}`;
+//   }
+// }
 
 @Controller()
 @ApiTags('Web Categorize')
@@ -78,9 +76,9 @@ export class WebCategoryController {
   }
 
   @ApiBearerAuth()
-  @UseInterceptors(CacheInterceptor)
+  // @UseInterceptors(CacheInterceptor)
   @UseGuards(ChromeExtensionOpenAuthGuard)
-  @CacheTTL(60000)
+  // @CacheTTL(60000)
   @Get('v2/web-category/html')
   getMeta(@Query('url') url: string): Promise<HTMLWebData> {
     return this.webCategoryService.getHtmlData(url);

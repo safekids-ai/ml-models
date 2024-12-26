@@ -15,7 +15,7 @@ import {format} from 'date-fns';
 import {useNotificationToast} from '../../../context/NotificationToastContext/NotificationToastContext';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFnsV3';
 import TextField from '@mui/material/TextField';
 
 const Root = styled.div`

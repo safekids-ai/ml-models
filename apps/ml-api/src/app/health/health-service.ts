@@ -5,7 +5,6 @@ import {LoggingService} from '../logger/logging.service';
 import TWILIO from 'twilio';
 import * as postmark from 'postmark';
 import {ConfigService} from "@nestjs/config";
-import IORedis from "ioredis";
 import {QueueConfig} from "../config/queue";
 
 const {Twilio} = TWILIO
@@ -24,7 +23,7 @@ export class HealthService {
 
   async check(): Promise<void> {
     try {
-      await Promise.all([this.db(), this.sms(), this.redis(), this.postmarkEmail()]);
+      await Promise.all([this.db(), this.sms(), this.postmarkEmail()]);
     } catch (ex) {
       throw new HttpException(ex, HttpStatus.SERVICE_UNAVAILABLE);
     }
@@ -42,20 +41,20 @@ export class HealthService {
   }
 
   // Bee queue Service
-  private async redis(): Promise<void> {
-    const redisUrl = this.config.get<QueueConfig>('queueConfig').url;
-    const connection = new IORedis(redisUrl, {maxRetriesPerRequest: null})
-
-    return new Promise((resolve, reject) => {
-      connection.on('ready', () => {
-        resolve();
-      });
-
-      connection.on('error', (err) => {
-        reject(err);
-      });
-    });
-  }
+  // private async redis(): Promise<void> {
+  //   const redisUrl = this.config.get<QueueConfig>('queueConfig').url;
+  //   const connection = new IORedis(redisUrl, {maxRetriesPerRequest: null})
+  //
+  //   return new Promise((resolve, reject) => {
+  //     connection.on('ready', () => {
+  //       resolve();
+  //     });
+  //
+  //     connection.on('error', (err) => {
+  //       reject(err);
+  //     });
+  //   });
+  // }
 
   // Postmark Email Service
   private async postmarkEmail(): Promise<void> {

@@ -7,7 +7,6 @@ import {
   WebCategoryResponseItem
 } from "@safekids-ai/web-category-types";
 import * as Logger from 'abstract-logging';
-import {j} from "vite/dist/node/types.d-aGj9QkWt";
 
 class GroqWebCategorizer extends WebCategorizer {
   api: Groq

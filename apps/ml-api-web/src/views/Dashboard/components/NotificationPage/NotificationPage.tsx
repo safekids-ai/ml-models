@@ -9,7 +9,7 @@ import {
     Tooltip,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { ExpandMore } from '@mui/icons-material/';
+import { ExpandMore } from '@mui/icons-material';
 import moment from 'moment';
 
 import { AppTheme } from '../../../../theme';

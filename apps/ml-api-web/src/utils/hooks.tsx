@@ -92,7 +92,7 @@ export const useClickPreventionOnDoubleClick = (onClick: () => void, onDoubleCli
 export function usePrevious(value: any) {
     // The ref object is a generic container whose current property is mutable ...
     // ... and can hold any value, similar to an instance property on a class
-    const ref = useRef();
+    const ref = useRef(null);
 
     // Store current value in ref
     useEffect(() => {

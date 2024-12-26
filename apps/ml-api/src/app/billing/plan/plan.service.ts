@@ -11,7 +11,7 @@ import {Payment} from '../payment/entities/payment.entity';
 import {PlanDto} from './dto/plan.dto';
 import {InvoiceService} from '../invoice/invoice.service';
 import {QueryTypes} from 'sequelize';
-import {DefaultPlanConfig} from "apps/ml-api/src/app/config/default-plans";
+import {DefaultPlanConfig} from "../../config/default-plans";
 import {LoggingService} from "../../logger/logging.service";
 
 @Injectable()

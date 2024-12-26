@@ -13,7 +13,7 @@ import {IsAdminStrategy} from './strategy/is-admin.strategy';
 import {IsAdminOrDistrictUserStrategy} from './strategy/is-admin-or-district-user.strategy';
 import {InternalApiKeyModule} from '../internal-api-key/internal-api-key.module';
 import {AccountLicenseModule} from '../account-license/account-license.module';
-import {ChromeExtensionOpenStrategy} from "apps/ml-api/src/app/auth/strategy/chromeextensionauth_open.strategy";
+import {ChromeExtensionOpenStrategy} from "./strategy/chromeextensionauth_open.strategy";
 
 @Module({
   imports: [UserDeviceLinkModule, InternalApiKeyModule, AccountLicenseModule, UserModule, JwtTokenModule],

@@ -4,7 +4,7 @@ import {LoggingService} from '../../logger/logging.service';
 import retry from 'async-retry';
 import {ConfigService} from '@nestjs/config';
 import TWILIO from 'twilio';
-import {TwilioConfig} from "apps/ml-api/src/app/config/twilio.sms";
+import {TwilioConfig} from "../../config/twilio.sms";
 
 const {Twilio} = TWILIO
 

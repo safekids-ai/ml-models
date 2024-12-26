@@ -1,8 +1,5 @@
 import {IsNotEmpty, IsOptional, ValidateNested} from "class-validator";
-import {Type} from "class-transformer";
-import {IsAtLeastOneFieldRequired} from "../../utils/validator.util";
 import {ApiProperty} from "@nestjs/swagger";
-import {WebCategoryUrl} from "apps/ml-api/src/app/web-category/entities/web-category-url-entity";
 import {HTMLWebData, WebCategoryType} from "@safekids-ai/web-category-types";
 
 export class WebMetaDto {

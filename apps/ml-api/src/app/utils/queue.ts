@@ -1,5 +1,4 @@
 import {Worker, Queue, Job} from 'bullmq';
-import IORedis from 'ioredis';
 import retry from 'async-retry';
 import {LoggingService} from "../logger/logging.service";
 

@@ -1,11 +1,12 @@
 {
   "name": "ml-api-web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "/src",
+  "sourceRoot": "apps/ml-api-web",
   "projectType": "application",
   "tags": [],
   "targets": {
     "build": {
+      "root": "apps/ml-api-web",
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",

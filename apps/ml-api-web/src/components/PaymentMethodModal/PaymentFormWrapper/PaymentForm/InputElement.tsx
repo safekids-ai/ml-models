@@ -12,7 +12,7 @@ export type Props = {
 
 
 const StripeInput = ({ component: Component, inputRef, ...props }: any) => {
-    const elementRef = useRef<any>();
+    const elementRef = useRef<any>(null);
     useImperativeHandle(inputRef, () => ({
         focus: () => elementRef.current?.focus,
         blur: () => elementRef.current?.blur,

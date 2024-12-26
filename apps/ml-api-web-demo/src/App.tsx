@@ -1,5 +1,4 @@
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
-import theme from './theme';
+import {ChakraProvider, defaultSystem} from '@chakra-ui/react';
 import SidebarWithHeader from './components/layout/Sidebar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -12,8 +11,7 @@ import TextClassification from './pages/TextClassification';
 function App() {
   return (
     <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode="system" />
+      <ChakraProvider value={defaultSystem}>
         <SidebarWithHeader>
           <Routes>
             <Route path="/" element={<Home />} />

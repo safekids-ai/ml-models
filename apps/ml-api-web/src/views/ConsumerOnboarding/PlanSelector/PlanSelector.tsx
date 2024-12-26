@@ -14,6 +14,7 @@ import {
   VERIFY_PROMO_CODE
 } from '../../../utils/endpoints';
 import {ContinueButton} from '../COPPA/COPPA.style';
+import { JSX } from 'react';
 
 import {Root, Title} from './PlanSelector.style';
 import {round} from 'lodash';

@@ -3,8 +3,8 @@ import {ConfigService} from '@nestjs/config';
 import {LoggingService} from '../../logger/logging.service';
 import retry from 'async-retry';
 import * as postmark from 'postmark';
-import {QueueConfig} from "apps/ml-api/src/app/config/queue";
-import {PostmarkConfig} from "apps/ml-api/src/app/config/postmark.email";
+import {QueueConfig} from "../../config/queue";
+import {PostmarkConfig} from "../../config/postmark.email";
 import {EmailTemplateService} from "../email.template.service";
 import {Injectable} from "@nestjs/common";
 

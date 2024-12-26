@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { JSX } from 'react';
 import { ConsumerLogoProps } from './ConsumerLogo.type';
 
 const ConsumerLogo = ({ className, onboardingInProgress }: ConsumerLogoProps): JSX.Element => {

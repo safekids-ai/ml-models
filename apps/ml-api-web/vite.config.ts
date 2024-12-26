@@ -1,11 +1,12 @@
 /// <reference types='vitest' />
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import {nxViteTsPaths} from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import * as process from "process";
+import path from "path";
 
-const port:number = (process.env.PORT) ? parseInt(process.env.PORT) : 5200;
-const portPreview:number = (process.env.PORT_PREVIEW) ? parseInt(process.env.PORT_PREVIEW) : 5300;
+const port: number = (process.env.PORT) ? parseInt(process.env.PORT) : 5200;
+const portPreview: number = (process.env.PORT_PREVIEW) ? parseInt(process.env.PORT_PREVIEW) : 5300;
 
 const APP_ENV = process.env.APP_ENV || 'production'
 let API_URL = process.env.API_URL
@@ -23,8 +24,9 @@ if (!API_URL) {
 }
 
 console.log(`VITE starting on port:${port} and preview port: ${portPreview} APP_ENV:${APP_ENV} NODE_ENV:${NODE_ENV}`);
-export default defineConfig({
 
+export default defineConfig({
+  root: __dirname,
   cacheDir: '../../node_modules/.vite/ml-api-web',
   define: {
     'import.meta.env.API_URL': JSON.stringify(API_URL),
@@ -51,20 +53,4 @@ export default defineConfig({
       react(),
       nxViteTsPaths(),
     ],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
-  // esbuild: {
-  //   loader: "jsx",
-  //   include: /src\/.*\.[jt]sx?$/,
-  // },
-  test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-  },
 });

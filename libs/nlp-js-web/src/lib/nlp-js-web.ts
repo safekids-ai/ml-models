@@ -16,7 +16,12 @@ class NLPWeb extends NLP {
   // }
 
   public createSession(modelUrl: string): Promise<InferenceSession> {
-    return InferenceSession.create(modelUrl, {graphOptimizationLevel: 'all'});
+    try {
+      return InferenceSession.create(modelUrl, {graphOptimizationLevel: 'all'});
+    } catch (err) {
+      console.log("Unable to createSession for NLP:", err);
+      throw new Error('failed to createSession due to' + JSON.stringify(err));
+    }
   }
 }
 
