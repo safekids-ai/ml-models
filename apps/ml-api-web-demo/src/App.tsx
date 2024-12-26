@@ -1,4 +1,4 @@
-import {ChakraProvider, defaultSystem} from '@chakra-ui/react';
+import { Provider } from "./components/ui/provider"
 import SidebarWithHeader from './components/layout/Sidebar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import TextClassification from './pages/TextClassification';
 function App() {
   return (
     <BrowserRouter>
-      <ChakraProvider value={defaultSystem}>
+      <Provider>
         <SidebarWithHeader>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -22,7 +22,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SidebarWithHeader>
-      </ChakraProvider>
+      </Provider>
     </BrowserRouter>
   );
 }

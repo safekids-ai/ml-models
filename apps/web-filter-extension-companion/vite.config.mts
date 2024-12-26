@@ -112,18 +112,6 @@ export default defineConfig({
       ]
     },
   },
-  test: {
-    globals: true,
-    // cache: {
-    //   dir: '../../node_modules/.vitest',
-    // },
-    environment: 'jsdom',
-    reporters: ["default"],
-//    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    includeSource: ['test-utils/app/*.ts'],
-    include: ['src/**/Boot*.spec.ts'],
-    setupFiles: './test-utils/vitest.setup.js',
-  },
 });
 
 function getCacheInvalidationKey() {

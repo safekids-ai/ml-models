@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import {ApiBearerAuth, ApiOperation, ApiTags} from '@nestjs/swagger';
 import {WebCategoryService} from "./web-category.services";
-// import {CacheInterceptor, CacheTTL} from "@nestjs/cache-manager";
+import {CacheInterceptor, CacheTTL} from "@nestjs/cache-manager";
 import {LoggingService} from "../logger/logging.service";
 import {GetWebCategoryDto, WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
 import {ConfigService} from "@nestjs/config";
@@ -21,19 +21,19 @@ import {ChromeExtensionOpenAuthGuard} from "../auth/guard/chrome-extension-auth-
 import {StringUtils} from "../utils/stringUtils";
 
 
-// @Injectable()
-// export class CustomCacheInterceptor extends CacheInterceptor {
-//   trackBy(context: ExecutionContext): string | undefined {
-//     const request = context.switchToHttp().getRequest();
-//     const meta = request.body;
-//
-//     if (!meta || !meta.url) {
-//       return undefined;
-//     }
-//
-//     return `wc:${meta.url}`;
-//   }
-// }
+@Injectable()
+export class CustomCacheInterceptor extends CacheInterceptor {
+  trackBy(context: ExecutionContext): string | undefined {
+    const request = context.switchToHttp().getRequest();
+    const meta = request.body;
+
+    if (!meta || !meta.url) {
+      return undefined;
+    }
+
+    return `wc:${meta.url}`;
+  }
+}
 
 @Controller()
 @ApiTags('Web Categorize')
@@ -48,7 +48,7 @@ export class WebCategoryController {
   @ApiOperation({summary: 'Gets the category of a website based on url'})
   @ApiBearerAuth()
   //@UseInterceptors(CustomCacheInterceptor)
-  //@CacheTTL(1)
+  // @CacheTTL(1)
   @UseGuards(ChromeExtensionOpenAuthGuard)
   @Post('v2/web-category')
   async getCategory(@Body() categoryDto: GetWebCategoryDto): Promise<WebCategoryUrlResponseDto> {

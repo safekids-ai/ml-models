@@ -234,10 +234,13 @@ importers:
         specifier: ^2.4.6
         version: 2.4.6(react@19.0.0)
       formik-mui:
-        specifier: 5.0.0-alpha.1
-        version: 5.0.0-alpha.1(@mui/material@6.3.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(formik@2.4.6(react@19.0.0))(react@19.0.0)(tiny-warning@1.0.3)
+        specifier: 5.0.0-alpha.0
+        version: 5.0.0-alpha.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@mui/material@6.3.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(formik@2.4.6(react@19.0.0))(react@19.0.0)(tiny-warning@1.0.3)
+      framer-motion:
+        specifier: ^11.15.0
+        version: 11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       google-auth-library:
-        specifier: ^9.15.0
+        specifier: ^9.12.0
         version: 9.15.0
       google-gax:
         specifier: ^4.4.1
@@ -281,6 +284,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      motion:
+        specifier: ^11.15.0
+        version: 11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       mysql2:
         specifier: ^3.12.0
         version: 3.12.0
@@ -7636,10 +7642,12 @@ packages:
     resolution: {integrity: sha512-0iirZp3uVDjVGt9p49aTaqjk84TrglENEDuqfdlZQ1roC9CWlPk6Avf8EEnZNcAqPonwkG35x4n3ww/1THYAeQ==}
     engines: {node: '>= 12.20'}
 
-  formik-mui@5.0.0-alpha.1:
-    resolution: {integrity: sha512-sHzrQwAWdVuKOdI0Xe1kCzXSjKXr50Jcot+szLc64SPw06J4DqwXN3GNxbhvfyEBGJBIL36e+cSSbm2i++tqqg==}
+  formik-mui@5.0.0-alpha.0:
+    resolution: {integrity: sha512-tcY8B4I3N2UK9ghgVpeBWsXGMDe1y4LVKwI8GiUbLKGB86fI/CN9UMr4FuNo6kzNXvO42LFNmCxdEVzovNCyYQ==}
     peerDependencies:
-      '@mui/material': '>5.6.0'
+      '@emotion/react': '>=11.5.0'
+      '@emotion/styled': '>=11.3.0'
+      '@mui/material': '>=5.2.3'
       formik: '>=2.2.9'
       react: '>=17.0.2'
       tiny-warning: '>=1.0.3'
@@ -7655,6 +7663,20 @@ packages:
 
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
+
+  framer-motion@11.15.0:
+    resolution: {integrity: sha512-MLk8IvZntxOMg7lDBLw2qgTHHv664bYoYmnFTmE0Gm/FW67aOJk0WM3ctMcG+Xhcv+vh5uyyXwxvxhSeJzSe+w==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   framesync@6.1.2:
     resolution: {integrity: sha512-jBTqhX6KaQVDyus8muwZbBeGGP0XgujBRbQ7gM7BRdS3CadCZIHiawyzYLnafYcvZIh5j8WE7cxZKFn7dXhu9g==}
@@ -9633,6 +9655,26 @@ packages:
 
   moo@0.5.2:
     resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==}
+
+  motion-dom@11.14.3:
+    resolution: {integrity: sha512-lW+D2wBy5vxLJi6aCP0xyxTxlTfiu+b+zcpVbGVFUxotwThqhdpPRSmX8xztAgtZMPMeU0WGVn/k1w4I+TbPqA==}
+
+  motion-utils@11.14.3:
+    resolution: {integrity: sha512-Xg+8xnqIJTpr0L/cidfTTBFkvRw26ZtGGuIhA94J9PQ2p4mEa06Xx7QVYZH0BP+EpMSaDlu+q0I0mmvwADPsaQ==}
+
+  motion@11.15.0:
+    resolution: {integrity: sha512-iZ7dwADQJWGsqsSkBhNHdI2LyYWU+hA1Nhy357wCLZq1yHxGImgt3l7Yv0HT/WOskcYDq9nxdedyl4zUv7UFFw==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
   mrmime@1.0.1:
     resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
@@ -16739,21 +16781,6 @@ snapshots:
       - typescript
       - verdaccio
 
-  '@nrwl/js@19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.4.5)':
-    dependencies:
-      '@nx/js': 19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.4.5)
-    transitivePeerDependencies:
-      - '@babel/traverse'
-      - '@swc-node/register'
-      - '@swc/core'
-      - '@swc/wasm'
-      - '@types/node'
-      - debug
-      - nx
-      - supports-color
-      - typescript
-      - verdaccio
-
   '@nrwl/js@19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.7.2)':
     dependencies:
       '@nx/js': 19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.7.2)
@@ -17143,7 +17170,7 @@ snapshots:
       '@babel/preset-env': 7.26.0(@babel/core@7.26.0)
       '@babel/preset-typescript': 7.26.0(@babel/core@7.26.0)
       '@babel/runtime': 7.26.0
-      '@nrwl/js': 19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.4.5)
+      '@nrwl/js': 19.7.3(@babel/traverse@7.26.4)(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))(@types/node@22.10.2)(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))(typescript@5.7.2)
       '@nx/devkit': 19.7.3(nx@19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15)))
       '@nx/workspace': 19.7.3(@swc-node/register@1.10.9(@swc/core@1.10.2(@swc/helpers@0.5.15))(@swc/types@0.1.17)(typescript@5.7.2))(@swc/core@1.10.2(@swc/helpers@0.5.15))
       babel-plugin-const-enum: 1.2.0(@babel/core@7.26.0)
@@ -22789,8 +22816,10 @@ snapshots:
       node-domexception: 1.0.0
       web-streams-polyfill: 4.0.0-beta.3
 
-  formik-mui@5.0.0-alpha.1(@mui/material@6.3.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(formik@2.4.6(react@19.0.0))(react@19.0.0)(tiny-warning@1.0.3):
+  formik-mui@5.0.0-alpha.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@mui/material@6.3.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(formik@2.4.6(react@19.0.0))(react@19.0.0)(tiny-warning@1.0.3):
     dependencies:
+      '@emotion/react': 11.14.0(@types/react@19.0.2)(react@19.0.0)
+      '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0)
       '@mui/material': 6.3.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react@19.0.0))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       formik: 2.4.6(react@19.0.0)
       react: 19.0.0
@@ -22811,6 +22840,16 @@ snapshots:
   forwarded@0.2.0: {}
 
   fraction.js@4.3.7: {}
+
+  framer-motion@11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      motion-dom: 11.14.3
+      motion-utils: 11.14.3
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.3.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   framesync@6.1.2:
     dependencies:
@@ -25337,6 +25376,19 @@ snapshots:
   moment@2.30.1: {}
 
   moo@0.5.2: {}
+
+  motion-dom@11.14.3: {}
+
+  motion-utils@11.14.3: {}
+
+  motion@11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      framer-motion: 11.15.0(@emotion/is-prop-valid@1.3.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.3.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   mrmime@1.0.1: {}
 

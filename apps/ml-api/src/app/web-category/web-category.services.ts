@@ -13,7 +13,7 @@ import {WebCategorizer, WebContentScraper} from "@safekids-ai/web-category";
 import {WebCategoryUrl} from "./entities/web-category-url-entity";
 import {WEBCATEGORY_URL_REPOSITORY, WEBCATEGORY_HOST_REPOSITORY} from "../constants";
 import {WebCategoryUrlResponseDto} from "./dto/web-category-url.dto";
-// import {CacheTTL} from "@nestjs/cache-manager";
+import {CacheTTL} from "@nestjs/cache-manager";
 import {WebCategoryHost} from "./entities/web-category-host-entity";
 import {StringUtils} from "../utils/stringUtils";
 
@@ -37,7 +37,7 @@ export class WebCategoryService {
     return parsedUrl.hostname;
   }
 
-  // @CacheTTL(1)
+  @CacheTTL(1)
   async getHostCategory(host: string): Promise<WebCategoryType[]> {
     const result = await this.hostRepository.findOne({
       where: {host},
@@ -52,7 +52,7 @@ export class WebCategoryService {
   }
 
 
-  // @CacheTTL(1)
+  @CacheTTL(1)
   async getURL(url: string): Promise<WebCategoryUrlResponseDto | null> {
     const result = await this.repository.findOne({
       where: {url},
