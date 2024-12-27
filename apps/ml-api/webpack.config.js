@@ -6,6 +6,7 @@ module.exports = {
   watch: process.env['NODE_ENV'] !== 'production',
   output: {
     path: join(__dirname, '../../dist/apps/ml-api'),
+    filename: 'main.js',
   },
   plugins: [
     new NxAppWebpackPlugin({
