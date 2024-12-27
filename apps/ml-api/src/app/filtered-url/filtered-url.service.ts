@@ -4,7 +4,7 @@ import { FilteredUrl, FilteredUrlCreationAttributes } from './entities/filtered-
 import { QueryException } from '../error/common.exception';
 import { FilteredUrlDto } from './dto/filtered-url.dto';
 import { Sequelize } from 'sequelize-typescript';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { QueryTypes } from 'sequelize';
 import { OrgUnit } from '../org-unit/entities/org-unit.entity';
 import { getSimpleURL } from '../utils/http.util';
@@ -124,7 +124,7 @@ export class FilteredUrlService {
             try {
                 transaction = await this.sequelize.transaction();
                 const filteredUrls = urls.map((url) => {
-                    return { id: uuid(), url: url.name, orgUnitId, accountId, enabled: url.enabled };
+                    return { id: uuidv4(), url: url.name, orgUnitId, accountId, enabled: url.enabled };
                 });
                 await this.filteredUrlRepository.destroy({ where: { orgUnitId } });
                 await this.filteredUrlRepository.bulkCreate<FilteredUrl>(filteredUrls);
@@ -149,7 +149,7 @@ export class FilteredUrlService {
             const orgUnits = await this.orgUnitRepository.findAll({ where: { accountId: dto.accountId } });
             const urls: FilteredUrlCreationAttributes[] = [];
             for (const orgUnit of orgUnits) {
-                const url: FilteredUrlCreationAttributes = { id : uuid(), orgUnitId : orgUnit.id, accountId : dto.accountId, enabled : dto.enabled == undefined ? true : dto.enabled, url : dto.url, inheritFromParent: true };
+                const url: FilteredUrlCreationAttributes = { id : uuidv4(), orgUnitId : orgUnit.id, accountId : dto.accountId, enabled : dto.enabled == undefined ? true : dto.enabled, url : dto.url, inheritFromParent: true };
                 urls.push(url);
             }
             await this.filteredUrlRepository.bulkCreate(urls);

@@ -1,0 +1,45 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "ESNext",
+      "dom",
+      "dom.iterable",
+      "es2015",
+      "ES2021"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "types": ["chrome","vite/client","jest"],
+    "downlevelIteration": true,
+    "paths": {
+      "@shared/*": ["../shared/src/*"],
+      "@safekids-ai/nlp-js-web": ["../../../../libs/nlp-js-web/src/index.ts"],
+      "@safekids-ai/nlp-js-common": ["../../../../libs/nlp-js-common/src/index.ts"],
+      "@safekids-ai/nlp-js-types": ["../../../../libs/nlp-js-types/src/index.ts"],
+      "@safekids-ai/vision-js-web": ["../../../../libs/vision-js-web/src/index.ts"],
+      "@safekids-ai/vision-js-common": ["../../../../libs/vision-js-common/src/index.ts"],
+      "@safekids-ai/vision-js-types": ["../../../../libs/vision-js-types/src/index.ts"],
+      "@safekids-ai/web-category": ["../../../../libs/web-category/src/index.ts"],
+      "@safekids-ai/web-category-types": ["../../../../libs/web-category-types/src/index.ts"]
+    }
+  },
+  "exclude": [
+    "./src/**/*.spec.ts",
+    "./src/**/*.spec.tsx"
+  ],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "vite.config.mts",
+    "node_modules/@types"
+  ]
+}

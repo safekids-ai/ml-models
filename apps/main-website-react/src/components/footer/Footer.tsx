@@ -49,11 +49,11 @@ const Footer = () => {
             <div className="md:w-5/12 w-full flex flex-col justify-between md:text-right text-center">
               <div className="">
                 { routes.map((route, index) => <Link href={route.href} className='text-sm font-medium leading-[19px] text-white no-underline px-[0.8rem]' key={index}>{route.name}</Link>)}
-               
+
                 {/*<a href="https://app.safekids.ai/signin" target="_blank" class="ml-4 text-sm font-medium leading-[19px] text-white no-underline px-[0.8rem]">Login</a>*/}
               </div>
               <div className="pt-[2rem] xl:pt-0">
-                © 2023 Safe Kids LLC. All Rights Reserved.
+                © 2025 Safe Kids LLC. All Rights Reserved.
               </div>
             </div>
           </div>

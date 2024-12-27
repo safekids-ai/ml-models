@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PinInputField from 'react-pin-field';
 import { Typography, MenuItem, Select, Avatar } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import GmailReporting from './GmailReporting';
 import { StyleProps } from '../../types';
 import { useMobile } from '../../../../utils/hooks';
 import Loader from '../../../../components/Loader';
 import TotalIntercept from './TotalIntercept';
-import { getRequest, putRequest } from '../../../../utils/api';
+import { getRequest, patchRequest, putRequest } from '../../../../utils/api';
 import PrrSummary from './PrrSummary';
 import KidsListWidget from './KidsListWidget/index';
 import {
@@ -18,6 +18,7 @@ import {
     GET_TOP_5_INTERCEPTED_URL,
     GET_GMAIL_REPORTS,
     PUT_KID_REQUEST,
+    UPDATE_USER_ACCESS,
 } from '../../../../utils/endpoints';
 import { getInitials, logError } from '../../../../utils/helpers';
 import 'react-week-picker/src/lib/calendar.css';
@@ -212,7 +213,7 @@ const SchoolActivity = () => {
         } else {
             getAccessLimitedUsers(startDate, endDate);
         }
-    }, [accountType, endDate, search, showNotification, startDate]);
+    }, []);
 
     const setAccessCode = (ref: any, accessCode: string) => {
         ref?.forEach((input: any, index: number) => (input.value = accessCode[index]));
@@ -225,7 +226,21 @@ const SchoolActivity = () => {
         getKidsActivity(activityStartTime, today);
     };
 
-    const TopInterceptActivity = useCallback( async (startDate: Date, endDate: Date) => {
+    useEffect(() => {
+        getKidsActivity(startDate, endDate);
+    }, []);
+    const getKidsActivity = async (startDate: Date, endDate: Date) => {
+        setLoading(true);
+        TopInterceptActivity(startDate, endDate);
+    };
+    useEffect(() => {
+        if (totalCountCategory > 0) {
+            getAccessLimitedUsers(startDate, endDate);
+            getCrisisEngagement(startDate, endDate);
+        }
+    }, [totalCountCategory]);
+
+    const TopInterceptActivity = async (startDate: Date, endDate: Date) => {
         try {
             await getGmailReports(startDate, endDate);
             await getTopInterceptCategory(startDate, endDate);
@@ -235,22 +250,7 @@ const SchoolActivity = () => {
             logError('Top Intercept ACTIVITY', error);
             setLoading(false);
         }
-    }, []);
-
-    const getKidsActivity = useCallback( async (startDate: Date, endDate: Date) => {
-        setLoading(true);
-        TopInterceptActivity(startDate, endDate);
-    }, [TopInterceptActivity]);
-    useEffect(() => {
-        getKidsActivity(startDate, endDate);
-    }, [endDate, getKidsActivity, startDate]);
-    useEffect(() => {
-        if (totalCountCategory > 0) {
-            getAccessLimitedUsers(startDate, endDate);
-            getCrisisEngagement(startDate, endDate);
-        }
-    }, [endDate, startDate, totalCountCategory]);
-
+    };
     const getGmailReports = async (startDate: Date, endDate: Date) => {
         try {
             const result = await getRequest<{}, any>(GET_GMAIL_REPORTS, {

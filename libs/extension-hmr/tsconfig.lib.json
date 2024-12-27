@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "../../dist/out-tsc",
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noEmit": false,
+    "moduleResolution": "Node",
+    "types": ["chrome", "node"],
+    "lib": ["ES2021", "dom"]
+  },
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts", "lib/injections/**/*"],
+  "include": ["src/**/*.ts"]
+}

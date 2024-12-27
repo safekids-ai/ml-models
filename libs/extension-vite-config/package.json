@@ -1,0 +1,41 @@
+{
+  "name": "@safekids-ai/extension-vite-config",
+  "description": "Safekids Extension Vite Config",
+  "version": "0.0.0-replace",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main" : "index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/safekids-ai/ml-models/tree/main/libs/extension-vite-config"
+  },
+  "author": {
+    "name": "Abbas Valliani",
+    "email": "abbas@safekids.ai",
+    "url": "https://www.safekids.ai"
+  },
+  "keywords": [
+    "example",
+    "typescript",
+    "npm",
+    "package",
+    "sample",
+    "boilerplate",
+    "starter",
+    "demo",
+    "cjs",
+    "esm",
+    "umd"
+  ],
+  "license": "Safe Kids License",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "sideEffects": false,
+  "generators": "./plugin/generators.json",
+  "schematics": "./plugin/generators.json",
+  "web-types": "./web-types.json"
+}

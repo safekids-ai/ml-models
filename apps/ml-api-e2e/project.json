@@ -1,15 +1,15 @@
 {
   "name": "ml-api-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["ml-api"],
   "projectType": "application",
+  "implicitDependencies": ["ml-api"],
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
         "jestConfig": "apps/ml-api-e2e/jest.config.ts",
-        "passWithNoTests": true,
+        "passWithNoTests": true
       }
     },
     "lint": {

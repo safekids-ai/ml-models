@@ -1,4 +1,5 @@
 import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
+import {CacheModule} from '@nestjs/cache-manager';
 import {SmsModule} from './sms/sms.module';
 import {LoggingModule} from './logger/logging.module';
 import {ConfigModule, ConfigService} from '@nestjs/config';
@@ -83,15 +84,16 @@ import {PromoCodeModule} from './billing/promo-code/promo-code.module';
 import {CouponModule} from './billing/coupon/coupon.module';
 import {SubscriptionFeedbackModule} from './billing/subscription-feedback/subscription-feedback.module';
 import {InvoiceModule} from './billing/invoice/invoice.module';
-import {ThrottlerModule, ThrottlerModuleOptions} from "@nestjs/throttler";
-import {ThrottlerBehindProxyGuard} from "./guards/throttler-behind-proxy-guard";
 import throttleConfig from "./config/throttle";
+import cacheConfig, {CacheConfig} from "./config/cache";
 import modelConfig from "./config/model";
-import queueConfig from "./config/queue"
+import queueConfig, {QueueConfig} from "./config/queue"
+import redisConfig, {RedisConfig} from "./config/redis"
 import categoryConfig from "./config/category"
 import defaultCouponsConfig from "./config/default-coupons"
 import defaultPlansConfig from "./config/default-plans"
 import deviceProfileConfig from "./config/device-profile-config"
+import aiConfig from "./config/ai-api"
 import eventConfig from "./config/event"
 import expressConfig from "./config/express"
 import globalsConfig from "./config/globals"
@@ -106,7 +108,9 @@ import twilioSmsConfig from "./config/twilio.sms"
 import webappConfig from "./config/webapp"
 import winstonConfig from "./config/winston"
 import {MlModule} from "./ml/ml.module";
-import {TestModule} from "./test/test.module";
+import {QueueModule} from "./queue/queue.module";
+import { redisStore } from 'cache-manager-redis-yet';
+import {WebCategoryModule} from "./web-category/web-category.module";
 
 const ENV = process.env.APP_ENV || 'development';
 
@@ -121,6 +125,8 @@ console.log('==========================================');
       isGlobal: true,
       cache: false,
       load: [
+        redisConfig,
+        cacheConfig,
         throttleConfig,
         modelConfig,
         queueConfig,
@@ -140,7 +146,8 @@ console.log('==========================================');
         sqlConfig,
         twilioSmsConfig,
         webappConfig,
-        winstonConfig
+        winstonConfig,
+        aiConfig,
       ]
     }),
 
@@ -154,6 +161,29 @@ console.log('==========================================');
     // }),
 
     //////////////////////////////////
+    // redis module
+    //////////////////////////////////
+    // CacheModule.registerAsync({
+    //   isGlobal: true,
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //
+    //   useFactory: async (configService: ConfigService) => {
+    //     const redisConfig = configService.get<RedisConfig>("redisConfig");
+    //     const cacheConfig = configService.get<CacheConfig>("cacheConfig");
+    //
+    //     return {
+    //       store: redisStore,
+    //       host: redisConfig.host,
+    //       port: redisConfig.port,
+    //       password: redisConfig.password,
+    //       ttl: cacheConfig.ttl,
+    //       max: cacheConfig.max
+    //     }
+    //   }
+    // }),
+
+    //////////////////////////////////
     // logging module
     //////////////////////////////////
     LoggingModule.forRootAsync({
@@ -163,42 +193,11 @@ console.log('==========================================');
       },
       inject: [ConfigService],
     }),
-
-    ///////////////////////////////////
-    // Email Module
-    ///////////////////////////////////
-    // EmailModule.forRootAsync({
-    //   email: {
-    //     imports: [ConfigModule, LoggingModule],
-    //     useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-    //       return new PostmarkEmailService(configService, loggingService);
-    //     },
-    //     provide: 'EmailServiceImpl',
-    //     inject: [ConfigService, LoggingService],
-    //   },
-    //   emailtemplate: {
-    //     imports: [ConfigModule, LoggingModule],
-    //     useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-    //       return new PostmarkEmailTemplateService(configService, loggingService);
-    //     },
-    //     provide: 'EmailTemplateServiceImpl',
-    //     inject: [ConfigService, LoggingService],
-    //   },
-    // }),
-
-    ///////////////////////////////////
-    // Messaging Module
-    ///////////////////////////////////
-    // SmsModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   useFactory: async (configService: ConfigService, loggingService: LoggingService) => {
-    //     return new TwilioSmsService(configService, loggingService);
-    //   },
-    //   provide: 'SmsImplementation',
-    //   inject: [ConfigService, LoggingService],
-    // }),
-    // EventEmitterModule.forRoot(),
     MlModule,
+    // QueueModule,
+    // EmailModule,
+    // SmsModule,
+    // EventEmitterModule.forRoot(),
     // DatabaseModule,
     // DefaultDataModule,
     // FilteredCategoryModule,
@@ -270,15 +269,16 @@ console.log('==========================================');
     // CouponModule,
     // SubscriptionFeedbackModule,
     // InvoiceModule,
+    // WebCategoryModule
   ],
 })
 export class AppModule implements NestModule {
   // constructor(private defaultDataService: DefaultDataService) {
   // }
 
-  onModuleInit(): void {
-    //void this.defaultDataService.insertDefaultData();
-  }
+  // onModuleInit(): void {
+  //   void this.defaultDataService.insertDefaultData();
+  // }
 
   /**
    * get raw or json body for requests routes implementation.

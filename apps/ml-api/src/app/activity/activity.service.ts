@@ -9,7 +9,7 @@ import {PrrNotificationService} from '../prr-notification/prr-notification.servi
 import {AccountService} from '../accounts/account.service';
 import {CreatePrrNotificationDto} from '../prr-notification/dto/create-prr-notification.dto';
 import {LoggingService} from '../logger/logging.service';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {Categories} from '../category/default-categories';
 import {CountResponse, PreviewResultDto, PrrInfoDto, UserInfoDto} from './dto/preview-result.dto';
 import {getPrrLevelName} from './prr-level-names';
@@ -19,7 +19,7 @@ import {AccountTypes} from '../account-type/account-type.enum';
 import {PrrLevels} from '../prr-level/prr-level.default';
 import {EmailTemplates} from '../email/email.templates';
 import {Sequelize} from 'sequelize-typescript';
-import {QueueServiceInterface} from '../email/email.interfaces';
+import {EmailInterface, QueueServiceInterface} from '../email/email.interfaces';
 import retry from 'async-retry';
 import {PrrActivityRequest} from '../chrome/dto/prr.activity.request';
 import {User} from '../user/entities/user.entity';
@@ -27,12 +27,15 @@ import {prrLevel} from '../domain';
 import {ActivityAiDataCreationAttributes} from '../activity-ai-data/entities/activity-ai-datum.entity';
 import {ActivityAiDataService} from '../activity-ai-data/activity-ai-data.service';
 import {ConfigService} from '@nestjs/config';
-import Queue from 'bee-queue';
 import {RedisClientOptions, createClient as createRedisClient} from 'redis';
-import {QueueConfig, QueueConfigItem} from "apps/ml-api/src/app/config/queue";
+import {QueueConfig, QueueConfigItem} from "../config/queue";
 
-import { AsyncParser } from '@json2csv/node';
+import {AsyncParser} from '@json2csv/node';
 import {WebAppConfig} from "../config/webapp";
+import {Job, Queue} from "bullmq";
+import {BatchProcessor} from "../utils/queue";
+import {InjectQueue} from "@nestjs/bullmq";
+
 const Json2csvParser = new AsyncParser();
 
 @Injectable()
@@ -41,10 +44,7 @@ export class ActivityService implements QueueServiceInterface {
   private readonly sequelize: Sequelize;
 
   private readonly WEB_URL: string;
-
-  private queue: Queue
-  private readonly queueConfig: QueueConfigItem
-  private readonly retryOptions;
+  private queueConfig: QueueConfigItem;
 
   constructor(
     @Inject(ACTIVITY_REPOSITORY) private readonly repository: typeof Activity,
@@ -55,35 +55,14 @@ export class ActivityService implements QueueServiceInterface {
     @Inject(SEQUELIZE) sequelize: Sequelize,
     private readonly config: ConfigService,
     private readonly activityAiDataService: ActivityAiDataService,
-    private readonly emailService: EmailService
+    private readonly emailService: EmailService,
+    @InjectQueue('activity-queue') private readonly queue: Queue
   ) {
     this.log.className(ActivityService.name);
+    this.queueConfig = config.get<QueueConfig>('queueConfig').queueActivity;
+
     this.DEFAULT_PAGE_LIMIT = 15;
     this.WEB_URL = this.config.get<WebAppConfig>("webAppConfig").url;
-
-    this.queueConfig = config.get<QueueConfig>('queueConfig').standardQueueEmail;
-
-    if (!this.queueConfig || !this.queueConfig.name || !this.queueConfig.url) {
-      throw new Error('Please define proper name for activity service queue and url')
-    }
-  }
-
-  async onModuleInit(): Promise<void> {
-    const redisConnectionOptions: RedisClientOptions = {
-      url: this.queueConfig.url
-    };
-
-    const queueSettings: Queue.QueueSettings = {
-      prefix: 'safekids',
-      autoConnect: true,
-      removeOnFailure: false,
-      removeOnSuccess: true,
-      stallInterval: 5000,
-      redis: createRedisClient(redisConnectionOptions),
-    };
-    this.queue = new Queue(this.queueConfig.name, queueSettings);
-    await this.listener();
-    this.log.info(`A listener called ${this.queueConfig.name} is setup for queue `, this.queueConfig.url);
   }
 
   create(createActivityDto: ActivityCreationAttributes) {
@@ -623,7 +602,7 @@ export class ActivityService implements QueueServiceInterface {
       return;
     }
     const account = await this.accountService.findOne(prrDto.accountId);
-    const crisesId = uuid().replace(/-/g, '');
+    const crisesId = uuidv4().replace(/-/g, '');
     const url = await this.generateUniqueUrl(crisesId);
     if (prrDto.prrLevelId === PrrLevels.THREE) {
       if (account.accountTypeId === AccountTypes.SCHOOL) {
@@ -643,7 +622,7 @@ export class ActivityService implements QueueServiceInterface {
       } else if (account.accountTypeId === AccountTypes.CONSUMER) {
         const parent = await this.userService.findParentAccount(user.accountId);
         await this.emailService.sendEmail({
-          id: uuid(),
+          id: uuidv4(),
           meta: {
             kidName: `${user.firstName} ${user.lastName}`,
             category: prrDto.prrCategoryId.replace(/_/g, ' '),
@@ -657,36 +636,6 @@ export class ActivityService implements QueueServiceInterface {
       }
     }
     return;
-  }
-
-  async sendMessage(message: PrrActivityRequest) {
-    this.log.debug('ActivityService sending activities event', message);
-
-    try {
-      const result = await retry(
-        async (bail) => {
-          try {
-            const job = await this.queue.createJob(message);
-            job.save();
-          } catch (error) {
-            if (error.retryable === false) {
-              bail(error);
-            } else {
-              throw error;
-            }
-          }
-        },
-        {
-          ...this.retryOptions,
-          onRetry: (error: Error) => {
-            this.log.warn('AWS Activity Service OnRetry - retrying queue email due to', error);
-          },
-        }
-      );
-      return result;
-    } catch (error) {
-      this.log.error('AWS Activity Service. Unable to send message to queue', error);
-    }
   }
 
   async findAllPrrLevelsCount(userId: string, start: Date, end: Date) {
@@ -717,29 +666,28 @@ export class ActivityService implements QueueServiceInterface {
     return obj ? obj.counts : 0;
   }
 
-  async listener(): Promise<void> {
+  async sendMessage(message: PrrActivityRequest) {
+    this.log.debug('ActivityService sending activities event', message);
+    await this.queue.add('prr-activity-job', message)
+  }
 
-    this.queue.process(async (message, done) => {
-      this.log.debug(`received inform event`);
-      const request = JSON.parse(message.Body);
-      const prrActivityRequest: PrrActivityRequest = request as PrrActivityRequest;
-      this.log.debug('Bee queue received inform event', {prrActivityRequest});
-      await this.savePrrActivityInBulk(prrActivityRequest);
-      return done(null, null);
-    });
+  async wireListener(): Promise<void> {
+    const batchProcessor = new BatchProcessor<PrrActivityRequest>(this.log,
+      {
+        queue: this.queue,
+        batchSize: this.queueConfig.batchOptions.size,
+        batchTimeout: this.queueConfig.batchOptions.timeout,
+        processBatch: this.processBatch,
+        workerCount: this.queueConfig.workers,
+        retryOptions: this.queueConfig.retryOptions
+      });
+  }
 
-    this.queue.on('error', (err) => {
-      this.log.error('BeeQueue Parent Email Queue listen error', err);
-    });
-
-    this.queue.on('succeeded', (job, result) => {
-      this.log.info('BeeQueue Parent Email Queue success: ', result);
-    });
-    const success = await this.queue.connect();
-    if (success) {
-      this.log.info(`A listener called ${this.queueConfig.name} is setup for queue `, this.queueConfig.url);
-    } else {
-      this.log.error(`A listener called ${this.queueConfig.name} did not setup for queue `, this.queueConfig.url);
-    }
+  public processBatch = async (jobs: Job<PrrActivityRequest>[]): Promise<void> => {
+    await Promise.all(
+      jobs.map(async (job) => {
+        await this.savePrrActivityInBulk(job.data);
+      })
+    );
   }
 }

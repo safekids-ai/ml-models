@@ -51,7 +51,7 @@ describe('Kid Settings => Filtered Categories Table', () => {
 
     test('Filtered Categories Table component is rendering Radio Buttons correctly', () => {
         const { getAllByRole } = render(Component);
-        const columnRadio = getAllByRole('radio') as HTMLInputElement[];
+        const columnRadio = getAllByRole('radio');
         const checkedItems = columnRadio.filter((el) => el.checked);
         expect(checkedItems.length).toEqual(KidDataTemp.categories.length);
     });

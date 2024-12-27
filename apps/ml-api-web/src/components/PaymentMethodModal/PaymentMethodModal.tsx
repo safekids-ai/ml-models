@@ -1,4 +1,5 @@
 import { Dialog, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { PaymentMethodModalStyled } from './PaymentMethodModal.style';
 import { PaymentFormWrapper } from './PaymentFormWrapper/PaymentFormWrapper';

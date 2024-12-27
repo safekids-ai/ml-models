@@ -28,9 +28,10 @@ type State = {
     status?: 'error' | 'success';
 };
 const CreatePassword: React.FC<Props> = ({ email }: Props) => {
+    const navigate = useNavigate();
     const [state, setState] = useState<State>({});
     // const [passwordStrength, setPasswordStrength] = useState(0);
-    const navigate = useNavigate();
+    const history = useNavigate();
     const onSubmit = useCallback(
         async (values: Values) => {
             try {
@@ -58,7 +59,7 @@ const CreatePassword: React.FC<Props> = ({ email }: Props) => {
                 }));
             }
         },
-        [email, navigate],
+        [email, history],
     );
     return (
         <FormPage

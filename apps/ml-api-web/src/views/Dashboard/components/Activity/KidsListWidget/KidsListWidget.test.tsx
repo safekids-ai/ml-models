@@ -6,14 +6,6 @@ import KidsListWidget from '.';
 import { KidWidgetType } from '../SchoolActivity.type';
 
 
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
-
-
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
@@ -38,7 +30,6 @@ const testData: KidWidgetType = {
             firstName: 'first',
             lastName: 'last',
             prrLevel: 2,
-            read: 0 // FIXME: unsure what value should be
         },
     ],
     totalItems: 5,

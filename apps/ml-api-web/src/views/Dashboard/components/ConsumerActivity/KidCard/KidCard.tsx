@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Checkbox, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Tooltip, Typography } from '@mui/material';
+import { Avatar, Button, Checkbox, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Tooltip, Typography } from '@mui/material';
 import { getInitials } from '../../../../../utils/helpers';
 import PinInputField from 'react-pin-field';
 import { KidCardStyled } from './kidCard.style';
-import { KIDS_STATUSES } from './KidCard.type';
-import { getStatus, periodTranslateArray } from './KidCard.utils';
+import { CategoryIntercept, KIDS_STATUSES } from './KidCard.type';
+import { getStatus, periodTranslateArray, totalCategoriesCount } from './KidCard.utils';
 import { format } from 'date-fns';
 import { PUT_KID_ASK_ACCESS_REQUEST, UPDATE_USER_ACCESS } from '../../../../../utils/endpoints';
 import { patchRequest, putRequest } from '../../../../../utils/api';
@@ -45,9 +45,9 @@ const KidCard = ({ kid, selectedTimeFilter }: Props) => {
             setChartLabel(sentenceCaseLabels);
             setChartData(Object.values(kid?.activity));
         }
-    }, [kid?.accessLimited, kid?.activity, kid?.kidRequests, kid?.status, selectedTimeFilter]);
+    }, []);
 
-    // const totalInterceptedCategoriesCount = totalCategoriesCount(kid?.topCategories);
+    const totalInterceptedCategoriesCount = totalCategoriesCount(kid?.topCategories);
 
     const handleToggle = (value: string) => () => {
         const currentIndex = checkedRequests?.indexOf(value);
@@ -215,7 +215,7 @@ const KidCard = ({ kid, selectedTimeFilter }: Props) => {
                                                 id={labelId}
                                                 primary={
                                                     <Typography className="text">
-                                                        <a className="url-text" href={request.url} target="_blank" rel="noreferrer">
+                                                        <a className="url-text" href={request.url} target="_blank">
                                                             {request.url}
                                                         </a>
                                                     </Typography>

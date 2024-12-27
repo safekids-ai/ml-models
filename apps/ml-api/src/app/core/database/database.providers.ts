@@ -59,6 +59,8 @@ import {Health} from '../../health/health.entity';
 import {ConfigService} from "@nestjs/config";
 import {SqlConfig} from "../../config/sql";
 import {LoggingService} from "../../logger/logging.service";
+import {WebCategoryUrl} from "../../web-category/entities/web-category-url-entity";
+import {WebCategoryHost} from "../../web-category/entities/web-category-host-entity";
 
 export const databaseProviders = [
   {
@@ -92,6 +94,13 @@ export const databaseProviders = [
       }
       config = {...dbOptions, ...config}
       const sequelize = new Sequelize(config);
+      try {
+        await sequelize.authenticate();
+      } catch (error) {
+        const {password, ...connectionSettings} = dbOptions
+        throw new Error(`Unable to connect to database ${JSON.stringify(connectionSettings)} with error:${error}`)
+      }
+
       sequelize.addModels([
         User,
         Account,
@@ -148,8 +157,11 @@ export const databaseProviders = [
         FilteredProcess,
         Invoice,
         Health,
+        WebCategoryUrl,
+        WebCategoryHost
       ]);
-      await sequelize.sync();
+      //commented out since a sync is dangerous
+      //await sequelize.sync();
       return sequelize;
     },
   },

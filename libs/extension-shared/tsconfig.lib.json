@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "outDir": "../../dist/out-tsc",
+    "declaration": true,
+    "sourceMap": true,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "types": ["chrome"],
+  },
+  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}

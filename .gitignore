@@ -38,10 +38,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# NX files
 .nx/
-#.nx/cache
-#.nx/tmp
-#.nx/installation
+
 
 # Next.js
 .next
@@ -53,3 +52,6 @@ logs
 .env
 migrations.json
 
+
+vite.config.*.timestamp*
+vitest.config.*.timestamp*

@@ -1,10 +1,9 @@
 import {Test, TestingModule} from '@nestjs/testing';
 
-import {MlController} from 'apps/ml-api/src/app/ml/ml.controller';
-import {MlService} from 'apps/ml-api/src/app/ml/ml.service';
+import {MlController} from './ml.controller';
+import {MlService} from './ml.service';
 import {Logger} from "@nestjs/common";
 import {ConfigService} from "@nestjs/config";
-import {ThrottlerBehindProxyGuard} from "./guards/throttler-behind-proxy-guard";
 import {APP_GUARD} from "@nestjs/core";
 
 describe('AppController', () => {

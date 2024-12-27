@@ -1,5 +1,5 @@
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select } from '@mui/material';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from '../../../components/InputFields';
 import DatesTable from './DatesTable/DatesTable';
@@ -214,7 +214,7 @@ const SaveButton = styled.div`
 `;
 
 const SchoolSchedule = ({ nextStep, isSettings }: Props) => {
-    const monthsArray = useMemo(() => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], []);
+    const monthsArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const daysArray = [
         '1',
         '2',
@@ -298,7 +298,7 @@ const SchoolSchedule = ({ nextStep, isSettings }: Props) => {
                     logError('GET NON SCHOOL DAYS CONFIG', err);
                 });
         }
-    }, [isSettings, monthsArray]);
+    }, []);
 
     const onContinue = () => {
         let newDates = [];

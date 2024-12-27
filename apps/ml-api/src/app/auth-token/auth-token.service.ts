@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { USER_AUTHTOKEN_REPOSITORY } from '../constants';
 import { AuthToken, AuthTokenCreationAttributes } from './entities/auth-token.entity';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { LoggingService } from '../logger/logging.service';
 import { QueryException } from '../error/common.exception';
 import { QueryTypes } from 'sequelize';
@@ -22,7 +22,7 @@ export class AuthTokenService {
         // if (createAuthTokenDto.refreshToken){
         //   createAuthTokenDto.refreshToken = await CryptoUtil.encrypt(createAuthTokenDto.refreshToken);
         // }
-        createAuthTokenDto.id = uuid();
+        createAuthTokenDto.id = uuidv4();
         await this.authTokenRepository.create(createAuthTokenDto);
     }
 

@@ -4,7 +4,7 @@ import { UpdateCalendarDto } from './dto/update-calendar.dto';
 import { CALENDAR_REPOSITORY, SEQUELIZE } from '../constants';
 import { AccountCalendar } from './entities/calendar.entity';
 import { Op, QueryTypes } from 'sequelize';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { FilteredUrl } from '../filtered-url/entities/filtered-url.entity';
 import { QueryException } from '../error/common.exception';
 import { Sequelize } from 'sequelize-typescript';

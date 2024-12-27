@@ -32,7 +32,7 @@
         },
         "development": {
           "buildTarget": "main-website-react:build:development",
-          "dev":true
+          "dev": true
         }
       }
     },

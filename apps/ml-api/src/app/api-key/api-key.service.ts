@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { SERVICES_APIKEY_REPOSITORY } from '../constants';
 import { ServicesApiKey, ServicesApiKeyCreationAttributes } from './entities/api-key.entity';
 import { CryptoUtil } from '../utils/crypto.service';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ApiKeyService {
@@ -12,7 +12,7 @@ export class ApiKeyService {
     ) {}
     async create(createApiKeyDto: ServicesApiKeyCreationAttributes) {
         try {
-            createApiKeyDto.id = uuid();
+            createApiKeyDto.id = uuidv4();
             // if (createApiKeyDto.accessKey) {
             //   createApiKeyDto.accessKey = await CryptoUtil.encrypt(
             //     createApiKeyDto.accessKey

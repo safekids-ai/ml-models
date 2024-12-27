@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { KID_CONFIG_REPOSITORY } from '../constants';
 import { KidConfig } from './entities/kid-config.entity';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { QueryException } from '../error/common.exception';
 import { LoggingService } from '../logger/logging.service';
 import { KidConfigDTO } from './dto/kid-config.dto';
@@ -28,7 +28,7 @@ export class KidConfigService {
     async create(userId: string): Promise<KidConfig> {
         try {
             const dto = {
-                id: uuid(),
+                id: uuidv4(),
                 offTime: this.KID_OFF_TIME,
                 userId,
                 status: Statuses.IN_PROGRESS,

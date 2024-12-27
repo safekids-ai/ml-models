@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Formik, Form, FormikHelpers } from 'formik';
+import { Formik, Form, FormikErrors, FormikHelpers } from 'formik';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../images/getStartedAlt.png';
 import { PinField, MessageContainer } from '../../components/InputFields';
+import { validateEmail } from '../../utils/validations';
+import { extractErrors } from '../../utils/helpers';
 import FormPage from '../../components/FormPage';
 import { postRequest } from '../../utils/api';
 import { FORGOT_PASSWORD, VERIFY_PASSWORD_RESET_CODE } from '../../utils/endpoints';
@@ -45,7 +47,7 @@ const VerifyResetPasswordCode: React.FC<Props> = ({ onSuccess, email }: Props) =
                 message: undefined,
             }));
             try {
-                const { status } = await postRequest<VerifyResetPasswordCodeRequest, VerifyForgotPasswordCodeResponse>(VERIFY_PASSWORD_RESET_CODE, {
+                const { status, data } = await postRequest<VerifyResetPasswordCodeRequest, VerifyForgotPasswordCodeResponse>(VERIFY_PASSWORD_RESET_CODE, {
                     code,
                     email,
                 });
@@ -87,9 +89,10 @@ type State = {
     status?: 'error' | 'success';
 };
 const ForgotPassword: React.FC = () => {
+    const navigate = useNavigate();
     const { state: passedState } = useLocation();
     const [state, setState] = useState<State>({});
-    const navigate = useNavigate();
+    const history = useNavigate();
     const onSubmit = useCallback(
         (formValues: Values, helpers?: FormikHelpers<Values>) => {
             const values = { ...formValues, email: formValues.email.toLowerCase() };

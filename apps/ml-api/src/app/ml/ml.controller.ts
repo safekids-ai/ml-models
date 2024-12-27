@@ -9,14 +9,13 @@ import {
   UseInterceptors
 } from '@nestjs/common';
 
-import {MlService} from 'apps/ml-api/src/app/ml/ml.service';
+import {MlService} from './ml.service';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
 import {NLPRequestDto} from "@safekids-ai/ml-api-types";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {Multer} from "multer";
 import {Limit} from "../guards/limit.guard";
 import {ApiBody, ApiTags} from "@nestjs/swagger";
-import {WebCategory} from "@safekids-ai/web-categorize";
 import {enumToJson} from "../app.utils";
 
 @ApiTags('App')
@@ -94,27 +93,5 @@ export class MlController {
   @Get('classify-image-url')
   async classifyImageURL(@Query('url') url: string) {
     return await this.appService.classifyImageURL(url);
-  }
-
-  @ApiBody({
-    description: 'Gets a list of categories of a website',
-  })
-  @Get('classify-website')
-  async classifyWebsite(@Query('uri') uri: string) {
-    if (!this.appService.validateURI(uri)) {
-      throw new HttpException({
-        status: HttpStatus.UNPROCESSABLE_ENTITY,
-        error: "Invalid URI:" + uri
-      }, HttpStatus.UNPROCESSABLE_ENTITY)
-    }
-    return this.appService.classifyWebsite(uri);
-  }
-
-  @ApiBody({
-    description: 'Gets a list of categories available for website classification',
-  })
-  @Get('website-category-codes')
-  async getWebsiteCategoryCodes() {
-    return enumToJson(WebCategory)
   }
 }

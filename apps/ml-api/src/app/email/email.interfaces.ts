@@ -27,34 +27,14 @@ interface EmailTemplateInterface {
   createdOn?: Date;
 }
 
-interface EmailTemplateServiceInterface {
-  list(): Promise<EmailTemplateInterface[]>;
-
-  get(id: string): Promise<EmailTemplateInterface>;
-
-  create(template: EmailTemplateInterface): Promise<void>;
-
-  update(template: EmailTemplateInterface): Promise<void>;
-
-  delete(id: string): Promise<void>;
-
-  deleteAll(): Promise<void>;
-}
-
-interface EmailServiceInterface {
-  sendEmail(email: EmailInterface): Promise<void>;
-}
-
 interface QueueServiceInterface {
-  listener(): Promise<void>;
+  wireListener(): Promise<void>;
 
   sendMessage?(message): Promise<void>;
 }
 
 export type {
-  EmailServiceInterface,
   QueueServiceInterface,
-  EmailTemplateServiceInterface,
   EmailTemplateInterface,
   EmailContentInterface,
   EmailInterface

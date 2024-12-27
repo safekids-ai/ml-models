@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ElementType } from 'react';
 import { Avatar, Tooltip } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import CustomScroll from 'simplebar-react';
 import { NotificationsOutlined, LanguageOutlined } from '@mui/icons-material';
 import 'simplebar/dist/simplebar.min.css';
@@ -154,19 +154,19 @@ export const schoolPrimaryLinks: LinkType[] = [
     {
         label: 'Search',
         icon: SearchIcon,
-        url: '/search',
+        url: '/search/*',
         component: SearchPage,
     },
     {
         label: 'Activity',
         icon: DashboardIcon,
-        url: '/dashboard',
+        url: '/dashboard/*',
         component: SchoolActivity,
     },
     {
         label: 'Notifications',
         icon: NotificationsOutlined,
-        url: '/notifications',
+        url: '/notifications/*',
         component: NotificationPage,
     },
 ];
@@ -175,13 +175,13 @@ export const schoolSecondaryLinks: LinkType[] = [
     {
         label: 'Settings',
         icon: SettingsIcon,
-        url: '/settings',
+        url: '/settings/*',
         component: SchoolSettings,
     },
     {
         label: 'Websites',
         icon: LanguageOutlined,
-        url: '/websites',
+        url: '/websites/*',
         component: WebsiteSettings,
     },
 ];
@@ -190,13 +190,13 @@ export const consumerPrimaryLinks: LinkType[] = [
     {
         label: 'Activity',
         icon: DashboardIcon,
-        url: '/dashboard',
+        url: '/dashboard/*',
         component: ConsumerActivity,
     },
     {
         label: 'Notifications',
         icon: NotificationsOutlined,
-        url: '/notifications',
+        url: '/notifications/*',
         component: NotificationPage,
     },
 ];
@@ -204,7 +204,7 @@ export const consumerSecondaryLinks: LinkType[] = [
     {
         label: 'Settings',
         icon: SettingsIcon,
-        url: '/settings',
+        url: '/settings/*',
         component: WebsiteSettings,
     },
 ];
@@ -290,7 +290,7 @@ const SideBar: React.FC<SidebarProps> = ({ notificationCount = 0, onClick }: Sid
 
                 <div className={classes.user}>
                     {avatarUrl ? (
-                        <img src={avatarUrl} className={classes.loadedImage} alt="Avatar" />
+                        <img src={avatarUrl} className={classes.loadedImage} alt="Avatar Image" />
                     ) : (
                         <Avatar className="avatar">{userFullName && getInitials(userFullName)}</Avatar>
                     )}

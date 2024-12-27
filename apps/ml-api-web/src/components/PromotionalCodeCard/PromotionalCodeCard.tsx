@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { getRequest, patchRequest } from '../../utils/api';
 import { CodeInput, PromotionalCodeCardStyled } from './PromotionalCodeCard.style';
 import { SubmitButton } from '../InputFields';
-import { VERIFY_PROMO_CODE } from '../../utils/endpoints';
+import { UPDATE_USER_PLAN, VERIFY_PROMO_CODE } from '../../utils/endpoints';
 import { PromoCodeInfo, Props } from './PromotionalCodeCard.type';
 import { generatePromoCodeDescription } from './PromotionalCodeCard.utils';
 
@@ -15,7 +15,7 @@ const initialValues = {
 export const PromotionalCodeCard = ({ setPromoCode, activePlanId }: Props) => {
     const [promoDescription, setPromoDescription] = useState('');
     const onSubmit = useCallback(
-        (values: any, helper: FormikHelpers<any>) => {
+        (values, helper: FormikHelpers<any>) => {
             const { setFieldError, setSubmitting } = helper;
             const { CODE: promoCode } = values;
             if (promoCode) {
@@ -49,7 +49,7 @@ export const PromotionalCodeCard = ({ setPromoCode, activePlanId }: Props) => {
                     });
             }
         },
-        [activePlanId, setPromoCode]
+        [promoDescription, activePlanId]
     );
 
     return (
@@ -62,7 +62,7 @@ export const PromotionalCodeCard = ({ setPromoCode, activePlanId }: Props) => {
             onSubmit={onSubmit}>
             {({ isSubmitting, isValid }) => {
                 return (
-                    <PromotionalCodeCardStyled isActive={!!promoDescription}>
+                    <PromotionalCodeCardStyled $isActive={!!promoDescription}>
                         <div className="left-section">
                             <span className="title">PROMOTIONAL CODE</span>
                             <span className="text-code">{promoDescription || 'If you have a promotional code, enter it here:'}</span>

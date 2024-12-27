@@ -1,0 +1,87 @@
+{
+  "name": "web-filter-extension-companion",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/web-filter-extension-companion/src",
+  "type": "module",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "viteConfig": "apps/web-filter-extension-companion/vite.config.mts",
+        "outputPath": "dist/apps/web-filter-extension-companion",
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "build:content"
+        }
+      ]
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "web-filter-extension-companion:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "web-filter-extension-companion:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "web-filter-extension-companion:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "web-filter-extension-companion:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "web-filter-extension-companion:build:development"
+        },
+        "production": {
+          "buildTarget": "web-filter-extension-companion:build:production"
+        }
+      },
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/web-filter-extension-companion/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/web-filter-extension-companion/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "web-filter-extension-companion:build"
+      }
+    }
+  }
+}

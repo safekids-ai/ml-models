@@ -30,7 +30,7 @@ export class ConsumerController {
     @UseGuards(ChromeExtensionAuthGuard)
     @Get('api/webfilter/configuration')
     getWebFilterConfiguration(@Request() req) {
-        return this.chromeService.getWebFilterConfiguration(req.user.accountId, req.user.userId, req.user.orgUnitId, req.user.deviceLinkId);
+      return this.chromeService.getWebFilterConfiguration(req.user.accountId, req.user.userId, req.user.orgUnitId, req.user.deviceLinkId);
     }
 
     @ApiOperation({ summary: 'Returns kid non school days configurations.' })

@@ -1,5 +1,4 @@
-import { UnorderedList, ListItem, ListIcon, List } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Flex } from '@chakra-ui/react';
 import { GoDash } from 'react-icons/go';
 
 interface Props {
@@ -10,21 +9,21 @@ function TextClassificationPrompt(props: { prompts: Props[] }) {
   const { prompts } = props;
   return (
     <div>
-      <UnorderedList spacing={3} id="nlp">
+      <Box as="ul" listStyleType="none">
         {prompts.map((prompt, i) => (
-          <ListItem key={i}>
+          <li key={i}>
             {prompt.name}
-            <List spacing={3}>
-              <ListItem>
-                <ListIcon>
+            <Box as="ul" gap={3} listStyleType='none' pl={0}>
+              <Flex as="li" alignItems='center'>
+                <Box as='span' className="icon" mr='5px'>
                   <GoDash />
-                </ListIcon>
+                </Box>
                 {prompt.example}
-              </ListItem>
-            </List>
-          </ListItem>
+              </Flex>
+            </Box>
+          </li>
         ))}
-      </UnorderedList>
+      </Box>
     </div>
   );
 }

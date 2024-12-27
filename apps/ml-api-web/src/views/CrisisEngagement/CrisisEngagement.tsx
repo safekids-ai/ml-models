@@ -164,7 +164,7 @@ const CrisisEngagement = () => {
                 setErrorMessage(err?.response?.data || 'Session is expired');
             })
             .finally(() => setLoading(false));
-    }, [searchParams]);
+    }, []);
 
     const getDate = (date?: string) => {
         if (!date) return '';

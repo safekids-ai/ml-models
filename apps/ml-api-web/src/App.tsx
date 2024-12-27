@@ -1,20 +1,22 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { FunctionComponent, useEffect, lazy, Suspense, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { MixPanel } from './MixPanel';
 import { CssBaseline } from '@mui/material';
 import { AuthProvider } from './context/AuthContext/AuthContext';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-
 import NoNetworkNotification from './components/NoNetworkNotification';
 
-import { getRequest, updateAxios } from './utils/api';
+import { getRequest } from './utils/api';
 import { NotificationToastProvider } from './context/NotificationToastContext/NotificationToastContext';
 import { GET_ACCOUNT_TYPE } from './utils/endpoints';
 import { logError } from './utils/helpers';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import MainLoader from "./components/MainLoader";
+import {NavigateSetter} from "./utils/navigate";
+import { JSX } from 'react';
 
-// dynamic imports for lower chunck size
+// dynamic imports for lower chunk size
 const Signup = lazy(() => import('./views/Signup/Signup'));
 const SchoolOnboarding = lazy(() => import('./views/SchoolOnboarding/SchoolOnboarding'));
 const ConsumerOnboarding = lazy(() => import('./views/ConsumerOnboarding/ConsumerOnboarding'));
@@ -25,160 +27,107 @@ const Dashboard = lazy(() => import('./views/Dashboard/Dashboard'));
 const RedirectComponent = lazy(() => import('./views/RedirectComponent/RedirectComponent'));
 const CrisisEngagement = lazy(() => import('./views/CrisisEngagement/CrisisEngagement'));
 
-type RouteProps = {
-    children: JSX.Element;
+const PublicRoute = ({ element }: { element: JSX.Element }) => {
+  const token = localStorage.getItem('jwt_token');
+  const location = useLocation();
+
+  if (token) {
+    const redirectURL = new URLSearchParams(location.search).get('redirect') || '/dashboard';
+    const { pathname, search } = new URL(redirectURL, window.origin);
+    return <Navigate to={`${pathname}${search}`} state={{ fromLogin: true }} />;
+  }
+
+  return element;
 };
 
-const CheckAuth = ({ children }: RouteProps) => {
-    const token = localStorage.getItem('jwt_token');
-    const { search: searchParams } = useLocation();
-    if (token) {
-        updateAxios();
-        const redirectURL = new URLSearchParams(searchParams).get('redirect') || '/dashboard';
-        const { pathname, search } = new URL(redirectURL, window.origin);
-        return <Navigate to={{ pathname, search }} state={{ fromLogin: true }} />;
-    } else {
-        return children;
-    }
-};
+const PrivateRoute = ({ element }: { element: JSX.Element }) => {
+  const { search, pathname } = useLocation();
+  const [accountType, setAccountType] = useState<string | null>(localStorage.getItem('account_type'));
+  const token = localStorage.getItem('jwt_token');
 
-const IsAuthenticated = ({ children }: RouteProps) => {
-    const { search, pathname } = useLocation();
-    const token = localStorage.getItem('jwt_token');
-    let accountType = localStorage.getItem('account_type');
+  useEffect(() => {
     if (!accountType && token) {
-        getRequest<{}, { accountType: string }>(GET_ACCOUNT_TYPE, {})
-            .then(({ data }) => {
-                localStorage.setItem('account_type', data.accountType);
-            })
-            .catch((err) => {
-                logError('GET_ACCOUNT_TYPE', err);
-            });
-        updateAxios();
+      getRequest<{}, { accountType: string }>(GET_ACCOUNT_TYPE, {})
+        .then(({ data }) => {
+          localStorage.setItem('account_type', data.accountType);
+          setAccountType(data.accountType);
+        })
+        .catch((err) => {
+          logError('GET_ACCOUNT_TYPE', err);
+        });
     }
-    const IsSchool = accountType === 'SCHOOL';
-    accountType = localStorage.getItem('account_type');
+  }, [accountType, token]);
 
-    const notSignedIn = !token;
-    if (notSignedIn && !IsSchool) {
-        const signInPath = `/signin?redirect=${pathname}${search}`;
-        return <Navigate to={signInPath} />;
-    } else if (notSignedIn && IsSchool) {
-        return <Navigate to="/school-signin" />;
-    } else {
-        updateAxios();
-        return children;
+  if (!token) {
+    const signInPath = `/signin?redirect=${pathname}${search}`;
+    if (accountType === 'SCHOOL') {
+      return <Navigate to="/school-signin" />;
     }
-};
+    return <Navigate to={signInPath} />;
+  }
 
-window.onerror = (error) => {
-    Sentry.captureException(error);
+  return element;
 };
 
 function App() {
-    useEffect(function onMount() {
-        MixPanel.track('App Load', {});
-        const accountType = localStorage.getItem('account_type');
-        const favicon = document.getElementById('favicon') as HTMLLinkElement;
-        if (accountType !== 'SCHOOL' && favicon) {
-            favicon.href = '/sk_orange_32x32_ico.png';
-        }
+  useEffect(function onMount() {
+    MixPanel.track('App Load', {});
+    const accountType = localStorage.getItem('account_type');
+    const favicon = document.getElementById('favicon') as HTMLLinkElement;
+    if (accountType !== 'SCHOOL' && favicon) {
+      favicon.href = '/sk_orange_32x32_ico.png';
+    }
 
-        return () => {
-            MixPanel.track('App Close', {});
-        };
-    }, []);
-    return (
-        // <Sentry.ErrorBoundary fallback={<div className="error">Error</div>}>
+    return () => {
+      MixPanel.track('App Close', {});
+    };
+  }, []);
+
+  return (
+    <Sentry.ErrorBoundary fallback={({ error, componentStack }) => (
+      <div className="error">
+        <h1>Something went wrong.</h1>
+        <details style={{ whiteSpace: 'pre-wrap' }}>
+          {error && error.toString()}
+          <br />
+          {componentStack}
+        </details>
+      </div>
+    )}>
+      <Suspense fallback={<MainLoader />}>
         <NotificationToastProvider>
-            <NoNetworkNotification>
-                <AuthProvider>
-                    <div className="App">
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <CssBaseline />
-                            <Routes>
-                                <Route path="/auth/google/redirect" element={<RedirectComponent />} />
-                                <Route path="/auth/google/redirect/teacher" element={<RedirectComponent />} />
-                                <Route path="/crisis-management" element={<CrisisEngagement />} />
-                                <Route
-                                    path="/signup"
-                                    element={
-                                        <CheckAuth>
-                                            <Suspense>
-                                                <Signup />
-                                            </Suspense>
-                                        </CheckAuth>
-                                    }
-                                />
-                                <Route
-                                    path="/signin"
-                                    element={
-                                        <CheckAuth>
-                                            <Suspense>
-                                                <SignIn />
-                                            </Suspense>
-                                        </CheckAuth>
-                                    }
-                                />
-                                <Route
-                                    path="/forgot-password"
-                                    element={
-                                        <CheckAuth>
-                                            <Suspense>
-                                                <ForgotPassword />
-                                            </Suspense>
-                                        </CheckAuth>
-                                    }
-                                />
-                                <Route
-                                    path="/school-signin"
-                                    element={
-                                        <CheckAuth>
-                                            <Suspense>
-                                                <SchoolSignIn />
-                                            </Suspense>
-                                        </CheckAuth>
-                                    }
-                                />
-                                <Route
-                                    path="/school-onboarding"
-                                    element={
-                                        <IsAuthenticated>
-                                            <Suspense>
-                                                <SchoolOnboarding />
-                                            </Suspense>
-                                        </IsAuthenticated>
-                                    }
-                                />
-                                <Route
-                                    path="/onboarding"
-                                    element={
-                                        <IsAuthenticated>
-                                            <Suspense>
-                                                <ConsumerOnboarding />
-                                            </Suspense>
-                                        </IsAuthenticated>
-                                    }
-                                />
-                                <Route
-                                    path="/"
-                                    element={
-                                        <IsAuthenticated>
-                                            <Suspense>
-                                                <Dashboard />
-                                            </Suspense>
-                                        </IsAuthenticated>
-                                    }
-                                />
-                                <Route element={<Navigate to="/signin" />} />
-                            </Routes>
-                        </LocalizationProvider>
-                    </div>
-                </AuthProvider>
-            </NoNetworkNotification>
+          <NoNetworkNotification>
+            <AuthProvider>
+              <NavigateSetter />
+              <div className="App">
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <CssBaseline />
+                  <Routes>
+                    <Route path="/auth/google/redirect" element={<RedirectComponent />} />
+                    <Route path="/auth/google/redirect/teacher" element={<RedirectComponent />} />
+                    <Route path="/crisis-management" element={<RedirectComponent />} />
+
+                    {/* Public Routes */}
+                    <Route path="/signup" element={<PublicRoute element={<Signup />} />} />
+                    <Route path="/signin" element={<PublicRoute element={<SignIn />} />} />
+                    <Route path="/forgot-password" element={<PublicRoute element={<ForgotPassword />} />} />
+                    <Route path="/school-signin" element={<PublicRoute element={<SchoolSignIn />} />} />
+
+                    {/* Private Routes */}
+                    <Route path="/school-onboarding" element={<PrivateRoute element={<SchoolOnboarding />} />} />
+                    <Route path="/onboarding" element={<PrivateRoute element={<ConsumerOnboarding />} />} />
+                    <Route path="/*" element={<PrivateRoute element={<Dashboard />} />} />
+
+                    <Route path="*" element={<Navigate to="/signin" />} />
+                  </Routes>
+                </LocalizationProvider>
+              </div>
+            </AuthProvider>
+          </NoNetworkNotification>
         </NotificationToastProvider>
-        // </Sentry.ErrorBoundary>
-    );
+      </Suspense>
+    </Sentry.ErrorBoundary>
+  );
 }
 
 export default App;

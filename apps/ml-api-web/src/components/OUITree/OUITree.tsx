@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Props } from './OUITree.types';
 import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import ChevronRight from '@mui/icons-material/ChevronRight';
+import { ChevronRight } from '@mui/icons-material';
 import styled from 'styled-components';
 
 const TreeItemContainer = styled.div`
@@ -39,7 +39,7 @@ const OUITree = ({ data, setOU }: Props) => {
         if (accountType !== 'SCHOOL') {
             setOU?.(data[0]);
         }
-    }, [accountType, data, setOU]);
+    }, []);
     return (
         <TreeView
             aria-label="rich object"

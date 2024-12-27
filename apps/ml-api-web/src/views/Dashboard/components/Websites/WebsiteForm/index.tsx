@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
 import { MenuItem } from '@mui/material';
+import { validateWebsite } from '../../../../../utils/validations';
 import { SelectDropdown, SubmitButton } from '../../../../../components/InputFields';
 import { useNotificationToast } from '../../../../../context/NotificationToastContext/NotificationToastContext';
 import { POST_FILTERED_WEBSITES, DELETE_FILTERED_WEBSITES } from '../../../../../utils/endpoints';
@@ -43,7 +44,7 @@ const WebsiteForm = ({ filteredWebsites, externalSelectedKidId, clearSelectedKid
             setSelectedKidId(externalSelectedKidId || filteredWebsites[0]?.id);
             clearSelectedKidId && clearSelectedKidId();
         }
-    }, [clearSelectedKidId, externalSelectedKidId, filteredWebsites]);
+    }, [externalSelectedKidId]);
 
     const { showNotification } = useNotificationToast();
 
@@ -179,7 +180,8 @@ const WebsiteForm = ({ filteredWebsites, externalSelectedKidId, clearSelectedKid
                                             variant={'standard'}
                                             className="select-field"
                                             multiple={false}
-                                            value={selectedKidId}
+                                            value={KidsData.some(kData => kData.id === selectedKidId) ? selectedKidId : ''}
+                                          //value={selectedKidId}
                                             onChange={(e: any) => setSelectedKidId(e.target.value)}
                                             SelectProps={{ displayEmpty: true }}>
                                             {KidsData.map((kData) => (
@@ -206,13 +208,13 @@ const WebsiteForm = ({ filteredWebsites, externalSelectedKidId, clearSelectedKid
                                                                 <AddedUrl invalid={!!fUrl?.isInvalid || false}>
                                                                     <a
                                                                         target="_blank"
-                                                                        href={fUrl.name.search('http') !== -1 ? fUrl.name : `https://${fUrl.name}`} rel="noreferrer">
+                                                                        href={fUrl.name.search('http') !== -1 ? fUrl.name : `https://${fUrl.name}`}>
                                                                         {fUrl.name}
                                                                     </a>
                                                                 </AddedUrl>
                                                             </>
                                                         ) : (
-                                                            <a target="_blank" href={`https://${fUrl.name}`} rel="noreferrer">
+                                                            <a target="_blank" href={`https://${fUrl.name}`}>
                                                                 {fUrl.name}
                                                             </a>
                                                         )}

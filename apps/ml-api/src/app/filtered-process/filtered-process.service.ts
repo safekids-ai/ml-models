@@ -7,7 +7,7 @@ import { QueryException } from '../error/common.exception';
 import { FilteredProcessDto, ProcessDto } from './dto/filtered-process.dto';
 import { Sequelize } from 'sequelize-typescript';
 import { LoggingService } from '../logger/logging.service';
-import { v4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class FilteredProcessService {
@@ -54,7 +54,7 @@ export class FilteredProcessService {
     async createFilteredProcess(accountId: string, orgUnitProcess: FilteredProcessDto): Promise<FilteredProcessDto> {
         const processes = orgUnitProcess.processes;
         const filteredProcesses = processes?.map((process) => {
-            return { id: v4(), name: process.name, orgUnitId: orgUnitProcess.id, accountId, isAllowed: process.isAllowed };
+            return { id: uuidv4(), name: process.name, orgUnitId: orgUnitProcess.id, accountId, isAllowed: process.isAllowed };
         });
         await this.createBulk(filteredProcesses);
 

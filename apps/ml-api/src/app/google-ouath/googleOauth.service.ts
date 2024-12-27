@@ -33,9 +33,8 @@ import {AccountTypes} from '../account-type/dto/account-types';
 import {LoginTokenResponseDto} from '../auth/dto/login-token-response.dto';
 import {OAuth2Client} from 'google-auth-library';
 import {AuthTokenCreationAttributes} from '../auth-token/entities/auth-token.entity';
-import {WebAppConfig} from "apps/ml-api/src/app/config/webapp";
-import {QueueConfig} from "apps/ml-api/src/app/config/queue";
-import {GoogleApiConfig} from "apps/ml-api/src/app/config/google.apis";
+import {WebAppConfig} from "../config/webapp";
+import {GoogleApiConfig} from "../config/google.apis";
 
 @Injectable()
 export class GoogleOauthService {

@@ -1,0 +1,67 @@
+{
+  "name": "extension-dev-utils",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/extension-dev-utils/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/extension-dev-utils/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/extension-dev-utils/src/index.ts",
+        "project": "libs/extension-dev-utils/ng-package.json",
+        "format": ["cjs"],
+        "assets": [
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extension-dev-utils/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extension-dev-utils/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm exec nx build extension-dev-utils"],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/extension-dev-utils"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/extension-dev-utils/jest.config.ts"
+      }
+    }
+  }
+}

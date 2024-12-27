@@ -6,6 +6,7 @@ import OUITree from '../../../../components/OUITree/OUITree';
 
 import { HelpIcon } from '../../../../svgs/SchoolOnboarding';
 import { FeatureDescriptions } from '../../SchoolOnboardingConstants';
+import {Routes} from "react-router-dom";
 
 const Root = styled.div`
     display: flex;
@@ -146,11 +147,7 @@ const CategoryTable = ({
         return categories
             .filter((category) => {
                 const editableCategory = conditional(category);
-                if (editableCategory) {
-                    return category
-                } else {
-                    return null;
-                }
+                if (editableCategory) return category;
             })
             .map((category) => {
                 return (

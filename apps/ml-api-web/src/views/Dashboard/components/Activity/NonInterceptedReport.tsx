@@ -1,6 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Paper, Switch, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TableSortLabel, Box } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import React, { useEffect, useState } from 'react';
+import {
+    Paper,
+    Switch,
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    TableSortLabel,
+    Box,
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { getRequest, postRequest } from '../../../../utils/api';
 import { GET_NON_INTERCEPT_REPORT, POST_FILTERED_URL_DISABLE } from '../../../../utils/endpoints';
 import { logError } from '../../../../utils/helpers';
@@ -8,6 +19,7 @@ import Loader from '../../../../components/Loader';
 import { NonInterceptDataType } from './SchoolActivity.type';
 import styled from 'styled-components';
 import { SubmitButton } from '../../../../components/InputFields';
+import {Routes} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -110,12 +122,25 @@ const NonInterceptedReport = ({ startDate, endDate }: Props) => {
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [order, setOrder] = React.useState('desc');
+    const [totalCountIntercept, setTotalCountIntercept] = React.useState(0);
     const [totalPage, setTotalPage] = React.useState(0);
     const [currentPage, setCurrentPage] = React.useState(0);
 
     const pageSize = 50;
+    useEffect(() => {
+        getNonInterceptData(currentPage, pageSize, order).then((result) => {
+            setNonInterceptedData(result);
+        });
+    }, [startDate, endDate]);
 
-    const getNonInterceptData = useCallback(async (page: number, size: number, order: string) => {
+    const getMoreNonInterceptedData = async () => {
+        setIsSubmitting(true);
+        const result = await getNonInterceptData(currentPage + 1, pageSize, order);
+        setNonInterceptedData([...nonInterceptedData, ...result]);
+        setIsSubmitting(false);
+    };
+
+    const getNonInterceptData = async (page: number, size: number, order: string) => {
         try {
             setLoading(true);
             const result = await getRequest<{}, any>(GET_NON_INTERCEPT_REPORT, {
@@ -125,6 +150,7 @@ const NonInterceptedReport = ({ startDate, endDate }: Props) => {
                 page: page,
                 size: size,
             });
+            setTotalCountIntercept(result.data.totalItems);
             setCurrentPage(result.data.currentPage);
             setTotalPage(result.data.totalPages);
 
@@ -134,19 +160,6 @@ const NonInterceptedReport = ({ startDate, endDate }: Props) => {
             logError('Get Non Intercept Data', error);
             setLoading(false);
         }
-    }, [endDate, startDate]);
-
-    useEffect(() => {
-        getNonInterceptData(currentPage, pageSize, order).then((result) => {
-            setNonInterceptedData(result);
-        });
-    }, [startDate, endDate, getNonInterceptData, currentPage, order]);
-
-    const getMoreNonInterceptedData = async () => {
-        setIsSubmitting(true);
-        const result = await getNonInterceptData(currentPage + 1, pageSize, order);
-        setNonInterceptedData([...nonInterceptedData, ...result]);
-        setIsSubmitting(false);
     };
 
     const handleRequestSort = async () => {

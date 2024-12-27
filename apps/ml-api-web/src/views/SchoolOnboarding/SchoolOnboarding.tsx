@@ -6,7 +6,7 @@ import Steps, { StepType } from '../../components/Steps/Steps';
 import Categories from './Categories/Categories';
 import Websites from './Websites/Websites';
 import CrisisManagement from './CrisisManagement/CrisisManagement';
-import { getRequest, history, patchRequest } from '../../utils/api';
+import { getRequest, patchRequest } from '../../utils/api';
 import { GET_ONBOARDING_ORGUNITS, GET_ONBOARDING_STATUS, UPDATE_ONBOARDING_STEP } from '../../utils/endpoints';
 import { logError } from '../../utils/helpers';
 import SIS from './SIS/SIS';
@@ -17,6 +17,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { useSchoolUserContext } from '../../context/SchoolUserContext/SchoolUserContext';
 import { onBoardingSteps, ONBOARDING_COMPLETED, ONBOARDING_IN_PROGRESS, StepDescription } from './SchoolOnboardingConstants';
 import Footer from '../../components/Footer';
+import {navigateTo} from "../../utils/navigate";
 
 const Root = styled.div`
     min-height: inherit;
@@ -89,15 +90,15 @@ const SchoolOnboarding = () => {
 
     useEffect(() => {
         if (localStorage.getItem('account_type') === 'CONSUMER') {
-            history.push('/onboarding');
+            navigateTo('/onboarding');
         }
         if (!isAdmin) {
-            history.push('/dashboard');
+            navigateTo('/dashboard');
         } else {
             getRequest<{}, any[]>(GET_ONBOARDING_STATUS, {})
                 .then((response: any) => {
                     if (response.data.onBoardingStatus === ONBOARDING_COMPLETED) {
-                        history.push('/dashboard');
+                        navigateTo('/dashboard');
                     } else {
                         // redirect it to thank you screen as all on boarding steps are previously completed
                         if (response.data.onBoardingStep === onBoardingSteps.CRISIS_MANAGEMENT) {
@@ -128,7 +129,7 @@ const SchoolOnboarding = () => {
                     logError('GET ONBOARDING ORG UNITS', err);
                 });
         }
-    }, [isAdmin]);
+    }, []);
 
     const nextStep = (onboardingStep: Number = 0) => {
         // update onboarding step
@@ -146,7 +147,7 @@ const SchoolOnboarding = () => {
             onBoardingStatus: 'COMPLETED',
         })
             .then(() => {
-                history.push(toSettings ? '/settings' : '/dashboard');
+                navigateTo(toSettings ? '/settings' : '/dashboard');
             })
             .catch((err) => {
                 logError('UPDATE ONBOARDING STATUS', err);

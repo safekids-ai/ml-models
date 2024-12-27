@@ -3,7 +3,7 @@ import { Categories } from '../../category/default-categories';
 import { Statuses } from '../../status/default-status';
 import { ActivityTypes } from '../../activity-type/default-activitytypes';
 import { PrrLevels } from '../../prr-level/prr-level.default';
-import { PrrTriggers } from '../../prr-trigger/prr-triggers,default';
+import { PrrTriggers } from '../../prr-trigger/prr-triggers.default';
 
 export class PrrActivityDto {
     prrActivityTypeId: ActivityTypes;

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitButton } from '../../../components/InputFields';
 import { getRequest, postRequest } from '../../../utils/api';
 import { GET_ONBOARDING_URLS, POST_ONBOARDING_URLS } from '../../../utils/endpoints';
@@ -27,7 +27,7 @@ const Websites = ({ ouTree, nextStep, isSettings }: Props) => {
 
     const accountType: string | null = localStorage.getItem('account_type');
 
-    const initaliseTree = useCallback((nodes: any, newUrls: any[], idList: string[], parentUrls: string[], isUrlsUpdated?: boolean) => {
+    const initaliseTree = (nodes: any, newUrls: any[], idList: string[], parentUrls: string[], isUrlsUpdated?: boolean) => {
         for (let i = 0; i < nodes.length; i++) {
             if (!isUrlsUpdated) {
                 nodes[i]['urls'] = newUrls;
@@ -47,7 +47,7 @@ const Websites = ({ ouTree, nextStep, isSettings }: Props) => {
             }
         }
         return;
-    }, []);
+    };
 
     useEffect(() => {
         if (ouTree.length) {
@@ -67,7 +67,7 @@ const Websites = ({ ouTree, nextStep, isSettings }: Props) => {
                     logError('GET ONBOARDING URLS', err);
                 });
         }
-    }, [initaliseTree, isSettings, ouTree]);
+    }, [ouTree]);
 
     const selectOUHandler = (node: any) => {
         updateUrls();

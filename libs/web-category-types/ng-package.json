@@ -1,0 +1,8 @@
+{
+    "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../dist/libs/web-category-types",
+    "lib": {
+        "entryFile": "src/index.ts"
+    },
+    "allowedNonPeerDependencies": ["onnxruntime-node", "@safekids-ai/nlp-js-common"]
+}

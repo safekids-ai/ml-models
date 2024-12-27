@@ -1,0 +1,66 @@
+{
+  "name": "extension-storage",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/extension-storage/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/extension-storage/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/extension-storage/src/index.ts",
+        "project": "libs/extension-storage/ng-package.json",
+        "assets": [
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extension-storage/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extension-storage/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm exec nx build extension-storage"],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/extension-storage"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/extension-storage/jest.config.ts"
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
-import React from 'react';
-import SimpleBar, { Props } from 'simplebar-react';
+import React, { forwardRef, Ref } from 'react';
+import SimpleBar, { Props as SimpleBarProps } from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import SimpleBarCore from 'simplebar';
 
-// @ts-ignore
-type ScrollProps = Props & { containerRef?: React.Ref<SimpleBar> };
-const ScrollContainer: React.FC<ScrollProps> = ({ containerRef, ...props }: ScrollProps) => <SimpleBar {...props} ref={containerRef} />;
+type ScrollProps = SimpleBarProps & { containerRef?: Ref<SimpleBarCore> };
+
+const ScrollContainer = forwardRef<SimpleBarCore, ScrollProps>(({ containerRef, ...props }, ref) => (
+  <SimpleBar {...props} ref={containerRef || ref} />
+));
+
 export default ScrollContainer;

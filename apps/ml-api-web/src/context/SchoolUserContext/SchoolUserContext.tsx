@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {useState, useEffect, useMemo, ReactNode} from 'react';
 
 import { getRequest } from '../../utils/api';
 import { GET_SCHOOL_USER_PROFILE } from '../../utils/endpoints';
@@ -18,36 +18,37 @@ const SchoolUserContext = React.createContext<SchoolUserContextType>({
     avatarUrl: '',
 });
 
-type SchoolUserProviderParams = {
-    children: React.ReactNode
+interface SchoolUserProviderProps {
+  children: ReactNode; // Explicitly type children
 }
+const SchoolUserProvider: React.FC<SchoolUserProviderProps> = ({ children }) => {
+  const [userProfile, setUserProfile] = useState<UserProfile>();
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>('');
 
-const SchoolUserProvider: React.FC<SchoolUserProviderParams> = (props: SchoolUserProviderParams) => {
-    const [userProfile, setUserProfile] = useState<UserProfile>();
-    const [avatarUrl, setAvatarUrl] = useState<string | undefined>('');
+  useEffect(() => {
+    getRequest<{}, GetUserProfileResponse>(GET_SCHOOL_USER_PROFILE, {})
+      .then(({ data }) => {
+        setUserProfile(data);
+        setAvatarUrl(data?.thumbnailPhotoUrl);
+      })
+      .catch(console.error);
+  }, []);
 
-    useEffect(() => {
-        getRequest<{}, GetUserProfileResponse>(GET_SCHOOL_USER_PROFILE, {})
-            .then(({ data }) => {
-                setUserProfile(data);
-                setAvatarUrl(data?.thumbnailPhotoUrl);
-            })
-            .catch(console.error);
-    }, []);
-    const isAdmin = useMemo(() => {
-        return equals(pathOr(0, ['isAdmin'], userProfile), 1);
-    }, [userProfile]);
+  const isAdmin = useMemo(() => {
+    return equals(pathOr(0, ['isAdmin'], userProfile), 1);
+  }, [userProfile]);
 
-    return (
-        <SchoolUserContext.Provider
-            value={{
-                userProfile,
-                isAdmin,
-                avatarUrl,
-            }}
-            {...props}
-        />
-    );
+  return (
+    <SchoolUserContext.Provider
+      value={{
+        userProfile,
+        isAdmin,
+        avatarUrl,
+      }}
+    >
+      {children} {/* Pass children explicitly */}
+    </SchoolUserContext.Provider>
+  );
 };
 const useSchoolUserContext = () => React.useContext(SchoolUserContext);
 

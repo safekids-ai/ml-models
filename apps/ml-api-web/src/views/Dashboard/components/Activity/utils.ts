@@ -1,4 +1,4 @@
-import { includes, sortBy, prop, pluck, propEq, find, reduce, pathOr } from 'ramda';
+import { dissoc, sortBy, prop, pluck, contains, propEq, find, reduce, pathOr } from 'ramda';
 import { customProperties } from '../../../../theme';
 import { isNothing, isSomething } from '../../../../utils/helpers';
 import { format, startOfDay } from 'date-fns';
@@ -80,50 +80,30 @@ export const transformData = (rawData: EventsAPIResponse, timePerBar: number) =>
         const diff = x2 % time;
         x = diff >= time / 2 ? x + (time - diff) : x - diff;
         // }
-        if (includes(x, timestamps)) {
+        if (contains(x, timestamps)) {
             const duplicatedData = find<any>(propEq('x', x), result);
 
             if (duplicatedData?.actualTimestamp < actualTimestamp) {
                 x += timePerBar * 1000;
             } else x -= timePerBar * 1000;
-            if (includes(x, timestamps)) {
+            if (contains(x, timestamps)) {
                 duplicate = true;
             }
         } else timestamps.push(x);
-        // const obj : EventsData = {
-        //     x,
-        //     y: y > 0 ? y : 0.5,
-        //     timestamp: x,
-        //     actualTimestamp,
-        //     // box: maxBox.box,
-        //     image: datum.imageThumbnailUrl,
-        //     label: undefined,
-        //     imageBlurredUrl: datum.imageBlurredUrl,
-        //     feedbackProvided: datum.feedbackProvided,
-        //     date: datum.date,
-        //     eventId: datum.eventId,
-        //     imageThumbnailUrl: datum.imageThumbnailUrl,
-        //     objectName: datum.objectName,
-        //     score: datum.score,
-        //     timezone: datum.timezone,
-        //     maxScore: 0,
-        //     maxUnsafeScore: 0,
-        //     videoAvailable: false,
-        //     _id: "",
-            
-        // };
-        const obj : EventsData = {
+        const obj = {
             ...event,
-            ...datum,
+            ...dissoc<any>('label', datum),
             x,
             y: y > 0 ? y : 0.5,
             timestamp: x,
             actualTimestamp,
             category: isSomething(event.label) && event.label.length > 0 ? event.label[0] : event.isSafe === false ? 'ADULT' : undefined,
             // box: maxBox.box,
-            videoAvailable: false,
+            // videoAvailable: datum.videoAvailable,
             image: event.imageThumbnailUrl,
-            label: undefined
+            label: undefined,
+            // imageBlurredUrl: event.imageBlurredUrl,
+            // feedbackProvided: event.feedbackProvided,
         };
         if (!duplicate) result.push(obj);
         return result;
@@ -134,6 +114,7 @@ export const transformRawData = (rawData: GetEventsResponse, timePerBar: number)
     const offset = '+00:00'; // getTimezoneOffset();
     const sortedRawData = rawData; //sortBy((d) => -1 * parseInt(d._id), rawData);
     const data = sortedRawData.reduce((result: EventsData[], datum, index) => {
+        // const { event } = datum;
         const { maxY: y } = reduce(
             (result: any, item: any) => {
                 if (item.score > result.maxY) {
@@ -161,28 +142,19 @@ export const transformRawData = (rawData: GetEventsResponse, timePerBar: number)
         //     x += timePerBar * 1000;
         //   } else x -= timePerBar * 1000;
         // } else timestamps.push(x);
-        const obj : EventsData = {
+        const obj = {
+            ...dissoc<any>('label', datum),
             x,
             y: y > 0 ? y : 0.5,
             timestamp: x,
             actualTimestamp,
             category: isSomething(datum.label) && datum.label.length > 0 ? datum.label[0] : datum.isSafe === false ? 'ADULT' : undefined,
             // box: maxBox.box,
+            // videoAvailable: datum.videoAvailable,
             image: datum.imageThumbnailUrl,
             label: undefined,
-            imageBlurredUrl: datum.imageBlurredUrl,
-            feedbackProvided: datum.feedbackProvided,
-            date: datum.date,
-            eventId: datum.eventId,
-            imageThumbnailUrl: datum.imageThumbnailUrl,
-            objectName: datum.objectName,
-            score: datum.score,
-            timezone: datum.timezone,
-            maxScore: 0,
-            maxUnsafeScore: 0,
-            videoAvailable: false,
-            _id: "",
-            
+            // imageBlurredUrl: event.imageBlurredUrl,
+            // feedbackProvided: event.feedbackProvided,
         };
         result.push(obj);
         return result;

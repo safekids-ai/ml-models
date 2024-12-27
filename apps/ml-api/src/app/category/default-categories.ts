@@ -207,7 +207,7 @@ export const defaultCategories = [
     {
         id: 'FAKE_NEWS',
         name: 'Fake News',
-        enabled: true,
+        enabled: false,
         schoolDefault: false,
         editable: true,
         status: CategoryStatus.ALLOW,
@@ -223,7 +223,7 @@ export const defaultCategories = [
     {
         id: 'HATE_SPEECH',
         name: 'Hate Speech',
-        enabled: true,
+        enabled: false,
         schoolDefault: false,
         editable: true,
         status: CategoryStatus.ALLOW,

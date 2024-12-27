@@ -40,7 +40,8 @@ const getText = (plan: ActivePlan | null): string => {
             ? `You have cancelled your subscription and will not be charged anymore. Your subscription will end in ${result} (${formatedDate}). If you'd like to resubscribe, please `
             : `You are currently enrolled in the ${plan?.planName}, which will auto renew in ${result} (${formatedDate}). `;
     }
-    return 'Your free trial has ended. You can subscribe to Monthly or Yearly plans. ';
+  return 'Please become a supporter and subscribe to Monthly or Yearly plans. ';
+    // return 'Your free trial has ended. You can subscribe to Monthly or Yearly plans. ';
 };
 
 export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
@@ -53,6 +54,12 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
     const [activePlan, setActivePlan] = useState<ActivePlan | null>(null);
     const [openPaymentMethodModal, setPaymentMethodModal] = useState<boolean>(false);
 
+    useEffect(() => {
+        getPaymentMethod().then(() => {
+            getActiveplan();
+        });
+    }, []);
+
     const getActiveplan = useCallback(async () => {
         getRequest<{}, ActivePlan>(GET_USER_PLAN, {})
             .then(({ data }) => {
@@ -63,7 +70,13 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
             .catch(() => {
                 showNotification({ type: 'error', message: 'Failed to get Plans' });
             });
-    }, [showNotification]);
+    }, []);
+
+    const onCompletePayment = useCallback(async (data) => {
+        getPaymentMethod().then(() => {
+            setPaymentMethodModal(false);
+        });
+    }, []);
 
     const getPaymentMethod = useCallback(async () => {
         getRequest<{}, PaymentMethod>(GET_PAYMENT_METHOD, {})
@@ -77,21 +90,7 @@ export const Payment = ({ onPlanChange }: { onPlanChange?: () => void }) => {
             .catch(() => {
                 showNotification({ type: 'error', message: 'Failed to get Payment Method.' });
             });
-    }, [showNotification]);
-
-    useEffect(() => {
-        getPaymentMethod().then(() => {
-            getActiveplan();
-        });
-    }, [getActiveplan, getPaymentMethod]);
-
-
-    const onCompletePayment = useCallback(async () => {
-        getPaymentMethod().then(() => {
-            setPaymentMethodModal(false);
-        });
-    }, [getPaymentMethod]);
-
+    }, [isCardExpired, activePaymentMethod]);
     return (
         <PaymentStyled id="payment">
             <HeadingContainerStyled>

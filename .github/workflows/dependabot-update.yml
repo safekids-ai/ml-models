@@ -54,6 +54,6 @@ jobs:
 
       - name: Build and Release
         run: |
-          npx nx build:prod
+          npx nx build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

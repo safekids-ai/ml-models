@@ -2,12 +2,12 @@ import {VisionLabel} from "@safekids-ai/vision-js-types";
 import {InferenceSession, Tensor} from 'onnxruntime-common';
 import {visionConfig} from './model'
 import * as Logger from 'abstract-logging';
+import cv from "@techstark/opencv-js";
 
+//const cv = require("@techstark/opencv-js");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const cv = require("@techstark/opencv-js");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const imageDataUtils = require('@andreekeberg/imagedata')
-
+//const imageDataUtils = require('@andreekeberg/imagedata')
+//import imageDataUtils from '@andreekeberg/imagedata';
 
 abstract class Vision {
   public static readonly version: string = "0.0.1";
@@ -22,7 +22,7 @@ abstract class Vision {
 
   public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
-  public async handleCreateSession(onnxFile: string) : Promise<InferenceSession> {
+  public async handleCreateSession(onnxFile: string): Promise<InferenceSession> {
     if (this.logger) {
       this.logger.debug("initialized opencv");
     }
@@ -36,8 +36,8 @@ abstract class Vision {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const me = this;
     if (cv && cv.Mat) {
-       await this.handleCreateSession(this.onnxUrl);
-       return;
+      this.session = await this.handleCreateSession(this.onnxUrl);
+      return;
     }
 
     return new Promise((resolve, reject) => {
@@ -70,7 +70,8 @@ abstract class Vision {
   //   return this.classifyImageData(imageData);
   // }
 
-  public async classifyImage(imageData: ImageData | Buffer): Promise<VisionLabel> {
+
+  public async classifyImage(imageData: ImageData): Promise<VisionLabel> {
     if (!this.session) {
       throw new Error("Please call init() to initialize the InferenceSession");
     }
@@ -93,7 +94,7 @@ abstract class Vision {
 
     const inferenceTime = new Date().getTime() - startTime;
 
-    if(this.logger) {
+    if (this.logger) {
       const totalTime = preProcessingTime + inferenceTime;
       this.logger.debug(`vision: label: ${label} finalLabel: ${finalLabel} maxIndex: ${maxIndex} maxProb: ${maxProb} inferenceTime: ${inferenceTime} totalTime: ${totalTime}`);
     }
@@ -111,15 +112,8 @@ abstract class Vision {
   }
 }
 
-async function getImageTensor(imageInput: ImageData | Buffer): Promise<Tensor> {
+async function getImageTensor(imageData: ImageData): Promise<Tensor> {
   const matC3 = new cv.Mat(224, 224, cv.CV_8UC3);
-  let imageData : ImageData = null;
-
-  if (imageInput instanceof Buffer) {
-    imageData = await imageDataUtils.getSync(imageInput);
-  } else {
-    imageData = imageInput;
-  }
 
   const mat = cv.matFromImageData(imageData);
   cv.cvtColor(mat, matC3, cv.COLOR_RGBA2BGR); // RGBA to BGR

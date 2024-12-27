@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/nlp-js-react-native/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
@@ -19,11 +20,19 @@
         "main": "libs/nlp-js-react-native/src/index.ts",
         "project": "libs/nlp-js-react-native/ng-package.json",
         "assets": [
-          { "input": ".", "glob": "README.md", "output": "/" },
-          { "input": ".", "glob": "logo.png", "output": "/" }
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
         ],
-        "esbuildOptions" : {
-          "packages" : "external"
+        "esbuildOptions": {
+          "packages": "external"
         }
       },
       "configurations": {
@@ -39,9 +48,7 @@
     "package": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "pnpm exec nx build nlp-js-react-native"
-        ],
+        "commands": ["pnpm exec nx build nlp-js-react-native"],
         "parallel": false
       }
     },
@@ -58,6 +65,5 @@
         "jestConfig": "libs/nlp-js-react-native/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }

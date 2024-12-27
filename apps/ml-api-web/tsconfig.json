@@ -1,11 +1,20 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "allowJs": false,
-    "esModuleInterop": false,
+    "allowJs": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
-    "types": ["vite/client", "vitest"]
+    "types": [
+      "vite/client",
+      "vitest",
+      "react",
+      "react-dom"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
   "files": [],
   "include": [],

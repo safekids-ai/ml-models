@@ -7,7 +7,7 @@ const Loader = () => (
         <span className="loading-text">
             Please <span className="red-text">wait a moment</span>...
         </span>
-        <img src={loader} alt="Loader"></img>
+        <img src={loader}></img>
     </LoaderContainer>
 );
 

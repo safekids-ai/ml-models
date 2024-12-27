@@ -7,7 +7,7 @@ import { ConfigService} from '@nestjs/config';
 import { LoggingService } from '../logger/logging.service';
 import { AuthToken } from '../auth-token/entities/auth-token.entity';
 import { CreateOrgUnitDto } from '../org-unit/dto/create-org-unit.dto';
-import {GoogleApiConfig} from "apps/ml-api/src/app/config/google.apis";
+import {GoogleApiConfig} from "../config/google.apis";
 
 @Injectable()
 export class GoogleApiService {

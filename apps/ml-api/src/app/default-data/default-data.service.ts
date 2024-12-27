@@ -26,11 +26,14 @@ import {PrrActionService} from '../prr-action/prr-action.service';
 import {PlanService} from '../billing/plan/plan.service';
 import {CouponService} from '../billing/coupon/coupon.service';
 import {AuthService} from '../consumer/auth/auth.service';
+import {ExpressConfig} from "../config/express";
 
 config();
 
 @Injectable()
 export class DefaultDataService {
+  private readonly isDevelopment: boolean
+
   constructor(
     private readonly log: LoggingService,
     private readonly config: ConfigService,
@@ -59,6 +62,8 @@ export class DefaultDataService {
     if (!this.log) {
       throw new Error("Logger not configured")
     }
+    this.isDevelopment = config.get<ExpressConfig>("expressConfig").isDevelopment()
+
     this.log.className(DefaultDataService.name);
   }
 
@@ -115,7 +120,6 @@ export class DefaultDataService {
       const serverTemplate = _.find(serverTemplates, {name: template.name});
       if (!serverTemplate) {
         await this.emailTemplateService.create({
-          id: template.name,
           name: template.name,
           content: {
             html: template.content.Body,
@@ -125,8 +129,6 @@ export class DefaultDataService {
           createdOn: new Date(),
         } as EmailTemplateInterface);
       } else {
-        //only update the template in development//TODO: for now, updating in production as well until initial templates finalized.
-        //    if (this.config._isDevelopment()) {
         await this.emailTemplateService.update({
           id: serverTemplate.id,
           name: serverTemplate.name,
@@ -137,7 +139,6 @@ export class DefaultDataService {
           },
           createdOn: new Date(),
         } as EmailTemplateInterface);
-        //    }
       }
     });
   }

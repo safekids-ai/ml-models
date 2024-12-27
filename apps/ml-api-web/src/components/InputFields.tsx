@@ -1,10 +1,10 @@
 import React, {ReactNode, useState, useEffect, useMemo, useRef, ReactElement} from 'react';
 import {fieldToTextField} from 'formik-mui';
 import {Field, FieldProps} from 'formik';
-import {IconButton, Button, TextField, Switch, useTheme, Tooltip} from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import {IconButton, Button, TextField, Switch, useTheme, Tooltip, InputAdornment} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import PinInputField from 'react-pin-field';
-import Alert from '@mui/lab/Alert';
+import Alert from '@mui/material/Alert';
 import CloseIcon from '@mui/icons-material/Close';
 import Visibility from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOffOutlined';
@@ -16,10 +16,12 @@ import {getPasswordStrength} from '../utils/passwordStrength';
 import Loader from './Loader';
 import {isSomething} from '../utils/helpers';
 import {AppTheme} from '../theme';
-import {DatePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {CalendarIcon} from '../svgs';
-import {CSSProperties} from '@mui/styles';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {CSSProperties} from '@mui/styles/withStyles';
+import {Routes} from "react-router-dom";
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFnsV3';
 
 type InputProps = {
   name: string;
@@ -101,36 +103,47 @@ export const SelectField: React.FC<SelectProps> = (props: SelectProps) => {
     onKeyPress,
     ...rest
   } = props;
+
   const ref = useRef<any>(null);
   const [refresh, setRefresh] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, leftDiff: 0 });
 
-  let width = 0;
-  let leftDiff = 0;
-  if (ref.current) {
-    width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
-  }
-  useEffect(
-    function onOpen() {
-      setRefresh(open);
-    },
-    [open, setRefresh]
-  );
+  useEffect(() => {
+    if (ref.current) {
+      const width = ref.current.clientWidth;
+      const innerSelect = ref.current.querySelector('input')
+
+      //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+      if (innerSelect) {
+        const innerWidth = innerSelect.clientWidth;
+        const leftDiff = (width - innerWidth) / 2;
+        setDimensions({ width, leftDiff });
+      }
+    }
+  }, [refresh, open]);
+
   useEffect(() => {
     const element = document.getElementById('menu-' + name);
     if (element) {
       const dropdown = element.getElementsByClassName('MuiMenu-paper')[0] as HTMLElement;
       if (dropdown && dropdown.style) {
         dropdown.classList.add('mui-select-dropdown');
-        dropdown.style.left = parseInt(dropdown.style.left, 10) - leftDiff + 'px !important';
-        dropdown.style.minWidth = width + 'px';
+        dropdown.style.left = `${parseInt(dropdown.style.left, 10) - dimensions.leftDiff}px`;
+        dropdown.style.minWidth = `${dimensions.width}px`;
       }
     }
-  }, [width, leftDiff, refresh, name]);
-  const forwardedProps = variant === 'outlined' ? {} : {disableUnderline: true};
+  }, [dimensions, name]);
+
+  useEffect(
+    function onOpen() {
+      setRefresh(open);
+    },
+    [open, setRefresh]
+  );
+
+  const forwardedProps = variant === 'outlined' ? {} : { disableUnderline: true };
+
   return (
     <Field name={name}>
       {(fieldProps: FieldProps) => {
@@ -160,7 +173,7 @@ export const SelectField: React.FC<SelectProps> = (props: SelectProps) => {
               },
               onClose: () => setOpen(false),
               MenuProps: {
-                getContentAnchorEl: null,
+                //getContentAnchorEl: null,
                 anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
                 transformOrigin: {vertical: 'top', horizontal: 'center'},
                 anchorEl: ref.current,
@@ -229,9 +242,12 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props: SelectDropd
   let leftDiff = 0;
   if (ref.current) {
     width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
+    const innerSelect = ref.current.querySelector('input')
+    //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+    if(innerSelect) {
+      const innerWidth = innerSelect.clientWidth;
+      leftDiff = (width - innerWidth) / 2;
+    }
   }
   useEffect(
     function onOpen() {
@@ -274,7 +290,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = (props: SelectDropd
         },
         onClose: () => setOpen(false),
         MenuProps: {
-          getContentAnchorEl: null,
+          //getContentAnchorEl: null,
           anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
           transformOrigin: {vertical: 'top', horizontal: 'center'},
           anchorEl: ref.current,
@@ -334,9 +350,12 @@ export const CustomSelectField: React.FC<CustomSelectProps> = (props: CustomSele
   let leftDiff = 0;
   if (ref.current) {
     width = ref.current.clientWidth;
-    const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
-    const innerWidth = innerSelect.clientWidth;
-    leftDiff = (width - innerWidth) / 2;
+    const innerSelect = ref.current.querySelector('input')
+    //const innerSelect = ref.current.getElementsByClassName('MuiSelect-root')[0];
+    if (innerSelect) {
+      const innerWidth = innerSelect.clientWidth;
+      leftDiff = (width - innerWidth) / 2;
+    }
   }
   useEffect(
     function onOpen() {
@@ -389,7 +408,7 @@ export const CustomSelectField: React.FC<CustomSelectProps> = (props: CustomSele
               },
               onClose: () => setOpen(false),
               MenuProps: {
-                getContentAnchorEl: null,
+                //getContentAnchorEl: null,
                 anchorOrigin: {vertical: 'bottom', horizontal: 'center'},
                 transformOrigin: {vertical: 'top', horizontal: 'center'},
                 anchorEl: ref.current,
@@ -636,7 +655,7 @@ const usePinStyles = makeStyles((theme: AppTheme) => ({
     gridGap: '10px',
     maxWidth: '410px',
     margin: 'auto',
-    '& .a-reactPinField__input': {
+    '& input': {
       width: '100%',
       maxWidth: '60px',
       height: '60px',
@@ -684,7 +703,6 @@ export const DateField = ({
                             name,
                             label,
                             openTo = 'year',
-                            views,
                             format = 'yyyy',
                             showClear = false,
                             onlyDay = true,
@@ -703,10 +721,8 @@ export const DateField = ({
         return (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              //ABBAS FIX ME inputVariant="outlined"
-              //ABBAS FIX ME style={{width: '100%'}}
               disableFuture
-              //ABBAS FIX ME showTodayButton
+              //showTodayButton
               readOnly={readOnly}
               {...rest}
               className="input-field date-field"
@@ -724,23 +740,26 @@ export const DateField = ({
               name={name}
               label={label}
               openTo={openTo}
-              //ABBAS FIX ME error={!!error && touched}
-
-              //   InputProps={{
-              //     disableUnderline: true,
-              //     endAdornment:
-              //       value && showClear ? (
-              //         <ClearFieldButton
-              //           onClick={() => {
-              //             setFieldValue(name, null);
-              //           }}
-              //           visible
-              //         />
-              //       ) : (
-              //         <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main}/>
-              //       ),
-              //   }}
-              //   views={views}
+              slots={{ textField: TextField }}
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  variant: 'outlined',
+                  error: !!error && touched,
+                  InputProps: {
+                    disableUnderline: true,
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {value && showClear ? (
+                          <ClearFieldButton onClick={() => setFieldValue(name, null)} />
+                        ) : (
+                          <CalendarIcon color={readOnly ? '#b1b1b1' : theme.palette.primary.main} />
+                        )}
+                      </InputAdornment>
+                    ),
+                  },
+                },
+              }}
             />
           </LocalizationProvider>
         );

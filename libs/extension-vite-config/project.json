@@ -1,0 +1,66 @@
+{
+  "name": "extension-vite-config",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/extension-vite-config/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/extension-vite-config/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/extension-vite-config/src/index.ts",
+        "project": "libs/extension-vite-config/ng-package.json",
+        "assets": [
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/extension-vite-config/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/extension-vite-config/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm exec nx build extension-vite-config"],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/extension-vite-config"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/extension-vite-config/jest.config.ts"
+      }
+    }
+  }
+}

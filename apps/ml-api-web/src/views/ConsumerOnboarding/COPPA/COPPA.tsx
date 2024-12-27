@@ -57,7 +57,6 @@ const COPPA = ({ nextStep }: Props) => {
                 </Description>
                 <Formik
                     enableReinitialize
-                    // @ts-ignore
                     onSubmit={onContinue}
                     initialValues={{
                         hasLegalAuthorityToInstall: 'yes',
@@ -123,7 +122,7 @@ const COPPA = ({ nextStep }: Props) => {
                                         />
                                     </div>
                                     <span className="agreement-text">
-                                        <br /> For any questions, please contact <a href="mailto:coppa@safekids.ai">coppa@safekids.ai</a>
+                                        <br /> For any questions, please contact <a>coppa@safekids.ai</a>
                                     </span>
                                 </div>
                                 <ContinueButton>

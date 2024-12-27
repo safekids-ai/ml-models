@@ -10,7 +10,7 @@ import { getPrrLevelName } from './prr-level-names';
 import { QueryTypes } from 'sequelize';
 import { ActivityTypes } from '../activity-type/default-activitytypes';
 import { PrrLevels } from '../prr-level/prr-level.default';
-import { PrrTriggers } from '../prr-trigger/prr-triggers,default';
+import { PrrTriggers } from '../prr-trigger/prr-triggers.default';
 import { Categories } from '../category/default-categories';
 import { Statuses } from '../status/default-status';
 import { AccountTypes } from '../account-type/account-type.enum';

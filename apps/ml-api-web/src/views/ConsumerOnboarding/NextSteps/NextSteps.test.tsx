@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, waitFor, screen } from '@testing-library/react';
+import { cleanup, render, wait, screen } from '@testing-library/react';
 import NextSteps from './NextSteps';
 
 afterEach(cleanup);
@@ -11,8 +11,9 @@ test('it renders coppa screen', async () => {
         jest.fn();
     });
     render(KidsCodesComponent);
-    await waitFor(() => expect(screen.getByText('Next Steps')).toBeTruthy());
+    await wait();
 
+    expect(screen.getByText('Next Steps')).toBeTruthy();
 });
 
 test('Next Screen Component is rendering the next button correctly', async () => {
@@ -21,8 +22,8 @@ test('Next Screen Component is rendering the next button correctly', async () =>
     });
     render(KidsCodesComponent);
     const finishBtn = screen.getByTestId(/add-kids-submit-button/i);
-    await waitFor(() => expect(finishBtn).toBeEnabled());
-    
+    await wait();
+    expect(finishBtn).toBeEnabled();
     // expect(getByTestId('add-kids-submit-button')).toBeTruthy();
 });
 

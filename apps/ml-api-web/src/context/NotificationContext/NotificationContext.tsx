@@ -62,7 +62,6 @@ const NotificationProvider: React.FC<any> = (props) => {
                     setNotifications((notifications) => {
                         let updatedNotifications = [...notifications];
                         forEach((id) => {
-                            // @ts-ignore
                             const index = findIndex(propEq('_id', id), updatedNotifications);
                             const notification = assoc('status', NotificationStatus.READ, updatedNotifications[index]);
                             updatedNotifications = update(index, notification, updatedNotifications);
@@ -90,7 +89,6 @@ const NotificationProvider: React.FC<any> = (props) => {
     const value = useMemo(
         () => ({
             notifications,
-            // @ts-ignore
             unreadNotifications: filter(propEq('status', NotificationStatus.UNREAD), notifications),
             markAsRead,
             markAsUnread,

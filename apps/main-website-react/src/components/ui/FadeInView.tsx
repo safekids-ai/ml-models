@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef } from 'react';
 // import useInView from '../../hooks/useInView';
-import { useInView } from 'framer-motion';
+import { useInView } from 'motion/react';
 
 type Props = {
   children: React.ReactNode;

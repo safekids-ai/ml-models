@@ -73,7 +73,7 @@ describe.skip('Payment Flow --> Click View Plan ', () => {
         expect(await util.isComponentVisible(page, OnboardingXPaths.CARD_TWO_CHOOSE_BUTTON(discountedValue[0]))).toBeTruthy();
 
         await util.clickOn(page, OnboardingXPaths.CARD_TWO_CHOOSE_BUTTON(discountedValue[0]));
-        await page.waitForSelector(OnboardingXPaths.CARD_TWO_THANK_YOU(discountedValue[0]));
+        await page.waitForXPath(OnboardingXPaths.CARD_TWO_THANK_YOU(discountedValue[0]));
         expect(await util.isComponentVisible(page, OnboardingXPaths.CARD_ONE_CHOOSE_BUTTON(discountedValue[0]))).toBeTruthy();
         await util.clickOn(page, PaymentXPaths.CLOSE_PLAN_BUTTON);
         await page.waitForTimeout(1000);

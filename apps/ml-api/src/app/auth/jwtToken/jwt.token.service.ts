@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { GoogleOauthTokenDto } from '../../google-ouath/dto/google.oauth.token.dto';
 import { LoginTokenResponseDto } from '../dto/login-token-response.dto';
 import { UserDTO } from '../../user/dto/user.dto';
-import {JwtConfig} from "apps/ml-api/src/app/config/jwt";
+import {JwtConfig} from "../../config/jwt";
 
 @Injectable()
 export class JwtTokenService {

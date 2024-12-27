@@ -12,7 +12,7 @@ export type Props = {
 
 
 const StripeInput = ({ component: Component, inputRef, ...props }: any) => {
-    const elementRef = useRef<any>();
+    const elementRef = useRef<any>(null);
     useImperativeHandle(inputRef, () => ({
         focus: () => elementRef.current?.focus,
         blur: () => elementRef.current?.blur,
@@ -24,7 +24,7 @@ export const InputElement = ({ component, placeholder, label, onChange: onChange
     const [shrink, setShrink] = useState(false);
     const [error, setError] = useState(true);
     const onChange = useCallback(
-        (props: any) => {
+        (props) => {
             const { empty, complete, value, error, ...rest } = props;
             console.log('Change', empty, complete, value, rest);
             setError(!!error);

@@ -27,7 +27,7 @@ export class PromoCodeController {
         const userId = req.user.userId;
         const accountId = req.user.accountId;
         return await this.promotionCodeService.getPromotionCodeLink(userId, accountId).catch((e) => {
-            this.logger.error(`Failed to get promotion code link. ${e}`);
+            this.logger.error(`Failed to get promotion code link. ${e}`, e);
             throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
         });
     }

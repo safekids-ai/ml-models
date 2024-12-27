@@ -1,8 +1,12 @@
 import { Checkbox, FormControlLabel } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import makeStyles from '@mui/styles/makeStyles';
 import { Field, FieldProps } from 'formik';
 import React, { ReactNode } from 'react';
 
+type Item = {
+    value: string | boolean | number;
+    label: string;
+};
 type RadioProps = {
     name: string;
     onChange?: (value: boolean) => void;

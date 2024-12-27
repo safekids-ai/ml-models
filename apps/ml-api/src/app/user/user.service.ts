@@ -4,7 +4,7 @@ import { SEQUELIZE, USER_REPOSITORY } from '../constants';
 import { CountOptions, Op } from 'sequelize';
 import { GoogleApiService } from '../google-apis/google.apis.service';
 import { getPagination, getPagingData } from '../paging/paging.util';
-import { uuid } from 'uuidv4';
+import {v4 as uuidv4} from 'uuid';
 import { LoggingService } from '../logger/logging.service';
 import { QueryException } from '../error/common.exception';
 import { Sequelize } from 'sequelize-typescript';
@@ -38,7 +38,7 @@ export class UserService {
      */
     async create(dto: UserCreationAttributes): Promise<User> {
         if (!dto.id) {
-            dto.id = uuid();
+            dto.id = uuidv4();
         }
         return await this.userRepository.create(dto);
     }
@@ -158,7 +158,7 @@ export class UserService {
             if (found) {
                 await this.userRepository.update(dto, { where: { email: dto.email } });
             } else {
-                dto.id = uuid().replace(/-/g, '');
+                dto.id = uuidv4().replace(/-/g, '');
                 await this.userRepository.create(dto);
             }
             return await this.userRepository.findOne({ where: { email: dto.email } });
@@ -187,7 +187,7 @@ export class UserService {
 
     async registerChromeUser(accountId: string, apiUser : admin_directory_v1.Schema$User, orgUnitId: string) {
         const userDTO : UserCreationAttributes = {
-            id: uuid().replace(/-/g, ''),
+            id: uuidv4().replace(/-/g, ''),
             firstName: apiUser.name.givenName,
             lastName: apiUser.name.familyName,
             email: apiUser.primaryEmail,

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ActivityAiDataService } from './activity-ai-data.service';
-import { PrrTriggers } from '../prr-trigger/prr-triggers,default';
+import { PrrTriggers } from '../prr-trigger/prr-triggers.default';
 import { Categories } from '../category/default-categories';
 import { ActivityAiDataCreationAttributes } from './entities/activity-ai-datum.entity';
 

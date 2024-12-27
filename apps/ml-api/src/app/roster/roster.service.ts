@@ -11,7 +11,7 @@ import { RosterOrgService } from '../roster-org/roster-org.service';
 import { SchoolClassService } from '../school-class/school-class.service';
 import { EnrollmentService } from '../enrollment/enrollment.service';
 import { UserService } from '../user/user.service';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { User } from '../user/entities/user.entity';
 import { QueryException } from '../error/common.exception';
 import { RosterApiErrors } from './roster-apis.errors';
@@ -294,7 +294,7 @@ export class OneRosterService {
         const usersToAdd = apiUsers
             .filter((apiUser) => !dbUserEmails.includes(apiUser.email))
             .map((apiUser) => {
-                apiUser.id = uuid().replace(/-/g, '');
+                apiUser.id = uuidv4().replace(/-/g, '');
                 return apiUser;
             });
         if (usersToAdd.length > 0) {

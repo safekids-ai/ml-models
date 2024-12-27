@@ -1,15 +1,15 @@
-import {SmsServiceInterface} from '../sms.service';
+import {SmsService} from '../sms.service';
 import {Injectable} from '@nestjs/common';
 import {LoggingService} from '../../logger/logging.service';
 import retry from 'async-retry';
 import {ConfigService} from '@nestjs/config';
 import TWILIO from 'twilio';
-import {TwilioConfig} from "apps/ml-api/src/app/config/twilio.sms";
+import {TwilioConfig} from "../../config/twilio.sms";
 
 const {Twilio} = TWILIO
 
 @Injectable()
-export class TwilioSmsService implements SmsServiceInterface {
+export class TwilioSmsService extends SmsService {
   private readonly accountSid: string;
   private readonly authToken: string;
   private readonly twilioPhoneNumber: string;
@@ -19,6 +19,7 @@ export class TwilioSmsService implements SmsServiceInterface {
     private readonly config: ConfigService,
     private readonly log: LoggingService
   ) {
+    super()
     this.log.className(TwilioSmsService.name);
     const smsConfig = config.get<TwilioConfig>('twilioConfig');
     this.retryOptions = smsConfig.retryOptions;

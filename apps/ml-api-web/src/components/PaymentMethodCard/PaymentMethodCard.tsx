@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { PaymentMethodCardStyled } from './PaymentMethodCard.style';
 import { Button } from '@mui/material';
 

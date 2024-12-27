@@ -1,17 +1,21 @@
-import {EmailTemplateInterface, EmailTemplateServiceInterface} from '../email.interfaces';
+import {EmailTemplateInterface} from '../email.interfaces';
 import {ConfigService} from '@nestjs/config';
 import {LoggingService} from '../../logger/logging.service';
 import retry from 'async-retry';
 import * as postmark from 'postmark';
-import {QueueConfig} from "apps/ml-api/src/app/config/queue";
-import {PostmarkConfig} from "apps/ml-api/src/app/config/postmark.email";
+import {QueueConfig} from "../../config/queue";
+import {PostmarkConfig} from "../../config/postmark.email";
+import {EmailTemplateService} from "../email.template.service";
+import {Injectable} from "@nestjs/common";
 
-export class PostmarkEmailTemplateService implements EmailTemplateServiceInterface {
+@Injectable()
+export class PostmarkEmailTemplateService extends EmailTemplateService {
   private readonly retryOptions;
   private readonly serverToken;
 
   constructor(private readonly config: ConfigService, private readonly log: LoggingService) {
-    const queueConfig = config.get<QueueConfig>("queueConfig").standardQueueEmail
+    super()
+    const queueConfig = config.get<QueueConfig>("queueConfig").queueEmail
     const postmarkConfig = config.get<PostmarkConfig>("postmarkConfig")
     this.retryOptions = queueConfig.retryOptions;
     this.serverToken = postmarkConfig.serverToken;
@@ -63,7 +67,6 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
       const result = await retry(
         async (bail) => {
           try {
-            // FIXME id might need to be a number
             const template: postmark.Models.Template = await client.getTemplate(Number(id));
 
             const ret = {
@@ -104,6 +107,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
     const client = new postmark.ServerClient(this.serverToken);
     const templateParams: postmark.Models.CreateTemplateRequest = {
       Name: template.name,
+      Alias: template.name,
       HtmlBody: template.content.html,
       Subject: template.content.subject,
       TextBody: template.content.text,
@@ -138,7 +142,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         this.log.warn('Template ' + template.name + ' already exists. Not creating.');
         return;
       }
-      this.log.error('AWS Email Service. Unable to do postmark.createTemplate', error);
+      this.log.error('postmarkEmailTemplateService Email Service. Unable to do postmark.createTemplate', error);
       throw error;
     }
   }
@@ -148,6 +152,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
 
     const templateParams: postmark.Models.UpdateTemplateRequest = {
       Name: template.name,
+      Alias: template.name,
       HtmlBody: template.content.html,
       Subject: template.content.subject,
       TextBody: template.content.text,
@@ -176,7 +181,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         }
       );
     } catch (error) {
-      this.log.error('AWS Email Service. Unable to do Postmark.updateTemplate', error);
+      this.log.error('postmarkEmailTemplateService. Unable to do Postmark.updateTemplate', error);
       throw error;
     }
   }
@@ -216,7 +221,7 @@ export class PostmarkEmailTemplateService implements EmailTemplateServiceInterfa
         }
       );
     } catch (error) {
-      this.log.error('AWS Email Service. Unable to do Postmark.deleteTemplate', error);
+      this.log.error('postmarkEmailTemplateService. Unable to do Postmark.deleteTemplate', error);
       throw error;
     }
   }

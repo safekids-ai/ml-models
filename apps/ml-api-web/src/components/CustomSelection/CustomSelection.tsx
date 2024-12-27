@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CustomSelectionStyled } from './CustomSelection.style';
 
 type Props = {

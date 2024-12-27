@@ -1,16 +1,31 @@
-import {
-  Theme,
-} from '@mui/material';
+// import {
+//   Theme,
+// } from '@mui/material';
+// import { createTheme } from '@mui/material/styles';
 import { createTheme } from '@mui/material/styles';
+import {Theme} from '@mui/material'
+// declare module '@mui/material/styles' {
+//   interface Theme {
+//     colors: {
+//       [index:string]: string;
+//     };
+//   }
+//
+//   interface ThemeOptions {
+//     colors?: {
+//       [index:string]: string;
+//     };
+//   }
+// }
 
 const accountType = localStorage.getItem('account_type');
 const primaryColor = accountType === 'SCHOOL' ? '#f7274a' : '#fa6400';
 
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface DefaultTheme extends Theme {
-  }
-}
+// declare module '@mui/styles/defaultTheme' {
+//   // eslint-disable-next-line @typescript-eslint/no-empty-interface
+//   export interface DefaultTheme extends Theme {
+//   }
+// }
 
 export const customProperties = {
   font: {
@@ -31,7 +46,9 @@ export const customProperties = {
     primaryColor,
   },
 };
-export type AppTheme = Theme & { colors: { [index: string]: string } };
+
+
+//export type AppTheme = Theme & { colors: { [index: string]: string } };
 const initialTheme = createTheme();
 export const theme = createTheme({
   palette: {
@@ -244,3 +261,8 @@ export const theme = createTheme({
     }
   }
 }, customProperties);
+
+export type AppTheme = Theme & { colors: { [index: string]: string } };
+export {theme as AppTheme}
+
+

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { JSX } from 'react';
 import { ConsumerLogoProps } from './ConsumerLogo.type';
 
 const ConsumerLogo = ({ className, onboardingInProgress }: ConsumerLogoProps): JSX.Element => {
@@ -11,7 +12,7 @@ const ConsumerLogo = ({ className, onboardingInProgress }: ConsumerLogoProps): J
             const token = localStorage.getItem('jwt_token');
             token ? setLink('/dashboard') : setLink('https://safekids.ai/');
         }
-    }, [onboardingInProgress]);
+    }, []);
 
     return (
         <div className={className}>

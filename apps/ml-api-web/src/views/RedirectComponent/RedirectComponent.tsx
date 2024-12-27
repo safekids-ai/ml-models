@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { getRequest, history, updateAxios } from '../../utils/api';
+import { getRequest, updateAxios } from '../../utils/api';
 import { useLocation } from 'react-router-dom';
 import { useNotificationToast } from '../../context/NotificationToastContext/NotificationToastContext';
 import { GET_ONBOARDING_STATUS, GET_SCHOOL_USER_PROFILE } from '../../utils/endpoints';
+import { GetUserProfileResponse } from '../../types/api-responses';
+import { logError } from '../../utils/helpers';
+import {navigateTo} from "../../utils/navigate";
 
 const RedirectComponent = () => {
     const { search, pathname } = useLocation();
@@ -19,9 +22,9 @@ const RedirectComponent = () => {
                         .then(({ data }) => {
                             const { isAdmin, role } = data;
                             if (role === 'DISTRICT_USER' && !isAdmin) {
-                                history.push('/dashboard');
+                                navigateTo('/dashboard');
                             } else {
-                                history.push('/school-signin');
+                                navigateTo('/school-signin');
                             }
                         })
                         .catch((e) => {
@@ -30,7 +33,7 @@ const RedirectComponent = () => {
                 })
                 .catch((err) => {
                     showNotification({ type: 'error', message: err?.response?.data });
-                    history.push('/school-signin');
+                    navigateTo('/school-signin');
                 });
         } else {
             getRequest<{}, any[]>(`auth/google/redirect?code=${code}`, {})
@@ -45,16 +48,16 @@ const RedirectComponent = () => {
                                 getRequest<{}, any[]>(GET_ONBOARDING_STATUS, {})
                                     .then((response: any) => {
                                         if (response.data.onBoardingStatus === 'COMPLETED' || response.data.onBoardingStatus === 'Completed') {
-                                            history.push('/dashboard');
+                                            navigateTo('/dashboard');
                                         } else {
-                                            history.push('/school-onboarding');
+                                            navigateTo('/school-onboarding');
                                         }
                                     })
                                     .catch((err) => {
                                         throw err;
                                     });
                             } else if (role === 'DISTRICT_USER' && !isAdmin) {
-                                history.push('/dashboard');
+                                navigateTo('/dashboard');
                             }
                         })
                         .catch((e) => {
@@ -65,10 +68,10 @@ const RedirectComponent = () => {
                     if (err?.response?.status === 401) {
                         showNotification({ type: 'error', message: 'User Unauthorized.' });
                     }
-                    history.push('/school-signin');
+                    navigateTo('/school-signin');
                 });
         }
-    }, [pathname, search, showNotification]);
+    }, []);
     return <></>;
 };
 
