@@ -38,9 +38,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
-.nx/cache
-.nx/tmp
-.nx/installation
+.nx/
+#.nx/cache
+#.nx/tmp
+#.nx/installation
 
 # Next.js
 .next
