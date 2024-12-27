@@ -163,25 +163,25 @@ console.log('==========================================');
     //////////////////////////////////
     // redis module
     //////////////////////////////////
-    CacheModule.registerAsync({
-      isGlobal: true,
-      imports: [ConfigModule],
-      inject: [ConfigService],
-
-      useFactory: async (configService: ConfigService) => {
-        const redisConfig = configService.get<RedisConfig>("redisConfig");
-        const cacheConfig = configService.get<CacheConfig>("cacheConfig");
-
-        return {
-          store: redisStore,
-          host: redisConfig.host,
-          port: redisConfig.port,
-          password: redisConfig.password,
-          ttl: cacheConfig.ttl,
-          max: cacheConfig.max
-        }
-      }
-    }),
+    // CacheModule.registerAsync({
+    //   isGlobal: true,
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //
+    //   useFactory: async (configService: ConfigService) => {
+    //     const redisConfig = configService.get<RedisConfig>("redisConfig");
+    //     const cacheConfig = configService.get<CacheConfig>("cacheConfig");
+    //
+    //     return {
+    //       store: redisStore,
+    //       host: redisConfig.host,
+    //       port: redisConfig.port,
+    //       password: redisConfig.password,
+    //       ttl: cacheConfig.ttl,
+    //       max: cacheConfig.max
+    //     }
+    //   }
+    // }),
 
     //////////////////////////////////
     // logging module
@@ -193,92 +193,92 @@ console.log('==========================================');
       },
       inject: [ConfigService],
     }),
-    QueueModule,
-    EmailModule,
-    SmsModule,
-    EventEmitterModule.forRoot(),
     MlModule,
-    DatabaseModule,
-    DefaultDataModule,
-    FilteredCategoryModule,
-    FilteredUrlModule,
-    ActivityModule,
-    SchoolClassModule,
-    EnrollmentModule,
-    OrgUnitModule,
-    AccountsModule,
-    UserModule,
-    AuthTokenModule,
-    StatusModule,
-    AccountTypeModule,
-    OnBoardingCategoryModule,
-    UrlModule,
-    InterceptionTimeModule,
-    ApiKeyModule,
-    CalendarModule,
-    InterceptionTimeModule,
-    ActivityTypeModule,
-    PrrTriggerModule,
-    PrrLevelModule,
-    UserDeviceLinkModule,
-    DeviceTypeModule,
-    GoogleOauthModule,
-    DirectoryModule,
-    NonSchoolDaysConfigModule,
-    NonSchoolDevicesConfigModule,
-    OnBoardingStepModule,
-    InsightModule,
-    ChromeModule,
-    ChromeConsumerModule,
-    RosterOrgModule,
-    FeedbackModule,
-    WebTimeModule,
-    OneRosterModule,
-    PrrNotificationModule,
-    RoleModule,
-    JobsModule,
-    LicenseModule,
-    AccountLicenseModule,
-    AuthModule,
-    ConsumerUserModule,
-    UserCodeModule,
-    ConsumerAuthModule,
-    ParentConsentModule,
-    EmailFeedbackModule,
-    InternalApiKeyModule,
-    EmailEventModule,
-    UserOptInModule,
-    EmailEventTypeModule,
-    KidConfigModule,
-    KidRequestModule,
-    ParentEmailConfigModule,
-    EmailEventConfigModule,
-    PrrActionModule,
-    InformPrrVisitsModule,
-    HealthModule,
-    PaymentModule,
-    PlanModule,
-    SubscriptionModule,
-    CustomerModule,
-    FeatureModule,
-    BillingWebhookModule,
-    BillingModule,
-    ActivityAiDataModule,
-    PrrManagerModule,
-    PromoCodeModule,
-    CouponModule,
-    SubscriptionFeedbackModule,
-    InvoiceModule,
-    WebCategoryModule
+    // QueueModule,
+    // EmailModule,
+    // SmsModule,
+    // EventEmitterModule.forRoot(),
+    // DatabaseModule,
+    // DefaultDataModule,
+    // FilteredCategoryModule,
+    // FilteredUrlModule,
+    // ActivityModule,
+    // SchoolClassModule,
+    // EnrollmentModule,
+    // OrgUnitModule,
+    // AccountsModule,
+    // UserModule,
+    // AuthTokenModule,
+    // StatusModule,
+    // AccountTypeModule,
+    // OnBoardingCategoryModule,
+    // UrlModule,
+    // InterceptionTimeModule,
+    // ApiKeyModule,
+    // CalendarModule,
+    // InterceptionTimeModule,
+    // ActivityTypeModule,
+    // PrrTriggerModule,
+    // PrrLevelModule,
+    // UserDeviceLinkModule,
+    // DeviceTypeModule,
+    // GoogleOauthModule,
+    // DirectoryModule,
+    // NonSchoolDaysConfigModule,
+    // NonSchoolDevicesConfigModule,
+    // OnBoardingStepModule,
+    // InsightModule,
+    // ChromeModule,
+    // ChromeConsumerModule,
+    // RosterOrgModule,
+    // FeedbackModule,
+    // WebTimeModule,
+    // OneRosterModule,
+    // PrrNotificationModule,
+    // RoleModule,
+    // JobsModule,
+    // LicenseModule,
+    // AccountLicenseModule,
+    // AuthModule,
+    // ConsumerUserModule,
+    // UserCodeModule,
+    // ConsumerAuthModule,
+    // ParentConsentModule,
+    // EmailFeedbackModule,
+    // InternalApiKeyModule,
+    // EmailEventModule,
+    // UserOptInModule,
+    // EmailEventTypeModule,
+    // KidConfigModule,
+    // KidRequestModule,
+    // ParentEmailConfigModule,
+    // EmailEventConfigModule,
+    // PrrActionModule,
+    // InformPrrVisitsModule,
+    // HealthModule,
+    // PaymentModule,
+    // PlanModule,
+    // SubscriptionModule,
+    // CustomerModule,
+    // FeatureModule,
+    // BillingWebhookModule,
+    // BillingModule,
+    // ActivityAiDataModule,
+    // PrrManagerModule,
+    // PromoCodeModule,
+    // CouponModule,
+    // SubscriptionFeedbackModule,
+    // InvoiceModule,
+    // WebCategoryModule
   ],
 })
 export class AppModule implements NestModule {
-  constructor(private defaultDataService: DefaultDataService) {
-  }
+  // constructor(private defaultDataService: DefaultDataService) {
+  // }
 
-  onModuleInit(): void {
-    void this.defaultDataService.insertDefaultData();
-  }
+  // onModuleInit(): void {
+  //   void this.defaultDataService.insertDefaultData();
+  // }
 
   /**
    * get raw or json body for requests routes implementation.
