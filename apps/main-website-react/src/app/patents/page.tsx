@@ -4,7 +4,6 @@ import FadeInView from '../../components/ui/FadeInView';
 const Patents = () => {
   return (
     <div id="contentWrapper">
-
       {/* Banner */}
       <section className="pt-[7rem] xl:pt-[5rem]">
         <div className="container-custom mx-auto">
@@ -12,9 +11,9 @@ const Patents = () => {
             <div className="lg:w-5/12 md:w-6/12 w-full">
               <div>
                 <h1 className="text-[45px] leading-[40px] sm:text-[70px] sm:leading-[65px] md:text-[55px] md:leading-[50px] lg:text[65px] lg:leading-[60px] xl:text-[80px] xl:leading-[85%] min-[1920px]:text-[90px] min-[1920px]:leading-[100%]">
-                  Revolutionary{' '}<span className="color2">Patents{' '}</span>
+                  Revolutionary <span className="color2">Patents </span>
                   and
-                  <span className="color2">{' '}Research</span>
+                  <span className="color2"> Research</span>
                 </h1>
                 <p className="font-gt-walsheim-pro pb-[2rem] pt-[2rem] px-[1rem] xl:pr-[0] xl:pb-[1.5rem] xl:pl-[0px] text-[18px] leading-[24px] sm:text-[20px] sm:leading-[32px] md:text-[18px] md:leading-[30px] lg:text-[24px] lg:leading-[36px]">
                   Safe Kids is the only Company that has patents that cover
@@ -55,21 +54,15 @@ const Patents = () => {
                   In-the-moment Education
                 </h6>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
-                  <a
-                    target="_blank"
-                    href="/docs/patents/11356734.pdf"
-                  >
-                    <i>#11,356,734</i> - Methods and systems for counseling a user with respect to
-                    supervised content
+                  <a target="_blank" href="/docs/patents/11356734.pdf">
+                    <i>#11,356,734</i> - Methods and systems for counseling a
+                    user with respect to supervised content
                   </a>
                 </p>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
-                  <a
-                    target="_blank"
-                    href="/docs/patents/11991415.pdf"
-                  >
-                    <i>#11,991,415</i> - Methods and systems for counseling a user with respect to
-                    supervised content
+                  <a target="_blank" href="/docs/patents/11991415.pdf">
+                    <i>#11,991,415</i> - Methods and systems for counseling a
+                    user with respect to supervised content
                   </a>
                 </p>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
@@ -105,11 +98,15 @@ const Patents = () => {
                   AI
                 </h6>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
-                  <a
-                    target="_blank"
-                    href="/docs/patents/10949774.pdf"
-                  >
-                    <i>#10,949,774</i> - Methods and systems for supervising displayed content
+                  <a target="_blank" href="/docs/patents/12153939.pdf">
+                    <i>#12,153,939</i> - Methods and systems for supervising
+                    displayed content
+                  </a>
+                </p>
+                <p className="text-[#0d6efd] mb-[1rem] text-lg">
+                  <a target="_blank" href="/docs/patents/10949774.pdf">
+                    <i>#10,949,774</i> - Methods and systems for supervising
+                    displayed content
                   </a>
                 </p>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
@@ -134,12 +131,9 @@ const Patents = () => {
                   Changing Behavior
                 </h6>
                 <p className="text-[#0d6efd] mb-[1rem] text-lg">
-                  <a
-                    target="_blank"
-                    href="/docs/patents/11309086.pdf"
-                  >
-                    <i>#11,309,086</i> - Methods and systems for interactively counseling a user with
-                    respect to supervised content
+                  <a target="_blank" href="/docs/patents/11309086.pdf">
+                    <i>#11,309,086</i> - Methods and systems for interactively
+                    counseling a user with respect to supervised content
                   </a>
                 </p>
               </div>
