@@ -5,7 +5,7 @@ import {InformPrrVisit, InformPrrVisitCreationAttributes} from './entities/infor
 import {PrrInformVisitDto, TabVisit} from '../chrome/dto/prr.activity.dto';
 import {ActivityService} from '../activity/activity.service';
 import {User} from '../user/entities/user.entity';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {EmailTemplates} from '../email/email.templates';
 import {EmailService} from '../email/email.service';
 import {UserService} from '../user/user.service';
@@ -98,7 +98,7 @@ export class InformPrrVisitsService implements QueueServiceInterface {
    */
   private async sendInformEventEmail(visits: TabVisit[], kid: User, parent: User): Promise<void> {
     this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         kidName: `${kid.firstName} ${kid.lastName}`,

@@ -10,7 +10,7 @@ import {PrrUserAction} from '../prr-action/prr-action.default';
 import {QueueServiceInterface} from '../email/email.interfaces';
 import {ConfigService} from '@nestjs/config';
 import retry from 'async-retry';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {EmailTemplates} from '../email/email.templates';
 import {EmailService} from '../email/email.service';
 import {User} from '../user/entities/user.entity';
@@ -114,7 +114,7 @@ export class EmailEventService implements QueueServiceInterface {
       const recipients: string[] = emailEventConfig.emailRecipients.split(',');
       this.log.warn(`Sending email to ${recipients} for event [${event}] for user [${userId}].`);
       this.emailService.sendEmail({
-        id: uuid(),
+        id: uuidv4(),
         useSupportEmail: true,
         meta: {
           userEmail: `${user.email}`,

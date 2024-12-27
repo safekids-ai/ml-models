@@ -4,7 +4,7 @@ import {UpdatePrrNotificationDto} from './dto/update-prr-notification.dto';
 import {PRRNOTIFICATION_REPOSITORY} from '../constants';
 import {PrrNotification} from './entities/prr-notification.entity';
 import {Activity} from '../activity/entities/activity.entity';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {QueryTypes} from 'sequelize';
 import {getPagination, getPagingData} from '../paging/paging.util';
 import {PrrSmsNotificationService} from './prr.sms.notification.service';
@@ -30,7 +30,7 @@ export class PrrNotificationService {
   }
 
   create(createPrrNotificationDto: CreatePrrNotificationDto) {
-    if (!createPrrNotificationDto.id) createPrrNotificationDto.id = uuid().replace(/-/g, '');
+    if (!createPrrNotificationDto.id) createPrrNotificationDto.id = uuidv4().replace(/-/g, '');
     return this.repository.create(createPrrNotificationDto);
   }
 
@@ -114,7 +114,7 @@ export class PrrNotificationService {
   }
 
   async createNotification(createPrrNotificationDto: CreatePrrNotificationDto) {
-    if (!createPrrNotificationDto.id) createPrrNotificationDto.id = uuid().replace(/-/g, '');
+    if (!createPrrNotificationDto.id) createPrrNotificationDto.id = uuidv4().replace(/-/g, '');
     const notification = await this.repository.create(createPrrNotificationDto);
     const message = await this.findOneByCode(notification.id);
     await this.prrSmsNotificationService.sendMessage(message);

@@ -25,7 +25,7 @@ import {User} from '../user/entities/user.entity';
 import {KidRequestDto, KidRequestTypes} from '../kid-request/domain/kid-request-dto';
 import {KidRequestService} from '../kid-request/kid-request.service';
 import {EmailService} from '../email/email.service';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {EmailTemplates} from '../email/email.templates';
 import {JwtTokenService} from '../auth/jwtToken/jwt.token.service';
 import {QueryException} from '../error/common.exception';
@@ -168,7 +168,7 @@ export class ChromeService {
       const token = await this.jwtTokenService.generateChromeExtensionToken({userId, kidName});
       accessLimitedAt.setMinutes(accessLimitedAt.getMinutes() + 5);
       await this.emailService.sendEmail({
-        id: uuid(),
+        id: uuidv4(),
         useSupportEmail: true,
         meta: {
           kidName,
@@ -341,7 +341,7 @@ export class ChromeService {
     const token = await this.jwtTokenService.generateChromeExtensionToken(payload);
     this.emailService.sendEmail({
       to: parent.email,
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         kidName: `${kid.firstName} ${kid.lastName}`,
@@ -383,7 +383,7 @@ export class ChromeService {
 
       const parent = await this.userService.findParentAccount(user.accountId);
       this.emailService.sendEmail({
-        id: uuid(),
+        id: uuidv4(),
         useSupportEmail: true,
         meta: {
           kidName: `${user.firstName} ${user.lastName}`,
@@ -454,7 +454,7 @@ export class ChromeService {
     const user = await this.userService.findOneById(kidId);
     const parent = await this.userService.findParentAccount(accountId);
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         kidName: `${user.firstName} ${user.lastName}`,
@@ -475,7 +475,7 @@ export class ChromeService {
    */
   async notifiyExtenionExpiredStatus(account: Account): Promise<void> {
     this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         parentName: account.name,

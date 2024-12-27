@@ -1,7 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ACCOUNT_LICENSE_REPOSITORY } from '../constants';
 import { AccountLicense, AccountLicenseCreationAttributes } from './entities/account-license.entity';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { AccountErrors } from '../accounts/account.errors';
 import { AccountService } from '../accounts/account.service';
 import { LoggingService } from '../logger/logging.service';
@@ -17,7 +17,7 @@ export class AccountLicenseService {
     ) {}
     create(createLicenseDto: AccountLicenseCreationAttributes) {
         if (!createLicenseDto.id) {
-            createLicenseDto.id = uuid();
+            createLicenseDto.id = uuidv4();
         }
         return this.repository.create(createLicenseDto);
     }

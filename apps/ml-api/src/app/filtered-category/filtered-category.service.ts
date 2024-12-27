@@ -4,7 +4,7 @@ import { FilteredCategory } from './entities/filtered-category.entity';
 import { QueryException } from '../error/common.exception';
 import { CategoryDTO, FilteredCategoryDto } from './dto/filtered-category.dto';
 import { Sequelize } from 'sequelize-typescript';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { QueryTypes } from 'sequelize';
 import { DefaultCategoryService } from '../category/default-category.service';
 import { AccountTypes } from '../account-type/dto/account-types';
@@ -136,7 +136,7 @@ export class FilteredCategoryService {
                         orgUnitId: orgUnitId,
                         categoryId: category.id,
                         accountId,
-                        id: uuid(),
+                        id: uuidv4(),
                         timeDuration: category.timeDuration,
                         status: accountType === AccountTypes.CONSUMER ? category.status : category.enabled ? CategoryStatus.ALLOW : CategoryStatus.PREVENT,
                     } as FilteredCategory;
@@ -185,7 +185,7 @@ export class FilteredCategoryService {
                         orgUnitId: orgUnitId,
                         categoryId: category.id,
                         accountId,
-                        id: uuid(),
+                        id: uuidv4(),
                         timeDuration: category.timeDuration,
                         status: this.getStatus(accountType, category, paidPlanCategories),
                     } as FilteredCategory;

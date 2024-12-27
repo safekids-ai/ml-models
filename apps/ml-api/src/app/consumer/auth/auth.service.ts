@@ -11,7 +11,7 @@ import {OrgUnitService} from '../../org-unit/org-unit.service';
 import {EmailService} from '../../email/email.service';
 import {UserCodeService} from '../user-code/user-code.service';
 import {ConfigService} from '@nestjs/config';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {Statuses} from '../../status/default-status';
 import {QueryException, ValidationException} from '../../error/common.exception';
 import {CodeType} from '../user-code/code_type';
@@ -132,7 +132,7 @@ export class AuthService {
       const emailCode = this.isDevelopment ? '111111' : NumberUtils.create6DigitRandom().toString();
       await this.userCodeService.update(userCode.userId, CodeType.EMAIL, emailCode);
       await this.emailService.sendEmail({
-        id: uuid(),
+        id: uuidv4(),
         meta: {userId: user.id, VerificationCode: emailCode, firstName: user.firstName, lastName: user.lastName},
         to: user.email,
         content: {
@@ -173,7 +173,7 @@ export class AuthService {
     };
     await this.userCodeService.create(userCodeDTO);
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {userId: user.id, VerificationCode: code},
       to: user.email,
@@ -213,7 +213,7 @@ export class AuthService {
 
   private async sendEmail(user: User, userCode: string) {
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {userId: user.id, VerificationCode: userCode, firstName: user.firstName, lastName: user.lastName},
       to: user.email,

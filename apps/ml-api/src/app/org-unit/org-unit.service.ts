@@ -5,7 +5,7 @@ import { ORG_UNIT_REPOSITORY, PLAN_REPOSITORY, SEQUELIZE, USER_REPOSITORY } from
 import { OrgUnit } from './entities/org-unit.entity';
 import { OrgUnitDto } from './dto/org-unit.dto';
 import { LoggingService } from '../logger/logging.service';
-import { v4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { QueryException, ValidationException } from '../error/common.exception';
 import { FilteredCategoryService } from '../filtered-category/filtered-category.service';
 import { FilteredUrlService } from '../filtered-url/filtered-url.service';
@@ -43,7 +43,7 @@ export class OrgUnitService {
 
     async create(createOrgUnitDto: CreateOrgUnitDto) {
         try {
-            createOrgUnitDto.id = v4();
+            createOrgUnitDto.id = uuidv4();
             return await this.orgUnitRepository.create(createOrgUnitDto);
         } catch (e) {
             this.log.error(QueryException.save(e));
@@ -133,7 +133,7 @@ export class OrgUnitService {
                     },
                 });
             } else {
-                createOrgUnitDto.id = v4();
+                createOrgUnitDto.id = uuidv4();
                 await this.orgUnitRepository.create(createOrgUnitDto);
             }
             return await this.orgUnitRepository.findOne({ where: { name: createOrgUnitDto.name } });
@@ -293,7 +293,7 @@ export class OrgUnitService {
     async createFilteredUrls(accountId: string, orgUnitUrl: OrgUnitUrlDTO): Promise<OrgUnitUrlDTO> {
         const urls = orgUnitUrl.urls;
         const filteredUrls = urls.map((url) => {
-            return { id: v4(), url: url.name, orgUnitId: orgUnitUrl.id, accountId, enabled: url.enabled, inheritFromParent: true };
+            return { id: uuidv4(), url: url.name, orgUnitId: orgUnitUrl.id, accountId, enabled: url.enabled, inheritFromParent: true };
         });
         await this.filteredUrlService.createBulk(filteredUrls);
         for (const filteredUrl of filteredUrls) {

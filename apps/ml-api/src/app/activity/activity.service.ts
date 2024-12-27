@@ -9,7 +9,7 @@ import {PrrNotificationService} from '../prr-notification/prr-notification.servi
 import {AccountService} from '../accounts/account.service';
 import {CreatePrrNotificationDto} from '../prr-notification/dto/create-prr-notification.dto';
 import {LoggingService} from '../logger/logging.service';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {Categories} from '../category/default-categories';
 import {CountResponse, PreviewResultDto, PrrInfoDto, UserInfoDto} from './dto/preview-result.dto';
 import {getPrrLevelName} from './prr-level-names';
@@ -602,7 +602,7 @@ export class ActivityService implements QueueServiceInterface {
       return;
     }
     const account = await this.accountService.findOne(prrDto.accountId);
-    const crisesId = uuid().replace(/-/g, '');
+    const crisesId = uuidv4().replace(/-/g, '');
     const url = await this.generateUniqueUrl(crisesId);
     if (prrDto.prrLevelId === PrrLevels.THREE) {
       if (account.accountTypeId === AccountTypes.SCHOOL) {
@@ -622,7 +622,7 @@ export class ActivityService implements QueueServiceInterface {
       } else if (account.accountTypeId === AccountTypes.CONSUMER) {
         const parent = await this.userService.findParentAccount(user.accountId);
         await this.emailService.sendEmail({
-          id: uuid(),
+          id: uuidv4(),
           meta: {
             kidName: `${user.firstName} ${user.lastName}`,
             category: prrDto.prrCategoryId.replace(/_/g, ' '),

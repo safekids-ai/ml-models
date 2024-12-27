@@ -5,7 +5,7 @@ import { AccountService } from '../accounts/account.service';
 import { UserService } from '../user/user.service';
 import { DeviceService } from '../device/device.service';
 import { OrgUnitService } from '../org-unit/org-unit.service';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { AuthTokenService } from '../auth-token/auth-token.service';
 import { GoogleApiService } from '../google-apis/google.apis.service';
 import { UserErrors } from '../error/users.errors';
@@ -44,7 +44,7 @@ export class UserDeviceLinkService {
     }
 
     create(createUserDeviceDto: UserDeviceLinkCreationAttributes) {
-        createUserDeviceDto.id = uuid();
+        createUserDeviceDto.id = uuidv4();
         return this.repository.create(createUserDeviceDto);
     }
 
@@ -120,7 +120,7 @@ export class UserDeviceLinkService {
                     user = await this.userService.registerChromeUser(account.id, apiUser, orgUnitId);
                 } else {
                     const userDTO : UserCreationAttributes = {
-                        id: uuid(), email: loginDTO.email, firstName: loginDTO.email, accountId: account.id, orgUnitId: orgUnitId, 
+                        id: uuidv4(), email: loginDTO.email, firstName: loginDTO.email, accountId: account.id, orgUnitId: orgUnitId,
                         password: "", // FIXME: what should the password be?
                         accessCode: null,
                         accessLimited: false,

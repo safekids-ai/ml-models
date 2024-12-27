@@ -3,7 +3,6 @@ import { JobDTO } from './dto/jobDTO';
 import { JOB_REPOSITORY, SEQUELIZE } from '../constants';
 import { Job } from './entities/jobs.entity';
 import { LoggingService } from '../logger/logging.service';
-import { uuid } from 'uuidv4';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { JobEventTypes } from './job.event.types';
 import { QueryException } from '../error/common.exception';
@@ -15,6 +14,7 @@ import { JobType } from './dto/job.type';
 import { ApiKeyService } from '../api-key/api-key.service';
 import { OneRosterService } from '../roster/roster.service';
 import { DirectoryService } from '../directory-service/directory.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class JobsService {
@@ -35,7 +35,7 @@ export class JobsService {
 
     async create(jobDTO: JobDTO, userId: string, accountId: string): Promise<Job> {
         try {
-            jobDTO.id = uuid();
+            jobDTO.id = uuidv4();
             jobDTO.userId = userId;
             jobDTO.accountId = accountId;
             jobDTO.startDate = new Date();

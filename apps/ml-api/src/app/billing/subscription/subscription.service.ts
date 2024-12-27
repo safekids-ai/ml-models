@@ -8,7 +8,7 @@ import {PlanService} from '../plan/plan.service';
 import {SEQUELIZE, SUBSCRIPTION_REPOSITORY} from '../../constants';
 import {Subscription} from './entities/subscription.entity';
 import {Stripe} from 'stripe';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {EmailTemplates} from '../../email/email.templates';
 import {EmailService} from '../../email/email.service';
 import {UserService} from '../../user/user.service';
@@ -247,7 +247,7 @@ export class SubscriptionService {
     const account = savedSubscription.account;
     const user = await this.userService.findOneByEmail(account.primaryDomain);
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         name: `${user.firstName} ${user.lastName}`,
@@ -264,7 +264,7 @@ export class SubscriptionService {
     const account = await this.accountService.findOne(response.metadata.accountId);
     const user = await this.userService.findOneByEmail(account.primaryDomain);
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         parentName: `${user.firstName} ${user.lastName}`,
@@ -281,7 +281,7 @@ export class SubscriptionService {
     const account = savedSubscription.account;
     const user = await this.userService.findOneByEmail(account.primaryDomain);
     await this.emailService.sendEmail({
-      id: uuid(),
+      id: uuidv4(),
       useSupportEmail: true,
       meta: {
         name: `${user.firstName} ${user.lastName}`,
@@ -321,7 +321,7 @@ export class SubscriptionService {
       for (const subscription of subscriptions) {
         const parent = await this.userService.findParentAccount(subscription.accountId);
         const emailInterface = {
-          id: uuid(),
+          id: uuidv4(),
           useSupportEmail: true,
           meta: {
             parentName: `${parent.firstName} ${parent.lastName}`,

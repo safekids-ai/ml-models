@@ -5,7 +5,7 @@ import {ParentEmailConfigDto} from './dto/parent-email-config.dto';
 import {KidConfigService} from '../kid-config/kid-config.service';
 import {ExtensionStatus} from '../kid-config/enum/extension-status';
 import {EmailService} from '../email/email.service';
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import {EmailTemplates} from '../email/email.templates';
 
 @Injectable()
@@ -33,7 +33,7 @@ export class ParentEmailConfigService implements OnModuleInit {
     const kidConfig = await this.kidConfigService.fetch(message.id);
     if (kidConfig && kidConfig.extensionStatus === ExtensionStatus.UNINSTALLED) {
       await this.emailService.sendEmail({
-        id: uuid(),
+        id: uuidv4(),
         useSupportEmail: true,
         meta: {
           kidName: `${message.firstName} ${message.lastName}`,

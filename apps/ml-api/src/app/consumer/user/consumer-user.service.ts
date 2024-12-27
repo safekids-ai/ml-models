@@ -2,7 +2,7 @@ import { FilteredProcessService } from './../../filtered-process/filtered-proces
 import { Inject, Injectable } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import { ACCOUNT_REPOSITORY, PLAN_REPOSITORY, SEQUELIZE, USER_REPOSITORY } from '../../constants';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { User, UserCreationAttributes } from '../../user/entities/user.entity';
 import { KidDto } from './dto/kid.dto';
 import { UserRoles } from '../../user/user.roles';
@@ -69,7 +69,7 @@ export class ConsumerUserService {
      */
     async create(dto: UserCreationAttributes): Promise<User> {
         try {
-            dto.id = uuid();
+            dto.id = uuidv4();
             return await this.repository.create(dto);
         } catch (error) {
             this.log.error(QueryException.save(error));

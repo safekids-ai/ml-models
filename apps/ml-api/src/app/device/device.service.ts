@@ -4,7 +4,7 @@ import { ChromeDeviceDTO, CreateDeviceDto } from './dto/create-device.dto';
 import { UpdateDeviceDto } from './dto/update-device.dto';
 import { Device, DeviceAttributes } from './entities/device.entity';
 import { DeviceTypeService } from '../device-type/device-type.service';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { DeviceTypes } from '../device-type/device-type.enum';
 import { Statuses } from '../status/default-status';
 import { QueryException } from '../error/common.exception';
@@ -21,7 +21,7 @@ export class DeviceService {
         this.log.className(DeviceService.name);
     }
     create(createDeviceDto: DeviceAttributes) {
-        createDeviceDto.id = uuid();
+        createDeviceDto.id = uuidv4();
         return this.repository.create(createDeviceDto);
     }
 

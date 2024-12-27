@@ -7,7 +7,7 @@ import { StatusService } from '../status/status.service';
 import { QueryException } from '../error/common.exception';
 import { LoggingService } from '../logger/logging.service';
 import { QueryTypes } from 'sequelize';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AccountService {
@@ -18,7 +18,7 @@ export class AccountService {
         private readonly log: LoggingService
     ) {}
     async create(createAccountDto: CreateAccountDto): Promise<Account> {
-        createAccountDto.id = uuid();
+        createAccountDto.id = uuidv4();
         return this.accountRepository.create(createAccountDto);
     }
 
@@ -76,7 +76,7 @@ export class AccountService {
                     where: { primaryDomain: dto.primaryDomain },
                 });
             } else {
-                dto.id = uuid();
+                dto.id = uuidv4();
                 await this.accountRepository.create(dto);
             }
             return await this.findOneByDomain(dto.primaryDomain);

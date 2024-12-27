@@ -8,7 +8,7 @@ import { OrgUnit } from '../org-unit/entities/org-unit.entity';
 import { UserService } from '../user/user.service';
 import { User, UserCreationAttributes } from '../user/entities/user.entity';
 import { AuthTokenService } from '../auth-token/auth-token.service';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import { FilteredCategoryService } from '../filtered-category/filtered-category.service';
 import { FilteredUrlService } from '../filtered-url/filtered-url.service';
 import { WebTimeService } from '../web-time/web-time.service';
@@ -59,7 +59,7 @@ export class DirectoryService {
         if (unitsToAdd.length > 0) {
             try {
                 unitsToAdd.forEach((unit) => {
-                    unit.id = uuid();
+                    unit.id = uuidv4();
                 });
                 await this.orgUnitService.bulkCreate(unitsToAdd);
             } catch (e) {
@@ -130,7 +130,7 @@ export class DirectoryService {
                     const unit = await this.orgUnitService.findOneByOrgUnitPath(user.orgUnitPath, accountId);
                     const orgUnitId = unit ? unit.id : (await this.orgUnitService.findOneByOrgUnitPath('/', accountId)).id;
                     const userCreationObject : UserCreationAttributes = {
-                        id: uuid().replace(/-/g, ''),
+                        id: uuidv4().replace(/-/g, ''),
                         firstName: user.name.givenName,
                         lastName: user.name.familyName,
                         email: user.primaryEmail,

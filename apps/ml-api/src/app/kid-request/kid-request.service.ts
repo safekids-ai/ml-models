@@ -4,7 +4,7 @@ import { KID_REQUEST_REPOSITORY, SEQUELIZE, USER_REPOSITORY } from '../constants
 import { QueryException, ValidationException } from '../error/common.exception';
 import { LoggingService } from '../logger/logging.service';
 import { KidAccessRequestsDto, KidRequestDto, KidRequestTypes } from './domain/kid-request-dto';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { FilteredUrlService } from '../filtered-url/filtered-url.service';
 import { FilteredUrlCreationAttributes } from '../filtered-url/entities/filtered-url.entity'
 import { JwtTokenService } from '../auth/jwtToken/jwt.token.service';
