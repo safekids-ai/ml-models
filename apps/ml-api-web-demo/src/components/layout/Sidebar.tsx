@@ -163,6 +163,7 @@ const MobileNav = ({ ...rest }: MobileProps) => {
       {...rest}
     >
       <Box display={{ base: 'block', md: 'none' }}>
+        { /* @ts-ignore */ }
         <DrawerTrigger asChild>
           <Button variant="outline" aria-label="open menu">
             <FiMenu />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {JSX} from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import { useChatScroll } from "../../hooks/useChatScroll";
 import { useColorModeValue } from '../ui/color-mode'
