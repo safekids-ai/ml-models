@@ -1,6 +1,6 @@
 import {Injectable, OnModuleInit} from '@nestjs/common';
 import {NLPLabel,NLPResult} from "@safekids-ai/nlp-js-types";
-import {NLPNode} from "@safekids-ai/nlp-js-node";
+import {NLPBert} from "@safekids-ai/nlp-js-common";
 import {VisionLabel, VisionNode} from "@safekids-ai/vision-js-node";
 import {ConfigService} from "@nestjs/config";
 import apiLogger from "abstract-logging";
@@ -12,7 +12,7 @@ import {LoggingService} from "../logger/logging.service";
 
 @Injectable()
 export class MlService implements OnModuleInit {
-  nlpModel: NLPNode = null;
+  nlpModel: NLPBert = null;
   visionModel: VisionNode = null;
   nlp_onnx_path: string;
   vision_onnx_path: string;
@@ -61,7 +61,7 @@ export class MlService implements OnModuleInit {
   async onModuleInit(): Promise<void> {
     //load the NLP model
     apiLogger.info("Loading NLP Model");
-    this.nlpModel = new NLPNode(this.nlp_onnx_path, apiLogger);
+    this.nlpModel = new NLPBert(this.nlp_onnx_path, apiLogger);
     await this.nlpModel.init();
     apiLogger.info(`Successfully loaded NLP Model ${this.nlp_onnx_path}`);
 

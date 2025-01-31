@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import {nxViteTsPaths} from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
 import {fileURLToPath} from 'url';
 import {dirname} from 'path';
+import path from 'path';
 
 const filename = fileURLToPath(import.meta.url);
 export const ROOT_DIR = dirname(filename);
@@ -32,8 +33,15 @@ export function withCommonConfig() {
   return {
     resolve: {
       alias: {
-        '@shared': resolve(MAIN_DIR, 'shared', 'src')
+        '@shared': resolve(MAIN_DIR, 'shared', 'src'),
+        "@safekids-ai/onnx-web": path.resolve(__dirname, "../../libs/onnx-web/src/index.ts"),
+        '@safekids-ai/onnx-node': path.resolve(__dirname, 'empty.ts')
       },
+    },
+    build: {
+      rollupOptions: {
+        external: ['onnxruntime-node', '@safekids-ai/onnx-node']
+      }
     },
     define: {
       'import.meta.env.PUBLIC_URL': JSON.stringify(PUBLIC_URL),

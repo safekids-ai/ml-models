@@ -3,7 +3,7 @@ import {TestUtils} from '../../../../../TestUtils';
 import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 import {MLModel, ModelSettings} from '@shared/types/MLModel.type';
-import {NLP} from '@safekids-ai/nlp-js-common';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 import {mock} from 'ts-mockito';
 import {Vision} from '@safekids-ai/vision-js-common';
 import {NLPModel} from 'chrome-extension/src/background/model/NLPModel';
@@ -39,7 +39,7 @@ describe('Queue Wrapper tests', () => {
   const storageManager = new LocalStorageManager();
   const settings: ModelSettings = {filterStrictness: 70};
   const logger = new ConsoleLogger();
-  const nlp: NLP = mock(NLP);
+  const nlp: NLPBert = mock(NLPBert);
   const nlpModel = new NLPModel(nlp, logger);
   const chromeUtils = new ChromeUtils(logger, storageManager);
   const vision: Vision = mock(Vision);

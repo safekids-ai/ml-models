@@ -1,17 +1,17 @@
 import {NLPModelInterface} from "./NLPModelInterface";
-import {NLPWeb} from "@safekids-ai/nlp-js-web";
+import {NLPBert} from "@safekids-ai/nlp-js-common";
 
 export class NLPModelImpl implements NLPModelInterface {
-  private readonly model: NLPWeb;
+  private readonly model: NLPBert;
   initDone: boolean = false;
 
-  modelPath: string = "models/nlp.onnx";
+  modelPath: string = "models/hate/nlp.onnx";
 
   constructor(_modelPath?: string) {
     if (_modelPath) {
       this.modelPath = _modelPath;
     }
-    this.model = new NLPWeb(this.modelPath);
+    this.model = new NLPBert(this.modelPath);
   }
 
   load = async () => {

@@ -1,0 +1,77 @@
+{
+  "name": "onnx-common",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/onnx-common/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/onnx-common/**/*.ts"]
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "main": "libs/onnx-common/src/index.ts",
+        "platform": "neutral",
+        "format": ["esm", "cjs"],
+        "assets": [
+          {
+            "input": ".",
+            "glob": "README.md",
+            "output": "/"
+          },
+          {
+            "input": ".",
+            "glob": "logo.png",
+            "output": "/"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/onnx-common/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/onnx-common/tsconfig.lib.json"
+        },
+        "node": {
+          "main": "libs/onnx-common/src/lib/onnx-node.ts",
+          "platform": "node",
+          "external": ["onnxruntime-node"]
+        },
+        "web": {
+          "main": "libs/onnx-common/src/lib/onnx-web.ts",
+          "platform": "browser",
+          "external": ["onnxruntime-web"]
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["pnpm exec nx build onnx-common"],
+        "parallel": false
+      }
+    },
+    "publish": {
+      "command": "npm publish --access public",
+      "options": {
+        "cwd": "dist/libs/onnx-common"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/onnx-common/jest.config.ts"
+      }
+    }
+  }
+}

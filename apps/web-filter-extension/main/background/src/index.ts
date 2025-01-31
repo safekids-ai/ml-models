@@ -1,4 +1,4 @@
-import {NLPWeb} from '@safekids-ai/nlp-js-web';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 import {VisionWeb} from '@safekids-ai/vision-js-web';
 
 import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
@@ -14,8 +14,8 @@ import {NLPModel} from './model/NLPModel';
 import {ChromeCommonUtils} from '@shared/chrome/utils/ChromeCommonUtils';
 
 
-const VISION_MODEL_PATH = 'models/vision.onnx';
-const NLP_MODEL_PATH = 'models/nlp.onnx';
+const VISION_MODEL_PATH = 'models/vision/vision.onnx';
+const NLP_MODEL_PATH = 'models/hate/nlp.onnx';
 
 export const loadModels = async (logger: Logger, modelsMap: Map<MLModels, MLModel>): Promise<void> => {
   const nlpModelWrapper = modelsMap.get(MLModels.NLP);
@@ -45,7 +45,7 @@ export const init = async (): Promise<void> => {
   const modelSettings: { filterStrictness: number } = {filterStrictness: 70};
 
   const modelsMap = new Map<MLModels, MLModel>();
-  const nlp = new NLPWeb(NLP_MODEL_PATH);
+  const nlp = new NLPBert(NLP_MODEL_PATH);
   const nlpModelWrapper = new NLPModel(nlp, logger);
 
   const vision = new VisionWeb(VISION_MODEL_PATH);

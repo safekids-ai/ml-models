@@ -1,11 +1,11 @@
 import {ConsoleLogger} from '@shared/logging/ConsoleLogger';
-import {NLP, NLPLabel} from '@safekids-ai/nlp-js-common';
+import {NLPBert, NLPLabel} from '@safekids-ai/nlp-js-common';
 import {NLPModel} from './NLPModel';
 
 describe('ImageModel tests', () => {
   let nlpModel: NLPModel;
   const logger = new ConsoleLogger();
-  const nlp = new NLP('');
+  const nlp = new NLPBert('');
 
   beforeEach(async () => {
     nlpModel = new NLPModel(nlp, logger);

@@ -54,8 +54,8 @@ weapons
 ### Interact directly with our demo
 [![Try a Demo of our Hate Model](assets/markdown/demo_model.png 'Demo Playground')](https://demo.safekids.ai/hate)
 
-## NLP and Vision Classification
-| NLP Classification | Vision Classification |
+## NLPBert and Vision Classification
+| NLPBert Classification | Vision Classification |
 | ------------------ |----------------|
 | bullying_hate      | porn           |
 | porn               | weapons        |
@@ -90,7 +90,7 @@ harmonic mean of Precision and  Recall. - the general accuracy measure for class
 
 ## API Reference
 #### Download models here
-[Model Files ONNX for NLP and Vision](https://github.com/safekids-ai/ml-models/tree/main/model_files) 
+[Model Files ONNX for NLPBert and Vision](https://github.com/safekids-ai/ml-models/tree/main/model_files) 
 
 #### Run the text classification model in node
 

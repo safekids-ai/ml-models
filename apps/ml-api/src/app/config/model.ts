@@ -5,7 +5,7 @@ export interface ModelConfig {
 
 export default () => ({
   modelConfig: {
-    nlp_onnx_path: process.env.NLP_ONNX_PATH || "model_files/nlp.onnx",
-    vision_onnx_path: process.env.VISION_ONNX_PATH || "model_files/vision.onnx",
+    nlp_onnx_path: process.env.NLP_ONNX_PATH || "model_files/hate/nlp.onnx",
+    vision_onnx_path: process.env.VISION_ONNX_PATH || "model_files/vision/vision.onnx",
   } as ModelConfig
 });

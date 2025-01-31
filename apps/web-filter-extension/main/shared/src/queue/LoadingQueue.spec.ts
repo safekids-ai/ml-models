@@ -4,7 +4,7 @@ import {TestUtils} from '../../../../../TestUtils';
 import {QueueWrapper} from '@shared/queue/QueueWrapper';
 import {ChromeUtils} from '@shared/chrome/utils/ChromeUtils';
 import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
-import {NLP} from '@safekids-ai/nlp-js-common';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 import {mock} from 'ts-mockito';
 import {Vision} from '@safekids-ai/vision-js-common';
 import {MLModels} from '@shared/types/MLModels';
@@ -20,7 +20,7 @@ describe('Loading Queue tests', () => {
   const chromeUtils = new ChromeUtils(logger, storageManager);
   const settings: ModelSettings = {filterStrictness: 70};
 
-  const nlp: NLP = mock(NLP);
+  const nlp: NLPBert = mock(NLPBert);
   const nlpModel = new NLPModel(nlp, logger);
 
   const vision: Vision = mock(Vision);

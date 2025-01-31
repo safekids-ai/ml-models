@@ -25,7 +25,6 @@
     "downlevelIteration": true,
     "paths": {
       "@shared/*": ["../shared/src/*"],
-      "@safekids-ai/nlp-js-web": ["../../../../libs/nlp-js-web/src/index.ts"],
       "@safekids-ai/nlp-js-common": ["../../../../libs/nlp-js-common/src/index.ts"],
       "@safekids-ai/nlp-js-types": ["../../../../libs/nlp-js-types/src/index.ts"],
       "@safekids-ai/vision-js-web": ["../../../../libs/vision-js-web/src/index.ts"],

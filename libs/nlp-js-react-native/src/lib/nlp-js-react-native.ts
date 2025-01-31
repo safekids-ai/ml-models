@@ -1,6 +1,6 @@
-import {NLP} from '@safekids-ai/nlp-js-common';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 import { InferenceSession } from "onnxruntime-react-native";
-class NLPWeb extends NLP {
+class NLPWeb extends NLPBert {
   constructor(modelUrl: string) {
     super(modelUrl);
   }

@@ -1,4 +1,4 @@
-import {NLPWeb} from '@safekids-ai/nlp-js-web';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 import {VisionWeb} from '@safekids-ai/vision-js-web';
 import {LocalStorageManager} from '@shared/chrome/storage/ChromeStorageManager';
 import {Logger} from '@shared/logging/ConsoleLogger';
@@ -211,7 +211,7 @@ export class ActivityServiceImpl implements ActivityService {
       const browserInfo = HttpUtils.getBrowserInfo().split(' ');
       webUsage.userDeviceLinkId = await this.localStorageManager.get('userDeviceLinkId');
       webUsage.mlVersion = VisionWeb.version;
-      webUsage.nlpVersion = NLPWeb.version;
+      webUsage.nlpVersion = NLPBert.version;
       webUsage.extensionVersion = this.chromeUtils.getManifest().version;
       webUsage.browser = browserInfo[0];
       webUsage.browserVersion = browserInfo[1];
@@ -234,7 +234,7 @@ export class ActivityServiceImpl implements ActivityService {
     try {
       webUsageActiveTab.userDeviceLinkId = await this.localStorageManager.get('userDeviceLinkId');
       webUsageActiveTab.mlVersion = VisionWeb.version;
-      webUsageActiveTab.nlpVersion = NLPWeb.version;
+      webUsageActiveTab.nlpVersion = NLPBert.version;
       webUsageActiveTab.extensionVersion = this.chromeUtils.getManifest().version;
       webUsageActiveTab.browserVersion = HttpUtils.getBrowserInfo().split(' ')[1];
       webUsageActiveTab.browser = HttpUtils.getBrowserInfo().split(' ')[0];

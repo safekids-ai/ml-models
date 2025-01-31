@@ -18,7 +18,7 @@ jest.spyOn(Array, 'isArray').mockImplementation((value) => {
 
 let vision: VisionNode = null;
 beforeAll(async () => {
-  vision = new VisionNode("./model_files/vision.onnx");
+  vision = new VisionNode("./model_files/vision/vision.onnx");
   await vision.init();
 });
 

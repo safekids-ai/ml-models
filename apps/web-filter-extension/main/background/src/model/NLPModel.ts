@@ -1,5 +1,5 @@
 import {NLPLabel} from '@safekids-ai/nlp-js-types';
-import {NLPWeb} from '@safekids-ai/nlp-js-web';
+import {NLPBert} from '@safekids-ai/nlp-js-common';
 
 import {Logger} from '@shared/logging/ConsoleLogger';
 import {MLModel, ModelSettings} from '@shared/types/MLModel.type';
@@ -14,7 +14,7 @@ export class NLPModel implements MLModel {
   private _ready: boolean = false;
   private settings: ModelSettings;
 
-  constructor(private readonly model: NLPWeb, private readonly logger: Logger) {
+  constructor(private readonly model: NLPBert, private readonly logger: Logger) {
     this.settings = {filterStrictness: 0};
   }
 

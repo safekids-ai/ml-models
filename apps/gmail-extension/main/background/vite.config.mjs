@@ -27,7 +27,7 @@ export default defineConfig({
               dest: `${outDir}/`,
             },
             {
-              src: `${MODELS_DIR}/*`,
+              src: `${MODELS_DIR}/hate`,
               dest: `${outDir}/models`,
             },
             {

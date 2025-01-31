@@ -2,34 +2,36 @@ import {Tokenizer} from './tokenizer';
 import {modelConfig} from './model';
 import {toxicPhrases} from './constants';
 import {InferenceSession, Tensor} from 'onnxruntime-common';
+import * as ort from "@safekids-ai/onnx-common";
 import {sentences} from "sbd"
 import * as Logger from 'abstract-logging';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
+import {loadONNXRuntime} from "@safekids-ai/onnx-model";
+import {OnnxRuntimeSessionProvider} from "@safekids-ai/onnx-common";
 
-abstract class NLP {
+class NLPBert {
   public static readonly version: string = "0.0.1";
   private readonly tokenizer: Tokenizer;
   private session: InferenceSession;
   private readonly onnxUrl: string;
   private logger?: Logger;
 
-  protected constructor(onnxUrl: string, logger?: Logger) {
+  public constructor(onnxUrl: string, logger?: Logger) {
     this.onnxUrl = onnxUrl;
     this.logger = logger;
     this.tokenizer = new Tokenizer();
   }
 
   public version() : string {
-    return NLP.version;
+    return NLPBert.version;
   }
-
-  public abstract createSession(onnxUrl: string): Promise<InferenceSession>
 
   public async init() {
     if (this.logger) {
       this.logger.info(`Loading model ${this.onnxUrl}`);
     }
-    this.session = await this.createSession(this.onnxUrl);
+    const sessionProvider:OnnxRuntimeSessionProvider = await loadONNXRuntime()
+    this.session = await sessionProvider.createSession(this.onnxUrl);
   }
 
   private async softmax(vector: number[]): Promise<number[]> {
@@ -246,4 +248,4 @@ abstract class NLP {
   }
 }
 
-export {NLP, toxicPhrases}
+export {NLPBert, toxicPhrases}
