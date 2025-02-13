@@ -35,7 +35,8 @@ export class NLPModelWrapper implements NLPModelWrapperInterface {
   }
 
   version(): string {
-    return this.nlpModel.version();
+    return "1.1.1"
+    // return this.nlpModel.version();
   }
 
   async loadToxicWords(toxicWordUrl: string) {

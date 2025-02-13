@@ -9,9 +9,9 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
-    "target": "ES2021",
+    "target": "ESNext",
     "module": "ESNext",
-    "lib": ["ES2021", "dom"],
+    "lib": ["ESNext", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -44,6 +44,7 @@
       ],
       "@safekids-ai/vision-js-types": ["libs/vision-js-types/src/index.ts"],
       "@safekids-ai/vision-js-web": ["libs/vision-js-web/src/index.ts"],
+      "@safekids-ai/ai-webcategory": ["libs/ai-webcategory/src/index.ts"],
       "@safekids-ai/web-category": ["libs/web-category/src/index.ts"],
       "@safekids-ai/web-category-types": [
         "libs/web-category-types/src/index.ts"

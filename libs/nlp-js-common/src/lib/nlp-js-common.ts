@@ -2,7 +2,6 @@ import {Tokenizer} from './tokenizer';
 import {modelConfig} from './model';
 import {toxicPhrases} from './constants';
 import {InferenceSession, Tensor} from 'onnxruntime-common';
-import * as ort from "@safekids-ai/onnx-common";
 import {sentences} from "sbd"
 import * as Logger from 'abstract-logging';
 import {NLPLabel, NLPResult} from "@safekids-ai/nlp-js-types";
@@ -22,7 +21,7 @@ class NLPBert {
     this.tokenizer = new Tokenizer();
   }
 
-  public version() : string {
+  public version(): string {
     return NLPBert.version;
   }
 
