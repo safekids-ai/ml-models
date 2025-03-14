@@ -109,7 +109,7 @@ const Banner = () => {
                   </a>
 
                   <a
-                    href="https://www.linkedin.com/posts/aahil-valliani-910996220_my-first-radio-interview-on-wiod-610-am-activity-7182475412231352320-4kx3/"
+                    href="https://www.youtube.com/watch?v=menB8V3srq8"
                     target="_blank"
                     aria-label=""
                   >
@@ -178,7 +178,7 @@ const Banner = () => {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/posts/aahil-valliani-910996220_my-first-radio-interview-on-wiod-610-am-activity-7182475412231352320-4kx3/"
+                  href="https://www.youtube.com/watch?v=menB8V3srq8"
                   target="_blank"
                   aria-label=""
                 >
