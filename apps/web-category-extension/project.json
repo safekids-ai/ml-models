@@ -1,0 +1,125 @@
+{
+  "name": "web-category-extension",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "/src",
+  "type": "module",
+  "projectType": "application",
+  "implicitDependencies": [
+    "extension-hmr",
+    "extension-vite-config",
+    "extension-dev-utils"
+  ],
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run web-category-extension:build-background",
+          "nx run web-category-extension:build-content",
+          "nx run web-category-extension:build-worker",
+          "nx run web-category-extension:load-hmr-server"
+        ],
+        "parallel": true
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run web-category-extension:test-background",
+          "nx run web-category-extension:test-content"
+        ],
+        "parallel": true
+      }
+    },
+    "load-hmr-server": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ./dist/libs/extension-hmr/NxServerRunner.cjs"
+      }
+    },
+    "build-background": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-category-extension/main/background/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}",
+        "emptyOutDir": false
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-content": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-category-extension/main/content/vite.config.mjs",
+        "outputPath": "{workspaceRoot}/dist/{projectRoot}/content",
+        "emptyOutDir": false
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "build-worker": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "configFile": "apps/web-category-extension/main/worker/onnx/vite.config.mjs",
+        "outputPath": "../../../dist/{projectRoot}/worker/onnx"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "test-background": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/web-category-extension/main/background/jest.config.ts"
+      }
+    },
+    "test-content": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/web-category-extension/main/content/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/web-category-extension/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}

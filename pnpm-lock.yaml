@@ -309,14 +309,14 @@ importers:
         specifier: 19.1.0
         version: 19.1.0
       onnxruntime-common:
-        specifier: 1.18.0
-        version: 1.18.0
+        specifier: 1.20.1
+        version: 1.20.1
       onnxruntime-node:
-        specifier: 1.18.0
-        version: 1.18.0
+        specifier: 1.20.1
+        version: 1.20.1
       onnxruntime-web:
-        specifier: 1.18.0
-        version: 1.18.0
+        specifier: 1.20.1
+        version: 1.20.1
       openai:
         specifier: ^4.77.0
         version: 4.77.0(zod@3.23.8)
@@ -7257,8 +7257,8 @@ packages:
   flatbuffers@1.12.0:
     resolution: {integrity: sha512-c7CZADjRcl6j0PlvFy0ZqXQ67qSEZfrVPynmnL+2zPc+NtMvrF8Y0QceMo7QqnSPc7+uWjUIAbvCQ5WIKlMVdQ==}
 
-  flatbuffers@25.1.24:
-    resolution: {integrity: sha512-Ni+KCqYquU30UEgGkrrwpbYtUcUmNuLFcQ5Xdy9DK7WUaji+AAov+Bf12FEYmu0eI15y31oD38utnBexe0cAYA==}
+  flatbuffers@25.2.10:
+    resolution: {integrity: sha512-7JlN9ZvLDG1McO3kbX0k4v+SUAg48L1rIwEvN6ZQl/eCtgJz9UylTMzE9wrmYrcorgxm3CX/3T/w5VAub99UUw==}
 
   flatted@3.3.2:
     resolution: {integrity: sha512-AiwGJM8YcNOaobumgtng+6NHuOqC3A7MixFeDafM3X9cIUM+xUXoS5Vfgf+OihAYe20fxqNM9yPBXJzRtZ/4eA==}
@@ -9555,25 +9555,18 @@ packages:
   only@0.0.2:
     resolution: {integrity: sha512-Fvw+Jemq5fjjyWz6CpKx6w9s7xxqo3+JCyM0WXWeCSOboZ8ABkyvP8ID4CZuChA/wxSx+XSJmdOm8rGVyJ1hdQ==}
 
-  onnxruntime-common@1.18.0:
-    resolution: {integrity: sha512-lufrSzX6QdKrktAELG5x5VkBpapbCeS3dQwrXbN0eD9rHvU0yAWl7Ztju9FvgAKWvwd/teEKJNj3OwM6eTZh3Q==}
-
   onnxruntime-common@1.20.1:
     resolution: {integrity: sha512-YiU0s0IzYYC+gWvqD1HzLc46Du1sXpSiwzKb63PACIJr6LfL27VsXSXQvt68EzD3V0D5Bc0vyJTjmMxp0ylQiw==}
 
   onnxruntime-common@1.21.0-dev.20250206-d981b153d3:
     resolution: {integrity: sha512-TwaE51xV9q2y8pM61q73rbywJnusw9ivTEHAJ39GVWNZqxCoDBpe/tQkh/w9S+o/g+zS7YeeL0I/2mEWd+dgyA==}
 
-  onnxruntime-node@1.18.0:
-    resolution: {integrity: sha512-iTnFcxKpmywCatx8ov4GTbECe3tJk2Bp1OA2mWRJde78q+7tpPYBhKMnwhlaoKy9oKQcy4UoEuuhoy2PSD13ww==}
-    os: [win32, darwin, linux]
-
   onnxruntime-node@1.20.1:
     resolution: {integrity: sha512-di/I4HDXRw+FLgq+TyHmQEDd3cEp9iFFZm0r4uJ1Wd7b/WE1VXtKWo8yemex347c6GNF/3Pv86ZfPhIWxORr0w==}
     os: [win32, darwin, linux]
 
-  onnxruntime-web@1.18.0:
-    resolution: {integrity: sha512-o1UKj4ABIj1gmG7ae0RKJ3/GT+3yoF0RRpfDfeoe0huzRW4FDRLfbkDETmdFAvnJEXuYDE0YT+hhkia0352StQ==}
+  onnxruntime-web@1.20.1:
+    resolution: {integrity: sha512-TePF6XVpLL1rWVMIl5Y9ACBQcyCNFThZON/jgElNd9Txb73CIEGlklhYR3UEr1cp5r0rbGI6nDwwrs79g7WjoA==}
 
   onnxruntime-web@1.21.0-dev.20250206-d981b153d3:
     resolution: {integrity: sha512-esDVQdRic6J44VBMFLumYvcGfioMh80ceLmzF1yheJyuLKq/Th8VT2aj42XWQst+2bcWnAhw4IKmRQaqzU8ugg==}
@@ -21731,7 +21724,7 @@ snapshots:
 
   flatbuffers@1.12.0: {}
 
-  flatbuffers@25.1.24: {}
+  flatbuffers@25.2.10: {}
 
   flatted@3.3.2: {}
 
@@ -24513,34 +24506,27 @@ snapshots:
 
   only@0.0.2: {}
 
-  onnxruntime-common@1.18.0: {}
-
   onnxruntime-common@1.20.1: {}
 
   onnxruntime-common@1.21.0-dev.20250206-d981b153d3: {}
-
-  onnxruntime-node@1.18.0:
-    dependencies:
-      onnxruntime-common: 1.18.0
-      tar: 7.4.3
 
   onnxruntime-node@1.20.1:
     dependencies:
       onnxruntime-common: 1.20.1
       tar: 7.4.3
 
-  onnxruntime-web@1.18.0:
+  onnxruntime-web@1.20.1:
     dependencies:
       flatbuffers: 1.12.0
       guid-typescript: 1.0.9
       long: 5.2.3
-      onnxruntime-common: 1.18.0
+      onnxruntime-common: 1.20.1
       platform: 1.3.6
       protobufjs: 7.4.0
 
   onnxruntime-web@1.21.0-dev.20250206-d981b153d3:
     dependencies:
-      flatbuffers: 25.1.24
+      flatbuffers: 25.2.10
       guid-typescript: 1.0.9
       long: 5.2.3
       onnxruntime-common: 1.21.0-dev.20250206-d981b153d3

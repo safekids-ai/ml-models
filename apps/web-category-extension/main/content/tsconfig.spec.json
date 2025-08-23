@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "types": ["jest", "node", "chrome"]
+  },
+  "include": [
+    "jest.config.ts",
+    "jest.setup.ts",
+    "./src/**/*.spec.ts",
+    "./src/**/*.spec.tsx",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
+}
