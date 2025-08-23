@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk -F'@' '{print $2}') && npm install -g "pnpm@$version"
 
+COPY nx.json tsconfig.base.json ./
 RUN pnpm install --ignore-scripts --frozen-lockfile
 COPY . .
 RUN pnpm run homepage
