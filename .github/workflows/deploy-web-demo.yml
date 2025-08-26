@@ -1,4 +1,4 @@
-name: Build and Deploy Main Website
+name: Build and Deploy DEMO
 
 on:
   release:
@@ -69,10 +69,7 @@ jobs:
         run: echo "Digest=${{ steps.build.outputs.digest }}"
 
       - name: Trigger Coolify deploy
-        env:
-          DEPLOY_WEBHOOK_URL: ${{ secrets.DEMO_DEPLOY_WEBHOOK_URL }}
-          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
         run: |
           curl -fsSL -X POST \
             -H "Authorization: Bearer $COOLIFY_API_TOKEN" \
-            "$DEPLOY_WEBHOOK_URL"
+            "https://coolify.infinitelogic.com/api/v1/deploy?uuid=${{ secrets.COOLIFY_APP_DEMO_UUID }}&tag=${{ steps.semver.outputs.full }}"
