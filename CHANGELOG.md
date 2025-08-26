@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.3.42](https://github.com/safekids-ai/ml-models/compare/1.3.41...1.3.42) (2025-08-26)
+
 ## [1.3.41](https://github.com/safekids-ai/ml-models/compare/1.3.40...1.3.41) (2025-08-26)
 
 ## [1.3.40](https://github.com/safekids-ai/ml-models/compare/1.3.39...1.3.40) (2025-08-26)
