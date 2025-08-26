@@ -8,6 +8,8 @@ COPY . .
 
 ENV API_URL=$API_URL
 ENV NODE_ENV=production
+ARG GIT_TAG=unknown
+ENV GIT_TAG=$GIT_TAG
 
 RUN pnpm run web-demo
 

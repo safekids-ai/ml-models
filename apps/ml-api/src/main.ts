@@ -62,6 +62,7 @@ async function bootstrap() {
   } else {
     await app.listen(port);
     winstonLogger.log(`Application is running on: ${await app.getUrl()}`);
+    console.log(`Running GitHub tag: ${process.env.GIT_TAG}`);
   }
 }
 bootstrap()

@@ -54,6 +54,7 @@ const Footer = () => {
               </div>
               <div className="pt-[2rem] xl:pt-0">
                 © 2025 Safe Kids LLC. All Rights Reserved.
+                <span className="ml-2">Version: {process.env.NEXT_PUBLIC_GIT_TAG ?? 'unknown'}</span>
               </div>
             </div>
           </div>

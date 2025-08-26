@@ -41,6 +41,8 @@ jobs:
           context: .
           file: apps/ml-api-web-demo/Dockerfile
           push: true
+          build-args: |
+            GIT_TAG=${{ steps.semver.outputs.full }}
           # Always push immutable version + semver rollups + git sha
           tags: |
             ${{ env.IMAGE_BASE }}:${{ steps.semver.outputs.full }}

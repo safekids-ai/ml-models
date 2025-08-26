@@ -1,4 +1,8 @@
 FROM node:slim AS builder
+
+ARG GIT_TAG=unknown
+ENV NEXT_PUBLIC_GIT_TAG=$GIT_TAG
+
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN version=$(grep 'packageManager' package.json | awk -F'"' '{print $4}' | awk -F'@' '{print $2}') && npm install -g "pnpm@$version"
