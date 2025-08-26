@@ -69,10 +69,9 @@ jobs:
 
       - name: Output image digest
         run: echo "Digest=${{ steps.build.outputs.digest }}"
-
-      - name: Trigger Coolify deployment via webhook
-        uses: fjogeleit/http-request-action@v1
-        with:
-          url: ${{vars.COOLIFY_URL}}/api/v1/deploy?uuid=${{secrets.COOLIFY_APP_DEMO_UUID}}&force=true
-          method: GET
-          bearerToken: ${{secrets.COOLIFY_API_TOKEN}}
+#      - name: Trigger Coolify deployment via webhook
+#        uses: fjogeleit/http-request-action@v1
+#        with:
+#          url: ${{vars.COOLIFY_URL}}/api/v1/deploy?uuid=${{secrets.COOLIFY_APP_DEMO_UUID}}&force=true
+#          method: GET
+#          bearerToken: ${{secrets.COOLIFY_API_TOKEN}}
