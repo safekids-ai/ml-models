@@ -67,3 +67,12 @@ jobs:
 
       - name: Output image digest
         run: echo "Digest=${{ steps.build.outputs.digest }}"
+
+      - name: Trigger Coolify deploy
+        env:
+          DEPLOY_WEBHOOK_URL: ${{ secrets.WEB_DEPLOY_WEBHOOK_URL }}
+          COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+        run: |
+          curl -fsSL -X POST \
+            -H "Authorization: Bearer $COOLIFY_API_TOKEN" \
+            "$DEPLOY_WEBHOOK_URL"
