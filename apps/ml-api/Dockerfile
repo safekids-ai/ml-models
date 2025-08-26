@@ -4,7 +4,7 @@ ARG API_PORT=3000
 ENV API_PORT=$API_PORT
 
 ARG GIT_TAG=unknown
-ENV GIT_TAG=$GIT_TAG
+ENV GIT_TAG=${GIT_TAG}
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
